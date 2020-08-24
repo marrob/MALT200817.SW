@@ -8,6 +8,8 @@
     using System.ComponentModel;
     using Common;
     using Devices;
+    using System.Diagnostics;
+    using System.Reflection;
 
     public class CanService : IDisposable
     {
@@ -30,6 +32,7 @@
             _itf = itf; 
             _bw = new BackgroundWorker();
             _waitForDoneEvent = new AutoResetEvent(false);
+            _readyToDisposeEvent = new AutoResetEvent(false);
             _bw.DoWork += DoWork;
         }
 
@@ -46,7 +49,6 @@
             _bw.RunWorkerAsync(argument);
         }
 
-
         private void DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
@@ -61,12 +63,6 @@
                     _itf.WriteFrame(new CanMsg[] { msg });
                 }
 
-                if (_bw.CancellationPending)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-           
 
                 if (_bw.CancellationPending)
                 {
@@ -75,6 +71,17 @@
                 }
 
             }
+
+            #region Resource Freeing
+
+            AppLog.Instance.WirteLine(GetType().Namespace + "." +
+                GetType().Name + "." +
+                MethodBase.GetCurrentMethod().Name +
+                "Resource Freeing");
+
+            _itf.Dispose();
+            _readyToDisposeEvent.Set();
+            #endregion
         }
         public void Dispose()
         {
@@ -93,13 +100,16 @@
                 if (_bw.IsBusy)
                 {
                     _bw.CancelAsync();
-                    _waitForDoneEvent.WaitOne();
+                    _readyToDisposeEvent.WaitOne();
                     
-                    _itf.Dispose();
                 }
-
             }
             _disposed = true;
+
+            AppLog.Instance.WirteLine(GetType().Namespace + "." +
+            GetType().Name + "." +
+            MethodBase.GetCurrentMethod().Name +
+            "Dispose Complete");
         }
     }
 }

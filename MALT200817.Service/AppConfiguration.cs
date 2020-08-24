@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
 
     public class AppConfiguration
@@ -13,6 +14,8 @@
         public string CanInterfaceName { get; set; }
         public int Baudrate { get; set; }
         public bool CanIoLog { get; set; }
+        public string AppLogPath { get; set; }
+        public bool AppLogEnabled { get; set; }
 
         private static Type[] SupportedTypes
         {
@@ -31,6 +34,8 @@
             CanInterfaceName = "Please set the interface eg.: CAN0";
             Baudrate = 1;
             CanIoLog = false;
+            AppLogPath = "";
+            AppLogEnabled = false;
         }
 
         public static AppConfiguration Instance { get; } = new AppConfiguration();
@@ -55,6 +60,8 @@
             Instance.CanInterfaceName = instance.CanInterfaceName;
             Instance.Baudrate = instance.Baudrate;
             Instance.CanIoLog = instance.CanIoLog;
+            Instance.AppLogPath = instance.AppLogPath;
+            Instance.AppLogEnabled = instance.AppLogEnabled;
 
         }
     }

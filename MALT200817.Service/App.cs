@@ -16,6 +16,7 @@
     using System.Net;
     using System.Dynamic;
     using System.Runtime.InteropServices.WindowsRuntime;
+    using MALT200817.Service.Common;
 
     class App
     {
@@ -48,6 +49,12 @@
             {
                 AppConfiguration.LoadFromFile(AppConstants.AppConfigurationFilePath);
             }
+            
+            
+            AppLog.Instance.FilePath = AppConfiguration.Instance.AppLogPath;
+            AppLog.Instance.Enabled = AppConfiguration.Instance.AppLogEnabled;
+            
+
 
             if (AppConfiguration.Instance.CanInterfaceType.Trim().ToUpper() == "XNET")
             {

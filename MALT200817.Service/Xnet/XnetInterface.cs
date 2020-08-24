@@ -29,8 +29,11 @@
             _bufferOut = new nxFrame[2];
             _sessionOut = new NiXnetSession(":memory:", "", Array.Empty<string>(), intfName, NiXnetMode.FrameOutStream);
             _sessionOut.BaudRate64 = baudrate;
-            GCHandle gchOut = GCHandle.Alloc(_bufferIn, GCHandleType.Pinned);
+            GCHandle gchOut = GCHandle.Alloc(_bufferOut, GCHandleType.Pinned);
             _ptrBufferOut = gchOut.AddrOfPinnedObject();
+
+            _sessionIn.Start(NiXnetScope.Normal);
+            _sessionOut.Start(NiXnetScope.Normal);
 
         }
 
@@ -76,6 +79,8 @@
 
         public void Dispose()
         {
+            _sessionIn.Stop(NiXnetScope.Normal);
+            _sessionOut.Stop(NiXnetScope.Normal);
             Dispose(true);
             GC.SuppressFinalize(this);
         }

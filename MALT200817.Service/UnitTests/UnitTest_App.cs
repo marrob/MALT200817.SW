@@ -24,8 +24,8 @@
         [Test]
         public void SetOneRealy()
         {
-            _app.TcpCommandLine("@03,#05,SET:04");
-
+            _app.TcpCommandLine("@03,#03,SET:04");
+            System.Threading.Thread.Sleep(400);
         }
 
 
