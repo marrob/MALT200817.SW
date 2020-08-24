@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment Id="FragmentApplication">
+
+    <!-- This is how we include wxi files -->
+    <?include $(sys.CURRENTDIR)Config.wxi ?>
+
+
+    <ComponentGroup Id="Application_Components" Directory="AppFolder" >
+      <Component Id="Dependecies" Guid="{59C6A671-4116-40A6-96C0-B53F50965A0F}">
+        <File Id='NiXnetDotNet.dll'         Source='$(var.AppDirectory)\NiXnetDotNet.dll' KeyPath='no'/>
+        <File Id='nunit.framework.dll'      Source='$(var.AppDirectory)\nunit.framework.dll' KeyPath='no'/>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
