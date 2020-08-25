@@ -12,41 +12,34 @@ namespace MALT200817.Service
 
     public class TcpParser
     {
-        IDeviceExplorer _DevExp;
+        IDeviceExplorer _devExp;
 
         public TcpParser()
         {
-            _DevExp = null;
+            _devExp = null;
         }
 
         public TcpParser(IDeviceExplorer explorer)
         {
-            _DevExp = explorer;
+            _devExp = explorer;
         }
 
-        public string Parse(string line)
+        public string CommandLine(string line)
         {
             line = line.ToUpper();
             line = Regex.Replace(line, @"\s+", " ");
 
-            /*
-            * @CARD_TYPE, #ADDR, SET:CH
-            * @05,00,SET:1
-            * @05,00,CLR:1
-            * 
-            */
 
-            if (line.Contains('@'))
+            if (line[0] == '@' && line[3] == '#')
             {
                 byte cardType = 0;
                 byte addr = 0;
-                byte channel = 0;
+                byte port = 0;
 
-                var array = line.Trim().Split(',');
-
-                var typeStr = array[0].Trim();
-                var addrStr = array[1].Trim();
-                var command = array[2].Trim();
+                //@05#01SET01
+                var typeStr = line.Substring(1, 2);
+                var addrStr = line.Substring(4, 2);
+                var command = line.Substring(6);
 
                 if (!byte.TryParse(typeStr.Substring(1), out cardType))
                     return "Data Type Error of 'CARD_TYPE'";
@@ -56,12 +49,12 @@ namespace MALT200817.Service
 
                 if (command.Contains("SET"))
                 {
-                    if (!byte.TryParse(command.Substring("SET:".Length), out channel))
+                    if (!byte.TryParse(command.Substring(3), out port))
                         return "Data Type Error of 'SET'";
 
                     try
                     {
-                        _DevExp.Set(cardType, addr, channel);
+                        _devExp.RequestOnOne(cardType, addr, port);
                     }
                     catch (ApplicationException ex)
                     {
@@ -70,21 +63,30 @@ namespace MALT200817.Service
                 }
                 else if (command.Contains("CLR"))
                 {
-                    if (!byte.TryParse(command.Substring("CLR:".Length), out channel))
+                    if (!byte.TryParse(command.Substring(2), out port))
                         return "Data Type Error of 'CLR'";
 
                     try
                     {
-                        _DevExp.Clr(cardType, addr, channel);
+                        _devExp.RequestOffOne(cardType, addr, port);
                     }
                     catch (ApplicationException ex)
                     {
                         return ex.Message;
                     }
                 }
+
+                return "OK";
+            }
+            else if (line == "GET-DEVICES")
+            {
+                string devs = string.Empty;
+                foreach (Device dev in _devExp.Devices)
+                    devs += dev.ToString() + ",";
+                return devs;
             }
 
-            return null;
+            return "Nem kezelet erdemény";
         }
 
     }

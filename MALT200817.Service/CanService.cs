@@ -16,11 +16,7 @@
         ICanInterface _itf;
         IDeviceExplorer _explorer;
 
-        private AutoResetEvent _shutdownEvent;
         private AutoResetEvent _readyToDisposeEvent;
-
-
-
 
         bool _disposed = false;
         BackgroundWorker _bw;
@@ -55,7 +51,8 @@
             {
 
                 var framesIn =  _itf.ReadFrame();
-                _explorer.FrameParser(framesIn);
+                foreach (CanMsg msg in framesIn) 
+                _explorer.FramesIn(msg);
 
                 if (_explorer.TxQueue.Count != 0)
                 {

@@ -12,10 +12,5 @@
 
 
 
-    public struct CanMsg
-    {
-        public UInt32 Id;
-        public int Length;
-        public UInt64 Payload;
-    }
+
 }

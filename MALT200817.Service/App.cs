@@ -18,7 +18,7 @@
     using System.Runtime.InteropServices.WindowsRuntime;
     using MALT200817.Service.Common;
 
-    class App
+    public class App
     {
 
         TcpService _tcpServer;
@@ -36,7 +36,7 @@
         {
             _tcpServer = new TcpService();
             _tcpServer.Completed += Server_Completed;
-            _tcpServer.ParserCallback = _tcpParser.Parse;
+            _tcpServer.ParserCallback = _tcpParser.CommandLine;
             _tcpServer.Begin(null);
 
 
@@ -76,6 +76,8 @@
 
 
             _canService.Begin(null);
+            System.Threading.Thread.Sleep(500);
+            _devExp.RequestAllInitInfo();
         }
 
         public void Stop()
@@ -86,7 +88,7 @@
 
         public string TcpCommandLine(string line)
         {
-            return _tcpParser.Parse(line);
+            return _tcpParser.CommandLine(line);
         }
 
 

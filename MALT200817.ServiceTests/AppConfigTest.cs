@@ -1,33 +1,41 @@
-﻿namespace MALT200817.Service.UnitTests
+﻿
+
+namespace MALT200817.Service.Tests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MALT200817.Service;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using NUnit.Framework;
+    using System.IO;
 
-
-    [TestFixture]
-    public class UnitTest_AppConfig
+    [TestClass()]
+    public class AppTesAppConfigTestts
     {
-        [Test]
+
+        [TestMethod()]
+        public void RequestOnOne()
+        {
+
+        }
+        [TestMethod()]
         public void FirstTest()
         {
             Console.WriteLine("Hello World");
         }
 
-        [Test]
+        [TestMethod()]
         public void WriteAppConfiguration()
-        {    
+        {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\TEST_config.xml";
             File.Delete(path);
             AppConfiguration.SaveToFile(path);
-            FileAssert.Exists(path);
+            Assert.IsTrue(File.Exists(path));
         }
 
-        [Test]
+        [TestMethod()]
         public void AppSet()
         {
             var app = new App();
@@ -35,5 +43,6 @@
             app.TcpCommandLine("@03,#05,SET:04");
 
         }
+
     }
 }

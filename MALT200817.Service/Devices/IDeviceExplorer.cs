@@ -5,8 +5,9 @@
     public interface IDeviceExplorer
     {
         SafeQueue<CanMsg> TxQueue { get; }
-        void FrameParser(CanMsg[] frames);
-        void Set(byte cardType, byte addr, byte channel);
-        void Clr(byte cardType, byte addr, byte channel);
+        DeviceCollection Devices { get; }
+        void FramesIn(CanMsg frame);
+        void RequestOnOne(byte cardType, byte addr, byte channel);
+        void RequestOffOne(byte cardType, byte addr, byte channel);
     }
 }
