@@ -26,7 +26,7 @@ namespace MALT200817.Service.Tests
         [TestMethod()]
         public void Command_RequestSetOne()
         {
-            var devExp = new DeviceExplorer();
+            var devExp = new Explorer();
             var parse = new TcpParser(devExp);
             parse.CommandLine("@03#05SET04");
         }
@@ -34,13 +34,13 @@ namespace MALT200817.Service.Tests
         [TestMethod()]
         public void Command_GetDevices()
         {
-            var devExp = new DeviceExplorer();
+            var devExp = new Explorer();
             var parse = new TcpParser(devExp);
             devExp.FramesIn(new CanMsg(0x1552030A, new byte[] { 0xF0, 0x01, 0x03, 0x0A, 0x00, 0x9A, 0x00 }));
             devExp.FramesIn(new CanMsg(0x1552030B, new byte[] { 0xF0, 0x01, 0x03, 0x0B, 0x00, 0x9A, 0x00 }));
             devExp.FramesIn(new CanMsg(0x1552030C, new byte[] { 0xF0, 0x01, 0x03, 0x0C, 0x00, 0x9A, 0x00 }));
 
-            var devices = parse.CommandLine("GET-DEVICES");
+                var devices = parse.CommandLine("GET-DEVICES");
 
 
 

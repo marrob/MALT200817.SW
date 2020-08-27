@@ -59,7 +59,7 @@
     <Compile Include="AppConfigTest.cs" />
     <Compile Include="TcpParserTest.cs" />
     <Compile Include="CanMsgTest.cs" />
-    <Compile Include="DeviceExplorerTest.cs" />
+    <Compile Include="ExplorerTest.cs" />
     <Compile Include="AppTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

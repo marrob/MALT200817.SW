@@ -78,13 +78,14 @@
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\SafeQueue.cs" />
     <Compile Include="Common\Tools.cs" />
+    <Compile Include="Devices\DevDescriptor.cs" />
     <Compile Include="Devices\Device.cs" />
     <Compile Include="Devices\DeviceCollection.cs" />
     <Compile Include="Common\ICanInterface.cs" />
     <Compile Include="Common\IoLog.cs" />
     <Compile Include="CanService.cs" />
-    <Compile Include="Devices\DeviceExplorer.cs" />
-    <Compile Include="Devices\IDeviceExplorer.cs" />
+    <Compile Include="Devices\Explorer.cs" />
+    <Compile Include="Devices\IExplorer.cs" />
     <Compile Include="NiCan\Nican.cs" />
     <Compile Include="NiCan\NiCanInterface.cs" />
     <Compile Include="NiCan\NiCanIoException.cs" />

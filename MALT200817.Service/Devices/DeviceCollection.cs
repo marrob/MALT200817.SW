@@ -13,8 +13,6 @@ namespace MALT200817.Service.Devices
     public class DeviceCollection : BindingList<Device>
     {
 
-        public static byte TpyeCode = 0x05;
-
         protected override void InsertItem(int index, Device item)
         {
             base.InsertItem(index, item);
@@ -23,6 +21,11 @@ namespace MALT200817.Service.Devices
         public new void Remove(Device item)
         {
             base.Remove(item);
+        }
+
+        public void SetOne(int cardType, int address, int port)
+        {
+
         }
     }
 }

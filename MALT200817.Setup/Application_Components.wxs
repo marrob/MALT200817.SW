@@ -9,7 +9,6 @@
     <ComponentGroup Id="Application_Components" Directory="AppFolder" >
       <Component Id="Dependecies" Guid="{59C6A671-4116-40A6-96C0-B53F50965A0F}">
         <File Id='NiXnetDotNet.dll'         Source='$(var.AppDirectory)\NiXnetDotNet.dll' KeyPath='no'/>
-        <File Id='nunit.framework.dll'      Source='$(var.AppDirectory)\nunit.framework.dll' KeyPath='no'/>
       </Component>
     </ComponentGroup>
   </Fragment>

@@ -14,7 +14,7 @@
     public class CanService : IDisposable
     {
         ICanInterface _itf;
-        IDeviceExplorer _explorer;
+        IExplorer _explorer;
 
         private AutoResetEvent _readyToDisposeEvent;
 
@@ -22,7 +22,7 @@
         BackgroundWorker _bw;
         readonly AutoResetEvent _waitForDoneEvent;
 
-        public CanService(ICanInterface itf, IDeviceExplorer explorer)
+        public CanService(ICanInterface itf, IExplorer explorer)
         {
             _explorer = explorer;
             _itf = itf; 
@@ -66,6 +66,8 @@
                     e.Cancel = true;
                     break;
                 }
+
+              //  Thread.Sleep(1);
 
             }
 

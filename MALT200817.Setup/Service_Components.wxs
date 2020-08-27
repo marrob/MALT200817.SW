@@ -10,14 +10,14 @@
       <ServiceInstall
         Id="ServiceInstaller"
         Type="ownProcess"
-        Name="myService"
+        Name="MaltService"
         DisplayName="AltonTech MALT200817.Service"
         Description="MALT Platform Windows Service"
         Start="auto"
         
         Account="LocalSystem"
         ErrorControl="normal" 
-        Arguments=" /start myService"
+        Arguments=" /start MaltService"
         Interactive="no" 
         
         />
@@ -25,7 +25,7 @@
                       Start="install"
                       Stop="both"
                       Remove="uninstall"
-                      Name="myService"
+                      Name="MaltService"
                       Wait="yes" />
     </Component>
   </Fragment>

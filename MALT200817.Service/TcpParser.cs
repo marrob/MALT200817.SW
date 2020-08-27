@@ -12,14 +12,14 @@ namespace MALT200817.Service
 
     public class TcpParser
     {
-        IDeviceExplorer _devExp;
+        IExplorer _devExp;
 
         public TcpParser()
         {
             _devExp = null;
         }
 
-        public TcpParser(IDeviceExplorer explorer)
+        public TcpParser(IExplorer explorer)
         {
             _devExp = explorer;
         }
@@ -29,8 +29,15 @@ namespace MALT200817.Service
             line = line.ToUpper();
             line = Regex.Replace(line, @"\s+", " ");
 
-
-            if (line[0] == '@' && line[3] == '#')
+            if (line == "SAY_HELLO_WOLRD")
+            {
+                return "HELLO WORLD";
+            }
+            else if (line == "*OPC?")
+            {
+                return "OPC";
+            }
+            else if (line[0] == '@' && line[3] == '#')
             {
                 byte cardType = 0;
                 byte addr = 0;
@@ -54,7 +61,7 @@ namespace MALT200817.Service
 
                     try
                     {
-                        _devExp.RequestOnOne(cardType, addr, port);
+                        _devExp.RequestSetOne(cardType, addr, port);
                     }
                     catch (ApplicationException ex)
                     {
@@ -63,12 +70,12 @@ namespace MALT200817.Service
                 }
                 else if (command.Contains("CLR"))
                 {
-                    if (!byte.TryParse(command.Substring(2), out port))
+                    if (!byte.TryParse(command.Substring(3), out port))
                         return "Data Type Error of 'CLR'";
 
                     try
                     {
-                        _devExp.RequestOffOne(cardType, addr, port);
+                        _devExp.RequestClrOne(cardType, addr, port);
                     }
                     catch (ApplicationException ex)
                     {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<?define ProductName = "Equip-Test MCT"?>-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <!-- Writing messages to Application Event Log -->
+  <!-- http://stackoverflow.com/questions/15013475/writing-messages-to-application-event-log -->
+   <!-- Unresolved reference to symbol 'Property:NETFRAMEWORK45' in section 'Product:*' -->
+
+  <!-- This is how we include wxi files -->
+  <?include $(sys.CURRENTDIR)Config.wxi ?>
+
+  <!--A rendszerleíró adatbázis kért hozzáférése nem engedélyezett” hibaüzenetet produkálnak, ha új eseményforrást próbálnak bejegyezni az eseménynaplóba-->
+  <!-- http://support.microsoft.com/?id=329291 -->
+  <Fragment>
+    <PropertyRef Id="NETFRAMEWORK40FULLINSTALLROOTDIR"/>
+    <PropertyRef Id="NETFRAMEWORK40FULLINSTALLROOTDIR64"/>
+    <PropertyRef Id="NETFRAMEWORK40CLIENTINSTALLROOTDIR"/>
+    <PropertyRef Id="NETFRAMEWORK40CLIENTINSTALLROOTDIR64"/>
+
+    <Component Id='EventSource_Component'
+               Directory='TARGETDIR'
+               Guid='3876EE3F-C4D7-4CF0-9D0E-88F4C9ED041D' >
+      <Condition>ALLUSERS</Condition>
+      <?if $(var.Platform) = x64 ?>
+      <util:EventSource Log='Application'
+              Name="$(var.ProductName)"
+              EventMessageFile='[NETFRAMEWORK20INSTALLROOTDIR64]EventLogMessages.dll'
+              KeyPath='yes' />
+      <?else ?>
+      <util:EventSource Log='Application'
+              Name="$(var.ProductName)"
+              EventMessageFile='[NETFRAMEWORK20INSTALLROOTDIR]EventLogMessages.dll'
+              KeyPath='yes' />
+      <?endif ?>
+    </Component>
+  </Fragment>
+</Wix>

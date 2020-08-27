@@ -10,7 +10,11 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="GetDevices.vi" Type="VI" URL="../GetDevices.vi"/>
+		<Item Name="RelayOnOff.vi" Type="VI" URL="../RelayOnOff.vi"/>
 		<Item Name="ResponseTimeTest.vi" Type="VI" URL="../ResponseTimeTest.vi"/>
+		<Item Name="TcpWriteRead.vi" Type="VI" URL="../TcpWriteRead.vi"/>
+		<Item Name="UserInterfaceEventPattern 1.vi" Type="VI" URL="../UserInterfaceEventPattern 1.vi"/>
 		<Item Name="Dependencies" Type="Dependencies"/>
 		<Item Name="Build Specifications" Type="Build"/>
 	</Item>

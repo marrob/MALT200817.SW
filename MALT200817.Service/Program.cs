@@ -9,7 +9,6 @@ namespace MALT200817.Service
         static void Main()
         {
 
-
 #if DEBUG
             WindowsService service = new WindowsService();
             service.OnDebug();
@@ -22,14 +21,6 @@ namespace MALT200817.Service
 			};
             ServiceBase.Run(ServicesToRun);
 #endif
-
-
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
-            {
-                new WindowsService()
-            };
-            ServiceBase.Run(ServicesToRun);
         }
     }
     

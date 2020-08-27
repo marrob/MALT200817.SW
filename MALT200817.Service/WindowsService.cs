@@ -12,8 +12,8 @@
         public WindowsService()
         {
             InitializeComponent();
-            //LogInit();
-              _myApp = new App();
+            LogInit();
+            _myApp = new App();
 
         }
 

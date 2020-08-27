@@ -21,12 +21,13 @@
     <Media Id="1" Cabinet="media.cab" EmbedCab="yes" />
 
     <!--User Interface-->
+    <!--
     <UIRef Id="WixUI_Mondo" />
     <UIRef Id="WixUI_ErrorProgressText" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     <WixVariable Id="WixUILicenseRtf" Value=".\Resources\License.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value=".\Resources\Banner_500x70.jpg" />
-
+    -->
     <!-- Define App Icon -->
     <Icon Id="AppAddRemove.ico" SourceFile=".\Resources\AppAddRemove.ico"/>
     <!-- Set Your Installer's Icon in Add/Remove Programs -->
@@ -43,7 +44,9 @@
     <Feature Id="AppFeature" Title="Application" Level="1" Description="Device Firmware Update Tool and Frimwares">
       <Feature Id ="App_Feature" Title="Application" Description="Firmware Upgrade Tool" Level="1">
         <ComponentGroupRef Id="Application_Components"/>
+        <ComponentRef Id ="EventSource_Component"/>
         <ComponentRef Id="Service_Components"/>
+        
       </Feature>
     </Feature>
 
