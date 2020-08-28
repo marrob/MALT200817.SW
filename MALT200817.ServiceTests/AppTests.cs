@@ -23,7 +23,7 @@ namespace MALT200817.Service.Tests
         [TestMethod()]
         public void RequestOnOne()
         {
-            _app.TcpCommandLine("@03#03SET04");
+            _app.TcpCommandLine("@03:03:SET:04");
             System.Threading.Thread.Sleep(400);
         }
 

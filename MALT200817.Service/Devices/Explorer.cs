@@ -44,27 +44,45 @@
             /* Response Ports Status */
             if (data[1] == 0x04)
             {
+
                 int cardType = data[0];
                 int addr = (int)(frame.Id & DEV_ADDR);
                 var dev = Devices.FirstOrDefault(n => n.CardType == cardType && n.Address == addr);
                 dev.ResponsePortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
+
             }
   
         }
 
-        public void RequestSetOne(byte cardType, byte addr, byte channel)
+        public void RequestClrOne(byte cardType, byte addr, byte port)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x01, channel, 0x01 });
+            msg.SetPayload(new byte[] { cardType, 0x01, port, 0x00 });
             TxQueue.Enqueue(msg);
         }
 
-        public void RequestClrOne(byte cardType, byte addr, byte channel)
+        public void RequestSetOne(byte cardType, byte addr, byte port)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x01, channel, 0x00 });
+            msg.SetPayload(new byte[] { cardType, 0x01, port, 0x01 });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void RequestClrSeveral(byte cardType, byte addr, byte[] several)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
+            msg.SetPayload(new byte[] { cardType, 0x03, several[0], several[1], several[2], several[3], 0x00 });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void RequestSetSeveral(byte cardType, byte addr, byte[] several)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
+            msg.SetPayload(new byte[] { cardType, 0x03, several[0], several[1], several[2], several[3], 0x01 });
             TxQueue.Enqueue(msg);
         }
 
@@ -85,6 +103,16 @@
             msg.Id = EXT_ID | GLOBAL_ID;
             msg.SetPayload(new byte[] { 0xAB, 0xFF });
             TxQueue.Enqueue(msg);
+        }
+
+
+        /// <param name="port">1-es indexelésű</param>
+        public bool RequestGetOne(byte cardType, byte addr, byte port)
+        {
+            var dev = Devices.FirstOrDefault(n => n.CardType == cardType && n.Address == addr);
+            var byteIndex = port / 8;
+            var bitIndex = port % 8;
+            return (dev.Ports[0][byteIndex] & (1 << bitIndex)) != 0;
         }
     }
 }

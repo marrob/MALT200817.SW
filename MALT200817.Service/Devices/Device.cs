@@ -12,8 +12,7 @@ namespace MALT200817.Service.Devices
         public int Address { get; set; }
         public int Options { get; set; }
         public string Version { get; set; }
-        public List<byte[]> Ports { get; set; }
-        public string CardName { get; set; }
+        public List<byte[]> Ports { get; set; } /*Az elsö bájt legkisebb helyiértéke az első */
         public DeviceDescriptor Descriptor { get; private set; }
         public string PrimaryKey { get  {  return "@" + CardType.ToString("X2") + "#" + Address.ToString("X2"); } }
 
@@ -30,17 +29,23 @@ namespace MALT200817.Service.Devices
                 for (int blocks = 0; blocks < Descriptor.Blocks; blocks++)
                     Ports.Add(new byte[Descriptor.BytePerBlock]);
             }
+            else
+            {
+                Descriptor = DevicesDesciptor.Instance[0];
+            }
         }
 
 
         public override string ToString()
         {
-            return "@" + CardType.ToString("X2") + "#" + Address.ToString("X2") + "O" + Options.ToString("X2") + Version;
+            //CARD_TYPE:ADDRESS:OPTIONS:VERSION:CARD_NAME
+            return "@" + CardType.ToString("X2") + ":" + Address.ToString("X2") + ":" + Options.ToString("X2") +":" + Version + ":" + Descriptor.CardName;
         }
 
         public void ResponsePortsStatus(int block, byte[] ports)
         {
-            Array.Copy(ports, Ports[block], ports.Length);            
+            if (Ports != null)
+                Array.Copy(ports, Ports[block], ports.Length);            
         }
 
 

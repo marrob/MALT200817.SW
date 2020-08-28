@@ -9,6 +9,9 @@ namespace MALT200817.Service
     using System.Threading.Tasks;
     using System.Text.RegularExpressions;
     using Devices;
+    using System.Xml.Schema;
+    using System.Globalization;
+    using Common;
 
     public class TcpParser
     {
@@ -37,63 +40,68 @@ namespace MALT200817.Service
             {
                 return "OPC";
             }
-            else if (line[0] == '@' && line[3] == '#')
+            else if (line[0] == '@')
             {
                 byte cardType = 0;
                 byte addr = 0;
                 byte port = 0;
 
-                //@05#01SET01
-                var typeStr = line.Substring(1, 2);
-                var addrStr = line.Substring(4, 2);
-                var command = line.Substring(6);
+                //@05:01:SET:01
+                var parts = line.Substring(1).Split(':');
+                var typeStr = parts[0];
+                var addrStr = parts[1];
+                var command = parts[2];
+                var valueStr = parts[3];
 
-                if (!byte.TryParse(typeStr.Substring(1), out cardType))
-                    return "Data Type Error of 'CARD_TYPE'";
+                if (!byte.TryParse(typeStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out cardType))
+                    return "!Data Type Error of 'CARD_TYPE'";
 
-                if (!byte.TryParse(addrStr.Substring(1), out addr))
-                    return "Data Type Error of 'ADDR";
 
-                if (command.Contains("SET"))
+                if (!byte.TryParse(addrStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addr))
+                    return "!Data Type Error of 'ADDR";
+
+                if (command == "SET")
                 {
-                    if (!byte.TryParse(command.Substring(3), out port))
-                        return "Data Type Error of 'SET'";
-
-                    try
-                    {
-                        _devExp.RequestSetOne(cardType, addr, port);
-                    }
-                    catch (ApplicationException ex)
-                    {
-                        return ex.Message;
-                    }
+                    _devExp.RequestSetOne(cardType, addr,
+                        byte.Parse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture));
                 }
-                else if (command.Contains("CLR"))
+                else if (command == "CLR")
                 {
-                    if (!byte.TryParse(command.Substring(3), out port))
-                        return "Data Type Error of 'CLR'";
-
-                    try
-                    {
-                        _devExp.RequestClrOne(cardType, addr, port);
-                    }
-                    catch (ApplicationException ex)
-                    {
-                        return ex.Message;
-                    }
+                    _devExp.RequestClrOne(cardType, addr,
+                        byte.Parse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture));
                 }
-
+                else if (command == "CLRS")
+                {
+                    _devExp.RequestClrSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(valueStr));
+                }
+                else if (command == "SETS")
+                {
+                    _devExp.RequestSetSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(valueStr));
+                }
+                else if (command == "GET")
+                {
+                    if (!byte.TryParse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
+                        return "!Data Type Error of " + command;
+                    var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" + port.ToString("X2");
+                    if (_devExp.RequestGetOne(cardType, addr, (byte)(port - 1)))
+                        retval += ":SET";
+                    else
+                        retval += ":CLR";
+                    return retval;
+                }
                 return "OK";
             }
-            else if (line == "GET-DEVICES")
+            
+            else if (line == "GET:DEVICES")
             {
                 string devs = string.Empty;
                 foreach (Device dev in _devExp.Devices)
-                    devs += dev.ToString() + ",";
-                return devs;
+                    devs += dev.ToString() + ";";
+                return devs.Substring(0,devs.Length-1);
             }
 
-            return "Nem kezelet erdemény";
+
+            return "!Nem kezelet erdemény";
         }
 
     }

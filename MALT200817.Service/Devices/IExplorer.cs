@@ -7,7 +7,12 @@
         DeviceCollection Devices { get; }
         SafeQueue<CanMsg> TxQueue { get; }
         void FramesIn(CanMsg frame);
-        void RequestSetOne(byte cardType, byte addr, byte channel);
-        void RequestClrOne(byte cardType, byte addr, byte channel);
+        void RequestClrOne(byte cardType, byte addr, byte port);
+        void RequestSetOne(byte cardType, byte addr, byte port);
+        void RequestClrSeveral(byte cardType, byte addr, byte[] several);
+        void RequestSetSeveral(byte cardType, byte addr, byte[] several);
+
+        bool RequestGetOne(byte cardType, byte addr, byte port);
+        
     }
 }

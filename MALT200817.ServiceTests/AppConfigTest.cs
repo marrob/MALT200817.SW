@@ -40,7 +40,7 @@ namespace MALT200817.Service.Tests
         {
             var app = new App();
             app.Start();
-            app.TcpCommandLine("@03,#05,SET:04");
+            app.TcpCommandLine("@03:05:SET:04");
 
         }
 

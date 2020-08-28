@@ -67,7 +67,7 @@
                     break;
                 }
 
-              //  Thread.Sleep(1);
+                Thread.Sleep(1);
 
             }
 

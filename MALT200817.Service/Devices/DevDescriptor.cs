@@ -17,15 +17,6 @@ namespace MALT200817.Service.Devices
         {
             this.Add(new DeviceDescriptor()
             {
-                CardType = 0x03,
-                Options = 0x00,
-                CardName = "MALT132",
-                Blocks = 1,
-                BytePerBlock = 8,
-                TotalPort = 32
-            });
-            this.Add(new DeviceDescriptor()
-            {
                 CardType = 0xFF,
                 Options = 0x00,
                 CardName = "NOT SUPPORTED",
@@ -33,6 +24,27 @@ namespace MALT200817.Service.Devices
                 BytePerBlock = 0,
                 TotalPort = 0
             });
+
+            this.Add(new DeviceDescriptor()
+            {
+                CardType = 0x03,
+                Options = 0x00,
+                CardName = "MALT132",
+                Blocks = 1,
+                BytePerBlock = 4,
+                TotalPort = 32
+            });
+
+            this.Add(new DeviceDescriptor()
+            {
+                CardType = 0x15,
+                Options = 0x00,
+                CardName = "MALT160T",
+                Blocks = 4,
+                BytePerBlock = 4,
+                TotalPort = 32
+            });
+
         }
 
     }
@@ -41,7 +53,7 @@ namespace MALT200817.Service.Devices
 
         public int CardType;
         public int Options;
-        public string PK { get {return "@" + CardType.ToString("X2") + "O" + Options.ToString("X2"); } }
+        public string PK { get { return "@" + CardType.ToString("X2"); } }
         public string CardName;
         public int Blocks;
         public int BytePerBlock;
