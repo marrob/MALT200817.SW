@@ -6,6 +6,7 @@
     using System.Net;
     using System.Net.Sockets;
     using System.ComponentModel;
+    using MALT200817.Service.Common;
 
     class TcpService : IDisposable
     {
@@ -53,25 +54,33 @@
 
                 while (client.Connected)
                 {
-                    byte[] msg = new byte[1024];
-                    ns.Read(msg, 0, msg.Length);
-                    var cmd = Encoding.Default.GetString(msg).Trim('\0');
-
-                    if (cmd.Length == 0)
-                        break;
-
-                    string response = "Empty\r\n";
-                    if (ParserCallback != null)
+                    try
                     {
-                        response = ParserCallback(cmd);
-                        var array = Encoding.Default.GetBytes(response + "\r\n");
-                        ns.Write(array, 0, array.Length);
+                        byte[] msg = new byte[1024];
+                        ns.Read(msg, 0, msg.Length);
+                        var cmd = Encoding.Default.GetString(msg).Trim('\0');
+
+                        if (cmd.Length == 0)
+                            break;
+
+                        string response = "Empty\r\n";
+                        if (ParserCallback != null)
+                        {
+                            response = ParserCallback(cmd);
+                            var array = Encoding.Default.GetBytes(response + "\r\n");
+                            ns.Write(array, 0, array.Length);
+                        }
+
+                        if (_bw.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
                     }
-
-                    if (_bw.CancellationPending)
+                    catch (Exception ex)
                     {
-                        e.Cancel = true;
-                        break;
+                        AppLog.Instance.WirteLine(ex.Message);
+
                     }
                 }
 

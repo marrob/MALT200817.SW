@@ -42,7 +42,7 @@ namespace MALT200817.Service.Devices
                 CardName = "MALT160T",
                 Blocks = 4,
                 BytePerBlock = 4,
-                TotalPort = 32
+                TotalPort = 160
             });
 
         }

@@ -12,9 +12,13 @@ namespace MALT200817.Service
     using System.Xml.Schema;
     using System.Globalization;
     using Common;
+    using System.Runtime.InteropServices;
 
     public class TcpParser
     {
+
+
+
         IExplorer _devExp;
 
         public TcpParser()
@@ -31,74 +35,106 @@ namespace MALT200817.Service
         {
             line = line.ToUpper();
             line = Regex.Replace(line, @"\s+", " ");
-
-            if (line == "SAY_HELLO_WOLRD")
+            try
             {
-                return "HELLO WORLD";
-            }
-            else if (line == "*OPC?")
-            {
-                return "OPC";
-            }
-            else if (line[0] == '@')
-            {
-                byte cardType = 0;
-                byte addr = 0;
-                byte port = 0;
-
-                //@05:01:SET:01
-                var parts = line.Substring(1).Split(':');
-                var typeStr = parts[0];
-                var addrStr = parts[1];
-                var command = parts[2];
-                var valueStr = parts[3];
-
-                if (!byte.TryParse(typeStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out cardType))
-                    return "!Data Type Error of 'CARD_TYPE'";
-
-
-                if (!byte.TryParse(addrStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addr))
-                    return "!Data Type Error of 'ADDR";
-
-                if (command == "SET")
+                if (line == "SAY_HELLO_WOLRD")
                 {
-                    _devExp.RequestSetOne(cardType, addr,
-                        byte.Parse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+                    return "HELLO WORLD";
                 }
-                else if (command == "CLR")
+                else if (line == "*OPC?")
                 {
-                    _devExp.RequestClrOne(cardType, addr,
-                        byte.Parse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+                    return "OPC";
                 }
-                else if (command == "CLRS")
+                else if (line[0] == '@')
                 {
-                    _devExp.RequestClrSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(valueStr));
-                }
-                else if (command == "SETS")
-                {
-                    _devExp.RequestSetSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(valueStr));
-                }
-                else if (command == "GET")
-                {
-                    if (!byte.TryParse(valueStr, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
-                        return "!Data Type Error of " + command;
-                    var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" + port.ToString("X2");
-                    if (_devExp.RequestGetOne(cardType, addr, (byte)(port - 1)))
-                        retval += ":SET";
+                    const int PART_CARD_TYPE = 0;
+                    const int PART_ADDRES = 1;
+                    const int PART_COMMAND = 2;
+                    const int PART_PARAM1 = 3;
+                    const int PART_PARAM2 = 4;
+
+                    byte cardType;
+                    byte addr;
+                    var parts = line.Substring(1).Split(':');
+
+                    if (!byte.TryParse(parts[PART_CARD_TYPE], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out cardType))
+                        return "!Data Type Error of 'CARD_TYPE'";
+
+                    if (!byte.TryParse(parts[PART_ADDRES], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addr))
+                        return "!Data Type Error of 'ADDR";
+
+                    if (parts[PART_COMMAND] == "SET#ONE")
+                    {
+                        _devExp.RequestSetOne(cardType, addr,
+                            byte.Parse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+                        return "OK";
+                    }
+                    else if (parts[PART_COMMAND] == "CLR#ONE")
+                    {
+                        _devExp.RequestClrOne(cardType, addr,
+                            byte.Parse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+                        return "OK";
+                    }
+                    else if (parts[PART_COMMAND] == "GET#ONE")
+                    {
+                        byte port;
+                        if (!byte.TryParse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
+                            return "!Data Type Error of " + parts[PART_COMMAND];
+                        var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" + port.ToString("X2");
+                        if (_devExp.GetOne(cardType, addr, (byte)(port - 1)))
+                            retval += ":SET";
+                        else
+                            retval += ":CLR";
+                        return retval;
+                    }
+                    else if (parts[PART_COMMAND] == "CLR#SEVERAL")
+                    {
+                        byte block = Explorer.FIRST_BLOCK;
+                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
+                            return "!Data Type Error of " + parts[PART_COMMAND];
+
+                        _devExp.RequestClrSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), Explorer.FIRST_BLOCK);
+                        return "OK";
+                    }
+                    else if (parts[PART_COMMAND] == "SET#SEVERAL")
+                    {
+                        byte block = Explorer.FIRST_BLOCK;
+                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
+                            return "!Data Type Error of " + parts[PART_COMMAND];
+
+                        _devExp.RequestSetSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), Explorer.FIRST_BLOCK);
+                        return "OK";
+                    }
+                    else if (parts[PART_COMMAND] == "GET#SEVERAL")
+                    {
+                        byte block = Explorer.FIRST_BLOCK;
+                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
+                            return "!Data Type Error of " + parts[PART_COMMAND];
+
+                        var state = _devExp.GetSeveral(cardType, addr, Explorer.FIRST_BLOCK);
+                        var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" +
+                            Tools.ConvertByteArrayToString(state);
+                        return retval;
+                    }
                     else
-                        retval += ":CLR";
-                    return retval;
+                    {
+                        return "!UNKNOWN DEVICE COMMAND: '" + parts[PART_COMMAND] + "'";
+                    }
                 }
-                return "OK";
+
+                if (line == "GET#DEVICES")
+                {
+                    string devs = string.Empty;
+                    foreach (Device dev in _devExp.Devices)
+                        devs += dev.ToString() + ";";
+                    return devs.Substring(0, devs.Length - 1);
+                }
             }
-            
-            else if (line == "GET:DEVICES")
+            catch (Exception ex)
             {
-                string devs = string.Empty;
-                foreach (Device dev in _devExp.Devices)
-                    devs += dev.ToString() + ";";
-                return devs.Substring(0,devs.Length-1);
+                return ex.Message;
             }
+
 
 
             return "!Nem kezelet erdemény";

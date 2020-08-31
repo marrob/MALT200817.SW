@@ -13,7 +13,7 @@
         /// <param name="byteArray">byte array</param>
         /// <param name="offset">az ofszettől kezdődően kezdődik a konvertálás</param>
         /// <returns>string pl.: (00 FF AA) </returns>
-        public static string ByteArrayLogString(byte[] byteArray)
+        public static string ConvertByteArrayLogString(byte[] byteArray)
         {
             string retval = string.Empty;
        
@@ -64,6 +64,22 @@
             }
 
             return data;
+        }
+
+        /// <summary>
+        /// ByteArray To C-Style String.
+        /// </summary>
+        /// <param name="data">byte[] data</param>
+        /// <returns>0001</returns>
+        public static string ConvertByteArrayToString(byte[] data)
+        {
+            string retval = string.Empty;
+            for (int i = 0; i < data.Length; i++)
+                retval += string.Format("{0:X2}", data[i]);
+
+            if (data.Length > 1)
+                retval = retval.Remove(retval.Length - 1, 1);
+            return retval;
         }
     }
 }

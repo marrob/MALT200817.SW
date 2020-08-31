@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AppConfigTest.cs" />
+    <Compile Include="Common\Tools.cs" />
     <Compile Include="TcpParserTest.cs" />
     <Compile Include="CanMsgTest.cs" />
     <Compile Include="ExplorerTest.cs" />

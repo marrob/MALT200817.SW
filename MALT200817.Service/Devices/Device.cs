@@ -22,7 +22,7 @@ namespace MALT200817.Service.Devices
             Address = address;
             Options = options;
             Version = "V" + ver1.ToString("X2") + ver0.ToString("X2");
-            Descriptor = DevicesDesciptor.Instance.FirstOrDefault(n => n.CardType == cardType && n.Options == options);
+            Descriptor = DevicesDesciptor.Instance.FirstOrDefault(n => n.CardType == cardType);
             if (Descriptor != null)
             {
                 Ports = new List<byte[]>();
