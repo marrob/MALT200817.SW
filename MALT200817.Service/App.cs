@@ -28,7 +28,7 @@
             }
             AppLog.Instance.FilePath = AppConfiguration.Instance.AppLogPath;
             AppLog.Instance.Enabled = AppConfiguration.Instance.AppLogEnabled;
-            AppLog.Instance.WirteLine("App()");
+            AppLog.Instance.WriteLine("App()");
             
             _exp = new Explorer();
             _tcpParser = new TcpParser(_exp);
@@ -64,7 +64,7 @@
             Thread.Sleep(500);
             _exp.RequestSaveCounters();
             
-            AppLog.Instance.WirteLine("Service Started");
+            AppLog.Instance.WriteLine("Service Started");
         }
 
         public void Stop()
@@ -72,7 +72,7 @@
            // _tcpServer.Dispose();
             _canService.Dispose();
 
-            AppLog.Instance.WirteLine("Service Stopped");
+            AppLog.Instance.WriteLine("Service Stopped");
         }
 
         public string TcpCommandLine(string line)

@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
 
     public class AppConfiguration
@@ -10,8 +9,11 @@
         const string XmlRootElement = "malt_project";
         const string XmlNamespace = @"http://www.altontech.hu/malt/2020/project/content";
 
+   
         public string CanInterfaceType { get; set; }
         public string CanInterfaceName { get; set; }
+
+        public string ServiceHostame { get; set; }
         public int Baudrate { get; set; }
         public bool CanIoLog { get; set; }
         public string AppLogPath { get; set; }
@@ -30,8 +32,8 @@
 
         public AppConfiguration()
         {
-            CanInterfaceType = "Please set the interface type eg.:XNET";
-            CanInterfaceName = "Please set the interface eg.: CAN0";
+            CanInterfaceType = "Please set the interface type eg.:XNET, NICAN...";
+            CanInterfaceName = "Please set the interface eg.: CAN1, CAN0...";
             Baudrate = 1;
             CanIoLog = false;
             AppLogPath = "";

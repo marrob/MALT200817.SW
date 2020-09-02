@@ -6,7 +6,7 @@
     using System.Net;
     using System.Net.Sockets;
     using System.ComponentModel;
-    using MALT200817.Service.Common;
+    using Common;
 
     class TcpService : IDisposable
     {
@@ -44,8 +44,6 @@
 
         private void DoWork(object sender, DoWorkEventArgs e)
         {
-            int i = 0;
-            double d = 0;
 
             while (true)
             {
@@ -79,7 +77,7 @@
                     }
                     catch (Exception ex)
                     {
-                        AppLog.Instance.WirteLine(ex.Message);
+                        AppLog.Instance.WriteLine(ex.Message);
 
                     }
                 }

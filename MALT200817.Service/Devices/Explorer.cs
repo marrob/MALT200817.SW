@@ -58,7 +58,7 @@
             }
             catch (Exception ex)
             {
-                AppLog.Instance.WirteLine(ex.Message);
+                AppLog.Instance.WriteLine(ex.Message);
             }
 
         }

@@ -11,7 +11,7 @@
   
   <!-- Full version number to display -->
   <?define VersionNumber  = "$(var.MajorVersion).$(var.MinorVersion).$(var.BuildNumber).$(var.Revision)"?>
-  <?define ProductName = "MALT200817.Service"?>
+  <?define ProductName = "MALT200817.Platform"?>
   <?define ProductCode = "{A24FC8A0-2849-4F00-8256-7261BA8819EA}"?>
   
   
@@ -38,7 +38,9 @@
   <!--
   Global Paths.
   -->
-  <?define AppDirectory               = "..\MALT200817.Service\bin\Release"?>
+
+  <?define AppDirectory               = "..\MALT200817.Explorer\bin\Release"?>
+  <?define ServiceDirectory           = "..\MALT200817.Service\bin\Release"?>
   <?define AppResourceDirectory       = ".\Resources"?>
   <?define LabView2018Directory       = "..\MALT200817.LabView.Driver"?>
 

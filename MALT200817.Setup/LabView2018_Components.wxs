@@ -39,7 +39,7 @@
         <File Id = "_dir.mnu" Source="$(var.LabView2018Directory)\dir.mnu" KeyPath="no" Checksum="yes"/>
       </Component>
       <Component Id="LabView_Global_Files" Directory="LabView_Global" Guid="{6EBA7B20-E71F-4E88-8467-A3F3D6ADE1E3}">
-        <File Id = "_MALT_Global.vi" Source="$(var.LabView2018Directory)\Global\MALT Global.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT_Global.vi" Source="$(var.LabView2018Directory)\Private\Global\MALT Global.vi" KeyPath="no" Checksum="yes"/>
       </Component>
       <Component Id="ServicesMCAN120803LvFolder" Directory="LabView_Private" Guid="{D3AA8711-1F6B-4046-9461-BE90AC71386A}">
         <File Id = "_MALT_DeviceReqW1PCreate.vi" Source="$(var.LabView2018Directory)\Private\MALT DeviceReqW1PCreate.vi" KeyPath="no" Checksum="yes"/>
@@ -87,20 +87,23 @@
         <File Id = "_MALT_HexStringToByteArray.vi" Source="$(var.LabView2018Directory)\Public\Tools\MALT HexStringToByteArray.vi" KeyPath="no" Checksum="yes"/>
       </Component>
       <Component Id="LabView_Types_Files" Directory="LabView_Types" Guid="{5524A340-18A6-45D0-BA42-45AB322C9C94}">
-        <File Id = "_MALT_CardTypes.ctl" Source="$(var.LabView2018Directory)\Types\MALT CardTypes.ctl" KeyPath="no" Checksum="yes"/>
-        <File Id = "_MALT_Parameters_Type.ctl" Source="$(var.LabView2018Directory)\Types\MALT Parameters Type.ctl" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT_CardTypes.ctl" Source="$(var.LabView2018Directory)\Private\Types\MALT CardTypes.ctl" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT_Parameters_Type.ctl" Source="$(var.LabView2018Directory)\Private\Types\MALT Parameters Type.ctl" KeyPath="no" Checksum="yes"/>
       </Component>
       <Component Id="LabView_UnitTest_Files" Directory="LabView_UnitTest" Guid="{01A6B3C1-C29F-421B-AAA9-9082A0EE459D}">
         <File Id = "_Execute_Cmd.vi" Source="$(var.LabView2018Directory)\UnitTest\Execute Cmd.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Get_Devices_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Get Devices Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Get_One_Status_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Get One Status Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Get_Several_Status_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Get Several Status Test.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT_IOPS.vi" Source="$(var.LabView2018Directory)\UnitTest\MALT IOPS.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT132_IOPS.vi" Source="$(var.LabView2018Directory)\UnitTest\MALT132 IOPS.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_MALT132.seq" Source="$(var.LabView2018Directory)\UnitTest\MALT132.seq" KeyPath="no" Checksum="yes"/>
         <File Id = "_OnOffRapidly.vi" Source="$(var.LabView2018Directory)\UnitTest\OnOffRapidly.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_ResponseTimeTest.vi" Source="$(var.LabView2018Directory)\UnitTest\ResponseTimeTest.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_One_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set One Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_Several_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set Several Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_ViTestFixture.vi" Source="$(var.LabView2018Directory)\UnitTest\ViTestFixture.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_YAV_IOPSx.vi" Source="$(var.LabView2018Directory)\UnitTest\YAV IOPSx.vi" KeyPath="no" Checksum="yes"/>
       </Component>
     </ComponentGroup>
   </Fragment>

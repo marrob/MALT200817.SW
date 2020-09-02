@@ -17,13 +17,13 @@
       <Directory Id = "ProgramFilesFolder">
         <!--C:\Program Files\Konvolucio\-->
         <Directory Id = "AppMnfFolder" Name="$(var.ShortCompany)">
-          <!--C:\Program Files\Konvolucio\MARC170608\-->
-          <Directory Id = "AppFolder" Name="$(var.ProductName)">
-            <!--C:\Program Files\Konvolucio\MARC170608\Drivers\-->
-            <Directory Id = "AppDriverFolder" Name="Drivers"/>
-          </Directory>
-        </Directory>
-      </Directory>
+          <!--C:\Program Files\Konvolucio\MALT200817.Explorer\-->
+          <Directory Id = "AppFolder" Name="$(var.ProductName)"/>
+          <!--C:\Program Files\Konvolucio\MALT200817.Service\-->
+        <Directory Id = "ServiceFolder" Name="$(var.ProductName).Service"/>
+          
+    </Directory>
+   </Directory>
 
 
       <!-- *Desktop* -->

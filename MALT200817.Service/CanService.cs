@@ -73,7 +73,7 @@
 
             #region Resource Freeing
 
-            AppLog.Instance.WirteLine(GetType().Namespace + "." +
+            AppLog.Instance.WriteLine(GetType().Namespace + "." +
                 GetType().Name + "." +
                 MethodBase.GetCurrentMethod().Name +
                 "Resource Freeing");
@@ -105,7 +105,7 @@
             }
             _disposed = true;
 
-            AppLog.Instance.WirteLine(GetType().Namespace + "." +
+            AppLog.Instance.WriteLine(GetType().Namespace + "." +
             GetType().Name + "." +
             MethodBase.GetCurrentMethod().Name +
             "Dispose Complete");

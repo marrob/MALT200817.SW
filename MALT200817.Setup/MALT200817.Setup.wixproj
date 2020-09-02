@@ -19,12 +19,13 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Service_Components.wxs" />
     <Compile Include="Application_Components.wxs" />
     <Compile Include="Directories.wxs" />
     <Compile Include="EventLog_Component.wxs" />
     <Compile Include="LabView2018_Components.wxs" />
     <Compile Include="Main.wxs" />
-    <Compile Include="Service_Components.wxs" />
+    <Compile Include="ServiceSetup_Components.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.wxi" />

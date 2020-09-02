@@ -32,7 +32,7 @@ namespace MALT200817.Service.Common
             FilePath = "IoLog.txt";
         }
 
-        public void WirteLine(string line)
+        public void WriteLine(string line)
         {
             if (Enabled)
             {
