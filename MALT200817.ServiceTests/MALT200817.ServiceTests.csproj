@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MALT200817.Service\MALT200817.Service.csproj">
-      <Project>{2418C00F-B52F-4C15-846F-0512E1677944}</Project>
+      <Project>{2418c00f-b52f-4c15-846f-0512e1677944}</Project>
       <Name>MALT200817.Service</Name>
     </ProjectReference>
   </ItemGroup>

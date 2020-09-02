@@ -22,6 +22,7 @@
     <Compile Include="Application_Components.wxs" />
     <Compile Include="Directories.wxs" />
     <Compile Include="EventLog_Component.wxs" />
+    <Compile Include="LabView2018_Components.wxs" />
     <Compile Include="Main.wxs" />
     <Compile Include="Service_Components.wxs" />
   </ItemGroup>

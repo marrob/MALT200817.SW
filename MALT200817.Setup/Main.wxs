@@ -46,6 +46,7 @@
         <ComponentGroupRef Id="Application_Components"/>
         <ComponentRef Id ="EventSource_Component"/>
         <ComponentRef Id="Service_Components"/>
+        <ComponentGroupRef Id="LabView2018_Components"/>
         
       </Feature>
     </Feature>
