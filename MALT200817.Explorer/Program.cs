@@ -15,6 +15,7 @@ namespace MALT200817.Explorer
     using System.Threading;
     using Events;
     using Properties;
+    using Client;
 
     static class Program
     {
@@ -39,8 +40,9 @@ namespace MALT200817.Explorer
 
     class App
     {
-        IMainForm _mainForm;
-        MaltTcpClient _client;
+        readonly IMainForm _mainForm;
+        readonly MaltClient _client;
+        readonly DataGridView _devciesDataGrid;
 
         public static SynchronizationContext SyncContext = null;
 
@@ -60,9 +62,6 @@ namespace MALT200817.Explorer
             AppLog.Instance.Enabled = AppConfiguration.Instance.AppLogEnabled;
             AppLog.Instance.WriteLine("App()");
 
-
-
-
             /*** Main Form ***/
             _mainForm = new MainForm();
             _mainForm.Text = AppConstants.SoftwareTitle + " - " + Application.ProductVersion;
@@ -71,8 +70,8 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            _client = new MaltTcpClient();
-            _client.Start("", 9999);
+            _client = new MaltClient();
+
 
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
@@ -106,6 +105,10 @@ namespace MALT200817.Explorer
             AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + ": " + string.Join("\r\n -", args));
 #endif
 
+            _client.Start("", 9999);
+
+            
+            _mainForm.DevicesDgv.DataSource = _client.GetDevices();
             Console.WriteLine(_client.GetDevices());
 
         }

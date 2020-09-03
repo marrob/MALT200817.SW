@@ -54,8 +54,19 @@
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Client\DeviceItem.cs" />
+    <Compile Include="Client\DeviceCollection.cs" />
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\IWindowLayoutRestoring.cs" />
+    <Compile Include="Controls\KnvDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\KnvRealyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\KnvRealyControl.Designer.cs">
+      <DependentUpon>KnvRealyControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\PlayAppEvent.cs" />
     <Compile Include="Events\RefreshAppEvent.cs" />
@@ -64,12 +75,18 @@
     <Compile Include="Events\StopAppEvent.cs" />
     <Compile Include="Events\TreeNodeChangedAppEvent.cs" />
     <Compile Include="Events\UnitTest_EventAggregator.cs" />
-    <Compile Include="MaltTcpClient.cs" />
-    <Compile Include="View\DevicesGridViewControl.cs">
+    <Compile Include="Client\MaltClient.cs" />
+    <Compile Include="View\Malt132CardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Malt132CardForm.Designer.cs">
+      <DependentUpon>Malt132CardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DevicesViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\DevicesGridViewControl.Designer.cs">
-      <DependentUpon>DevicesGridViewControl.cs</DependentUpon>
+    <Compile Include="View\DevicesViewControl.Designer.cs">
+      <DependentUpon>DevicesViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
@@ -79,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\KnvRealyControl.resx">
+      <DependentUpon>KnvRealyControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -87,12 +107,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\DevicesGridViewControl.resx">
-      <DependentUpon>DevicesGridViewControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\DevicesViewControl.resx">
+      <DependentUpon>DevicesViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Malt132CardForm.resx">
+      <DependentUpon>Malt132CardForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -107,6 +131,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\relay_off.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\relay_on.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

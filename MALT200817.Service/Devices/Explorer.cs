@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Net.Sockets;
+    using System.Security.Cryptography.X509Certificates;
 
     public class Explorer : IExplorer
     {
@@ -33,9 +34,9 @@
                 /* Response Init Info */
                 if (data[0] == 0xF0)
                 {
-                    var newDev = new Device(data[2], data[3], data[4], data[5], data[6]);
+                    var newDev = new DeviceItem(data[2], data[3], data[4], data[5], data[6]);
                     bool found = false;
-                    foreach (Device dev in Devices)
+                    foreach (DeviceItem dev in Devices)
                     {
                         if (dev.PrimaryKey == newDev.PrimaryKey)
                             found = true;
@@ -48,12 +49,8 @@
                 /* Response Ports Status */
                 if (data[1] == 0x04)
                 {
-
-                    int cardType = data[0];
-                    int addr = (int)(frame.Id & DEV_ADDR);
-                    var dev = Devices.FirstOrDefault(n => n.CardType == cardType && n.Address == addr);
-                    dev.ResponsePortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
-
+                    var dev = Devices.Search(cardType : data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
                 }
             }
             catch (Exception ex)
@@ -81,9 +78,9 @@
         }
 
         /// <param name="port">0-ás indexelésű</param>
-        public bool GetOne(byte cardType, byte addr, byte port)
+        public bool GetOne(byte cardType, byte address, byte port)
         {
-            var dev = Devices.FirstOrDefault(n => n.CardType == cardType && n.Address == addr);
+            var dev = Devices.Search(cardType, address);
             var byteIndex = port / 8;
             var bitIndex = port % 8;
             return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
@@ -117,7 +114,7 @@
 
         public void RequestSaveCounters()
         {
-            foreach (Device dev in Devices)
+            foreach (DeviceItem dev in Devices)
             {
                 var msg = new CanMsg();
                 msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)dev.CardType << 8 | (byte)dev.Address;
@@ -133,5 +130,7 @@
             msg.SetPayload(new byte[] { 0xAB, 0xFF });
             TxQueue.Enqueue(msg);
         }
+
+
     }
 }

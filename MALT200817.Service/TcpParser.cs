@@ -1,30 +1,14 @@
-﻿
-namespace MALT200817.Service
+﻿namespace MALT200817.Service
 {
-
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Text.RegularExpressions;
     using Devices;
-    using System.Xml.Schema;
     using System.Globalization;
     using Common;
-    using System.Runtime.InteropServices;
 
     public class TcpParser
     {
-
-
-
-        IExplorer _devExp;
-
-        public TcpParser()
-        {
-            _devExp = null;
-        }
+        readonly IExplorer _devExp;
 
         public TcpParser(IExplorer explorer)
         {
@@ -53,14 +37,12 @@ namespace MALT200817.Service
                     const int PART_PARAM1 = 3;
                     const int PART_PARAM2 = 4;
 
-                    byte cardType;
-                    byte addr;
                     var parts = line.Substring(1).Split(':');
 
-                    if (!byte.TryParse(parts[PART_CARD_TYPE], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out cardType))
+                    if (!byte.TryParse(parts[PART_CARD_TYPE], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte cardType))
                         return "!Data Type Error of 'CARD_TYPE'";
 
-                    if (!byte.TryParse(parts[PART_ADDRES], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addr))
+                    if (!byte.TryParse(parts[PART_ADDRES], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte addr))
                         return "!Data Type Error of 'ADDR";
 
                     if (parts[PART_COMMAND] == "SET#ONE")
@@ -125,7 +107,7 @@ namespace MALT200817.Service
                 if (line == "GET#DEVICES")
                 {
                     string devs = string.Empty;
-                    foreach (Device dev in _devExp.Devices)
+                    foreach (DeviceItem dev in _devExp.Devices)
                         devs += dev.ToString() + ";";
                     return devs.Substring(0, devs.Length - 1);
                 }

@@ -20,8 +20,10 @@ namespace MALT200817.Explorer.View
         event FormClosingEventHandler FormClosing;
         event EventHandler Disposed;
 
+
         string Text { get; set; }
-      //  ToolStripItem[] MenuBar { set; }
+        
+        //ToolStripItem[] MenuBar { set; }
         bool AlwaysOnTop { get; set; }
 
         ToolStripItem[] StatusBar { set; }
@@ -31,6 +33,8 @@ namespace MALT200817.Explorer.View
 
         //void CursorWait();
         //void CursorDefault();
+
+        DataGridView DevicesDgv { get; }
     }
 
 
@@ -39,6 +43,8 @@ namespace MALT200817.Explorer.View
         public MainForm()
         {
             InitializeComponent();
+
+           
         }
 
         public ToolStripItem[] StatusBar
@@ -51,6 +57,13 @@ namespace MALT200817.Explorer.View
             get { return this.TopMost; }
             set { this.TopMost = value; }
         }
+
+        public DataGridView DevicesDgv
+        {
+            get { return devicesViewControl1.DataGrid; }
+        }
+
+
     }
 
 
