@@ -136,7 +136,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NiXnetDotNet\NiXnetDotNet\NiXnetDotNet.vcxproj">
+    <ProjectReference Include="..\NiXnetDotNet\NiXnetDotNet\NiXnetDotNet.vcxproj">
       <Project>{769e7cb4-9b0c-484a-a993-01bc933f7cbe}</Project>
       <Name>NiXnetDotNet</Name>
     </ProjectReference>
