@@ -14,7 +14,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTitleAttribute(L"NiXnetDotNet")];
 [assembly:AssemblyDescriptionAttribute(L".net interface to the National Instruments NI-XNET driver")];
 [assembly:AssemblyConfigurationAttribute(L"")];
-[assembly:AssemblyCompanyAttribute(L"ddCIM Software Testing A/S")];
+[assembly:AssemblyCompanyAttribute(L"CIM Software Testing A/S")];
 [assembly:AssemblyProductAttribute(L"NiXnetDotNet")];
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c) CIM Software Testing A/S 2016")];
 [assembly:AssemblyTrademarkAttribute(L"")];
