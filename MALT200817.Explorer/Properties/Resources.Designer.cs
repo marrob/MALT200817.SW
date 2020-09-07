@@ -63,9 +63,9 @@ namespace MALT200817.Explorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap relay_off {
+        internal static System.Drawing.Bitmap relay_spdt_off {
             get {
-                object obj = ResourceManager.GetObject("relay_off", resourceCulture);
+                object obj = ResourceManager.GetObject("relay_spdt_off", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,29 @@ namespace MALT200817.Explorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap relay_on {
+        internal static System.Drawing.Bitmap relay_spdt_on {
             get {
-                object obj = ResourceManager.GetObject("relay_on", resourceCulture);
+                object obj = ResourceManager.GetObject("relay_spdt_on", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap relay_spst_off {
+            get {
+                object obj = ResourceManager.GetObject("relay_spst_off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap relay_spst_on {
+            get {
+                object obj = ResourceManager.GetObject("relay_spst_on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

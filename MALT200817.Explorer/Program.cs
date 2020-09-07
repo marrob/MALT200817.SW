@@ -42,8 +42,8 @@ namespace MALT200817.Explorer
     {
         readonly IMainForm _mainForm;
         readonly MaltClient _client;
-        readonly DataGridView _devciesDataGrid;
-
+        readonly DevicePresenter _devicePresenter;
+        readonly DeviceCollection _devices;
         public static SynchronizationContext SyncContext = null;
 
         public App()
@@ -72,6 +72,8 @@ namespace MALT200817.Explorer
             /*** MALT TCP Client ***/
             _client = new MaltClient();
 
+            _devices = new DeviceCollection();
+            _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv, _devices);
 
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
@@ -107,10 +109,12 @@ namespace MALT200817.Explorer
 
             _client.Start("", 9999);
 
-            
-            _mainForm.DevicesDgv.DataSource = _client.GetDevices();
-            Console.WriteLine(_client.GetDevices());
+            foreach (DeviceItem dev in _client.GetDevices())
+            {
+                _devices.Add(dev);
+            }
 
+            _devicePresenter.Update();
         }
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)

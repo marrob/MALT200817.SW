@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B2B73D7-168F-4A63-9D91-54F5E576F594}</ProjectGuid>
+    <ProjectGuid>{4FFD714B-E58A-425E-AAF9-89E5AFCCE4F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MALT200817.ServiceTests</RootNamespace>
-    <AssemblyName>MALT200817.ServiceTests</AssemblyName>
+    <RootNamespace>MALT200817.ExplorerTests</RootNamespace>
+    <AssemblyName>MALT200817.ExplorerTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -51,18 +52,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Devices\DeviceItemTests.cs" />
-    <Compile Include="Devices\UnitTest_AppConfigTest.cs" />
-    <Compile Include="Devices\UnitTest_AppTests.cs" />
-    <Compile Include="Devices\UnitTest_CanMsgTest.cs" />
-    <Compile Include="Devices\UnitTest_ExplorerTest.cs" />
-    <Compile Include="Devices\UnitTest_TcpParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\DeviceCooridnatorTests.cs" />
+    <Compile Include="View\UnitTest_Relay.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MALT200817.Service\MALT200817.Service.csproj">
-      <Project>{2418C00F-B52F-4C15-846F-0512E1677944}</Project>
-      <Name>MALT200817.Service</Name>
+    <ProjectReference Include="..\MALT200817.Explorer\MALT200817.Explorer.csproj">
+      <Project>{49BAF06B-D79A-422C-90AD-F0D065114B6E}</Project>
+      <Name>MALT200817.Explorer</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

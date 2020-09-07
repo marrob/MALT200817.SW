@@ -12,7 +12,7 @@ namespace MALT200817.Explorer.Controls
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    public partial class KnvRealyControl : UserControl
+    public partial class KnvRealySpdtControl : UserControl
     {
         public event EventHandler RelayClick
         {
@@ -27,31 +27,31 @@ namespace MALT200817.Explorer.Controls
             set { _state = value; }
         }
 
-        public string RealayNumber
+        public string RelayLabel
         {
             get { return labelRelayNum.Text; }
             set { labelRelayNum.Text = value; }
         }
 
-        public string ComPinNumber
+        public string ComPinLabel
         {
             get { return labelComPin.Text; }
             set { labelComPin.Text = value; }
         }
         
-        public string NcPinNumber
+        public string NcPinLabel
         {
             get { return labelNcPin.Text; }
             set { labelNcPin.Text = value; }
         }
 
-        public string NoPinNumber
+        public string NoPinLabel
         {
             get { return labelNoPin.Text; }
             set { labelNoPin.Text = value; }
         }
 
-        public KnvRealyControl()
+        public KnvRealySpdtControl()
         {
             InitializeComponent();
         }

@@ -17,9 +17,9 @@ namespace MALT200817.Service.Devices
         {
             this.Add(new DeviceDescriptor()
             {
-                CardType = 0xFF,
-                Options = 0x00,
-                CardName = "NOT SUPPORTED",
+                FamilyCode = 0xFF,
+                OptionCode = 0x00,
+                FamilyName = "NOT SUPPORTED",
                 Blocks = 0,
                 BytePerBlock = 0,
                 TotalPort = 0
@@ -27,9 +27,9 @@ namespace MALT200817.Service.Devices
 
             this.Add(new DeviceDescriptor()
             {
-                CardType = 0x03,
-                Options = 0x00,
-                CardName = "MALT132",
+                FamilyCode = 0x03,
+                OptionCode = 0x00,
+                FamilyName = "MALT132",
                 Blocks = 1,
                 BytePerBlock = 4,
                 TotalPort = 32
@@ -37,9 +37,9 @@ namespace MALT200817.Service.Devices
 
             this.Add(new DeviceDescriptor()
             {
-                CardType = 0x15,
-                Options = 0x00,
-                CardName = "MALT160T",
+                FamilyCode = 0x15,
+                OptionCode = 0x00,
+                FamilyName = "MALT160T",
                 Blocks = 4,
                 BytePerBlock = 4,
                 TotalPort = 160
@@ -51,10 +51,10 @@ namespace MALT200817.Service.Devices
     public class DeviceDescriptor
     {
 
-        public int CardType;
-        public int Options;
-        public string PK { get { return "@" + CardType.ToString("X2"); } }
-        public string CardName;
+        public int FamilyCode;
+        public int OptionCode;
+        public string PK { get { return "@" + FamilyCode.ToString("X2"); } }
+        public string FamilyName;
         public int Blocks;
         public int BytePerBlock;
         public int TotalPort;

@@ -33,7 +33,7 @@
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagnosticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.devicesViewControl1 = new MALT200817.Explorer.View.DevicesViewControl();
+            this.devicesViewControl1 = new MALT200817.Explorer.View.DeviceSelectorControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -121,7 +121,7 @@
         private System.Windows.Forms.ToolStripMenuItem diagnosticsToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private DevicesViewControl devicesViewControl1;
+        private DeviceSelectorControl devicesViewControl1;
     }
 }
 

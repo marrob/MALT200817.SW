@@ -6,6 +6,7 @@
     using System.Net.Sockets;
     using System.Collections.Generic;
     using System.Runtime.Remoting.Messaging;
+    using MALT200817.Explorer.Common;
 
     public class MaltClient : IDisposable
     {
@@ -27,6 +28,7 @@
 
         public void Start(string hostname, int port)
         { 
+            
             _client.Connect("", 9999);
             _networkStream = _client.GetStream();
             _networkStream.ReadTimeout = 2000;
@@ -53,10 +55,15 @@
             {
                 var items = dev.Split(':');
 
-                retval.Add(new DeviceItem("",cardType: items[5] + "-" + items[0],
-                                            address: items[1],
-                                            version: items[3],
-                                            serialNumber: items[4]));
+                retval.Add(new DeviceItem() { 
+                    FamilyCode = Tools.HexaByteStrToInt(items[0].Substring(1)),
+                    Address = Tools.HexaByteStrToInt(items[1]),
+                    OptionCode = Tools.HexaByteStrToInt(items[2]),
+                    Version = items[3],
+                    SerialNumber = items[4],
+                    FirstName = items[5]
+                    
+                });
 
             }
             return retval ;

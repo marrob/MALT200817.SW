@@ -30,7 +30,7 @@ namespace MALT200817.Service.Devices
 
         public DeviceItem Search(byte cardType, byte address)
         {
-            return this.FirstOrDefault(n => n.CardType == cardType && n.Address == address);
+            return this.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == address);
         }
     }
 }

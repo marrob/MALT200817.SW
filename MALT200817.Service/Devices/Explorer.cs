@@ -104,7 +104,7 @@
 
         public byte[] GetSeveral(byte cardType, byte addr, byte block)
         {
-            var dev = Devices.FirstOrDefault(n => n.CardType == cardType && n.Address == addr);
+            var dev = Devices.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == addr);
             if (dev == null)
                 throw new ApplicationException("MALT Device Not found: CardType:" + cardType.ToString("X2") + ", Address:" + addr.ToString("X2"));
             var retval = new byte[dev.Descriptor.BytePerBlock];
@@ -117,8 +117,8 @@
             foreach (DeviceItem dev in Devices)
             {
                 var msg = new CanMsg();
-                msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)dev.CardType << 8 | (byte)dev.Address;
-                msg.SetPayload(new byte[] { (byte)dev.CardType, 0xEE, 0x11 });
+                msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)dev.FamilyCode << 8 | (byte)dev.Address;
+                msg.SetPayload(new byte[] { (byte)dev.FamilyCode, 0xEE, 0x11 });
                 TxQueue.Enqueue(msg);
             }
         }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MALT200817.ServiceTests")]
+[assembly: AssemblyTitle("MALT200817.ExplorerTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MALT200817.ServiceTests")]
+[assembly: AssemblyProduct("MALT200817.ExplorerTests")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7b2b73d7-168f-4a63-9d91-54f5e576f594")]
+[assembly: Guid("4ffd714b-e58a-425e-aaf9-89e5afcce4f7")]
 
 // Version information for an assembly consists of the following four values:
 //

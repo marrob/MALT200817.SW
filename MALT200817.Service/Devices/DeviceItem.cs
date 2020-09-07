@@ -12,22 +12,22 @@ namespace MALT200817.Service.Devices
 
     public class DeviceItem
     {
-        public int CardType { get; set; }
+        public int FamilyCode { get; set; }
         public int Address { get; set; }
-        public int Options { get; set; }
+        public int OptionCode { get; set; }
         public string Version { get; set; }
         public List<byte[]> Ports { get; set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
         public DeviceDescriptor Descriptor { get; private set; }
-        public string PrimaryKey { get  {  return "@" + CardType + "#" + Address; } }
+        public string PrimaryKey { get  {  return "@" + FamilyCode + "#" + Address; } }
         public string SerialNumber;
 
-        public DeviceItem(int cardType, int address, int options, int ver0, int ver1)
+        public DeviceItem(int familyCode, int address, int optionCode, int ver0, int ver1)
         {
-            CardType = cardType;
+            FamilyCode = familyCode;
             Address = address;
-            Options = options;
+            OptionCode = optionCode;
             Version = "V" + ver1.ToString("X2") + ver0.ToString("X2");
-            Descriptor = DevicesDesciptor.Instance.FirstOrDefault(n => n.CardType == cardType);
+            Descriptor = DevicesDesciptor.Instance.FirstOrDefault(n => n.FamilyCode == familyCode);
             if (Descriptor != null)
             {
                 Ports = new List<byte[]>();
@@ -40,24 +40,28 @@ namespace MALT200817.Service.Devices
             }
         }
 
-
         public override string ToString()
         {
-            //CARD_TYPE:ADDRESS:OPTIONS:VERSION:SERIALNUMBER:CARD_NAME
-            return "@" + CardType.ToString("X2") + ":" + Address.ToString("X2") + ":" + Options.ToString("X2") + ":" + Version + ":" + SerialNumber + ":" + Descriptor.CardName;
+            return "@" + FamilyCode.ToString("X2") + ":" + //FAMILY_CODE
+                          Address.ToString("X2") + ":" +   //ADDRESS
+                          OptionCode.ToString("X2") + ":" + //OPTION_CODE
+                          Version + ":" +                //VERSION
+                          SerialNumber + ":" +           //SERIALNUMBER
+                          Descriptor.FamilyName + ":" +  //FAMILY_NAME
+                         "Todo FIRST_NAME";
         }
 
         public override bool Equals(object obj)
         {
             return obj is DeviceItem item &&
-                   CardType == item.CardType &&
+                   FamilyCode == item.FamilyCode &&
                    Address == item.Address;
         }
 
         public override int GetHashCode()
         {
             int hashCode = 2012160261;
-            hashCode = hashCode * -1521134295 + EqualityComparer<int>.Default.GetHashCode(CardType);
+            hashCode = hashCode * -1521134295 + EqualityComparer<int>.Default.GetHashCode(FamilyCode);
             hashCode = hashCode * -1521134295 + EqualityComparer<int>.Default.GetHashCode(Address);
             return hashCode;
         }

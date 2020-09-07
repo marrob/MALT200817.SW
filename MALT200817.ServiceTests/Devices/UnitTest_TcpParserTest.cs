@@ -3,16 +3,9 @@
 namespace MALT200817.Service.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using MALT200817.Service;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using MALT200817.Service.Devices;
-
-    using MALT200817.Service.Common;
+    using Devices;
     using Common;
+    using Service;
 
     [TestClass()]
     public class TcpParserTest
@@ -21,7 +14,7 @@ namespace MALT200817.Service.Tests
         [TestMethod()]
         public void FirstCommand()
         {
-            var parse = new TcpParser();
+            var parse = new TcpParser(null);
             parse.CommandLine("@05:01:SET#ONE:01");
         }
 
@@ -33,8 +26,8 @@ namespace MALT200817.Service.Tests
             parse.CommandLine("@03:05:SET#ONE:04");
 
             Assert.AreEqual(
-            ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x01, 0x03, 0x01 }),
-            ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
+            Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x01, 0x03, 0x01 }),
+            Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
         }
 
         [TestMethod()]
@@ -45,8 +38,8 @@ namespace MALT200817.Service.Tests
             parse.CommandLine("@03:05:SET#ONE:00");
 
             Assert.AreEqual(
-            ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x01, 0x00, 0x01 }),
-            ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
+            Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x01, 0x00, 0x01 }),
+            Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
         }
 
 
@@ -57,8 +50,8 @@ namespace MALT200817.Service.Tests
             var parse = new TcpParser(devExp);
             parse.CommandLine("@03:05:SET#SEVERAL:01000000:00");
             Assert.AreEqual(
-                ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x01 }),
-                ServiceTests.Common.Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
+                Tools.ConvertByteArrayToCStyleString(new byte[] { 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x01 }),
+                Tools.ConvertByteArrayToCStyleString(devExp.TxQueue.Dequeue().GetPayload()));
         }
 
         [TestMethod()]

@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,11 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
-      <HintPath>..\packages\MSTest.TestFramework.2.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MSTest.TestFramework.2.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions">
-      <HintPath>..\packages\MSTest.TestFramework.2.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MSTest.TestFramework.2.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,14 +60,21 @@
     <Compile Include="Client\DeviceCollection.cs" />
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\IWindowLayoutRestoring.cs" />
+    <Compile Include="Common\Tools.cs" />
     <Compile Include="Controls\KnvDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\KnvRealyControl.cs">
+    <Compile Include="Controls\KnvRealySpstControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\KnvRealyControl.Designer.cs">
-      <DependentUpon>KnvRealyControl.cs</DependentUpon>
+    <Compile Include="Controls\KnvRealySpstControl.Designer.cs">
+      <DependentUpon>KnvRealySpstControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\KnvRealySpdtControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\KnvRealySpdtControl.Designer.cs">
+      <DependentUpon>KnvRealySpdtControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\PlayAppEvent.cs" />
@@ -76,17 +85,25 @@
     <Compile Include="Events\TreeNodeChangedAppEvent.cs" />
     <Compile Include="Events\UnitTest_EventAggregator.cs" />
     <Compile Include="Client\MaltClient.cs" />
-    <Compile Include="View\Malt132CardForm.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\DevicePresenter.cs" />
+    <Compile Include="View\DeviceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Malt132CardForm.Designer.cs">
-      <DependentUpon>Malt132CardForm.cs</DependentUpon>
+    <Compile Include="View\DeviceForm.Designer.cs">
+      <DependentUpon>DeviceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\DevicesViewControl.cs">
+    <Compile Include="View\DeviceDescriptorCollection.cs" />
+    <Compile Include="View\DescriptorItem.cs" />
+    <Compile Include="View\DeviceSelectorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\DevicesViewControl.Designer.cs">
-      <DependentUpon>DevicesViewControl.cs</DependentUpon>
+    <Compile Include="View\DeviceSelectorControl.Designer.cs">
+      <DependentUpon>DeviceSelectorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
@@ -96,27 +113,36 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\KnvRealyControl.resx">
-      <DependentUpon>KnvRealyControl.cs</DependentUpon>
+    <Compile Include="View\ComponentCollection.cs" />
+    <Compile Include="View\ComponentItem.cs" />
+    <Compile Include="View\DevicePanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\DevicePanelControl.Designer.cs">
+      <DependentUpon>DevicePanelControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\KnvRealySpstControl.resx">
+      <DependentUpon>KnvRealySpstControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\KnvRealySpdtControl.resx">
+      <DependentUpon>KnvRealySpdtControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="View\DevicesViewControl.resx">
-      <DependentUpon>DevicesViewControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\DeviceForm.resx">
+      <DependentUpon>DeviceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DeviceSelectorControl.resx">
+      <DependentUpon>DeviceSelectorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Malt132CardForm.resx">
-      <DependentUpon>Malt132CardForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\DevicePanelControl.resx">
+      <DependentUpon>DevicePanelControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,10 +158,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\relay_off.PNG" />
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\relay_spdt_off.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\relay_on.PNG" />
+    <None Include="Resources\relay_spdt_on.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\relay_spst_off.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\relay_spst_on.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
