@@ -25,6 +25,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     { 
                         Type = ComponetType.RELAY_SPDT,
+                        Port = 0,
                         RelayLabel = "K1",
                         PinLabel_COM = "36",
                         PinLabel_NC = "3",
@@ -33,6 +34,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPDT,
+                        Port = 1,
                         RelayLabel = "K2",
                         PinLabel_COM = "37",
                         PinLabel_NC = "4",
@@ -41,6 +43,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPDT,
+                        Port = 2,
                         RelayLabel = "K3",
                         PinLabel_COM = "38",
                         PinLabel_NC = "5",
@@ -49,6 +52,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPDT,
+                        Port = 3,
                         RelayLabel = "K4",
                         PinLabel_COM = "39",
                         PinLabel_NC = "6",
@@ -67,6 +71,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 0,
                         RelayLabel = "K1",
                         PinLabel_COM = "PI1",
                         PinLabel_NO = "PO1"
@@ -74,6 +79,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 1,
                         RelayLabel = "K2",
                         PinLabel_COM = "PI1",
                         PinLabel_NO = "PO2"
@@ -81,6 +87,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 2,
                         RelayLabel = "K3",
                         PinLabel_COM = "PI2",
                         PinLabel_NO = "PO1"
@@ -99,6 +106,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 0,
                         RelayLabel = "K1",
                         PinLabel_COM = "COM1",
                         PinLabel_NO = "A-BUS"
@@ -106,6 +114,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 1,
                         RelayLabel = "K2",
                         PinLabel_COM = "COM2",
                         PinLabel_NO = "A-BUS"
@@ -113,6 +122,7 @@ namespace MALT200817.Explorer.View
                     new ComponentItem()
                     {
                         Type = ComponetType.RELAY_SPST,
+                        Port = 2,
                         RelayLabel = "K3",
                         PinLabel_COM = "COM1",
                         PinLabel_NO = "A-BUS"
@@ -134,6 +144,8 @@ namespace MALT200817.Explorer.View
             var retval = Library.Descriptors.FirstOrDefault(n => n.CardType == familyCode && n.Options == optionCode);
             return retval;
         }
+
+      
 
     }
 

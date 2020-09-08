@@ -12,20 +12,42 @@ namespace MALT200817.Explorer.Controls
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    public partial class KnvRealySpstControl : UserControl
+    public partial class KnvRealySpstControl : UserControl, IKnvOutputComponentControl
     {
-        public event EventHandler RelayClick
-        {
-            add { pictureBox1.Click += value; }
-            remove { pictureBox1.Click -= value; }
-        }
+        public event EventHandler ComponentClick;
 
-        private bool _state;
+        bool _state;
         public bool State
         {
-            get { return _state; }
-            set { _state = value; }
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state != value)
+                {
+                    if (value)
+                        On();
+                    else
+                        Off();
+                    _state = value;
+                }
+            }
         }
+
+
+        void On()
+        {
+            pictureBox1.Image = Properties.Resources.relay_spst_on;
+        }
+
+        void Off()
+        {
+            pictureBox1.Image = Properties.Resources.relay_spst_off;
+        }
+
+        public int Port { get; set; }
 
         public string RelayLabel
         {
@@ -48,6 +70,11 @@ namespace MALT200817.Explorer.Controls
         public KnvRealySpstControl()
         {
             InitializeComponent();
+
+            pictureBox1.Click += (o, s) =>
+            {
+                ComponentClick?.Invoke(this, EventArgs.Empty);
+            };
         }
     }
 }

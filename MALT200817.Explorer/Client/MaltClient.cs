@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using System.Runtime.Remoting.Messaging;
     using MALT200817.Explorer.Common;
+    using System.Linq;
 
     public class MaltClient : IDisposable
     {
@@ -16,34 +17,51 @@
 
         bool _disposed = false;
 
-        //public static MaltTcpClient Instance { get; } = new MaltTcpClient();
+        public static MaltClient Instance { get; } = new MaltClient();
 
         public delegate string WriteReadDelagte(string line);
         public WriteReadDelagte WriteReadFnPtr;
+        public bool IsConnected { get; private set; } = false;
+        public Exception LastException { get; private set; } = null;
 
-        public MaltClient()
+        private MaltClient()
         {
             
         }
 
         public void Start(string hostname, int port)
-        { 
-            
-            _client.Connect("", 9999);
-            _networkStream = _client.GetStream();
-            _networkStream.ReadTimeout = 2000;
-            _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
-            WriteReadFnPtr = WriteReadLine;
-
-
+        {
+            try
+            {
+                _client.Connect("", 9999);
+                _networkStream = _client.GetStream();
+                _networkStream.ReadTimeout = 2000;
+                _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
+                WriteReadFnPtr = WriteReadLine;
+                IsConnected = true;
+            }
+            catch (Exception ex)
+            {
+                LastException = ex;
+                throw ex;
+            }
         }
 
         string WriteReadLine(string line)
         {
-            string ptMessage = Console.ReadLine();
-            byte[] bytes = Encoding.UTF8.GetBytes(line);
-            _networkStream.Write(bytes, 0, bytes.Length);
-            return _streamReader.ReadLine();
+            try
+            {
+                string ptMessage = Console.ReadLine();
+                byte[] bytes = Encoding.UTF8.GetBytes(line);
+                _networkStream.Write(bytes, 0, bytes.Length);
+                return _streamReader.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                if (LastException != null)
+                    LastException = ex;
+                throw ex;
+            }
         }
 
         public DeviceCollection GetDevices()
@@ -64,9 +82,47 @@
                     FirstName = items[5]
                     
                 });
-
             }
-            return retval ;
+            return retval;
+        }
+
+        public bool GetOne(int familyCode, int address,  int port)
+        {
+            var result = GetOne(familyCode.ToString("X2"), address.ToString("X2"), port);
+            return result;
+        }
+        
+        public bool GetOne(string familyCode, string address, int port)
+        {
+            var request = "@" + familyCode +  ":" + address + ":" +  "GET#ONE:" + port.ToString("X2");
+            var response = WriteReadFnPtr(request);
+            var result = response.Substring(response.Length - 3);
+            if (result == "CLR")
+                return false;
+            else if (result == "SET")
+                return true;
+            else
+                throw new ApplicationException("Error: Invalid response:" + result);
+        }
+
+        public void SetOne(int familyCode, int address, int port, bool state)
+        {
+            SetOne(familyCode.ToString("X2"), address.ToString("X2"), port, state);
+        }
+
+        /// <summary>
+        /// 
+        /// /// </summary>
+        /// <param name="familyCode"></param>
+        /// <param name="address"></param>
+        /// <param name="port">port0=>K1 </param>
+        /// <param name="state"></param>
+        public void SetOne(string familyCode, string address, int port, bool state) 
+        {
+            var request = "@" + familyCode + ":" + address + ":" + (state == true ? "SET#ONE" : "CLR#ONE") + ":" + port.ToString("X2");
+            var response = WriteReadFnPtr(request);
+            if (response != "OK")
+                throw new ApplicationException("Error: Invalid response:" + response);
         }
 
         public void Dispose()

@@ -33,19 +33,24 @@
             // 
             // relayPanelControl1
             // 
+            this.relayPanelControl1.Address = null;
+            this.relayPanelControl1.Datasource = null;
             this.relayPanelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.relayPanelControl1.FamilyCode = null;
             this.relayPanelControl1.Location = new System.Drawing.Point(0, 0);
             this.relayPanelControl1.Name = "relayPanelControl1";
+            this.relayPanelControl1.OptionCode = null;
             this.relayPanelControl1.Size = new System.Drawing.Size(496, 275);
             this.relayPanelControl1.TabIndex = 0;
+            this.relayPanelControl1.Load += new System.EventHandler(this.relayPanelControl1_Load);
             // 
-            // Malt132CardForm
+            // DeviceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 275);
             this.Controls.Add(this.relayPanelControl1);
-            this.Name = "Malt132CardForm";
+            this.Name = "DeviceForm";
             this.Text = "CardMalt132Form";
             this.ResumeLayout(false);
 

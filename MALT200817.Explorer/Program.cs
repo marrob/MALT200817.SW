@@ -41,7 +41,6 @@ namespace MALT200817.Explorer
     class App
     {
         readonly IMainForm _mainForm;
-        readonly MaltClient _client;
         readonly DevicePresenter _devicePresenter;
         readonly DeviceCollection _devices;
         public static SynchronizationContext SyncContext = null;
@@ -70,7 +69,7 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            _client = new MaltClient();
+            
 
             _devices = new DeviceCollection();
             _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv, _devices);
@@ -107,9 +106,9 @@ namespace MALT200817.Explorer
             AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + ": " + string.Join("\r\n -", args));
 #endif
 
-            _client.Start("", 9999);
+            MaltClient.Instance.Start("", 9999);
 
-            foreach (DeviceItem dev in _client.GetDevices())
+            foreach (DeviceItem dev in MaltClient.Instance.GetDevices())
             {
                 _devices.Add(dev);
             }
@@ -131,7 +130,7 @@ namespace MALT200817.Explorer
 #if TRACE
             AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
 #endif
-            _client.Dispose();
+            MaltClient.Instance.Dispose();
 
             //TimerService.Instance.Dispose();
             //  _ioService.Dispose();

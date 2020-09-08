@@ -9,6 +9,7 @@ namespace MALT200817.Explorer.View
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
+    using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
@@ -73,8 +74,10 @@ namespace MALT200817.Explorer.View
         {
             var descriptor = Library.Descriptors.Search(familyCode, optionCode);
             var form = new DeviceForm();
-            form.Text = descriptor.FirstName + " - " + address.ToString("X2");
             form.Components = descriptor.Components;
+            form.FamilyCode = familyCode.ToString("X2");
+            form.Address = address.ToString("X2");
+            form.OptionCode = optionCode.ToString("X2");
             form.Show();
         }
     }

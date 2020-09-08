@@ -61,6 +61,7 @@
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\IWindowLayoutRestoring.cs" />
     <Compile Include="Common\Tools.cs" />
+    <Compile Include="Controls\IKnvComponentControl.cs" />
     <Compile Include="Controls\KnvDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>

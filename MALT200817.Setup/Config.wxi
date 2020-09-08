@@ -3,7 +3,7 @@
   <?define ShortCompany = "AltonTech" ?>
   <?define LongCompany =  "AltonTech" ?>
   <?define MajorVersion = "0"?>
-  <?define MinorVersion = "0"?>
+  <?define MinorVersion = "3"?>
   <?define BuildNumber  = "0"?> <!-- VS: The default build number increments daily. -->
   <!-- Revision is NOT used by WiX in the upgrade procedure -->
   <!--The default revision number is the number of seconds since midnight local time, divided by 2.-->
