@@ -21,7 +21,7 @@
         public const int FIRST_BLOCK = 0;
 
         public SafeQueue<CanMsg> TxQueue { get; } = new SafeQueue<CanMsg>();
-        public DeviceCollection Devices { get; } = new DeviceCollection();
+        public LiveDeviceCollection LiveDevices { get; } = new LiveDeviceCollection();
 
         public void FramesIn(CanMsg frame)
         {
@@ -34,22 +34,22 @@
                 /* Response Init Info */
                 if (data[0] == 0xF0)
                 {
-                    var newDev = new DeviceItem(data[2], data[3], data[4], data[5], data[6]);
+                    var newDev = new LiveDeviceItem(data[2], data[3], data[4], data[5], data[6]);
                     bool found = false;
-                    foreach (DeviceItem dev in Devices)
+                    foreach (LiveDeviceItem dev in LiveDevices)
                     {
                         if (dev.PrimaryKey == newDev.PrimaryKey)
                             found = true;
                     }
 
                     if (!found)
-                        Devices.Add(newDev);
+                        LiveDevices.Add(newDev);
                 }
 
                 /* Response Ports Status */
                 if (data[1] == 0x04)
                 {
-                    var dev = Devices.Search(cardType : data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    var dev = LiveDevices.Search(cardType : data[0], address: (byte)(frame.Id & DEV_ADDR));
                     dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
                 }
             }
@@ -80,7 +80,7 @@
         /// <param name="port">0-ás indexelésű</param>
         public bool GetOne(byte cardType, byte address, byte port)
         {
-            var dev = Devices.Search(cardType, address);
+            var dev = LiveDevices.Search(cardType, address);
             var byteIndex = port / 8;
             var bitIndex = port % 8;
             return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
@@ -104,7 +104,7 @@
 
         public byte[] GetSeveral(byte cardType, byte addr, byte block)
         {
-            var dev = Devices.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == addr);
+            var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == addr);
             if (dev == null)
                 throw new ApplicationException("MALT Device Not found: CardType:" + cardType.ToString("X2") + ", Address:" + addr.ToString("X2"));
             var retval = new byte[dev.Descriptor.BytePerBlock];
@@ -114,7 +114,7 @@
 
         public void RequestSaveCounters()
         {
-            foreach (DeviceItem dev in Devices)
+            foreach (LiveDeviceItem dev in LiveDevices)
             {
                 var msg = new CanMsg();
                 msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)dev.FamilyCode << 8 | (byte)dev.Address;
@@ -130,6 +130,14 @@
             msg.SetPayload(new byte[] { 0xAB, 0xFF });
             TxQueue.Enqueue(msg);
         }
+
+        public void DoUpdateCardsInfo()
+        {
+            LiveDevices.Clear();
+            RequestAllInitInfo();
+            RequestSaveCounters();
+        }
+
 
 
     }

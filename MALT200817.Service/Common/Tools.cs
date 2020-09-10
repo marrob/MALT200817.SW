@@ -97,5 +97,10 @@
                 retval = retval.Remove(retval.Length - 1, 1);
             return retval;
         }
+
+        public static byte HexaByteStrToByte(string value)
+        {
+            return byte.Parse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        }
     }
 }

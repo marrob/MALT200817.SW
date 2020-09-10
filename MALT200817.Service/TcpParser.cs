@@ -10,6 +10,9 @@
     {
         readonly IExplorer _devExp;
 
+        const string RESPONSE_OK = "OK";
+        const string RESPONSE_NOTFOUND = "NOT FOUND";
+      
         public TcpParser(IExplorer explorer)
         {
             _devExp = explorer;
@@ -17,21 +20,19 @@
 
         public string CommandLine(string line)
         {
+            AppLog.Instance.WriteLine(line);
+
             line = line.ToUpper();
             line = Regex.Replace(line, @"\s+", " ");
             try
             {
-                if (line == "SAY_HELLO_WOLRD")
-                {
-                    return "HELLO WORLD";
-                }
-                else if (line == "*OPC?")
+                if (line == "*OPC?")
                 {
                     return "OPC";
                 }
                 else if (line[0] == '@')
                 {
-                    const int PART_CARD_TYPE = 0;
+                    const int PART_FAMILY_CODE = 0;
                     const int PART_ADDRES = 1;
                     const int PART_COMMAND = 2;
                     const int PART_PARAM1 = 3;
@@ -39,31 +40,24 @@
 
                     var parts = line.Substring(1).Split(':');
 
-                    if (!byte.TryParse(parts[PART_CARD_TYPE], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte cardType))
-                        return "!Data Type Error of 'CARD_TYPE'";
-
-                    if (!byte.TryParse(parts[PART_ADDRES], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte addr))
-                        return "!Data Type Error of 'ADDR";
+                    var familyCode = Tools.HexaByteStrToByte(parts[PART_FAMILY_CODE]);
+                    var address = Tools.HexaByteStrToByte(parts[PART_ADDRES]);
 
                     if (parts[PART_COMMAND] == "SET#ONE")
                     {
-                        _devExp.RequestSetOne(cardType, addr,
-                            byte.Parse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture));
-                        return "OK";
+                        _devExp.RequestSetOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "CLR#ONE")
                     {
-                        _devExp.RequestClrOne(cardType, addr,
-                            byte.Parse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture));
-                        return "OK";
+                        _devExp.RequestClrOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "GET#ONE")
                     {
-                        byte port;
-                        if (!byte.TryParse(parts[PART_PARAM1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
-                            return "!Data Type Error of " + parts[PART_COMMAND];
-                        var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" + port.ToString("X2");
-                        if (_devExp.GetOne(cardType, addr, (byte)(port - 1)))
+                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
+                        if (_devExp.GetOne(familyCode, address, (byte)(port - 1)))
                             retval += ":SET";
                         else
                             retval += ":CLR";
@@ -71,30 +65,21 @@
                     }
                     else if (parts[PART_COMMAND] == "CLR#SEVERAL")
                     {
-                        byte block = Explorer.FIRST_BLOCK;
-                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
-                            return "!Data Type Error of " + parts[PART_COMMAND];
-
-                        _devExp.RequestClrSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), Explorer.FIRST_BLOCK);
-                        return "OK";
+                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
+                        _devExp.RequestClrSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "SET#SEVERAL")
                     {
-                        byte block = Explorer.FIRST_BLOCK;
-                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
-                            return "!Data Type Error of " + parts[PART_COMMAND];
-
-                        _devExp.RequestSetSeveral(cardType, addr, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), Explorer.FIRST_BLOCK);
-                        return "OK";
+                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
+                        _devExp.RequestSetSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "GET#SEVERAL")
                     {
-                        byte block = Explorer.FIRST_BLOCK;
-                        if (!byte.TryParse(parts[PART_PARAM2], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out block))
-                            return "!Data Type Error of " + parts[PART_COMMAND];
-
-                        var state = _devExp.GetSeveral(cardType, addr, Explorer.FIRST_BLOCK);
-                        var retval = "@" + cardType.ToString("X2") + ":" + addr.ToString("X2") + ":STA:" +
+                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
+                        var state = _devExp.GetSeveral(familyCode, address, block);
+                        var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
                         return retval;
                     }
@@ -103,13 +88,39 @@
                         return "!UNKNOWN DEVICE COMMAND: '" + parts[PART_COMMAND] + "'";
                     }
                 }
-
-                if (line == "GET#DEVICES")
+                else if (line == "GET#DEVICES")
                 {
                     string devs = string.Empty;
-                    foreach (DeviceItem dev in _devExp.Devices)
-                        devs += dev.ToString() + ";";
-                    return devs.Substring(0, devs.Length - 1);
+                    if (_devExp.LiveDevices.Count != 0)
+                    {
+                        foreach (LiveDeviceItem dev in _devExp.LiveDevices)
+                        {
+                            devs += "@" +
+                                dev.FamilyCode.ToString("X2") + ":" + //FAMILY_CODE
+                                dev.Address.ToString("X2") + ":" +    //ADDRESS
+                                dev.OptionCode.ToString("X2") + ":" + //OPTION_CODE
+                                dev.Version + ":" +                   //VERSION
+                                dev.SerialNumber + ":" +              //SERIALNUMBER
+                                dev.Descriptor.FamilyName + ":" +     //FAMILY_NAME
+                                "Todo FIRST_NAME" +
+                                ";";
+                        }
+                        return devs.Substring(0, devs.Length - 1);
+                    }
+                    else
+                    {
+                        return RESPONSE_NOTFOUND;
+                    }
+
+                }
+                else if (line == "DO#UPDATE:CARDSINFO")
+                {
+                    _devExp.DoUpdateCardsInfo();
+                    return RESPONSE_OK;
+                }
+                else if (line == "DO#SAY:HELLO WOLRD")
+                {
+                    return "HELLO WORLD";
                 }
             }
             catch (Exception ex)

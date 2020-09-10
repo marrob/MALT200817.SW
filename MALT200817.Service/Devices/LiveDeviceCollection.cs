@@ -10,15 +10,15 @@ namespace MALT200817.Service.Devices
     using System.IO;
 
 
-    public class DeviceCollection : BindingList<DeviceItem>
+    public class LiveDeviceCollection : BindingList<LiveDeviceItem>
     {
 
-        protected override void InsertItem(int index, DeviceItem item)
+        protected override void InsertItem(int index, LiveDeviceItem item)
         {
             base.InsertItem(index, item);
         }
 
-        public new void Remove(DeviceItem item)
+        public new void Remove(LiveDeviceItem item)
         {
             base.Remove(item);
         }
@@ -28,7 +28,7 @@ namespace MALT200817.Service.Devices
 
         }
 
-        public DeviceItem Search(byte cardType, byte address)
+        public LiveDeviceItem Search(byte cardType, byte address)
         {
             return this.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == address);
         }

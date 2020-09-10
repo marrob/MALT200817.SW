@@ -58,12 +58,7 @@
                 throw new ApplicationException("CAN interface type is not supported.");
             }
 
-            _canService.Begin(null);
-            Thread.Sleep(500);
-            _exp.RequestAllInitInfo();
-            Thread.Sleep(500);
-            _exp.RequestSaveCounters();
-            
+            _canService.Begin(null);  
             AppLog.Instance.WriteLine("Service Started");
         }
 

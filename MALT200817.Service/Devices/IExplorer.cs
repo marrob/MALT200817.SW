@@ -4,7 +4,7 @@
 
     public interface IExplorer
     {
-        DeviceCollection Devices { get; }
+        LiveDeviceCollection LiveDevices { get; }
         SafeQueue<CanMsg> TxQueue { get; }
         void FramesIn(CanMsg frame);
         void RequestClrOne(byte cardType, byte addr, byte port);
@@ -13,6 +13,8 @@
         void RequestSetSeveral(byte cardType, byte addr, byte[] several, byte block);
         byte[] GetSeveral(byte cardType, byte addr, byte block);
         bool GetOne(byte cardType, byte addr, byte port);
-        
+        void DoUpdateCardsInfo();
+
+
     }
 }

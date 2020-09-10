@@ -139,6 +139,5 @@ namespace MALT200817.Explorer
             EventAggregator.Instance.Dispose();
             Settings.Default.Save();
         }
-
     }
 }

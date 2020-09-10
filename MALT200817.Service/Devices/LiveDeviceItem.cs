@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace MALT200817.Service.Devices
-{
-    class Valami
-    { 
-    
-    }
-
-
-    public class DeviceItem
+{ 
+    public class LiveDeviceItem
     {
         public int FamilyCode { get; set; }
         public int Address { get; set; }
@@ -21,7 +15,7 @@ namespace MALT200817.Service.Devices
         public string PrimaryKey { get  {  return "@" + FamilyCode + "#" + Address; } }
         public string SerialNumber;
 
-        public DeviceItem(int familyCode, int address, int optionCode, int ver0, int ver1)
+        public LiveDeviceItem(int familyCode, int address, int optionCode, int ver0, int ver1)
         {
             FamilyCode = familyCode;
             Address = address;
@@ -40,20 +34,9 @@ namespace MALT200817.Service.Devices
             }
         }
 
-        public override string ToString()
-        {
-            return "@" + FamilyCode.ToString("X2") + ":" + //FAMILY_CODE
-                          Address.ToString("X2") + ":" +   //ADDRESS
-                          OptionCode.ToString("X2") + ":" + //OPTION_CODE
-                          Version + ":" +                //VERSION
-                          SerialNumber + ":" +           //SERIALNUMBER
-                          Descriptor.FamilyName + ":" +  //FAMILY_NAME
-                         "Todo FIRST_NAME";
-        }
-
         public override bool Equals(object obj)
         {
-            return obj is DeviceItem item &&
+            return obj is LiveDeviceItem item &&
                    FamilyCode == item.FamilyCode &&
                    Address == item.Address;
         }

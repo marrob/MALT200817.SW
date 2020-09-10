@@ -101,8 +101,8 @@
     <Compile Include="Common\SafeQueue.cs" />
     <Compile Include="Common\Tools.cs" />
     <Compile Include="Devices\DevDescriptor.cs" />
-    <Compile Include="Devices\DeviceItem.cs" />
-    <Compile Include="Devices\DeviceCollection.cs" />
+    <Compile Include="Devices\LiveDeviceItem.cs" />
+    <Compile Include="Devices\LiveDeviceCollection.cs" />
     <Compile Include="Common\ICanInterface.cs" />
     <Compile Include="Common\IoLog.cs" />
     <Compile Include="CanService.cs" />
