@@ -162,28 +162,19 @@
             TxQueue.Enqueue(msg);
         }
 
-        static bool i = false;
+
         public void DoUpdateDeviceInfo()
         {
-            lock (_lockObj)
+            LiveDevices.Clear();
+            RequestAllInitInfo();
+            //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
+            Thread.Sleep(250);
+
+            foreach (LiveDeviceItem dev in LiveDevices)
             {
-
-                if (!i)
-                {
-                    LiveDevices.Clear();
-                    RequestAllInitInfo();
-                    //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
-                    Thread.Sleep(250);
-
-                    foreach (LiveDeviceItem dev in LiveDevices)
-                    {
-                        RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
-                        RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
-                        RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
-                    }
-                    i = true;
-                }
-
+                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
+                RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
+                RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
             }
 
             //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek

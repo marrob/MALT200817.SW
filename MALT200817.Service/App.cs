@@ -50,7 +50,8 @@
                 throw new ApplicationException("CAN interface type is not supported.");
             }
 
-            _canService.Begin(null);  
+            _canService.Begin(null);
+            _exp.DoUpdateDeviceInfo();
             AppLog.Instance.WriteLine("Service Started");
         }
 
@@ -58,7 +59,7 @@
         {
            // _tcpServer.Dispose();
             _canService.Dispose();
-
+           
             AppLog.Instance.WriteLine("Service Stopped");
         }
 

@@ -77,21 +77,18 @@
                     ns.Read(msg, 0, msg.Length);
                     var cmd = Encoding.Default.GetString(msg).Trim('\0');
 
-                    //lock (_lockObj)
-                    //{
-                        if (cmd.Length != 0)
+                    if (cmd.Length != 0)
+                    {
+                        string response = "Empty\r\n";
+                        if (ParserCallback != null)
                         {
-                            string response = "Empty\r\n";
-                            if (ParserCallback != null)
-                            {
-                                //AppLog.Instance.WriteLine("Service Request:" + cmd);
-                                response = ParserCallback(cmd);
-                                //AppLog.Instance.WriteLine("Service Response:" + response);
-                                var array = Encoding.Default.GetBytes(response + "\r\n");
-                                ns.Write(array, 0, array.Length);
-                            }
+                            //AppLog.Instance.WriteLine("Service Request:" + cmd);
+                            response = ParserCallback(cmd);
+                            //AppLog.Instance.WriteLine("Service Response:" + response);
+                            var array = Encoding.Default.GetBytes(response + "\r\n");
+                            ns.Write(array, 0, array.Length);
                         }
-                    //}
+                    }
                 }
                 catch (Exception ex)
                 {
