@@ -25,6 +25,7 @@
             remove { _bw.RunWorkerCompleted -= value; }
             add { _bw.RunWorkerCompleted += value; }
         }
+        
 
         public TcpService()
         {
@@ -42,48 +43,18 @@
             _server.Start();
             _bw.RunWorkerAsync(argument);
         }
-
+        int clintentsCount;
         private void DoWork(object sender, DoWorkEventArgs e)
         {
 
             while (true)
             {
                 TcpClient client = _server.AcceptTcpClient();
-                NetworkStream ns = client.GetStream();
+                clintentsCount++;
+                Console.WriteLine("Enter New client");
 
-                while (client.Connected)
-                {
-                    try
-                    {
-                        byte[] msg = new byte[1024];
-                        ns.Read(msg, 0, msg.Length);
-                        var cmd = Encoding.Default.GetString(msg).Trim('\0');
+                new Thread(() => HandleClient(client)).Start();
 
-                        if (cmd.Length == 0)
-                            break;
-
-                        string response = "Empty\r\n";
-                        if (ParserCallback != null)
-                        {
-                            AppLog.Instance.WriteLine("Service Request:" + cmd);
-                            response = ParserCallback(cmd);
-                            AppLog.Instance.WriteLine("Service Response:" + response);
-                            var array = Encoding.Default.GetBytes(response + "\r\n");
-                            ns.Write(array, 0, array.Length);
-                        }
-
-                        if (_bw.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        AppLog.Instance.WriteLine(ex.Message);
-
-                    }
-                }
 
                 if (_bw.CancellationPending)
                 {
@@ -93,6 +64,45 @@
 
             }
         }
+
+        public void HandleClient(TcpClient client)
+        {
+            while (client.Connected)
+            {
+                try
+                {
+
+                    NetworkStream ns = client.GetStream();
+                    byte[] msg = new byte[1024];
+                    ns.Read(msg, 0, msg.Length);
+                    var cmd = Encoding.Default.GetString(msg).Trim('\0');
+
+                    //lock (_lockObj)
+                    //{
+                        if (cmd.Length != 0)
+                        {
+                            string response = "Empty\r\n";
+                            if (ParserCallback != null)
+                            {
+                                //AppLog.Instance.WriteLine("Service Request:" + cmd);
+                                response = ParserCallback(cmd);
+                                //AppLog.Instance.WriteLine("Service Response:" + response);
+                                var array = Encoding.Default.GetBytes(response + "\r\n");
+                                ns.Write(array, 0, array.Length);
+                            }
+                        }
+                    //}
+                }
+                catch (Exception ex)
+                {
+                   // AppLog.Instance.WriteLine(ex.Message);
+
+                }
+            } 
+            clintentsCount--;
+            Console.WriteLine("Close client");
+        }
+      
 
         public void Dispose()
         {

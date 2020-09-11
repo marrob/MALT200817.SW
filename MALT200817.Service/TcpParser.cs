@@ -113,6 +113,8 @@
                 }
                 else if (line == "DO#UPDATE:DEVICES:INFO")
                 {
+                    
+
                     _devExp.DoUpdateDeviceInfo();
                     return RESPONSE_OK;
                 }
@@ -123,7 +125,7 @@
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                ////return ex.Message;
             }
 
 

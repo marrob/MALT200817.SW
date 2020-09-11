@@ -24,46 +24,52 @@
         public SafeQueue<CanMsg> TxQueue { get; } = new SafeQueue<CanMsg>();
         public LiveDeviceCollection LiveDevices { get; } = new LiveDeviceCollection();
 
+        object _lockObj = new object();
+
         public void FramesIn(CanMsg frame)
         {
-            try
+            lock (_lockObj)
             {
-                var data = frame.GetPayload();
-                if ((frame.Id & DIR_MASK) != HOST_RX_ID)
-                    return;
-
-                /* Response Init Info */
-                if (data[0] == 0xF0)
+                try
                 {
-                    var newDev = new LiveDeviceItem(data[2], data[3], data[4], data[5], data[6]);
-                    bool found = false;
-                    foreach (LiveDeviceItem dev in LiveDevices)
+                    var data = frame.GetPayload();
+                    if ((frame.Id & DIR_MASK) != HOST_RX_ID)
+                        return;
+
+                    /* Response Init Info */
+                    if (data[0] == 0xF0)
                     {
-                        if (dev.PrimaryKey == newDev.PrimaryKey)
-                            found = true;
+                        var newDev = new LiveDeviceItem(data[2], data[3], data[4], data[5], data[6]);
+                        bool found = false;
+                        foreach (LiveDeviceItem dev in LiveDevices)
+                        {
+                            if (dev.PrimaryKey == newDev.PrimaryKey)
+                                found = true;
+                        }
+                        if (!found)
+                            LiveDevices.Add(newDev);
                     }
-                    if (!found)
-                        LiveDevices.Add(newDev);
-                }
-                /* Response Ports Status */
-                else if (data[1] == 0x04)
-                {
-                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
-                    dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
-                }
-                /* Response Serial Number*/
-                else if (data[1] == 0xDE)
-                {
-                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
-                    dev.SetSerialNumber(new byte[] { data[3], data[4], data[5], data[6] });
-                }
-                    
-            }
-            catch (Exception ex)
-            {
-                AppLog.Instance.WriteLine(ex.Message);
-            }
+                    /* Response Ports Status */
+                    else if (data[1] == 0x04)
+                    {
+                        var familyCode = data[0];
+                        var adddress = (byte)(frame.Id & DEV_ADDR);
+                        var dev = LiveDevices.Search(familyCode, adddress);
+                        dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
+                    }
+                    /* Response Serial Number*/
+                    else if (data[1] == 0xDE)
+                    {
+                        var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
+                        dev.SetSerialNumber(new byte[] { data[3], data[4], data[5], data[6] });
+                    }
 
+                }
+                catch (Exception ex)
+                {
+                    AppLog.Instance.WriteLine(ex.Message);
+                }
+            }
         }
 
         /// <param name="port">0-es indexelésű</param>
@@ -77,19 +83,25 @@
         /// <param name="port">0-jelenti a K1-egyet indexelésű</param>
         public void RequestSetOne(byte familyCode, byte address, byte port)
         {
-            var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
-            msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x01 });
-            TxQueue.Enqueue(msg);
+            lock (_lockObj)
+            {
+                var msg = new CanMsg();
+                msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+                msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x01 });
+                TxQueue.Enqueue(msg);
+            }
         }
 
         /// <param name="port">0-ás indexelésű</param>
         public bool GetOne(byte familyCode, byte address, byte port)
         {
-            var dev = LiveDevices.Search(familyCode, address);
-            var byteIndex = port / 8;
-            var bitIndex = port % 8;
-            return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
+            lock (_lockObj)
+            {
+                var dev = LiveDevices.Search(familyCode, address);
+                var byteIndex = port / 8;
+                var bitIndex = port % 8;
+                return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
+            }
         }
 
         public void RequestClrSeveral(byte familyCode, byte address, byte[] several, byte block)
@@ -150,18 +162,28 @@
             TxQueue.Enqueue(msg);
         }
 
+        static bool i = false;
         public void DoUpdateDeviceInfo()
         {
-            LiveDevices.Clear();
-            RequestAllInitInfo();
-            //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
-            Thread.Sleep(250);
-            
-            foreach (LiveDeviceItem dev in LiveDevices)
+            lock (_lockObj)
             {
-                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
-                RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
-                RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
+
+                if (!i)
+                {
+                    LiveDevices.Clear();
+                    RequestAllInitInfo();
+                    //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
+                    Thread.Sleep(250);
+
+                    foreach (LiveDeviceItem dev in LiveDevices)
+                    {
+                        RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
+                        RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
+                        RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
+                    }
+                    i = true;
+                }
+
             }
 
             //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek
