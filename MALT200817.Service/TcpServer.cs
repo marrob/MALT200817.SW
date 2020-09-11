@@ -7,11 +7,12 @@
     using System.Net.Sockets;
     using System.ComponentModel;
     using Common;
+    using Configuration;
 
     class TcpService : IDisposable
     {
-        BackgroundWorker _bw;
-        TcpListener _server;
+        readonly BackgroundWorker _bw;
+        readonly TcpListener _server;
         readonly AutoResetEvent _waitForDoneEvent;
         bool _disposed = false;
 
@@ -28,7 +29,7 @@
         public TcpService()
         {
             _bw = new BackgroundWorker();
-            _server = new TcpListener(IPAddress.Any, 9999);
+            _server = new TcpListener(IPAddress.Any, AppConfiguration.Instance.ServicePort);
             _waitForDoneEvent = new AutoResetEvent(false);
             _bw.DoWork += DoWork;
 
@@ -64,7 +65,9 @@
                         string response = "Empty\r\n";
                         if (ParserCallback != null)
                         {
+                            AppLog.Instance.WriteLine("Service Request:" + cmd);
                             response = ParserCallback(cmd);
+                            AppLog.Instance.WriteLine("Service Response:" + response);
                             var array = Encoding.Default.GetBytes(response + "\r\n");
                             ns.Write(array, 0, array.Length);
                         }

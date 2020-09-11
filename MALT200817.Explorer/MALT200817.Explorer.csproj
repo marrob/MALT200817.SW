@@ -54,10 +54,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfiguration.cs" />
-    <Compile Include="AppConstants.cs" />
     <Compile Include="Client\DeviceItem.cs" />
     <Compile Include="Client\DeviceCollection.cs" />
+    <Compile Include="Commands\DevicesForceUpdateCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowConfigurationCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowLogCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\AlwaysOnTopCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ColumnAutosizeCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\UpdatesCommands.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\IWindowLayoutRestoring.cs" />
     <Compile Include="Common\Tools.cs" />
@@ -161,7 +177,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\relay_spdt_off.PNG" />
   </ItemGroup>
@@ -173,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\relay_spst_on.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MALT200817.Configuration\MALT200817.Configuration.csproj">
+      <Project>{0e36a826-7715-4845-bd9c-abf394bd6679}</Project>
+      <Name>MALT200817.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

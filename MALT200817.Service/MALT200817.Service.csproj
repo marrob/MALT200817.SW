@@ -94,8 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="AppConfiguration.cs" />
-    <Compile Include="AppConstants.cs" />
     <Compile Include="Common\CanMsg.cs" />
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\SafeQueue.cs" />
@@ -142,6 +140,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MALT200817.Configuration\MALT200817.Configuration.csproj">
+      <Project>{0e36a826-7715-4845-bd9c-abf394bd6679}</Project>
+      <Name>MALT200817.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NiXnetDotNet\NiXnetDotNet\NiXnetDotNet.vcxproj">
       <Project>{769e7cb4-9b0c-484a-a993-01bc933f7cbe}</Project>
       <Name>NiXnetDotNet</Name>

@@ -21,6 +21,8 @@
 
         public delegate string WriteReadDelagte(string line);
         public WriteReadDelagte WriteReadFnPtr;
+        private string resp;
+
         public bool IsConnected { get; private set; } = false;
         public Exception LastException { get; private set; } = null;
 
@@ -33,7 +35,7 @@
         {
             try
             {
-                _client.Connect("", 9999);
+                _client.Connect(hostname, port);
                 _networkStream = _client.GetStream();
                 _networkStream.ReadTimeout = 2000;
                 _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
@@ -43,7 +45,7 @@
             catch (Exception ex)
             {
                 LastException = ex;
-                throw ex;
+                ////throw ex;
             }
         }
 
@@ -63,28 +65,40 @@
                 throw ex;
             }
         }
-
+        public void UpdateDevicesInfo()
+        {
+            var resp = WriteReadFnPtr("DO#UPDATE:DEVICES:INFO");
+            if (resp != "OK")
+                throw new ApplicationException(resp);
+        }
         public DeviceCollection GetDevices()
         {
             var retval = new DeviceCollection();
             var response = WriteReadFnPtr("GET#DEVICES");
-            var devs = response.Split(';');
-            foreach (string dev in devs)
-            {
-                var items = dev.Split(':');
 
-                retval.Add(new DeviceItem() { 
-                    FamilyCode = Tools.HexaByteStrToInt(items[0].Substring(1)),
-                    Address = Tools.HexaByteStrToInt(items[1]),
-                    OptionCode = Tools.HexaByteStrToInt(items[2]),
-                    Version = items[3],
-                    SerialNumber = items[4],
-                    FirstName = items[5]
-                    
-                });
+            if (response != "NOT FOUND")
+            {
+                var devs = response.Split(';');
+                foreach (string dev in devs)
+                {
+                    var items = dev.Split(':');
+
+                    retval.Add(new DeviceItem()
+                    {
+                        FamilyCode = Tools.HexaByteStrToInt(items[0].Substring(1)),
+                        Address = Tools.HexaByteStrToInt(items[1]),
+                        OptionCode = Tools.HexaByteStrToInt(items[2]),
+                        Version = items[3],
+                        SerialNumber = items[4],
+                        FirstName = items[5]
+
+                    });
+                }
             }
             return retval;
         }
+
+
 
         public bool GetOne(int familyCode, int address,  int port)
         {

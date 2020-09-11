@@ -20,8 +20,6 @@
 
         public string CommandLine(string line)
         {
-            AppLog.Instance.WriteLine(line);
-
             line = line.ToUpper();
             line = Regex.Replace(line, @"\s+", " ");
             try
@@ -113,9 +111,9 @@
                     }
 
                 }
-                else if (line == "DO#UPDATE:CARDSINFO")
+                else if (line == "DO#UPDATE:DEVICES:INFO")
                 {
-                    _devExp.DoUpdateCardsInfo();
+                    _devExp.DoUpdateDeviceInfo();
                     return RESPONSE_OK;
                 }
                 else if (line == "DO#SAY:HELLO WOLRD")

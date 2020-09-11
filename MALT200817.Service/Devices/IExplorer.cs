@@ -13,7 +13,7 @@
         void RequestSetSeveral(byte cardType, byte addr, byte[] several, byte block);
         byte[] GetSeveral(byte cardType, byte addr, byte block);
         bool GetOne(byte cardType, byte addr, byte port);
-        void DoUpdateCardsInfo();
+        void DoUpdateDeviceInfo();
 
 
     }

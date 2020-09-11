@@ -5,8 +5,9 @@
   
   <Fragment>
     <Component Id ="ServiceSetup_Components" Directory="ServiceFolder" Guid ="{A052FF43-DBD1-454D-B59E-2763BD11AF5B}">
-      <File Id='MALT200817.ServiceEXE' Name='MALT200817.Service.exe'  DiskId='1'  Source='$(var.ServiceDirectory)\MALT200817.Service.exe' KeyPath='yes'/>
-    
+      <File Id='MALT200817.Service.exe'  Source='$(var.ServiceDirectory)\MALT200817.Service.exe' KeyPath='yes'/>
+      <File Id='MALT200817.Configuration.dll'   Source='$(var.ServiceDirectory)\MALT200817.Configuration.dll' KeyPath='no'/>
+
       <ServiceInstall
         Id="ServiceInstaller"
         Type="ownProcess"

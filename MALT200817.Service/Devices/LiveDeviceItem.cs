@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 namespace MALT200817.Service.Devices
-{ 
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Common;
     public class LiveDeviceItem
     {
         public int FamilyCode { get; set; }
@@ -55,8 +56,9 @@ namespace MALT200817.Service.Devices
                 Array.Copy(ports, Ports[block], ports.Length);            
         }
 
-        public void SetSerialNumber()
+        public void SetSerialNumber(byte[] serialNumByteArray)
         {
+            SerialNumber = BitConverter.ToInt32(serialNumByteArray, 0).ToString();
         }
     }
 }

@@ -31,7 +31,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diagnosticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.devicesViewControl1 = new MALT200817.Explorer.View.DeviceSelectorControl();
             this.menuStrip1.SuspendLayout();
@@ -51,8 +50,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
-            this.diagnosticsToolStripMenuItem});
+            this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(646, 24);
@@ -64,12 +62,6 @@
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.testToolStripMenuItem.Text = "Test";
-            // 
-            // diagnosticsToolStripMenuItem
-            // 
-            this.diagnosticsToolStripMenuItem.Name = "diagnosticsToolStripMenuItem";
-            this.diagnosticsToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.diagnosticsToolStripMenuItem.Text = "Diag";
             // 
             // splitContainer1
             // 
@@ -84,7 +76,7 @@
             this.splitContainer1.SplitterDistance = 366;
             this.splitContainer1.TabIndex = 8;
             // 
-            // devicesGridViewControl1
+            // devicesViewControl1
             // 
             this.devicesViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesViewControl1.Location = new System.Drawing.Point(0, 0);
@@ -118,7 +110,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem diagnosticsToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private DeviceSelectorControl devicesViewControl1;

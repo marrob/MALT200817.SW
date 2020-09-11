@@ -28,9 +28,9 @@ namespace MALT200817.Service.Devices
 
         }
 
-        public LiveDeviceItem Search(byte cardType, byte address)
+        public LiveDeviceItem Search(byte familyCode, byte address)
         {
-            return this.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == address);
+            return this.FirstOrDefault(n => n.FamilyCode == familyCode && n.Address == address);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MALT200817.Explorer.View
 
         string Text { get; set; }
         
-        //ToolStripItem[] MenuBar { set; }
+        ToolStripItem[] MenuBar { set; }
         bool AlwaysOnTop { get; set; }
 
         ToolStripItem[] StatusBar { set; }
@@ -43,8 +43,10 @@ namespace MALT200817.Explorer.View
         public MainForm()
         {
             InitializeComponent();
-
-           
+        }
+        public ToolStripItem[] MenuBar
+        {
+            set { menuStrip1.Items.AddRange(value); }
         }
 
         public ToolStripItem[] StatusBar

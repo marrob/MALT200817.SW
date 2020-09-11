@@ -4,12 +4,13 @@ namespace MALT200817.Service.Common
     using System;
     using System.IO;
     using System.Text;
+    using Configuration;
 
     public class IoLog
     {
         public static IoLog Instance { get; } = new IoLog();
 
-        public string FilePath { get; set; } = AppConstants.LogPath;
+        public string FilePath { get; set; } = AppConstants.LogDirectory;
         public bool Enabled;
 
         public double? GetFileSizeKB

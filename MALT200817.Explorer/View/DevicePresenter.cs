@@ -14,7 +14,13 @@ namespace MALT200817.Explorer.View
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    public class DevicePresenter
+
+    public interface IDevicePresenter
+    {
+        void Update();
+    }
+
+    public class DevicePresenter: IDevicePresenter
     {
         public class DeviceListViewItem
         { 

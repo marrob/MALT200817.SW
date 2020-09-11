@@ -6,6 +6,7 @@
     using System.Linq.Expressions;
     using System.Net.Sockets;
     using System.Security.Cryptography.X509Certificates;
+    using System.Threading;
 
     public class Explorer : IExplorer
     {
@@ -41,17 +42,22 @@
                         if (dev.PrimaryKey == newDev.PrimaryKey)
                             found = true;
                     }
-
                     if (!found)
                         LiveDevices.Add(newDev);
                 }
-
                 /* Response Ports Status */
-                if (data[1] == 0x04)
+                else if (data[1] == 0x04)
                 {
-                    var dev = LiveDevices.Search(cardType : data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
                     dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
                 }
+                /* Response Serial Number*/
+                else if (data[1] == 0xDE)
+                {
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    dev.SetSerialNumber(new byte[] { data[3], data[4], data[5], data[6] });
+                }
+                    
             }
             catch (Exception ex)
             {
@@ -61,66 +67,71 @@
         }
 
         /// <param name="port">0-es indexelésű</param>
-        public void RequestClrOne(byte cardType, byte addr, byte port)
+        public void RequestClrOne(byte familyCode, byte address, byte port)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x01, port, 0x00 });
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x00 });
             TxQueue.Enqueue(msg);
         }
         /// <param name="port">0-jelenti a K1-egyet indexelésű</param>
-        public void RequestSetOne(byte cardType, byte addr, byte port)
+        public void RequestSetOne(byte familyCode, byte address, byte port)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x01, port, 0x01 });
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x01 });
             TxQueue.Enqueue(msg);
         }
 
         /// <param name="port">0-ás indexelésű</param>
-        public bool GetOne(byte cardType, byte address, byte port)
+        public bool GetOne(byte familyCode, byte address, byte port)
         {
-            var dev = LiveDevices.Search(cardType, address);
+            var dev = LiveDevices.Search(familyCode, address);
             var byteIndex = port / 8;
             var bitIndex = port % 8;
             return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
         }
 
-        public void RequestClrSeveral(byte cardType, byte addr, byte[] several, byte block)
+        public void RequestClrSeveral(byte familyCode, byte address, byte[] several, byte block)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x03, several[0], several[1], several[2], several[3], 0x00 , block });
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x03, several[0], several[1], several[2], several[3], 0x00 , block });
             TxQueue.Enqueue(msg);
         }
 
-        public void RequestSetSeveral(byte cardType, byte addr, byte[] several, byte block)
+        public void RequestSetSeveral(byte familyCode, byte addr, byte[] several, byte block)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)cardType << 8 | addr;
-            msg.SetPayload(new byte[] { cardType, 0x03, several[0], several[1], several[2], several[3], 0x01, block });
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | addr;
+            msg.SetPayload(new byte[] { familyCode, 0x03, several[0], several[1], several[2], several[3], 0x01, block });
             TxQueue.Enqueue(msg);
         }
 
-        public byte[] GetSeveral(byte cardType, byte addr, byte block)
+        public byte[] GetSeveral(byte familyCode, byte address, byte block)
         {
-            var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == cardType && n.Address == addr);
+            var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == familyCode && n.Address == address);
             if (dev == null)
-                throw new ApplicationException("MALT Device Not found: CardType:" + cardType.ToString("X2") + ", Address:" + addr.ToString("X2"));
+                throw new ApplicationException("MALT Device Not found: CardType:" + familyCode.ToString("X2") + ", Address:" + address.ToString("X2"));
             var retval = new byte[dev.Descriptor.BytePerBlock];
             Array.Copy(dev.Ports[FIRST_BLOCK], retval, retval.Length);
             return retval;
         }
 
-        public void RequestSaveCounters()
+        public void RequestPortsStatus(byte familyCode, byte address)
         {
-            foreach (LiveDeviceItem dev in LiveDevices)
-            {
-                var msg = new CanMsg();
-                msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)dev.FamilyCode << 8 | (byte)dev.Address;
-                msg.SetPayload(new byte[] { (byte)dev.FamilyCode, 0xEE, 0x11 });
-                TxQueue.Enqueue(msg);
-            }
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x04, 1 });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void RequestSaveCounters(byte familyCode, byte address)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | (byte)address;
+            msg.SetPayload(new byte[] { familyCode, 0xEE, 0x11 });
+            TxQueue.Enqueue(msg);
         }
 
         public void RequestAllInitInfo()
@@ -131,14 +142,30 @@
             TxQueue.Enqueue(msg);
         }
 
-        public void DoUpdateCardsInfo()
+        public void RequestSerialNumber(byte familyCode, byte address)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | (byte)address;
+            msg.SetPayload(new byte[] { familyCode, 0xDE, 0xF5 });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void DoUpdateDeviceInfo()
         {
             LiveDevices.Clear();
             RequestAllInitInfo();
-            RequestSaveCounters();
+            //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
+            Thread.Sleep(250);
+            
+            foreach (LiveDeviceItem dev in LiveDevices)
+            {
+                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
+                RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
+                RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
+            }
+
+            //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek
+            Thread.Sleep(250);
         }
-
-
-
     }
 }

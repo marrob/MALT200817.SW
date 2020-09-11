@@ -11,11 +11,13 @@
       </Component>
       
       <Component Id="App_Files" Guid="{F1E00504-6CC7-4E1B-AF54-96D2EAF2FD13}">
-        <File Name="_MALT200817.Explorer.exe" Source="$(var.AppDirectory)\MALT200817.Explorer.exe" KeyPath="yes" Checksum="yes">
+        
+        
+        <File Name="MALT200817.Explorer.exe" Source="$(var.AppDirectory)\MALT200817.Explorer.exe" KeyPath="yes" Checksum="yes">
           <Shortcut Id="_MALT200817.Explorer.exe" Directory="AppProgramsFolder" WorkingDirectory="AppFolder" Icon="AppAddRemove.ico" Name="$(var.ProductName)" Advertise="yes" />
           <Shortcut Id="DesktopShortcut"    Directory="DesktopFolder"  WorkingDirectory = "AppFolder"  Icon="AppAddRemove.ico"  Name="$(var.ProductName)" Advertise="yes" />
         </File>
-       
+       <File Id="_MALT200817.Configuration.dll" Source="$(var.AppDirectory)\MALT200817.Configuration.dll" KeyPath="no" Checksum="yes"/>
       </Component>
     </ComponentGroup>
   </Fragment>

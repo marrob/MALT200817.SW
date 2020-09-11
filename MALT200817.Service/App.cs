@@ -7,7 +7,7 @@
     using Devices;
     using MALT200817.Service.Common;
     using System.Threading;
-
+    using Configuration;
     public class App
     {
         TcpService _tcpServer;
@@ -17,17 +17,9 @@
 
         public App()
         {
-            if (!File.Exists(AppConstants.AppConfigurationFilePath))
-            {
-                AppConfiguration.SaveToFile(AppConstants.AppConfigurationFilePath);
-                new ApplicationException("Set the ConfigurationFile! " + AppConstants.AppConfigurationFilePath);
-            }
-            else
-            {
-                AppConfiguration.LoadFromFile(AppConstants.AppConfigurationFilePath);
-            }
-            AppLog.Instance.FilePath = AppConfiguration.Instance.AppLogPath;
-            AppLog.Instance.Enabled = AppConfiguration.Instance.AppLogEnabled;
+            AppConfiguration.Init();
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + "MALT200817.Service_" + DateTime.Now.ToString("yyMMdd_HHmmss")+".txt";
+            AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
             AppLog.Instance.WriteLine("App()");
             
             _exp = new Explorer();
@@ -40,15 +32,15 @@
             _tcpServer.Completed += Server_Completed;
             _tcpServer.ParserCallback = _tcpParser.CommandLine;
             _tcpServer.Begin(null);
-            if (AppConfiguration.Instance.CanInterfaceType.Trim().ToUpper() == "XNET")
+            if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
             {
-                var baudrate = AppConfiguration.Instance.Baudrate;
-                var itfName = AppConfiguration.Instance.CanInterfaceName.Trim().ToUpper();
+                var baudrate = AppConfiguration.Instance.CanBusBaudrate;
+                var itfName = AppConfiguration.Instance.CanBusInterfaceName.Trim().ToUpper();
                 var itf = new XnetInterface();
                 itf.Init((UInt64)baudrate, itfName);
                 _canService = new CanService(itf, _exp);
             }
-            else if (AppConfiguration.Instance.CanInterfaceType.Trim().ToUpper() == "NICAN")
+            else if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "NICAN")
             {
                 throw new ApplicationException("NICAN is not supported yet.");
 

@@ -16,6 +16,7 @@ namespace MALT200817.Explorer
     using Events;
     using Properties;
     using Client;
+    using Configuration;
 
     static class Program
     {
@@ -48,17 +49,9 @@ namespace MALT200817.Explorer
         public App()
         {
             /*** Application Configuration ***/
-            if (!File.Exists(AppConstants.AppConfigurationFilePath))
-            {
-                AppConfiguration.SaveToFile(AppConstants.AppConfigurationFilePath);
-                new ApplicationException("Set the ConfigurationFile! " + AppConstants.AppConfigurationFilePath);
-            }
-            else
-            {
-                AppConfiguration.LoadFromFile(AppConstants.AppConfigurationFilePath);
-            }
-            AppLog.Instance.FilePath = AppConfiguration.Instance.AppLogPath;
-            AppLog.Instance.Enabled = AppConfiguration.Instance.AppLogEnabled;
+            AppConfiguration.Init();
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.Explorer_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
+            AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
             AppLog.Instance.WriteLine("App()");
 
             /*** Main Form ***/
@@ -69,10 +62,30 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            
-
             _devices = new DeviceCollection();
             _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv, _devices);
+
+            var diagMenu = new ToolStripMenuItem("Diag");
+            diagMenu.DropDown.Items.AddRange(
+                 new ToolStripItem[]
+                 {
+                     new Commands.ShowConfigurationCommand(),
+                     new Commands.ShowLogCommand(),
+                 });
+
+            var toolsMenu = new ToolStripMenuItem("Tools");
+            toolsMenu.DropDown.Items.AddRange(
+                 new ToolStripItem[]
+                 {
+                     new Commands.DevicesForceUpdateCommand(_devicePresenter),
+                 });
+
+            _mainForm.MenuBar = new ToolStripItem[]
+                {
+                    toolsMenu,
+                //    viewMenu,
+                    diagMenu,
+                };
 
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
@@ -106,7 +119,9 @@ namespace MALT200817.Explorer
             AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + ": " + string.Join("\r\n -", args));
 #endif
 
-            MaltClient.Instance.Start("", 9999);
+            MaltClient.Instance.Start("", AppConfiguration.Instance.ServicePort);
+            MaltClient.Instance.UpdateDevicesInfo();
+
 
             foreach (DeviceItem dev in MaltClient.Instance.GetDevices())
             {
