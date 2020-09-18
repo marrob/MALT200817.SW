@@ -20,15 +20,16 @@
         const UInt32 HOST_TX_ID = 0x00010000;
 
         public const int FIRST_BLOCK = 0;
+        //public bool LiveDevicesIsUpdateComplete { get; private set; }
 
         public SafeQueue<CanMsg> TxQueue { get; } = new SafeQueue<CanMsg>();
         public LiveDeviceCollection LiveDevices { get; } = new LiveDeviceCollection();
 
-        object _lockObj = new object();
+      //  object _lockObj = new object();
 
         public void FramesIn(CanMsg frame)
         {
-            lock (_lockObj)
+          //  lock (_lockObj)
             {
                 try
                 {
@@ -72,36 +73,46 @@
             }
         }
 
-        /// <param name="port">0-es indexelésű</param>
-        public void RequestClrOne(byte familyCode, byte address, byte port)
+        /// <param name="port">1-es indexelésű</param>
+        public void RequestClrOne(byte familyCode, byte address, int port)
         {
+            if (port == 0)
+                throw new Exception("Error: parameter port cannot be 0.");
+            port = port - 1;
+
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
-            msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x00 });
+            msg.SetPayload(new byte[] { familyCode, 0x01, (byte)port, 0x00 });
             TxQueue.Enqueue(msg);
         }
-        /// <param name="port">0-jelenti a K1-egyet indexelésű</param>
-        public void RequestSetOne(byte familyCode, byte address, byte port)
+        /// <param name="port">1-jelenti a K1-egyet indexelésű</param>
+        public void RequestSetOne(byte familyCode, byte address, int port)
         {
-            lock (_lockObj)
-            {
+            if (port == 0)
+                throw new Exception("Error: parameter port cannot be 0.");
+            port = port - 1;
+         //   lock (_lockObj)
+         //   {
                 var msg = new CanMsg();
                 msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
-                msg.SetPayload(new byte[] { familyCode, 0x01, port, 0x01 });
+                msg.SetPayload(new byte[] { familyCode, 0x01, (byte)port, 0x01 });
                 TxQueue.Enqueue(msg);
-            }
+          ///  }
         }
 
         /// <param name="port">0-ás indexelésű</param>
-        public bool GetOne(byte familyCode, byte address, byte port)
+        public bool GetOne(byte familyCode, byte address, int port)
         {
-            lock (_lockObj)
-            {
-                var dev = LiveDevices.Search(familyCode, address);
+            if (port == 0)
+                throw new Exception("Error: parameter port cannot be 0.");
+            port = port - 1;
+            // lock (_lockObj)
+            // {
+            var dev = LiveDevices.Search(familyCode, address);
                 var byteIndex = port / 8;
                 var bitIndex = port % 8;
                 return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
-            }
+           // }
         }
 
         public void RequestClrSeveral(byte familyCode, byte address, byte[] several, byte block)
@@ -165,7 +176,8 @@
 
         public void DoUpdateDeviceInfo()
         {
-            LiveDevices.Clear();
+            /*LiveDevices.Clear(); */
+            /*Nem törölhetek, mert ha jön egy kliens vagy és ráfrissít, és a többi kliens pedig épp keres benne, akkor az baj.*/
             RequestAllInitInfo();
             //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
             Thread.Sleep(250);

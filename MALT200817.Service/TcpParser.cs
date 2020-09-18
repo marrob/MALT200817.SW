@@ -41,21 +41,25 @@
                     var familyCode = Tools.HexaByteStrToByte(parts[PART_FAMILY_CODE]);
                     var address = Tools.HexaByteStrToByte(parts[PART_ADDRES]);
 
+                    /*** 1..n-ig, 0-az hiba! ***/
                     if (parts[PART_COMMAND] == "SET#ONE")
                     {
                         _devExp.RequestSetOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
+                    /*** 1..n-ig, 0-az hiba! ***/
                     else if (parts[PART_COMMAND] == "CLR#ONE")
                     {
+                        
                         _devExp.RequestClrOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
+                    /*** 1..n-ig, 0-az hiba! ***/
                     else if (parts[PART_COMMAND] == "GET#ONE")
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
-                        if (_devExp.GetOne(familyCode, address, (byte)(port - 1)))
+                        if (_devExp.GetOne(familyCode, address, port))
                             retval += ":SET";
                         else
                             retval += ":CLR";
@@ -113,7 +117,7 @@
                 }
                 else if (line == "DO#UPDATE:DEVICES:INFO")
                 {
-                    
+
 
                     _devExp.DoUpdateDeviceInfo();
                     return RESPONSE_OK;
@@ -122,15 +126,19 @@
                 {
                     return "HELLO WORLD";
                 }
+                else
+                {
+                    return "!UNKNOWN DEVICE COMMAND: '" + line + "'";
+                }
             }
             catch (Exception ex)
             {
-                ////return ex.Message;
+                return "!" + ex.Message;
             }
 
 
 
-            return "!Nem kezelet erdemény";
+            //return "!Nem kezelet erdemény";
         }
 
     }

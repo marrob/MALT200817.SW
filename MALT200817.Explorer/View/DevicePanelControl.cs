@@ -70,7 +70,7 @@
                 if (con is IKnvOutputComponentControl)
                 {
                     var component = (con as IKnvOutputComponentControl);
-                    component.State = client.GetOne(FamilyCode, Address, component.Port + 1);
+                    component.State = client.GetOne(FamilyCode, Address, component.Port);
                 }
             }
             
