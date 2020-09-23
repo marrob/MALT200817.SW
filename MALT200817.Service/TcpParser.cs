@@ -2,8 +2,6 @@
 {
     using System;
     using System.Text.RegularExpressions;
-    using Devices;
-    using System.Globalization;
     using Common;
 
     public class TcpParser
@@ -103,7 +101,7 @@
                                 dev.OptionCode.ToString("X2") + ":" + //OPTION_CODE
                                 dev.Version + ":" +                   //VERSION
                                 dev.SerialNumber + ":" +              //SERIALNUMBER
-                                dev.Descriptor.FamilyName + ":" +     //FAMILY_NAME
+                                dev.Device.FamilyName + ":" +     //FAMILY_NAME
                                 "Todo FIRST_NAME" +
                                 ";";
                         }

@@ -13,14 +13,15 @@ namespace MALT200817.Explorer.View
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-
+    using Library;
+    using MALT200817.Configuration;
 
     public interface IDevicePresenter
     {
         void Update();
     }
 
-    public class DevicePresenter: IDevicePresenter
+    public class DevicePanelPresenter: IDevicePresenter
     {
         public class DeviceListViewItem
         { 
@@ -32,12 +33,12 @@ namespace MALT200817.Explorer.View
             public string OptionCode { get; set; }
         }
 
-
-        public DeviceCollection _devices;
+        DeviceListViewItem _selected;
+        public LiveDeviceCollection _devices;
         public BindingList<DeviceListViewItem> _deviceViewLists;
         DataGridView _deviceDgv;
 
-        public DevicePresenter(DataGridView deviceDgv, DeviceCollection devices)
+        public DevicePanelPresenter(DataGridView deviceDgv, LiveDeviceCollection devices)
         {
             _deviceDgv = deviceDgv;
             _devices = devices;
@@ -50,19 +51,17 @@ namespace MALT200817.Explorer.View
 
         private void DeviceDgv_DoubleClick(object sender, EventArgs e)
         {
-            var selcted = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
-            var familyCode = Tools.HexaByteStrToInt(selcted.FamilyCode);  
-            var address = Tools.HexaByteStrToInt(selcted.Address);
-            var option = Tools.HexaByteStrToInt(selcted.OptionCode);
-            ShowDevice(familyCode, address, option);
+            var selected = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
+            _selected = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
+            ShowDevice();
         }
 
         public void Update()
         {
             _deviceViewLists.Clear();
-            foreach (DeviceItem dev in _devices)
+            foreach (LiveDeviceItem dev in _devices)
             {
-                var firstName = Library.Descriptors.Search(dev.FamilyCode, dev.OptionCode).FirstName;
+                var firstName = Devices.Instance.Search(dev.FamilyCode, dev.OptionCode).FirstName;
                 _deviceViewLists.Add(new DeviceListViewItem()
                 {
                     FirstName = firstName,
@@ -76,14 +75,23 @@ namespace MALT200817.Explorer.View
         }
 
 
-        public void ShowDevice(int familyCode, int address, int optionCode)
+        public void ShowDevice()
         {
-            var descriptor = Library.Descriptors.Search(familyCode, optionCode);
+            var familyCode = Tools.HexaByteStrToInt(_selected.FamilyCode);
+            var optionCode = Tools.HexaByteStrToInt(_selected.OptionCode);
+            var lib = Devices.Instance.Search(familyCode, optionCode);
             var form = new DeviceForm();
-            form.Components = descriptor.Components;
+            form.Text = lib.FirstName + ":" + _selected.Address + " " + AppConstants.SoftwareCustomer;
+            form.Components = lib.Components;
             form.FamilyCode = familyCode.ToString("X2");
-            form.Address = address.ToString("X2");
+            form.Address = _selected.Address;
             form.OptionCode = optionCode.ToString("X2");
+            form.Size = lib.DefaultWinodwSize;
+            form.FwVersion = _selected.Version;
+            form.SN = _selected.SerialNumber;
+            form.FamilyName = lib.FamilyName;
+            form.FirstName = lib.FirstName;
+            form.LibVersion = lib.LibVersion;
             form.Show();
         }
     }

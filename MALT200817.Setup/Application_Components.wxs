@@ -18,6 +18,7 @@
           <Shortcut Id="DesktopShortcut"    Directory="DesktopFolder"  WorkingDirectory = "AppFolder"  Icon="AppAddRemove.ico"  Name="$(var.ProductName)" Advertise="yes" />
         </File>
        <File Id="_MALT200817.Configuration.dll" Source="$(var.AppDirectory)\MALT200817.Configuration.dll" KeyPath="no" Checksum="yes"/>
+        <File Id="_MALT200817.Library.dll" Source="$(var.AppDirectory)\MALT200817.Library.dll" KeyPath="no" Checksum="yes"/>
       </Component>
     </ComponentGroup>
   </Fragment>

@@ -37,12 +37,14 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::MALT200817.Explorer.Properties.Resources.relay_spst_off;
             this.pictureBox1.Location = new System.Drawing.Point(140, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // labelComPin
             // 
@@ -67,6 +69,7 @@
             // labelRelayNum
             // 
             this.labelRelayNum.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.labelRelayNum.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelRelayNum.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRelayNum.Location = new System.Drawing.Point(3, 0);
             this.labelRelayNum.Name = "labelRelayNum";
@@ -74,6 +77,7 @@
             this.labelRelayNum.TabIndex = 4;
             this.labelRelayNum.Text = "K128";
             this.labelRelayNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelRelayNum.Click += new System.EventHandler(this.labelRelayNum_Click);
             // 
             // KnvRealySpstControl
             // 

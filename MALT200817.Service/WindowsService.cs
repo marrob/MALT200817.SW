@@ -2,6 +2,7 @@
 {
     using System.ServiceProcess;
     using System.Diagnostics;
+    using System;
 
     public partial class WindowsService : ServiceBase
     {
@@ -18,6 +19,8 @@
             LogInit();
 #endif
             _myApp = new App();
+
+         
 
         }
 

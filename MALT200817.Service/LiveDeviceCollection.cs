@@ -1,5 +1,5 @@
 ﻿
-namespace MALT200817.Service.Devices
+namespace MALT200817.Service
 {
     using System;
     using System.Collections.Generic;

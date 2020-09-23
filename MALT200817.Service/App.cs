@@ -2,12 +2,10 @@
 {
     using System;
     using System.ComponentModel;
-    using MALT200817.Service.Xnet;
-    using System.IO;
-    using Devices;
-    using MALT200817.Service.Common;
-    using System.Threading;
+    using Xnet;
+    using Common;
     using Configuration;
+    using Library;
     public class App
     {
         TcpService _tcpServer;
@@ -32,6 +30,11 @@
             _tcpServer.Completed += Server_Completed;
             _tcpServer.ParserCallback = _tcpParser.CommandLine;
             _tcpServer.Begin(null);
+              
+            /*** Device Lib ***/
+            Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
+           
+
             if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
             {
                 var baudrate = AppConfiguration.Instance.CanBusBaudrate;

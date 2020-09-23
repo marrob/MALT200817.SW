@@ -12,13 +12,13 @@ namespace MALT200817.Explorer.View.Tests
     [TestClass()]
     public class DeviceCooridnatorTests
     {
-        DeviceCollection _devices = new DeviceCollection();
+        LiveDeviceCollection _devices = new LiveDeviceCollection();
 
         [TestInitialize]
         public void Init()
         {
            
-            _devices.Add(new DeviceItem()
+            _devices.Add(new LiveDeviceItem()
             {
                 FamilyCode = 0x03,
                 OptionCode = 0x00,
@@ -26,7 +26,7 @@ namespace MALT200817.Explorer.View.Tests
                 Version = "0.00",
                 SerialNumber = "123456"
             });
-            _devices.Add(new DeviceItem()
+            _devices.Add(new LiveDeviceItem()
             {
                 FamilyCode = 0x03,
                 OptionCode = 0x01,
@@ -34,7 +34,7 @@ namespace MALT200817.Explorer.View.Tests
                 Version = "0.01",
                 SerialNumber = "666"
             });
-            _devices.Add(new DeviceItem()
+            _devices.Add(new LiveDeviceItem()
             {
                 FamilyCode = 0x15,
                 OptionCode = 0x05,
@@ -48,7 +48,7 @@ namespace MALT200817.Explorer.View.Tests
         public void ShowSelectedDeviceTest()
         {
             var frm = new MainForm();
-            var dp = new DevicePresenter(frm.DevicesDgv, _devices);
+            var dp = new DevicePanelPresenter(frm.DevicesDgv, _devices);
             frm.Load += (sender, e) => (sender as MainForm).Visible = true;
             frm.ShowDialog();
         

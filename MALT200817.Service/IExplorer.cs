@@ -1,4 +1,4 @@
-﻿namespace MALT200817.Service.Devices
+﻿namespace MALT200817.Service
 {
     using Common;
 

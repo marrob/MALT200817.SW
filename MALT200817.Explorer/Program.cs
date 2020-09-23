@@ -17,6 +17,8 @@ namespace MALT200817.Explorer
     using Properties;
     using Client;
     using Configuration;
+    using Library;
+    using System.Reflection.Emit;
 
     static class Program
     {
@@ -42,12 +44,13 @@ namespace MALT200817.Explorer
     class App
     {
         readonly IMainForm _mainForm;
-        readonly DevicePresenter _devicePresenter;
-        readonly DeviceCollection _devices;
+        readonly DevicePanelPresenter _devicePresenter;
+        readonly LiveDeviceCollection _devices;
         public static SynchronizationContext SyncContext = null;
 
         public App()
         {
+
             /*** Application Configuration ***/
             AppConfiguration.Init();
             AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.Explorer_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
@@ -62,8 +65,12 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            _devices = new DeviceCollection();
-            _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv, _devices);
+            _devices = new LiveDeviceCollection();
+            _devicePresenter = new DevicePanelPresenter(_mainForm.DevicesDgv, _devices);
+
+
+            Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
+
 
             var diagMenu = new ToolStripMenuItem("Diag");
             diagMenu.DropDown.Items.AddRange(
@@ -123,7 +130,7 @@ namespace MALT200817.Explorer
             MaltClient.Instance.UpdateDevicesInfo();
 
 
-            foreach (DeviceItem dev in MaltClient.Instance.GetDevices())
+            foreach (LiveDeviceItem dev in MaltClient.Instance.GetDevices())
             {
                 _devices.Add(dev);
             }

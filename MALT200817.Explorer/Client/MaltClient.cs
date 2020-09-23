@@ -71,9 +71,9 @@
             if (resp != "OK")
                 throw new ApplicationException(resp);
         }
-        public DeviceCollection GetDevices()
+        public LiveDeviceCollection GetDevices()
         {
-            var retval = new DeviceCollection();
+            var retval = new LiveDeviceCollection();
             var response = WriteReadFnPtr("GET#DEVICES");
 
             if (response != "NOT FOUND")
@@ -83,7 +83,7 @@
                 {
                     var items = dev.Split(':');
 
-                    retval.Add(new DeviceItem()
+                    retval.Add(new LiveDeviceItem()
                     {
                         FamilyCode = Tools.HexaByteStrToInt(items[0].Substring(1)),
                         Address = Tools.HexaByteStrToInt(items[1]),

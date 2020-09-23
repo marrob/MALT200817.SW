@@ -70,11 +70,16 @@ namespace MALT200817.Explorer.Controls
         public KnvRealySpstControl()
         {
             InitializeComponent();
+        }
 
-            pictureBox1.Click += (o, s) =>
-            {
-                ComponentClick?.Invoke(this, EventArgs.Empty);
-            };
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ComponentClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void labelRelayNum_Click(object sender, EventArgs e)
+        {
+            ComponentClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

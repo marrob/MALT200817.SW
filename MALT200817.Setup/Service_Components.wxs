@@ -7,6 +7,7 @@
     <ComponentGroup Id="Service_Components" Directory="ServiceFolder" >
       <Component Id="Service_Files" Guid="{59C6A671-4116-40A6-96C0-B53F50965A0F}">
         <File Id='NiXnetDotNet.dll'         Source='$(var.ServiceDirectory)\NiXnetDotNet.dll' KeyPath='no'/>
+        <File Id='MALT200817.Library.dll'         Source='$(var.ServiceDirectory)\MALT200817.Library.dll' KeyPath='no'/>
       </Component>
     </ComponentGroup>
   </Fragment>

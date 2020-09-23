@@ -11,9 +11,13 @@
 
     class TcpService : IDisposable
     {
+
+        public int ClientsCount {  get; private set; }
+
         readonly BackgroundWorker _bw;
         readonly TcpListener _server;
         readonly AutoResetEvent _waitForDoneEvent;
+
         bool _disposed = false;
 
         public delegate string ParserDelegate(string attribute);
@@ -43,18 +47,16 @@
             _server.Start();
             _bw.RunWorkerAsync(argument);
         }
-        int clintentsCount;
+        
         private void DoWork(object sender, DoWorkEventArgs e)
         {
 
             while (true)
             {
                 TcpClient client = _server.AcceptTcpClient();
-                clintentsCount++;
                 Console.WriteLine("Enter New client");
-
                 new Thread(() => HandleClient(client)).Start();
-
+                ClientsCount++;
 
                 if (_bw.CancellationPending)
                 {
@@ -71,7 +73,6 @@
             {
                 try
                 {
-
                     NetworkStream ns = client.GetStream();
                     byte[] msg = new byte[1024];
                     ns.Read(msg, 0, msg.Length);
@@ -89,15 +90,18 @@
                             ns.Write(array, 0, array.Length);
                         }
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
                 catch (Exception ex)
                 {
-                   // AppLog.Instance.WriteLine(ex.Message);
-
+                    AppLog.Instance.WriteLine(ex.Message);
                 }
-            } 
-            clintentsCount--;
+            }
             Console.WriteLine("Close client");
+            ClientsCount--;
         }
       
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MALT200817.Explorer.Client
 {
-    public class DeviceItem
+    public class LiveDeviceItem
     {   
         public int FamilyCode { get; set; }
         public int OptionCode { get; set; }

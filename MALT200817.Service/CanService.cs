@@ -7,7 +7,6 @@
     using System.Net.Sockets;
     using System.ComponentModel;
     using Common;
-    using Devices;
     using System.Diagnostics;
     using System.Reflection;
 

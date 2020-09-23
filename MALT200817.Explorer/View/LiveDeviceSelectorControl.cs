@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MALT200817.Explorer.View
 {
-    public partial class DeviceSelectorControl : UserControl
+    public partial class LiveDeviceSelectorControl : UserControl
     {
-        public DeviceSelectorControl()
+        public LiveDeviceSelectorControl()
         {
             InitializeComponent();
             knvDataGridView1.AutoGenerateColumns = false;

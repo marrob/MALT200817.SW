@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MALT200817.Explorer.Common;
 
 namespace MALT200817.Explorer.View
 {
@@ -36,15 +37,64 @@ namespace MALT200817.Explorer.View
             set { relayPanelControl1.OptionCode = value; } 
         }
 
+        public string  LibVersion
+        {
+            get { return toolStripStatusLabelLibVersion.Text; }
+            set { toolStripStatusLabelLibVersion.Text = value; }
+        }
+
+        public string LibPath { get; set; }
+
+        public string FwVersion
+        {
+            get { return toolStripStatusLabelFwVersion.Text; }
+            set { toolStripStatusLabelFwVersion.Text = value; }
+        }
+
+        public string SN
+        {
+            get { return toolStripStatusLabelSerialNumber.Text; }
+            set { toolStripStatusLabelSerialNumber.Text = value; }
+        }
+
+        public string FamilyName { get; set; }
+        public string FirstName { get; set; }
+
+        
 
         public DeviceForm()
         {
             InitializeComponent();
+
+
         }
 
         private void relayPanelControl1_Load(object sender, EventArgs e)
         {
-            this.Text = "@" + FamilyCode + ":" + Address + ":" + OptionCode;
+            toolStripStatusLabelSwVersion.Text = typeof(Program).Assembly.GetName().Version.ToString();
+
+#if DEBUG
+            toolStripStatusWindowSize.Visible = true;
+#else
+            toolStripStatusWindowSize.Visible = false;
+#endif
+
+            toolStripStatusLabelFirstName.Text = FirstName;
+            toolStripStatusLabelAddress.Text = Address;
+            toolStripStatusLabelFamilyCode.Text = FamilyCode;
+            toolStripStatusLabelOptionCode.Text = OptionCode;
+            toolStripStatusLabelFamilyName.Text = FamilyName;
+        }
+
+        private void DeviceForm_ResizeEnd(object sender, EventArgs e)
+        {
+            toolStripStatusWindowSize.Text = this.Size.ToString();
+
+        }
+
+        private void toolStripStatusLabelLibVersion_Click(object sender, EventArgs e)
+        {
+            Tools.RunNotepadOrNpp(LibPath);
         }
     }
 }

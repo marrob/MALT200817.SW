@@ -1,10 +1,12 @@
 ﻿
-namespace MALT200817.Service.Devices
+namespace MALT200817.Service
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Common;
+    using MALT200817.Library;
+
     public class LiveDeviceItem
     {
         public int FamilyCode { get; set; }
@@ -12,9 +14,10 @@ namespace MALT200817.Service.Devices
         public int OptionCode { get; set; }
         public string Version { get; set; }
         public List<byte[]> Ports { get; set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
-        public DeviceDescriptor Descriptor { get; private set; }
         public string PrimaryKey { get  {  return "@" + FamilyCode + "#" + Address; } }
         public string SerialNumber;
+        public DeviceItem Device;
+ 
 
         public LiveDeviceItem(int familyCode, int address, int optionCode, int ver0, int ver1)
         {
@@ -22,16 +25,17 @@ namespace MALT200817.Service.Devices
             Address = address;
             OptionCode = optionCode;
             Version = "V" + ver1.ToString("X2") + ver0.ToString("X2");
-            Descriptor = DevicesDesciptor.Instance.FirstOrDefault(n => n.FamilyCode == familyCode);
-            if (Descriptor != null)
+            Device =  Devices.Instance.Search(familyCode, optionCode);
+          
+            if (Device != null)
             {
                 Ports = new List<byte[]>();
-                for (int blocks = 0; blocks < Descriptor.Blocks; blocks++)
-                    Ports.Add(new byte[Descriptor.BytePerBlock]);
+                for (int blocks = 0; blocks < Device.BlockSize; blocks++)
+                    Ports.Add(new byte[Device.BlockSize]);
             }
             else
             {
-                Descriptor = DevicesDesciptor.Instance[0];
+                AppLog.Instance.WriteLine("This device not suppoerted" + familyCode.ToString());
             }
         }
 

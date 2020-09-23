@@ -51,7 +51,7 @@ namespace MALT200817.Explorer.View
 
         public ToolStripItem[] StatusBar
         {
-            set { statusStrip1.Items.AddRange(value); }
+            set { statusStrip2.Items.AddRange(value); }
         }
 
         public bool AlwaysOnTop
@@ -64,11 +64,5 @@ namespace MALT200817.Explorer.View
         {
             get { return devicesViewControl1.DataGrid; }
         }
-
-
     }
-
-
-
-
 }

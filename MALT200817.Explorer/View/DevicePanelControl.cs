@@ -11,6 +11,7 @@
     using System.Windows.Forms;
     using MALT200817.Explorer.Controls;
     using MALT200817.Explorer.Client;
+    using Library;
 
     public partial class DevicePanelControl : UserControl
     {
@@ -20,13 +21,13 @@
         public string OptionCode { get;  set; }
 
         private readonly Timer _timer;
-        private ComponentCollection _components;
+        private Library.ComponentCollection _components;
 
         public object Datasource
         {
             get { return _components; }
             set 
-            {    _components = (ComponentCollection)value; 
+            {    _components = (Library.ComponentCollection)value; 
                  ContentUpdate(); 
             }
         }
@@ -80,30 +81,31 @@
         {
             if (_components == null)
                 return;
-            foreach (ComponentItem i in _components)
+            foreach (IComponentItem i in _components)
             {
-                if (i.Type == ComponetType.RELAY_SPDT)
+                if (i is ComponentRelaySPDT)
                 {
+                    var comp = (i as ComponentRelaySPDT);
                     var ctrl = new KnvRealySpdtControl()
-                    {
+                    { 
                         Port = i.Port,
-                        RelayLabel = i.RelayLabel,
-                        NcPinLabel = i.PinLabel_NC,
-                        NoPinLabel = i.PinLabel_NO,
-                        ComPinLabel = i.PinLabel_COM
-
+                        RelayLabel = comp.Label,
+                        NcPinLabel = comp.PinLabel_NC,
+                        NoPinLabel = comp.PinLabel_NO,
+                        ComPinLabel = comp.PinLabel_COM
                     };
                     ctrl.ComponentClick += ComponentClick;
                     flowLayoutPanel1.Controls.Add(ctrl);
                 }
-                else if (i.Type == ComponetType.RELAY_SPST)
+                else if (i is ComponentRelaySPST)
                 {
+                    var comp = (i as ComponentRelaySPST);
                     var ctrl = new KnvRealySpstControl()
                     {
                         Port = i.Port,
-                        RelayLabel = i.RelayLabel,
-                        NoPinLabel = i.PinLabel_NO,
-                        ComPinLabel = i.PinLabel_COM
+                        RelayLabel = comp.Label,
+                        NoPinLabel = comp.PinLabel_NO,
+                        ComPinLabel = comp.PinLabel_COM
                     };
                     ctrl.ComponentClick += ComponentClick;
                     flowLayoutPanel1.Controls.Add(ctrl);

@@ -9,7 +9,7 @@ namespace MALT200817.Explorer.Client
 {
 
 
-    public class DeviceCollection : BindingList<DeviceItem>
+    public class LiveDeviceCollection : BindingList<LiveDeviceItem>
     {
 
     }

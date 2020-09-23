@@ -98,7 +98,6 @@
         <File Id = "_MALT_IOPS.vi" Source="$(var.LabView2018Directory)\UnitTest\MALT IOPS.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_MALT132_IOPS.vi" Source="$(var.LabView2018Directory)\UnitTest\MALT132 IOPS.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_MALT132.seq" Source="$(var.LabView2018Directory)\UnitTest\MALT132.seq" KeyPath="no" Checksum="yes"/>
-        <File Id = "_OnOffRapidly.vi" Source="$(var.LabView2018Directory)\UnitTest\OnOffRapidly.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_ResponseTimeTest.vi" Source="$(var.LabView2018Directory)\UnitTest\ResponseTimeTest.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_One_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set One Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_Several_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set Several Test.vi" KeyPath="no" Checksum="yes"/>

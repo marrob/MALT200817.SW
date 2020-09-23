@@ -98,14 +98,13 @@
     <Compile Include="Common\AppLog.cs" />
     <Compile Include="Common\SafeQueue.cs" />
     <Compile Include="Common\Tools.cs" />
-    <Compile Include="Devices\DevDescriptor.cs" />
-    <Compile Include="Devices\LiveDeviceItem.cs" />
-    <Compile Include="Devices\LiveDeviceCollection.cs" />
+    <Compile Include="LiveDeviceItem.cs" />
+    <Compile Include="LiveDeviceCollection.cs" />
     <Compile Include="Common\ICanInterface.cs" />
     <Compile Include="Common\IoLog.cs" />
     <Compile Include="CanService.cs" />
-    <Compile Include="Devices\Explorer.cs" />
-    <Compile Include="Devices\IExplorer.cs" />
+    <Compile Include="Explorer.cs" />
+    <Compile Include="IExplorer.cs" />
     <Compile Include="NiCan\Nican.cs" />
     <Compile Include="NiCan\NiCanInterface.cs" />
     <Compile Include="NiCan\NiCanIoException.cs" />
@@ -143,6 +142,10 @@
     <ProjectReference Include="..\MALT200817.Configuration\MALT200817.Configuration.csproj">
       <Project>{0e36a826-7715-4845-bd9c-abf394bd6679}</Project>
       <Name>MALT200817.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MALT200817.Library\MALT200817.Library.csproj">
+      <Project>{b4bc807b-7d87-4dcb-abc0-3a34ede3825a}</Project>
+      <Name>MALT200817.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\NiXnetDotNet\NiXnetDotNet\NiXnetDotNet.vcxproj">
       <Project>{769e7cb4-9b0c-484a-a993-01bc933f7cbe}</Project>

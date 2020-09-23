@@ -1,6 +1,6 @@
 ﻿namespace MALT200817.Explorer.View
 {
-    partial class DeviceSelectorControl
+    partial class LiveDeviceSelectorControl
     {
         /// <summary> 
         /// Required designer variable.
