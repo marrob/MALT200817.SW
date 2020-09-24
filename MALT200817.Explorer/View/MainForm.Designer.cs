@@ -184,7 +184,6 @@
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private LiveDeviceSelectorControl devicesViewControl1;
         private System.Windows.Forms.StatusStrip statusStrip2;

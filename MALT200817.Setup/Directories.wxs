@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Fragment>
 
     <!-- This is how we include wxi files -->
@@ -9,6 +10,15 @@
       <RegistrySearch Id="MyDocumentsSearch" Root="HKCU" Type="directory" Name="Personal"
             Key="Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"/>
     </Property>
+    
+    <DirectoryRef Id="AppLibraryFolder">
+      <Component Id="CmpCreateCommonAppDataFolderWithPermissions" Guid="{6A250336-FCF0-4C0B-8CD9-2F07B720231F}" Permanent="yes">
+        <CreateFolder>
+          <!--This will ensure that everyone gets full permissions to the folder that we create in the ProgramData folder. -->
+          <util:PermissionEx User="Everyone" GenericAll="yes" />
+        </CreateFolder>
+      </Component>
+    </DirectoryRef>
 
     <!-- Directory Sturcture -->
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -31,6 +41,15 @@
           <!-- ProgramMenuFolder = C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Konvolúció Bt.\MARC170608-->
           <!--
           <Directory Id ="CurrentAppProgramsFolder" Name="$(var.ProductName)"/>-->
+        </Directory>
+      </Directory>
+
+      <!-- *ProgramData* -->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="CommonAppDataManufacturerFolder" Name="$(var.ShortCompany)">
+          <Directory Id="AppDataFolder" Name="$(var.ProductName)">
+            <Directory Id="AppLibraryFolder" Name="Library"/>
+          </Directory>
         </Directory>
       </Directory>
 

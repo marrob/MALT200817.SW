@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MALT200817.Explorer.Common;
-
-namespace MALT200817.Explorer.View
+﻿namespace MALT200817.Explorer.View
 {
+    using System;
+    using System.Windows.Forms;
+    using Common;
+    using MALT200817.Explorer.Client;
+
     public partial class DeviceForm : Form
     {
         public object Components
@@ -60,13 +53,9 @@ namespace MALT200817.Explorer.View
         public string FamilyName { get; set; }
         public string FirstName { get; set; }
 
-        
-
         public DeviceForm()
         {
             InitializeComponent();
-
-
         }
 
         private void relayPanelControl1_Load(object sender, EventArgs e)
@@ -95,6 +84,11 @@ namespace MALT200817.Explorer.View
         private void toolStripStatusLabelLibVersion_Click(object sender, EventArgs e)
         {
             Tools.RunNotepadOrNpp(LibPath);
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MaltClient.Instance.Reset(FamilyCode, Address);
         }
     }
 }

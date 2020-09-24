@@ -2,12 +2,6 @@
 
 namespace MALT200817.Library
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Drawing;
     using System.Xml.Serialization;
 
@@ -21,6 +15,7 @@ namespace MALT200817.Library
         public int OptionCode { get; set; }
         public string FirstName { get; set; }
         public int BlockSize { get; set; }
+        public int Blocks { get; set; }
         public ComponentCollection Components {get; set;}
         public Size DefaultWinodwSize { get; set; }
 

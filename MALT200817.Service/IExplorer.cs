@@ -14,6 +14,7 @@
         byte[] GetSeveral(byte familyCode, byte address, byte block);
         bool GetOne(byte familyCode, byte address, int port);
         void DoUpdateDeviceInfo();
+        void RequestReset(byte familyCode, byte address);
 
 
     }

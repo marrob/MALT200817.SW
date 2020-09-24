@@ -6,8 +6,8 @@ namespace MALT200817.Explorer.Commands
 
     class UpdatesCommands : ToolStripButton
     {
-        //public UpdatesCommands()
-        //{
+       public UpdatesCommands()
+       {
         //    //    Image = Resources.Delete32x32;
         //    DisplayStyle = ToolStripItemDisplayStyle.Text;
         //    //    Size = new System.Drawing.Size(50, 50);
@@ -20,6 +20,6 @@ namespace MALT200817.Explorer.Commands
         //    base.OnClick(e);
         //    var hiw = new MJBL180509.View.UpdatesForm();
         //    hiw.ShowDialog();
-        //}
+       }
     }
 }

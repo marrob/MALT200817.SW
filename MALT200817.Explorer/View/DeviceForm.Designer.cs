@@ -31,9 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceForm));
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusWindowSize = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAddress = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFirstName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelAddress = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelOptionCode = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelFamilyName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusWindowSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSerialNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFwVersion = new System.Windows.Forms.ToolStripStatusLabel();
@@ -41,10 +44,10 @@
             this.toolStripStatusLabelSwVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.relayPanelControl1 = new MALT200817.Explorer.View.DevicePanelControl();
-            this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelOptionCode = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelFamilyName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip2
@@ -80,11 +83,14 @@
             this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
             this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
-            // toolStripStatusWindowSize
+            // toolStripStatusLabelFirstName
             // 
-            this.toolStripStatusWindowSize.Name = "toolStripStatusWindowSize";
-            this.toolStripStatusWindowSize.Size = new System.Drawing.Size(103, 19);
-            this.toolStripStatusWindowSize.Text = "WINDOW SIZE X Y";
+            this.toolStripStatusLabelFirstName.AutoToolTip = true;
+            this.toolStripStatusLabelFirstName.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelFirstName.Name = "toolStripStatusLabelFirstName";
+            this.toolStripStatusLabelFirstName.Size = new System.Drawing.Size(72, 19);
+            this.toolStripStatusLabelFirstName.Text = "FIRST NAME";
+            this.toolStripStatusLabelFirstName.ToolTipText = "First Name";
             // 
             // toolStripStatusLabelAddress
             // 
@@ -96,20 +102,46 @@
             this.toolStripStatusLabelAddress.Text = "ADDRESS";
             this.toolStripStatusLabelAddress.ToolTipText = "Address";
             // 
-            // toolStripStatusLabelFirstName
+            // toolStripStatusLabelFamilyCode
             // 
-            this.toolStripStatusLabelFirstName.AutoToolTip = true;
-            this.toolStripStatusLabelFirstName.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelFirstName.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelFirstName.Name = "toolStripStatusLabelFirstName";
-            this.toolStripStatusLabelFirstName.Size = new System.Drawing.Size(76, 19);
-            this.toolStripStatusLabelFirstName.Text = "FIRST NAME";
-            this.toolStripStatusLabelFirstName.ToolTipText = "First Name";
+            this.toolStripStatusLabelFamilyCode.AutoToolTip = true;
+            this.toolStripStatusLabelFamilyCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelFamilyCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelFamilyCode.Name = "toolStripStatusLabelFamilyCode";
+            this.toolStripStatusLabelFamilyCode.Size = new System.Drawing.Size(84, 19);
+            this.toolStripStatusLabelFamilyCode.Text = "FAMILY CODE";
+            this.toolStripStatusLabelFamilyCode.ToolTipText = "Family Code";
+            // 
+            // toolStripStatusLabelOptionCode
+            // 
+            this.toolStripStatusLabelOptionCode.AutoToolTip = true;
+            this.toolStripStatusLabelOptionCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelOptionCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelOptionCode.Name = "toolStripStatusLabelOptionCode";
+            this.toolStripStatusLabelOptionCode.Size = new System.Drawing.Size(88, 19);
+            this.toolStripStatusLabelOptionCode.Text = "OPTION CODE";
+            this.toolStripStatusLabelOptionCode.ToolTipText = "Option Code";
+            // 
+            // toolStripStatusLabelFamilyName
+            // 
+            this.toolStripStatusLabelFamilyName.AutoToolTip = true;
+            this.toolStripStatusLabelFamilyName.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabelFamilyName.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelFamilyName.Name = "toolStripStatusLabelFamilyName";
+            this.toolStripStatusLabelFamilyName.Size = new System.Drawing.Size(87, 19);
+            this.toolStripStatusLabelFamilyName.Text = "FAMILY NAME";
+            this.toolStripStatusLabelFamilyName.ToolTipText = "Family Name";
+            // 
+            // toolStripStatusWindowSize
+            // 
+            this.toolStripStatusWindowSize.Name = "toolStripStatusWindowSize";
+            this.toolStripStatusWindowSize.Size = new System.Drawing.Size(103, 19);
+            this.toolStripStatusWindowSize.Text = "WINDOW SIZE X Y";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(14, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelSerialNumber
@@ -168,42 +200,29 @@
             this.relayPanelControl1.Datasource = null;
             this.relayPanelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.relayPanelControl1.FamilyCode = null;
-            this.relayPanelControl1.Location = new System.Drawing.Point(0, 0);
+            this.relayPanelControl1.Location = new System.Drawing.Point(0, 24);
             this.relayPanelControl1.Name = "relayPanelControl1";
             this.relayPanelControl1.OptionCode = null;
-            this.relayPanelControl1.Size = new System.Drawing.Size(770, 318);
+            this.relayPanelControl1.Size = new System.Drawing.Size(770, 294);
             this.relayPanelControl1.TabIndex = 0;
             this.relayPanelControl1.Load += new System.EventHandler(this.relayPanelControl1_Load);
             // 
-            // toolStripStatusLabelFamilyCode
+            // menuStrip1
             // 
-            this.toolStripStatusLabelFamilyCode.AutoToolTip = true;
-            this.toolStripStatusLabelFamilyCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelFamilyCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelFamilyCode.Name = "toolStripStatusLabelFamilyCode";
-            this.toolStripStatusLabelFamilyCode.Size = new System.Drawing.Size(84, 19);
-            this.toolStripStatusLabelFamilyCode.Text = "FAMILY CODE";
-            this.toolStripStatusLabelFamilyCode.ToolTipText = "Family Code";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(770, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripStatusLabelOptionCode
+            // testToolStripMenuItem
             // 
-            this.toolStripStatusLabelOptionCode.AutoToolTip = true;
-            this.toolStripStatusLabelOptionCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelOptionCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelOptionCode.Name = "toolStripStatusLabelOptionCode";
-            this.toolStripStatusLabelOptionCode.Size = new System.Drawing.Size(88, 19);
-            this.toolStripStatusLabelOptionCode.Text = "OPTION CODE";
-            this.toolStripStatusLabelOptionCode.ToolTipText = "Option Code";
-            // 
-            // toolStripStatusLabelFamilyName
-            // 
-            this.toolStripStatusLabelFamilyName.AutoToolTip = true;
-            this.toolStripStatusLabelFamilyName.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.toolStripStatusLabelFamilyName.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelFamilyName.Name = "toolStripStatusLabelFamilyName";
-            this.toolStripStatusLabelFamilyName.Size = new System.Drawing.Size(87, 19);
-            this.toolStripStatusLabelFamilyName.Text = "FAMILY NAME";
-            this.toolStripStatusLabelFamilyName.ToolTipText = "Family Name";
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.testToolStripMenuItem.Text = "RESET";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // DeviceForm
             // 
@@ -212,11 +231,14 @@
             this.ClientSize = new System.Drawing.Size(770, 318);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.relayPanelControl1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "DeviceForm";
             this.Text = "MALTXXX";
             this.ResizeEnd += new System.EventHandler(this.DeviceForm_ResizeEnd);
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,5 +261,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelOptionCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyName;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
     }
 }

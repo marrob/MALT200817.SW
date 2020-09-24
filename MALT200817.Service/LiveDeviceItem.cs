@@ -30,7 +30,7 @@ namespace MALT200817.Service
             if (Device != null)
             {
                 Ports = new List<byte[]>();
-                for (int blocks = 0; blocks < Device.BlockSize; blocks++)
+                for (int blocks = 0; blocks < Device.Blocks; blocks++)
                     Ports.Add(new byte[Device.BlockSize]);
             }
             else

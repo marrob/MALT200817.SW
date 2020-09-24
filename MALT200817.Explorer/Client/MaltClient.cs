@@ -4,10 +4,8 @@
     using System.IO;
     using System.Text;
     using System.Net.Sockets;
-    using System.Collections.Generic;
-    using System.Runtime.Remoting.Messaging;
-    using MALT200817.Explorer.Common;
-    using System.Linq;
+    using Common;
+
 
     public class MaltClient : IDisposable
     {
@@ -21,7 +19,6 @@
 
         public delegate string WriteReadDelagte(string line);
         public WriteReadDelagte WriteReadFnPtr;
-        private string resp;
 
         public bool IsConnected { get; private set; } = false;
         public Exception LastException { get; private set; } = null;
@@ -110,18 +107,32 @@
         {
             var request = "@" + familyCode +  ":" + address + ":" +  "GET#ONE:" + port.ToString("X2");
             var response = WriteReadFnPtr(request);
+            if (response[0] == '!')
+            {
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " +  response);
+            }
             var result = response.Substring(response.Length - 3);
             if (result == "CLR")
                 return false;
             else if (result == "SET")
                 return true;
             else
-                throw new ApplicationException("Error: Invalid response:" + result);
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
         }
 
         public void SetOne(int familyCode, int address, int port, bool state)
         {
             SetOne(familyCode.ToString("X2"), address.ToString("X2"), port, state);
+        }
+
+        public void Reset(string familyCode, string address)
+        {
+            var request = "@" + familyCode + ":" + address + ":" + "RESET";
+            var response = WriteReadFnPtr(request);
+            if (response != "OK")
+            {
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+            }
         }
 
         /// <summary>
@@ -136,7 +147,7 @@
             var request = "@" + familyCode + ":" + address + ":" + (state == true ? "SET#ONE" : "CLR#ONE") + ":" + port.ToString("X2");
             var response = WriteReadFnPtr(request);
             if (response != "OK")
-                throw new ApplicationException("Error: Invalid response:" + response);
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
         }
 
         public void Dispose()

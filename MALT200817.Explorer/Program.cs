@@ -3,14 +3,9 @@
 namespace MALT200817.Explorer
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using System.IO;
     using Common;
     using View;
-    using System.Diagnostics;
     using System.Reflection;
     using System.Threading;
     using Events;
@@ -18,7 +13,6 @@ namespace MALT200817.Explorer
     using Client;
     using Configuration;
     using Library;
-    using System.Reflection.Emit;
 
     static class Program
     {
@@ -38,14 +32,13 @@ namespace MALT200817.Explorer
 
     public interface IApp
     {
-
+        void UpdateDeviceList();
     }
 
-    class App
+    class App:IApp
     {
         readonly IMainForm _mainForm;
         readonly DevicePanelPresenter _devicePresenter;
-        readonly LiveDeviceCollection _devices;
         public static SynchronizationContext SyncContext = null;
 
         public App()
@@ -65,10 +58,9 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            _devices = new LiveDeviceCollection();
-            _devicePresenter = new DevicePanelPresenter(_mainForm.DevicesDgv, _devices);
+            _devicePresenter = new DevicePanelPresenter(_mainForm.DevicesDgv);
 
-
+            /*** Device Library ***/
             Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
 
 
@@ -84,7 +76,7 @@ namespace MALT200817.Explorer
             toolsMenu.DropDown.Items.AddRange(
                  new ToolStripItem[]
                  {
-                     new Commands.DevicesForceUpdateCommand(_devicePresenter),
+                     new Commands.DevicesForceUpdateCommand(this),
                  });
 
             _mainForm.MenuBar = new ToolStripItem[]
@@ -93,6 +85,10 @@ namespace MALT200817.Explorer
                 //    viewMenu,
                     diagMenu,
                 };
+
+            /*** Status ***/
+
+
 
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
@@ -127,16 +123,15 @@ namespace MALT200817.Explorer
 #endif
 
             MaltClient.Instance.Start("", AppConfiguration.Instance.ServicePort);
-            MaltClient.Instance.UpdateDevicesInfo();
-
-
-            foreach (LiveDeviceItem dev in MaltClient.Instance.GetDevices())
-            {
-                _devices.Add(dev);
-            }
-
-            _devicePresenter.Update();
+            UpdateDeviceList();
         }
+
+        public void UpdateDeviceList()
+        {
+            MaltClient.Instance.UpdateDevicesInfo();
+            _devicePresenter.Update(MaltClient.Instance.GetDevices());
+        }
+
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {

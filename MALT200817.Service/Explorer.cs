@@ -99,9 +99,10 @@
             port -= 1;
 
             var dev = LiveDevices.Search(familyCode, address);
-                var byteIndex = port / 8;
-                var bitIndex = port % 8;
-                return (dev.Ports[FIRST_BLOCK][byteIndex] & (1 << bitIndex)) != 0;
+            var block = port / 32; 
+            var byteIndex = (port / 8) - (4 * block); //ha egy port szám nagyobb mint egy block akkor azzal korrigálni kell.
+            var bitIndex = port % 8;
+            return (dev.Ports[block][byteIndex] & (1 << bitIndex)) != 0;
 
         }
 
@@ -113,10 +114,10 @@
             TxQueue.Enqueue(msg);
         }
 
-        public void RequestSetSeveral(byte familyCode, byte addr, byte[] several, byte block)
+        public void RequestSetSeveral(byte familyCode, byte address, byte[] several, byte block)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | addr;
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
             msg.SetPayload(new byte[] { familyCode, 0x03, several[0], several[1], several[2], several[3], 0x01, block });
             TxQueue.Enqueue(msg);
         }
@@ -129,6 +130,21 @@
             var retval = new byte[dev.Device.BlockSize];
             Array.Copy(dev.Ports[FIRST_BLOCK], retval, retval.Length);
             return retval;
+        }
+
+        public void RequestReset(byte familyCode, byte address)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x03, 0x00, 0x00, 0x00, 0x00, 0x06 });
+            TxQueue.Enqueue(msg);
+
+            /*Ez kell valamiért MALT160T-nek, majd megnézni mért nemgy megy*/
+            for (byte b = 0; b < 4; b++)
+            {
+                RequestSetSeveral(familyCode, address, new byte[] { 0, 0, 0, 0 }, b);
+                TxQueue.Enqueue(msg);
+            }
         }
 
         public void RequestPortsStatus(byte familyCode, byte address)

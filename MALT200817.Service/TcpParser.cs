@@ -83,6 +83,11 @@
                             Tools.ConvertByteArrayToString(state);
                         return retval;
                     }
+                    if (parts[PART_COMMAND] == "RESET")
+                    {
+                        _devExp.RequestReset(familyCode, address);
+                        return RESPONSE_OK;
+                    }
                     else
                     {
                         return "!UNKNOWN DEVICE COMMAND: '" + parts[PART_COMMAND] + "'";

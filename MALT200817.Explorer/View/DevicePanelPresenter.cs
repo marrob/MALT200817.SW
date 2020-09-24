@@ -18,7 +18,7 @@ namespace MALT200817.Explorer.View
 
     public interface IDevicePresenter
     {
-        void Update();
+        void Update(LiveDeviceCollection devices);
     }
 
     public class DevicePanelPresenter: IDevicePresenter
@@ -38,15 +38,12 @@ namespace MALT200817.Explorer.View
         public BindingList<DeviceListViewItem> _deviceViewLists;
         DataGridView _deviceDgv;
 
-        public DevicePanelPresenter(DataGridView deviceDgv, LiveDeviceCollection devices)
+        public DevicePanelPresenter(DataGridView deviceDgv)
         {
             _deviceDgv = deviceDgv;
-            _devices = devices;
             _deviceViewLists = new BindingList<DeviceListViewItem>();
-            
             deviceDgv.DataSource = _deviceViewLists;
             deviceDgv.DoubleClick += DeviceDgv_DoubleClick;
-            Update();
         }
 
         private void DeviceDgv_DoubleClick(object sender, EventArgs e)
@@ -56,10 +53,10 @@ namespace MALT200817.Explorer.View
             ShowDevice();
         }
 
-        public void Update()
+        public void Update(LiveDeviceCollection devices)
         {
             _deviceViewLists.Clear();
-            foreach (LiveDeviceItem dev in _devices)
+            foreach (LiveDeviceItem dev in devices)
             {
                 var firstName = Devices.Instance.Search(dev.FamilyCode, dev.OptionCode).FirstName;
                 _deviceViewLists.Add(new DeviceListViewItem()

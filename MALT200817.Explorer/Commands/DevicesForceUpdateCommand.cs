@@ -8,10 +8,10 @@ namespace MALT200817.Explorer.Commands
 
     class DevicesForceUpdateCommand : ToolStripButton
     {
-        IDevicePresenter _devicePresenter;
-        public DevicesForceUpdateCommand(IDevicePresenter devicePresenter)
+        IApp _app;
+        public DevicesForceUpdateCommand(IApp app)
         {
-            _devicePresenter = devicePresenter;
+            _app = app;
             //    Image = Resources.Delete32x32;
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
@@ -22,8 +22,7 @@ namespace MALT200817.Explorer.Commands
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            MaltClient.Instance.UpdateDevicesInfo();
-            _devicePresenter.Update();
+            _app.UpdateDeviceList();
         }
     }
 }

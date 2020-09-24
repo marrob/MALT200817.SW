@@ -3,8 +3,8 @@
   <Fragment>
     <!-- This is how we include wxi files -->
     <?include $(sys.CURRENTDIR)Config.wxi ?>
-    <ComponentGroup Id="Application_Components" Directory="AppFolder" >
-      
+    
+    <ComponentGroup Id="Application_Components" Directory="AppFolder" >  
       <Component Guid="{DD628932-1855-4DE3-8E0D-63D47830619F}" >
         <RemoveFolder Id="AppProgramsFolder" On='uninstall'  Directory='AppProgramsFolder'/>
         <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
