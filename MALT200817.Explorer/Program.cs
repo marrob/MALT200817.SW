@@ -13,6 +13,9 @@ namespace MALT200817.Explorer
     using Client;
     using Configuration;
     using Library;
+    using ErrorHandling;
+    using System.Net.Configuration;
+    using System.Diagnostics;
 
     static class Program
     {
@@ -22,23 +25,43 @@ namespace MALT200817.Explorer
         [STAThread]
         static void Main()
         {
+
+#if !DEBUG
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            Application.ThreadException += ApplicationOnThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+#endif
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             new App();
+        }
+        private static void CurrentDomainOnUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            var x = new ErrorHandlerService();
+            AppLog.Instance.WriteLine(x.Show(e));
+        }
+        private static void ApplicationOnThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            var x = new ErrorHandlerService();
+            AppLog.Instance.WriteLine(x.Show(e));
         }
     }
 
 
     public interface IApp
     {
+        void Connect();
+        void Disconnect();
         void UpdateDeviceList();
     }
 
-    class App:IApp
+    class App : IApp
     {
         readonly IMainForm _mainForm;
-        readonly DevicePanelPresenter _devicePresenter;
+        readonly DevicePresenter _devicePresenter;
         public static SynchronizationContext SyncContext = null;
 
         public App()
@@ -48,7 +71,7 @@ namespace MALT200817.Explorer
             AppConfiguration.Init();
             AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.Explorer_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
-            AppLog.Instance.WriteLine("App()");
+            AppLog.Instance.WriteLine("MALT200817.Explorer.App() Constructor started.");
 
             /*** Main Form ***/
             _mainForm = new MainForm();
@@ -58,7 +81,7 @@ namespace MALT200817.Explorer
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
 
             /*** MALT TCP Client ***/
-            _devicePresenter = new DevicePanelPresenter(_mainForm.DevicesDgv);
+            _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv);
 
             /*** Device Library ***/
             Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
@@ -69,14 +92,18 @@ namespace MALT200817.Explorer
                  new ToolStripItem[]
                  {
                      new Commands.ShowConfigurationCommand(),
-                     new Commands.ShowLogCommand(),
+                     new Commands.ShowLogFolderCommand(),
+                     new Commands.ShowLibraryFolderCommand(),
+                     new Commands.ShowServicesCommand()
                  });
 
             var toolsMenu = new ToolStripMenuItem("Tools");
             toolsMenu.DropDown.Items.AddRange(
                  new ToolStripItem[]
                  {
+                     new Commands.DevicesConnectCommand(this),
                      new Commands.DevicesForceUpdateCommand(this),
+                     new Commands.AlwaysOnTopCommand(_mainForm),
                  });
 
             _mainForm.MenuBar = new ToolStripItem[]
@@ -86,9 +113,7 @@ namespace MALT200817.Explorer
                     diagMenu,
                 };
 
-            /*** Status ***/
-
-
+            _mainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();
 
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
@@ -118,35 +143,43 @@ namespace MALT200817.Explorer
 
         public void Start(string[] args)
         {
-#if TRACE
-            AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + ": " + string.Join("\r\n -", args));
-#endif
-
-            MaltClient.Instance.Start("", AppConfiguration.Instance.ServicePort);
+            Connect();
             UpdateDeviceList();
         }
 
         public void UpdateDeviceList()
         {
+            var sp = new Stopwatch();
+            sp.Start();
             MaltClient.Instance.UpdateDevicesInfo();
-            _devicePresenter.Update(MaltClient.Instance.GetDevices());
+            var devices = MaltClient.Instance.GetDevices();
+            _mainForm.DevicesCount = devices.Count.ToString();
+            _devicePresenter.Update(devices);
+            sp.Stop();
+            _mainForm.ConnectionTime = sp.ElapsedMilliseconds.ToString() + "ms";
+        }
+
+        public void Connect()
+        {
+            MaltClient.Instance.Start("", AppConfiguration.Instance.ServicePort);
+        }
+
+        public void Disconnect()
+        {
+            MaltClient.Instance.Dispose();
         }
 
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-#if TRACE
-            AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-#endif
+
         }
 
 
 
         void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-#if TRACE
-            AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-#endif
+
             MaltClient.Instance.Dispose();
 
             //TimerService.Instance.Dispose();
@@ -155,6 +188,8 @@ namespace MALT200817.Explorer
             Settings.Default.Save();
             EventAggregator.Instance.Dispose();
             Settings.Default.Save();
+
+            AppLog.Instance.WriteLine("MALT200817.Explorer.App() MainForm_FormClosed.");
         }
     }
 }

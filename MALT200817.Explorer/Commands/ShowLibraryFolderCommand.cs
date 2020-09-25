@@ -6,17 +6,17 @@ namespace MALT200817.Explorer.Commands
     using Configuration;
     using Common;
 
-    class ShowLogCommand : ToolStripButton
+    class ShowLibraryFolderCommand : ToolStripButton
     {
-        public ShowLogCommand()
+        public ShowLibraryFolderCommand()
         {
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
-            Text = "Show Log";
+            Text = "Show Library Folder";
         }
         protected override void OnClick(EventArgs e)
         {
-            Tools.RunNotepadOrNpp(AppConstants.LogDirectory) ;
+            Tools.OpenFolder(AppConstants.LibraryPath) ;
 
         }
 

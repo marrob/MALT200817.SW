@@ -6,8 +6,9 @@
     using System.Globalization;
     using System.Diagnostics;
     using System.IO;
+    using System.ServiceProcess;
 
-    public static class Tools
+    static class Tools
     {
         public static int HexaByteStrToInt(string value)
         {
@@ -17,6 +18,11 @@
         public static byte HexaByteStrToByte(string value)
         {
             return byte.Parse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        }
+
+        public static void OpenFolder(string path)
+        {
+            Process.Start("explorer.exe", path);
         }
 
         public static void RunNotepadOrNpp(string path)
@@ -34,5 +40,27 @@
                 myProcess.Start();
             }
         }
+
+        public static string GetServiceStatus(string servicename)
+        {
+            ServiceController sc = new ServiceController(servicename);
+
+            switch (sc.Status)
+            {
+                case ServiceControllerStatus.Running:
+                    return "Running";
+                case ServiceControllerStatus.Stopped:
+                    return "Stopped";
+                case ServiceControllerStatus.Paused:
+                    return "Paused";
+                case ServiceControllerStatus.StopPending:
+                    return "Stopping";
+                case ServiceControllerStatus.StartPending:
+                    return "Starting";
+                default:
+                    return "Status Changing";
+            }
+        }
+    
     }
 }

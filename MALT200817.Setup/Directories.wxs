@@ -11,14 +11,7 @@
             Key="Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"/>
     </Property>
     
-    <DirectoryRef Id="AppLibraryFolder">
-      <Component Id="CmpCreateCommonAppDataFolderWithPermissions" Guid="{6A250336-FCF0-4C0B-8CD9-2F07B720231F}" Permanent="yes">
-        <CreateFolder>
-          <!--This will ensure that everyone gets full permissions to the folder that we create in the ProgramData folder. -->
-          <util:PermissionEx User="Everyone" GenericAll="yes" />
-        </CreateFolder>
-      </Component>
-    </DirectoryRef>
+
 
     <!-- Directory Sturcture -->
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -45,6 +38,14 @@
       </Directory>
 
       <!-- *ProgramData* -->
+      <!-- 
+      <DirectoryRef Id="AppLibraryFolder">
+        <Component Id="CmpCreateCommonAppDataFolderWithPermissions" Guid="{6A250336-FCF0-4C0B-8CD9-2F07B720231F}" Permanent="yes">
+          <CreateFolder>
+            <util:PermissionEx User="Everyone" GenericAll="yes" />
+          </CreateFolder>
+        </Component>
+      </DirectoryRef>
       <Directory Id="CommonAppDataFolder">
         <Directory Id="CommonAppDataManufacturerFolder" Name="$(var.ShortCompany)">
           <Directory Id="AppDataFolder" Name="$(var.ProductName)">
@@ -52,7 +53,7 @@
           </Directory>
         </Directory>
       </Directory>
-
+-->
       <!-- *Desktop* -->
       <!--DesktopFolder = C:\Users\Public\Desktop\-->
       <Directory Id="DesktopFolder" Name="Desktop" />

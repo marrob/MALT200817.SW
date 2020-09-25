@@ -22,9 +22,13 @@ namespace MALT200817.Explorer.View
 
 
         string Text { get; set; }
-        
+
         ToolStripItem[] MenuBar { set; }
         bool AlwaysOnTop { get; set; }
+
+        string Version { get; set; }
+        string DevicesCount { get; set; }
+        string ConnectionTime { get; set; }
 
         ToolStripItem[] StatusBar { set; }
 
@@ -40,6 +44,24 @@ namespace MALT200817.Explorer.View
 
     public partial class MainForm : Form, IMainForm
     {
+        public string Version
+        {
+            get { return (toolStripStatusLabelVersion.Text); }
+            set { toolStripStatusLabelVersion.Text = value; }
+        }
+
+        public string DevicesCount
+        {
+            get { return toolStripStatusDevicesCount.Text; }
+            set { toolStripStatusDevicesCount.Text = value; }
+        }
+
+        public string ConnectionTime
+        {
+            get { return toolStripStatusLabelConnetcionTime.Text; }
+            set { toolStripStatusLabelConnetcionTime.Text = value; }
+        }
+
         public MainForm()
         {
             InitializeComponent();

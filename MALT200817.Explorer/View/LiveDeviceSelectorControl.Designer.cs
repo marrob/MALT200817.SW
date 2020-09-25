@@ -30,7 +30,6 @@
         {
             this.knvDataGridView1 = new Konvolucio.MCEL181123.Controls.KnvDataGridView();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FamilyCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +47,6 @@
             this.knvDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.knvDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FirstName,
-            this.FamilyCode,
             this.Address,
             this.Version,
             this.SerialNumber});
@@ -71,13 +69,6 @@
             this.FirstName.Name = "FirstName";
             this.FirstName.ReadOnly = true;
             // 
-            // FamilyCode
-            // 
-            this.FamilyCode.DataPropertyName = "FamilyCode";
-            this.FamilyCode.HeaderText = "Family Code";
-            this.FamilyCode.Name = "FamilyCode";
-            this.FamilyCode.ReadOnly = true;
-            // 
             // Address
             // 
             this.Address.DataPropertyName = "Address";
@@ -95,16 +86,16 @@
             // SerialNumber
             // 
             this.SerialNumber.DataPropertyName = "SerialNumber";
-            this.SerialNumber.HeaderText = "Serial Number";
+            this.SerialNumber.HeaderText = "SN";
             this.SerialNumber.Name = "SerialNumber";
             this.SerialNumber.ReadOnly = true;
             // 
-            // DeviceSelectorControl
+            // LiveDeviceSelectorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.knvDataGridView1);
-            this.Name = "DeviceSelectorControl";
+            this.Name = "LiveDeviceSelectorControl";
             this.Size = new System.Drawing.Size(507, 340);
             ((System.ComponentModel.ISupportInitialize)(this.knvDataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -115,7 +106,6 @@
 
         private Konvolucio.MCEL181123.Controls.KnvDataGridView knvDataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FamilyCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Version;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNumber;

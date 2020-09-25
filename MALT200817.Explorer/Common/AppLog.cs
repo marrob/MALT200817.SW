@@ -35,14 +35,21 @@ namespace MALT200817.Explorer.Common
 
         public void WriteLine(string line)
         {
-            if (Enabled)
+            try
             {
-                line = DateTime.Now.ToString(AppConstants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + AppConstants.NewLine;
-                var fileWrite = new StreamWriter(FilePath, true, Encoding.ASCII);
-                fileWrite.NewLine = AppConstants.NewLine;
-                fileWrite.Write(line);
-                fileWrite.Flush();
-                fileWrite.Close();
+                if (Enabled)
+                {
+                    line = DateTime.Now.ToString(AppConstants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + AppConstants.NewLine;
+                    var fileWrite = new StreamWriter(FilePath, true, Encoding.ASCII);
+                    fileWrite.NewLine = AppConstants.NewLine;
+                    fileWrite.Write(line);
+                    fileWrite.Flush();
+                    fileWrite.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Cannot write to log file, please check the path.\r\n" + ex.Message);
             }
         }
     }

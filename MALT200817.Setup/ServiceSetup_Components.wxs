@@ -22,12 +22,14 @@
         Interactive="no" 
         
         />
+      <!-- Service Start Or Not
       <ServiceControl Id="StartService"
                       Start="install"
                       Stop="both"
                       Remove="uninstall"
                       Name="MaltService"
                       Wait="yes" />
+     -->
     </Component>
   </Fragment>
 </Wix>

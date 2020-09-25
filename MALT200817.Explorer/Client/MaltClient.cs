@@ -9,7 +9,7 @@
 
     public class MaltClient : IDisposable
     {
-        TcpClient _client = new TcpClient();
+        TcpClient _client;
         NetworkStream _networkStream;
         StreamReader _streamReader;
 
@@ -32,6 +32,7 @@
         {
             try
             {
+                _client = new TcpClient();
                 _client.Connect(hostname, port);
                 _networkStream = _client.GetStream();
                 _networkStream.ReadTimeout = 2000;
@@ -41,8 +42,7 @@
             }
             catch (Exception ex)
             {
-                LastException = ex;
-                ////throw ex;
+                throw new IOException("MALT200817.Service is not responding to the start request.\r\n" + ex.Message);
             }
         }
 
@@ -65,6 +65,7 @@
         public void UpdateDevicesInfo()
         {
             var resp = WriteReadFnPtr("DO#UPDATE:DEVICES:INFO");
+
             if (resp != "OK")
                 throw new ApplicationException(resp);
         }
@@ -158,8 +159,11 @@
 
         private void Dispose(bool disposing)
         {
+            IsConnected = false;
+
             if (_disposed)
                 return;
+
 
             if (disposing)
             {

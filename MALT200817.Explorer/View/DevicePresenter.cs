@@ -2,8 +2,8 @@
 namespace MALT200817.Explorer.View
 {
 
-    using MALT200817.Explorer.Client;
-    using MALT200817.Explorer.Common;
+    using Client;
+    using Common;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -14,14 +14,14 @@ namespace MALT200817.Explorer.View
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using Library;
-    using MALT200817.Configuration;
+    using Configuration;
 
     public interface IDevicePresenter
     {
         void Update(LiveDeviceCollection devices);
     }
 
-    public class DevicePanelPresenter: IDevicePresenter
+    public class DevicePresenter: IDevicePresenter
     {
         public class DeviceListViewItem
         { 
@@ -38,7 +38,7 @@ namespace MALT200817.Explorer.View
         public BindingList<DeviceListViewItem> _deviceViewLists;
         DataGridView _deviceDgv;
 
-        public DevicePanelPresenter(DataGridView deviceDgv)
+        public DevicePresenter(DataGridView deviceDgv)
         {
             _deviceDgv = deviceDgv;
             _deviceViewLists = new BindingList<DeviceListViewItem>();
@@ -48,7 +48,6 @@ namespace MALT200817.Explorer.View
 
         private void DeviceDgv_DoubleClick(object sender, EventArgs e)
         {
-            var selected = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
             _selected = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
             ShowDevice();
         }
@@ -74,22 +73,12 @@ namespace MALT200817.Explorer.View
 
         public void ShowDevice()
         {
-            var familyCode = Tools.HexaByteStrToInt(_selected.FamilyCode);
-            var optionCode = Tools.HexaByteStrToInt(_selected.OptionCode);
-            var lib = Devices.Instance.Search(familyCode, optionCode);
-            var form = new DeviceForm();
-            form.Text = lib.FirstName + ":" + _selected.Address + " " + AppConstants.SoftwareCustomer;
-            form.Components = lib.Components;
-            form.FamilyCode = familyCode.ToString("X2");
-            form.Address = _selected.Address;
-            form.OptionCode = optionCode.ToString("X2");
-            form.Size = lib.DefaultWinodwSize;
-            form.FwVersion = _selected.Version;
-            form.SN = _selected.SerialNumber;
-            form.FamilyName = lib.FamilyName;
-            form.FirstName = lib.FirstName;
-            form.LibVersion = lib.LibVersion;
-            form.Show();
+            var dev = new DeviceFormNextGen();
+            dev.Address = _selected.Address;
+            dev.FamilyCode = _selected.FamilyCode;
+            dev.OptionCode = _selected.OptionCode;
+            dev.SerialNumber = _selected.SerialNumber;
+            dev.Show();
         }
     }
 }

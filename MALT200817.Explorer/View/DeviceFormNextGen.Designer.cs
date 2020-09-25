@@ -1,6 +1,6 @@
 ﻿namespace MALT200817.Explorer.View
 {
-    partial class DeviceForm
+    partial class DeviceFormNextGen
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceFormNextGen));
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFirstName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,11 +43,15 @@
             this.toolStripStatusLabelLibVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSwVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.relayPanelControl1 = new MALT200817.Explorer.View.DevicePanelControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStripMessage = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemMessage = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.menuStripMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip2
@@ -194,19 +198,6 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 19);
             this.toolStripStatusLabel2.Text = "AltonTech";
             // 
-            // relayPanelControl1
-            // 
-            this.relayPanelControl1.Address = null;
-            this.relayPanelControl1.Datasource = null;
-            this.relayPanelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.relayPanelControl1.FamilyCode = null;
-            this.relayPanelControl1.Location = new System.Drawing.Point(0, 24);
-            this.relayPanelControl1.Name = "relayPanelControl1";
-            this.relayPanelControl1.OptionCode = null;
-            this.relayPanelControl1.Size = new System.Drawing.Size(770, 294);
-            this.relayPanelControl1.TabIndex = 0;
-            this.relayPanelControl1.Load += new System.EventHandler(this.relayPanelControl1_Load);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -224,29 +215,70 @@
             this.testToolStripMenuItem.Text = "RESET";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
-            // DeviceForm
+            // menuStripMessage
+            // 
+            this.menuStripMessage.BackColor = System.Drawing.Color.Red;
+            this.menuStripMessage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemMessage,
+            this.toolStripMenuItem2});
+            this.menuStripMessage.Location = new System.Drawing.Point(0, 24);
+            this.menuStripMessage.Name = "menuStripMessage";
+            this.menuStripMessage.Size = new System.Drawing.Size(770, 24);
+            this.menuStripMessage.TabIndex = 12;
+            this.menuStripMessage.Text = "menuStripMessage";
+            // 
+            // toolStripMenuItemMessage
+            // 
+            this.toolStripMenuItemMessage.Name = "toolStripMenuItemMessage";
+            this.toolStripMenuItemMessage.Size = new System.Drawing.Size(165, 20);
+            this.toolStripMenuItemMessage.Text = "toolStripMenuItemMessage";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.toolStripMenuItem2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(69, 20);
+            this.toolStripMenuItem2.Text = "Continue";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuContinue_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 48);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(770, 246);
+            this.flowLayoutPanel1.TabIndex = 13;
+            // 
+            // DeviceFormNextGen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 318);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip2);
-            this.Controls.Add(this.relayPanelControl1);
+            this.Controls.Add(this.menuStripMessage);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "DeviceForm";
+            this.MainMenuStrip = this.menuStripMessage;
+            this.Name = "DeviceFormNextGen";
             this.Text = "MALTXXX";
+            this.Load += new System.EventHandler(this.DeviceFormNextGen_Load);
             this.ResizeEnd += new System.EventHandler(this.DeviceForm_ResizeEnd);
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.menuStripMessage.ResumeLayout(false);
+            this.menuStripMessage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private DevicePanelControl relayPanelControl1;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripSplitButton1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusWindowSize;
@@ -261,7 +293,12 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelOptionCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyName;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStripMessage;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMessage;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

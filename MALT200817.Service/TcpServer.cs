@@ -54,9 +54,10 @@
             while (true)
             {
                 TcpClient client = _server.AcceptTcpClient();
-                Console.WriteLine("Enter New client");
                 new Thread(() => HandleClient(client)).Start();
                 ClientsCount++;
+                Console.WriteLine("Enter New client");
+                AppLog.Instance.WriteLine("Welcome:" + " New Client! Clients count is:" + ClientsCount.ToString());
 
                 if (_bw.CancellationPending)
                 {
@@ -100,7 +101,8 @@
                     AppLog.Instance.WriteLine(ex.Message);
                 }
             }
-            Console.WriteLine("Close client");
+            Console.WriteLine("Goodbye client");
+            AppLog.Instance.WriteLine("Goodbye:" + ".Clients count is:" + ClientsCount.ToString());
             ClientsCount--;
         }
       

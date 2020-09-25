@@ -35,6 +35,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -51,6 +52,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,15 +64,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Client\LiveDeviceItem.cs" />
     <Compile Include="Client\LiveDeviceCollection.cs" />
+    <Compile Include="Commands\DevicesConnectCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Commands\DevicesForceUpdateCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowServicesCommand.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\ShowConfigurationCommand.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Commands\ShowLogCommand.cs">
+    <Compile Include="Commands\ShowLibraryFolderCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowLogFolderCommand.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\AlwaysOnTopCommand.cs">
@@ -83,6 +97,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Common\AppLog.cs" />
+    <Compile Include="ErrorHandling\ErrorHandlerService.cs" />
+    <Compile Include="ErrorHandling\ErrorHandlingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorHandling\ErrorHandlingForm.Designer.cs">
+      <DependentUpon>ErrorHandlingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\IWindowLayoutRestoring.cs" />
     <Compile Include="Common\Tools.cs" />
     <Compile Include="Controls\IKnvComponentControl.cs" />
@@ -101,6 +122,12 @@
     <Compile Include="Controls\KnvRealySpdtControl.Designer.cs">
       <DependentUpon>KnvRealySpdtControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorHandling\ErrorHandlingProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorHandling\ErrorHandlingProgressDialog.Designer.cs">
+      <DependentUpon>ErrorHandlingProgressDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\PlayAppEvent.cs" />
     <Compile Include="Events\RefreshAppEvent.cs" />
@@ -115,13 +142,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\DevicePanelPresenter.cs" />
-    <Compile Include="View\DeviceForm.cs">
+    <Compile Include="View\DeviceFormNextGen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\DeviceForm.Designer.cs">
-      <DependentUpon>DeviceForm.cs</DependentUpon>
+    <Compile Include="View\DeviceFormNextGen.Designer.cs">
+      <DependentUpon>DeviceFormNextGen.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\DevicePresenter.cs" />
     <Compile Include="View\LiveDeviceSelectorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,13 +162,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\DevicePanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\DevicePanelControl.Designer.cs">
-      <DependentUpon>DevicePanelControl.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="ErrorHandling\ErrorHandlingForm.resx">
+      <DependentUpon>ErrorHandlingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\KnvRealySpstControl.resx">
       <DependentUpon>KnvRealySpstControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,17 +176,14 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\DeviceForm.resx">
-      <DependentUpon>DeviceForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\DeviceFormNextGen.resx">
+      <DependentUpon>DeviceFormNextGen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LiveDeviceSelectorControl.resx">
       <DependentUpon>LiveDeviceSelectorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\DevicePanelControl.resx">
-      <DependentUpon>DevicePanelControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -204,10 +224,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\ProgramData\AltonTech\MALT200817\Library\MALT132.xml">
-      <Link>MALT132.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\Warning48.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

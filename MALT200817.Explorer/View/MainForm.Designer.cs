@@ -34,9 +34,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLoadTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelLastModify = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelRowColumn = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusDevicesCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelConnetcionTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,7 +53,7 @@
             this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(646, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(411, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,27 +68,29 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.devicesViewControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(646, 426);
-            this.splitContainer1.SplitterDistance = 366;
+            this.splitContainer1.Panel2Collapsed = true;
+            this.splitContainer1.Size = new System.Drawing.Size(411, 483);
+            this.splitContainer1.SplitterDistance = 338;
             this.splitContainer1.TabIndex = 8;
             // 
             // statusStrip2
             // 
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton1,
-            this.toolStripStatusLoadTime,
-            this.toolStripStatusLabelLastModify,
-            this.toolStripStatusLabelRowColumn,
+            this.toolStripStatusDevicesCount,
+            this.toolStripStatusLabelConnetcionTime,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabelVersion,
             this.toolStripStatusLabel2});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 426);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 483);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(646, 24);
+            this.statusStrip2.ShowItemToolTips = true;
+            this.statusStrip2.Size = new System.Drawing.Size(411, 24);
             this.statusStrip2.TabIndex = 9;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -103,34 +104,27 @@
             this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
             this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
-            // toolStripStatusLoadTime
+            // toolStripStatusDevicesCount
             // 
-            this.toolStripStatusLoadTime.Name = "toolStripStatusLoadTime";
-            this.toolStripStatusLoadTime.Size = new System.Drawing.Size(62, 19);
-            this.toolStripStatusLoadTime.Text = "Load Time";
+            this.toolStripStatusDevicesCount.Name = "toolStripStatusDevicesCount";
+            this.toolStripStatusDevicesCount.Size = new System.Drawing.Size(51, 19);
+            this.toolStripStatusDevicesCount.Text = "DEVICES";
+            this.toolStripStatusDevicesCount.ToolTipText = "Devices Count";
             // 
-            // toolStripStatusLabelLastModify
+            // toolStripStatusLabelConnetcionTime
             // 
-            this.toolStripStatusLabelLastModify.AutoToolTip = true;
-            this.toolStripStatusLabelLastModify.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelLastModify.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelLastModify.Name = "toolStripStatusLabelLastModify";
-            this.toolStripStatusLabelLastModify.Size = new System.Drawing.Size(121, 19);
-            this.toolStripStatusLabelLastModify.Text = "Last write timestamp";
-            // 
-            // toolStripStatusLabelRowColumn
-            // 
-            this.toolStripStatusLabelRowColumn.AutoToolTip = true;
-            this.toolStripStatusLabelRowColumn.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.toolStripStatusLabelRowColumn.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelRowColumn.Name = "toolStripStatusLabelRowColumn";
-            this.toolStripStatusLabelRowColumn.Size = new System.Drawing.Size(80, 19);
-            this.toolStripStatusLabelRowColumn.Text = "Row Column";
+            this.toolStripStatusLabelConnetcionTime.AutoToolTip = true;
+            this.toolStripStatusLabelConnetcionTime.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelConnetcionTime.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelConnetcionTime.Name = "toolStripStatusLabelConnetcionTime";
+            this.toolStripStatusLabelConnetcionTime.Size = new System.Drawing.Size(75, 19);
+            this.toolStripStatusLabelConnetcionTime.Text = "CONN TIME";
+            this.toolStripStatusLabelConnetcionTime.ToolTipText = "Connection Time";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(217, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(150, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -140,6 +134,7 @@
             this.toolStripStatusLabelVersion.Name = "toolStripStatusLabelVersion";
             this.toolStripStatusLabelVersion.Size = new System.Drawing.Size(58, 19);
             this.toolStripStatusLabelVersion.Text = "VERSION";
+            this.toolStripStatusLabelVersion.ToolTipText = "Softwer Version";
             // 
             // toolStripStatusLabel2
             // 
@@ -155,14 +150,14 @@
             this.devicesViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesViewControl1.Location = new System.Drawing.Point(0, 0);
             this.devicesViewControl1.Name = "devicesViewControl1";
-            this.devicesViewControl1.Size = new System.Drawing.Size(366, 426);
+            this.devicesViewControl1.Size = new System.Drawing.Size(411, 483);
             this.devicesViewControl1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 450);
+            this.ClientSize = new System.Drawing.Size(411, 507);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
@@ -188,9 +183,8 @@
         private LiveDeviceSelectorControl devicesViewControl1;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLoadTime;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLastModify;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRowColumn;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusDevicesCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelConnetcionTime;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;

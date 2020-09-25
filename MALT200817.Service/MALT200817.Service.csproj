@@ -93,6 +93,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Common\CanMsg.cs" />
     <Compile Include="Common\AppLog.cs" />
@@ -111,7 +114,6 @@
     <Compile Include="NiCan\NiCanTools.cs" />
     <Compile Include="NiCan\NiCan_UnitTest_basics.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TcpParser.cs" />
     <Compile Include="WindowsService.cs">
       <SubType>Component</SubType>
@@ -151,6 +153,9 @@
       <Project>{769e7cb4-9b0c-484a-a993-01bc933f7cbe}</Project>
       <Name>NiXnetDotNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

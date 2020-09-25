@@ -44,11 +44,11 @@
     <Feature Id="AppFeature" Title="Application" Level="1" Description="Device Firmware Update Tool and Frimwares">
       <Feature Id ="App_Feature" Title="Application" Description="Firmware Upgrade Tool" Level="1">
         <ComponentGroupRef Id="Application_Components"/>
-        <ComponentGroupRef Id="Library_Components"/>
+        <!-- <ComponentGroupRef Id="Library_Components"/>-->
         <ComponentGroupRef Id="Service_Components"/>
         <ComponentRef Id ="EventSource_Component"/>
         <ComponentRef Id="ServiceSetup_Components"/>
-        <ComponentRef Id="CmpCreateCommonAppDataFolderWithPermissions" />
+        <!--<ComponentRef Id="CmpCreateCommonAppDataFolderWithPermissions" /> -->
         <ComponentGroupRef Id="LabView2018_Components"/>
         
       </Feature>

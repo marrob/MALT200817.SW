@@ -56,7 +56,25 @@ namespace MALT200817.Library
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="familyCode">00..FF</param>
+        /// <param name="optionCode">00..FF</param>
+        /// <returns></returns>
+        public DeviceItem Search(string familyCode, string optionCode)
+        {
+            var retval = this.FirstOrDefault(n => n.FamilyCode == Tools.HexaByteStrToInt(familyCode) &&
+                                                  n.OptionCode == Tools.HexaByteStrToInt(optionCode));
+            return retval;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="familyCode">0..255</param>
+        /// <param name="optionCode">0..255</param>
+        /// <returns></returns>
         public DeviceItem Search(int familyCode, int optionCode)
         {
             var retval = this.FirstOrDefault(n => n.FamilyCode == familyCode && n.OptionCode == optionCode);
