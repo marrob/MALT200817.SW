@@ -36,24 +36,29 @@
           <Directory Id ="CurrentAppProgramsFolder" Name="$(var.ProductName)"/>-->
         </Directory>
       </Directory>
-
-      <!-- *ProgramData* -->
-      <!-- 
-      <DirectoryRef Id="AppLibraryFolder">
-        <Component Id="CmpCreateCommonAppDataFolderWithPermissions" Guid="{6A250336-FCF0-4C0B-8CD9-2F07B720231F}" Permanent="yes">
-          <CreateFolder>
-            <util:PermissionEx User="Everyone" GenericAll="yes" />
-          </CreateFolder>
-        </Component>
-      </DirectoryRef>
-      <Directory Id="CommonAppDataFolder">
-        <Directory Id="CommonAppDataManufacturerFolder" Name="$(var.ShortCompany)">
-          <Directory Id="AppDataFolder" Name="$(var.ProductName)">
-            <Directory Id="AppLibraryFolder" Name="Library"/>
-          </Directory>
+      
+      <!--*ProgramData*-->
+      <!-- c:\Users\Margit Robert\AppData\Roaming\ -->
+      <Directory Id="AppDataFolder">
+        <Directory Id="ProgramData_Component" Name="FlowOutlook" >
+          <Component Id="ProgramData_Component" Guid="cdca45fb-ce6c-4a00-9865-29b24123c62a">
+            <RemoveFolder On="both" Id="ProgramData_Component"/>
+            <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="FlowOutlook" />
+          </Component>
         </Directory>
       </Directory>
--->
+      <!--C:\ProgramData -->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="APPLICATIONDATADIRECTORY"/>
+          <Directory Id ="AppDataCompanyFolder" Name ="$(var.LongCompany)">
+            <Directory Id ="AppDataProductFolder" Name ="$(var.ProductName)">
+              <!--C:\ProgramData\AltonTech\MALT200817\Library\ -->
+              <Directory Id ="AppDataLibraryFolder" Name ="Library">
+              </Directory>
+            </Directory>
+          </Directory>
+      </Directory>
+
       <!-- *Desktop* -->
       <!--DesktopFolder = C:\Users\Public\Desktop\-->
       <Directory Id="DesktopFolder" Name="Desktop" />

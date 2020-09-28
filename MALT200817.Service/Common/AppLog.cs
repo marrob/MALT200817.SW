@@ -9,10 +9,8 @@ namespace MALT200817.Service.Common
     public class AppLog
     {
         public static AppLog Instance { get; } = new AppLog();
-
-        public string FilePath { get; set; } = AppConstants.LogDirectory;
+        public string FilePath { get; set; }
         public bool Enabled;
-
         public double? GetFileSizeKB
         {
             get
@@ -35,14 +33,29 @@ namespace MALT200817.Service.Common
 
         public void WriteLine(string line)
         {
-            if (Enabled)
+            try
             {
-                line = DateTime.Now.ToString(AppConstants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + AppConstants.NewLine;
-                var fileWrite = new StreamWriter(FilePath, true, Encoding.ASCII);
-                fileWrite.NewLine = AppConstants.NewLine;
-                fileWrite.Write(line);
-                fileWrite.Flush();
-                fileWrite.Close();
+                if (Enabled)
+                {
+                    if (!Directory.Exists(Path.GetDirectoryName(FilePath)))
+                    {
+                        Enabled = false;
+                    }
+                    else
+                    {
+                        line = DateTime.Now.ToString(AppConstants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + AppConstants.NewLine;
+                        var fileWrite = new StreamWriter(FilePath, true, Encoding.ASCII);
+                        fileWrite.NewLine = AppConstants.NewLine;
+                        fileWrite.Write(line);
+                        fileWrite.Flush();
+                        fileWrite.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Enabled = false;
+                throw new IOException("Cannot write to log file, please check the path.\r\n" + ex.Message);
             }
         }
     }

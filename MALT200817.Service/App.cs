@@ -17,7 +17,7 @@
         {
             AppConfiguration.Init();
             AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + "MALT200817.Service_" + DateTime.Now.ToString("yyMMdd_HHmmss")+".txt";
-            AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
+            AppLog.Instance.Enabled = AppConfiguration.Instance.LogServiceEnabled;
             AppLog.Instance.WriteLine("App()");
             
             _exp = new Explorer();
@@ -60,9 +60,16 @@
 
         public void Stop()
         {
-           // _tcpServer.Dispose();
+            AppLog.Instance.WriteLine("Service.Stop start");
+            AppLog.Instance.WriteLine("Service.Stop:  TCP Server Start Dispose.");
+
+            _tcpServer.Dispose();
+            AppLog.Instance.WriteLine("Service.Stop: TCP Server End Dispose.");
+            
+            AppLog.Instance.WriteLine("Service.Stop: CAN Server Start Dispose.");
             _canService.Dispose();
-           
+            AppLog.Instance.WriteLine("Service.Stop: CAN Server End Dispose.");
+
             AppLog.Instance.WriteLine("Service Stopped");
         }
 

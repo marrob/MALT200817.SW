@@ -10,6 +10,7 @@ namespace MALT200817.Service.Tests
     using System.Text;
     using System.Threading.Tasks;
     using System.IO;
+    using Configuration;
 
     [TestClass()]
     public class AppTesAppConfigTestts
@@ -31,7 +32,7 @@ namespace MALT200817.Service.Tests
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\TEST_config.xml";
             File.Delete(path);
-            AppConfiguration.SaveToFile(path);
+           // AppConfiguration.SaveToFile(path);
             Assert.IsTrue(File.Exists(path));
         }
 

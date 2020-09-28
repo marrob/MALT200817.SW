@@ -53,21 +53,34 @@
 
             while (true)
             {
-                TcpClient client = _server.AcceptTcpClient();
-                new Thread(() => HandleClient(client)).Start();
-                ClientsCount++;
-                Console.WriteLine("Enter New client");
-                AppLog.Instance.WriteLine("Welcome:" + " New Client! Clients count is:" + ClientsCount.ToString());
-
-                if (_bw.CancellationPending)
+                try
                 {
-                    e.Cancel = true;
-                    break;
+                    if (_bw.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
+                    /* Itt blokkoolva várakozik a szál, ha meghivod rá a _server.Stopot()
+                     * akkor ezt küldi:
+                     * A blocking operation was interrupted by a call to WSACancelBlockingCall
+                     */
+                    TcpClient client = _server.AcceptTcpClient();
+                    new Thread(() => HandleClient(client)).Start();
+                    ClientsCount++;
+                    Console.WriteLine("Enter New client");
+                    AppLog.Instance.WriteLine("Welcome:" + " New Client! Clients count is:" + ClientsCount.ToString());
                 }
-
+                catch (Exception ex)
+                {
+                    
+                    AppLog.Instance.WriteLine(ex.Message);
+                }
             }
+            /*Ezzel mehet tovább a Dispose*/
+            _waitForDoneEvent.Set();
         }
-
+        /*TODO: Mi van akkor ha több kilensen dolgozik ez a szál? ezt ki fogja megölni?*/
         public void HandleClient(TcpClient client)
         {
             while (client.Connected)
@@ -119,7 +132,7 @@
                 return;
 
             if (disposing)
-            {
+            {              
                 _server.Stop();
 
                 if (_bw.IsBusy)
@@ -127,7 +140,6 @@
                     _bw.CancelAsync();
                     _waitForDoneEvent.WaitOne();
                 }
-
             }
             _disposed = true;
         }

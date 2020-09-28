@@ -18,7 +18,6 @@ namespace MALT200817.Explorer.Commands
 
         protected override void OnClick(EventArgs e)
         { 
-            Tools.RunNotepadOrNpp(AppConstants.AppConfigurationFilePath);
             base.OnClick(e);
 
             var myProcess = new Process();
