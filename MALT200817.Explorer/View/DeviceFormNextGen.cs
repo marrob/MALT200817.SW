@@ -147,7 +147,7 @@
             toolStripStatusWindowSize.Visible = false;
 #endif
             ComponentClick += DeviceFormNextGen_ComponentClick;
-            _library = Devices.Instance.Search(FamilyCode, OptionCode);
+            _library = Devices.Library.Search(FamilyCode, OptionCode);
             Start();
         }
 

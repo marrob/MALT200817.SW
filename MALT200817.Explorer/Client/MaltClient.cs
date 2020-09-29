@@ -35,7 +35,8 @@
                 _client = new TcpClient();
                 _client.Connect(hostname, port);
                 _networkStream = _client.GetStream();
-                _networkStream.ReadTimeout = 2000;
+                _networkStream.ReadTimeout = 1000;
+                _networkStream.WriteTimeout = 500;
                 _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
                 WriteReadFnPtr = WriteReadLine;
                 IsConnected = true;
@@ -57,6 +58,7 @@
             }
             catch (Exception ex)
             {
+                IsConnected = false;
                 if (LastException != null)
                     LastException = ex;
                 throw ex;
@@ -64,7 +66,7 @@
         }
         public void UpdateDevicesInfo()
         {
-            var resp = WriteReadFnPtr("DO#UPDATE:DEVICES:INFO");
+            var resp = WriteReadFnPtr("UPDATE#DEVICES:INFO");
 
             if (resp != "OK")
                 throw new ApplicationException(resp);

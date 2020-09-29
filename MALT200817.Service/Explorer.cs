@@ -5,17 +5,15 @@
     using System.Linq;
     using System.Threading;
 
-    public class Explorer : IExplorer
+    public class Explorer
     {
         const UInt32 DIR_MASK = 0x000F0000;
-
         const UInt32 EXT_ID = 0x20000000;
         const UInt32 DEV_ID = 0x15500000;
         const UInt32 DEV_ADDR = 0x000000FF;
         const UInt32 GLOBAL_ID = 0x1558FFFF;
         const UInt32 HOST_RX_ID = 0x00020000;
         const UInt32 HOST_TX_ID = 0x00010000;
-
         public const int FIRST_BLOCK = 0;
 
         public SafeQueue<CanMsg> TxQueue { get; } = new SafeQueue<CanMsg>();
@@ -23,10 +21,9 @@
 
         public void FramesIn(CanMsg frame)
         {
-
+            var data = frame.GetPayload();
             try
-            {
-                var data = frame.GetPayload();
+            {             
                 if ((frame.Id & DIR_MASK) != HOST_RX_ID)
                     return;
 
@@ -35,10 +32,13 @@
                 {
                     var newDev = new LiveDeviceItem(data[2], data[3], data[4], data[5], data[6]);
                     bool found = false;
+                    /*ha ez mind egyezik akkor új eszköz.*/
                     foreach (LiveDeviceItem dev in LiveDevices)
                     {
-                        if (dev.PrimaryKey == newDev.PrimaryKey)
-                            found = true;
+                        if ( dev.Address == newDev.Address &&
+                             dev.FamilyCode == newDev.FamilyCode)
+
+                       found = true;
                     }
                     if (!found)
                         LiveDevices.Add(newDev);
@@ -46,9 +46,7 @@
                 /* Response Ports Status */
                 else if (data[1] == 0x04)
                 {
-                    var familyCode = data[0];
-                    var adddress = (byte)(frame.Id & DEV_ADDR);
-                    var dev = LiveDevices.Search(familyCode, adddress);
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
                     dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
                 }
                 /* Response Serial Number*/
@@ -57,11 +55,16 @@
                     var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
                     dev.SetSerialNumber(new byte[] { data[3], data[4], data[5], data[6] });
                 }
-
+                /* Response Realy Counter*/
+                else if (data[1] == 0xEE && data[2] == 1)
+                {
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    dev.Counters[data[3]] = BitConverter.ToInt32(new byte[] { data[4], data[5], data[6], data[7] }, 0x00);
+                }
             }
             catch (Exception ex)
             {
-                AppLog.Instance.WriteLine(ex.Message);
+                AppLog.Instance.WriteLine("Explorer:Frames in:" + ex.Message + "The frame was:" + Tools.ConvertByteArrayToCStyleString(data));
             }
 
         }
@@ -140,9 +143,9 @@
             TxQueue.Enqueue(msg);
 
             /*Ez kell valamiért MALT160T-nek, majd megnézni mért nemgy megy*/
-            for (byte b = 0; b < 4; b++)
+            for (byte i = 0; i < 4; i++)
             {
-                RequestSetSeveral(familyCode, address, new byte[] { 0, 0, 0, 0 }, b);
+                RequestSetSeveral(familyCode, address, new byte[] { 0, 0, 0, 0 }, i);
                 TxQueue.Enqueue(msg);
             }
         }
@@ -158,8 +161,18 @@
         public void RequestSaveCounters(byte familyCode, byte address)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | (byte)address;
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
             msg.SetPayload(new byte[] { familyCode, 0xEE, 0x11 });
+            TxQueue.Enqueue(msg);
+        }
+
+        /// <param name="port">1-es indexelésű</param>
+        public void RequestPortCounter(byte familyCode, byte address, byte port)
+        {
+            port -= 1;
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0xEE, 0x01, port });
             TxQueue.Enqueue(msg);
         }
 
@@ -174,10 +187,14 @@
         public void RequestSerialNumber(byte familyCode, byte address)
         {
             var msg = new CanMsg();
-            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | (byte)address;
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
             msg.SetPayload(new byte[] { familyCode, 0xDE, 0xF5 });
             TxQueue.Enqueue(msg);
         }
+
+
+
+
 
 
         public void DoUpdateDeviceInfo()

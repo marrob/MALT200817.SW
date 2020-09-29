@@ -13,7 +13,7 @@ namespace MALT200817.Library
 
             DeviceItem di = new DeviceItem();
             di.DefaultWinodwSize = new System.Drawing.Size(10, 12);
-            Devices.Instance.Save("xx.txt", di);
+            Devices.Library.Save("xx.txt", di);
 
         }
     }

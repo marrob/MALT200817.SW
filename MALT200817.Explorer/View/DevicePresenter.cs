@@ -57,7 +57,7 @@ namespace MALT200817.Explorer.View
             _deviceViewLists.Clear();
             foreach (LiveDeviceItem dev in devices)
             {
-                var firstName = Devices.Instance.Search(dev.FamilyCode, dev.OptionCode).FirstName;
+                var firstName = Devices.Library.Search(dev.FamilyCode, dev.OptionCode).FirstName;
                 _deviceViewLists.Add(new DeviceListViewItem()
                 {
                     FirstName = firstName,

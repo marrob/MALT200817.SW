@@ -7,14 +7,18 @@ namespace MALT200817.Service
     using Common;
     using MALT200817.Library;
 
+
+
+
+
     public class LiveDeviceItem
     {
         public int FamilyCode { get; set; }
         public int Address { get; set; }
-        public int OptionCode { get; set; }
+        public int OptionCode { get; set; } /*Az option kódotól független a tipus.*/
         public string Version { get; set; }
         public List<byte[]> Ports { get; set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
-        public string PrimaryKey { get  {  return "@" + FamilyCode + "#" + Address; } }
+        public int[] Counters {get; set;} /*Az indexek a portok, az értékek a számlálók értékei */
         public string SerialNumber;
         public DeviceItem Device;
  
@@ -25,13 +29,15 @@ namespace MALT200817.Service
             Address = address;
             OptionCode = optionCode;
             Version = "V" + ver1.ToString("X2") + ver0.ToString("X2");
-            Device =  Devices.Instance.Search(familyCode, optionCode);
+            Device =  Devices.Library.Search(familyCode, optionCode);
           
             if (Device != null)
             {
                 Ports = new List<byte[]>();
                 for (int blocks = 0; blocks < Device.Blocks; blocks++)
                     Ports.Add(new byte[Device.BlockSize]);
+
+                Counters = new int[Devices.Library.GetRealyCount(familyCode, optionCode)];
             }
             else
             {

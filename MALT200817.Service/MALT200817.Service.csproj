@@ -107,7 +107,6 @@
     <Compile Include="Common\IoLog.cs" />
     <Compile Include="CanService.cs" />
     <Compile Include="Explorer.cs" />
-    <Compile Include="IExplorer.cs" />
     <Compile Include="NiCan\Nican.cs" />
     <Compile Include="NiCan\NiCanInterface.cs" />
     <Compile Include="NiCan\NiCanIoException.cs" />

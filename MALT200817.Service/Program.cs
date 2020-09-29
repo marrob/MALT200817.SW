@@ -12,8 +12,8 @@ namespace MALT200817.Service
 #if DEBUG
             WindowsService service = new WindowsService();
             service.OnDebug();
-            System.Threading.Thread.Sleep(5000);
-            service.Stop();
+            //System.Threading.Thread.Sleep(5000);
+            //service.Stop();
             System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
 #else
 

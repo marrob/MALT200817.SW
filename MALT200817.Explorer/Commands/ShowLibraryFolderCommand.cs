@@ -16,7 +16,7 @@ namespace MALT200817.Explorer.Commands
         }
         protected override void OnClick(EventArgs e)
         {
-            Tools.OpenFolder(AppConstants.LibraryPath) ;
+            Tools.OpenFolder(AppConstants.LibraryDirectory) ;
 
         }
 

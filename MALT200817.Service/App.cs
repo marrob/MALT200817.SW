@@ -6,19 +6,21 @@
     using Common;
     using Configuration;
     using Library;
+    using System.IO;
+
     public class App
     {
         TcpService _tcpServer;
-        TcpParser _tcpParser;
+        readonly TcpParser _tcpParser;
         CanService _canService;
-        Explorer _exp;
+        readonly Explorer _exp;
 
         public App()
         {
             AppConfiguration.Init();
             AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + "MALT200817.Service_" + DateTime.Now.ToString("yyMMdd_HHmmss")+".txt";
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogServiceEnabled;
-            AppLog.Instance.WriteLine("App()");
+            AppLog.Instance.WriteLine("App");
             
             _exp = new Explorer();
             _tcpParser = new TcpParser(_exp);
@@ -32,8 +34,9 @@
             _tcpServer.Begin(null);
               
             /*** Device Lib ***/
-            Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
-           
+            Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
+            AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Directory.Exists(AppConstants.LibraryDirectory).ToString());
+            AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Devices.Library.Count.ToString());
 
             if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
             {
@@ -45,32 +48,36 @@
             }
             else if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "NICAN")
             {
-                throw new ApplicationException("NICAN is not supported yet.");
+                AppLog.Instance.WriteLine("App:Start: NICAN is not supported yet.");
+                throw new ApplicationException("App:Start: NICAN is not supported yet.");
 
             }
             else
             {
-                throw new ApplicationException("CAN interface type is not supported.");
+                AppLog.Instance.WriteLine("Start CAN interface type is not supported.");
+                throw new ApplicationException("Start CAN interface type is not supported.");
             }
 
+            AppLog.Instance.WriteLine("App:Start:canService.Begin()");
             _canService.Begin(null);
+            AppLog.Instance.WriteLine("App:Start:DoUpdateDeviceInfo()");
             _exp.DoUpdateDeviceInfo();
-            AppLog.Instance.WriteLine("Service Started");
+            AppLog.Instance.WriteLine("App:Start:Sequence complete...");
         }
 
         public void Stop()
         {
-            AppLog.Instance.WriteLine("Service.Stop start");
-            AppLog.Instance.WriteLine("Service.Stop:  TCP Server Start Dispose.");
+            AppLog.Instance.WriteLine("App:Stop: Start");
+            AppLog.Instance.WriteLine("App:Stop: TCP Server Start Dispose.");
 
             _tcpServer.Dispose();
-            AppLog.Instance.WriteLine("Service.Stop: TCP Server End Dispose.");
+            AppLog.Instance.WriteLine("App:Stop: TCP Server End Dispose.");
             
-            AppLog.Instance.WriteLine("Service.Stop: CAN Server Start Dispose.");
+            AppLog.Instance.WriteLine("App:Stop: CAN Server Start Dispose.");
             _canService.Dispose();
-            AppLog.Instance.WriteLine("Service.Stop: CAN Server End Dispose.");
+            AppLog.Instance.WriteLine("App:Stop: CAN Server End Dispose.");
 
-            AppLog.Instance.WriteLine("Service Stopped");
+            AppLog.Instance.WriteLine("App:Stop: Stop sequence complete... Bye");
         }
 
         public string TcpCommandLine(string line)
@@ -80,7 +87,7 @@
 
         private static void Server_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine("Completed...");
+            Console.WriteLine("App:Completed...");
             Console.WriteLine(e.Error);
         }
     }

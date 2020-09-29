@@ -84,7 +84,7 @@ namespace MALT200817.Explorer
             _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv);
 
             /*** Device Library ***/
-            Devices.Instance.LoadLibrary(AppConstants.LibraryPath);
+            Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
 
 
             var diagMenu = new ToolStripMenuItem("Diag");

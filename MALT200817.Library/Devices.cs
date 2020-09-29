@@ -16,7 +16,7 @@ namespace MALT200817.Library
         const string XmlRootElement = "malt_device";
         const string XmlNamespace = @"http://www.altontech.hu/malt/2020/project/content";
 
-        public static Devices Instance { get; } = new Devices();
+        public static Devices Library { get; } = new Devices();
 
         private static Type[] SupportedTypes
         {
@@ -28,6 +28,9 @@ namespace MALT200817.Library
                     typeof(ComponentCollection),
                     typeof(ComponentRelaySPDT),
                     typeof(ComponentRelaySPST),
+                    typeof(ComponentDigitalOutput),
+                    typeof(ComponentDigitalInput)
+
                 };
             }
         }
@@ -79,6 +82,12 @@ namespace MALT200817.Library
         {
             var retval = this.FirstOrDefault(n => n.FamilyCode == familyCode && n.OptionCode == optionCode);
             return retval;
+        }
+
+        public int GetRealyCount(int familyCode, int optionCode)
+        {
+            var dev = Search(familyCode, optionCode);
+            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST );
         }
 
 

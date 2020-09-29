@@ -12,16 +12,14 @@
 
     public class CanService : IDisposable
     {
-        ICanInterface _itf;
-        IExplorer _explorer;
-
-        private AutoResetEvent _readyToDisposeEvent;
-
+        readonly ICanInterface _itf;
+        readonly Explorer _explorer;
+        private readonly AutoResetEvent _readyToDisposeEvent;
         bool _disposed = false;
-        BackgroundWorker _bw;
-        readonly AutoResetEvent _waitForDoneEvent;
+        readonly BackgroundWorker _bw;
+        private readonly AutoResetEvent _waitForDoneEvent;
 
-        public CanService(ICanInterface itf, IExplorer explorer)
+        public CanService(ICanInterface itf, Explorer explorer)
         {
             _explorer = explorer;
             _itf = itf; 
@@ -71,12 +69,7 @@
             }
 
             #region Resource Freeing
-
-            AppLog.Instance.WriteLine(GetType().Namespace + "." +
-                GetType().Name + "." +
-                MethodBase.GetCurrentMethod().Name +
-                "Resource Freeing");
-
+            AppLog.Instance.WriteLine("CanService:DoWork:Resource Free");
             _itf.Dispose();
             _readyToDisposeEvent.Set();
             #endregion
@@ -89,6 +82,7 @@
 
         private void Dispose(bool disposing)
         {
+            AppLog.Instance.WriteLine("CanService:Dispose Begin");
             if (_disposed)
                 return;
 
@@ -103,11 +97,7 @@
                 }
             }
             _disposed = true;
-
-            AppLog.Instance.WriteLine(GetType().Namespace + "." +
-            GetType().Name + "." +
-            MethodBase.GetCurrentMethod().Name +
-            "Dispose Complete");
+            AppLog.Instance.WriteLine("CanService:Dispose Complete");
         }
     }
 }
