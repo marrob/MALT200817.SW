@@ -1,6 +1,6 @@
 ﻿namespace MALT200817.Explorer.View
 {
-    partial class DeviceFormNextGen
+    partial class DeviceForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceFormNextGen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceForm));
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFirstName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -41,14 +41,16 @@
             this.toolStripStatusLabelSerialNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFwVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelLibVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelSwVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStripMessage = new System.Windows.Forms.MenuStrip();
+            this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cOUNTERSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStripMenuItemMessage = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.menuStripMessage = new System.Windows.Forms.MenuStrip();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.menuStripMessage.SuspendLayout();
@@ -68,7 +70,7 @@
             this.toolStripStatusLabelSerialNumber,
             this.toolStripStatusLabelFwVersion,
             this.toolStripStatusLabelLibVersion,
-            this.toolStripStatusLabelSwVersion,
+            this.toolStripStatusLabelVersion,
             this.toolStripStatusLabel2});
             this.statusStrip2.Location = new System.Drawing.Point(0, 294);
             this.statusStrip2.Name = "statusStrip2";
@@ -179,19 +181,19 @@
             this.toolStripStatusLabelLibVersion.ToolTipText = "Library Version";
             this.toolStripStatusLabelLibVersion.Click += new System.EventHandler(this.toolStripStatusLabelLibVersion_Click);
             // 
-            // toolStripStatusLabelSwVersion
+            // toolStripStatusLabelVersion
             // 
-            this.toolStripStatusLabelSwVersion.AutoToolTip = true;
-            this.toolStripStatusLabelSwVersion.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelSwVersion.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelSwVersion.Name = "toolStripStatusLabelSwVersion";
-            this.toolStripStatusLabelSwVersion.Size = new System.Drawing.Size(58, 19);
-            this.toolStripStatusLabelSwVersion.Text = "VERSION";
-            this.toolStripStatusLabelSwVersion.ToolTipText = "Software Version";
+            this.toolStripStatusLabelVersion.AutoToolTip = true;
+            this.toolStripStatusLabelVersion.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelVersion.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelVersion.Name = "toolStripStatusLabelVersion";
+            this.toolStripStatusLabelVersion.Size = new System.Drawing.Size(58, 19);
+            this.toolStripStatusLabelVersion.Text = "VERSION";
+            this.toolStripStatusLabelVersion.ToolTipText = "Software Version";
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(220)))));
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
@@ -201,7 +203,9 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
+            this.testToolStripMenuItem,
+            this.alwaysOnTopToolStripMenuItem,
+            this.cOUNTERSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(770, 24);
@@ -211,9 +215,52 @@
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.testToolStripMenuItem.Text = "RESET";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.testToolStripMenuItem.Text = "Reset";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
+            // 
+            // alwaysOnTopToolStripMenuItem
+            // 
+            this.alwaysOnTopToolStripMenuItem.Checked = true;
+            this.alwaysOnTopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alwaysOnTopToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
+            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.alwaysOnTopToolStripMenuItem.Text = "Alway On Top";
+            this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.AlwaysOnTopToolStripMenuItem_Click);
+            // 
+            // cOUNTERSToolStripMenuItem
+            // 
+            this.cOUNTERSToolStripMenuItem.Name = "cOUNTERSToolStripMenuItem";
+            this.cOUNTERSToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.cOUNTERSToolStripMenuItem.Text = "Counters";
+            this.cOUNTERSToolStripMenuItem.Click += new System.EventHandler(this.CountersToolStripMenuItem_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 48);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(770, 246);
+            this.flowLayoutPanel1.TabIndex = 13;
+            // 
+            // toolStripMenuItemMessage
+            // 
+            this.toolStripMenuItemMessage.Name = "toolStripMenuItemMessage";
+            this.toolStripMenuItemMessage.Size = new System.Drawing.Size(165, 20);
+            this.toolStripMenuItemMessage.Text = "toolStripMenuItemMessage";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(220)))));
+            this.toolStripMenuItem2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(69, 20);
+            this.toolStripMenuItem2.Text = "Continue";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuContinue_Click);
             // 
             // menuStripMessage
             // 
@@ -227,33 +274,7 @@
             this.menuStripMessage.TabIndex = 12;
             this.menuStripMessage.Text = "menuStripMessage";
             // 
-            // toolStripMenuItemMessage
-            // 
-            this.toolStripMenuItemMessage.Name = "toolStripMenuItemMessage";
-            this.toolStripMenuItemMessage.Size = new System.Drawing.Size(165, 20);
-            this.toolStripMenuItemMessage.Text = "toolStripMenuItemMessage";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.toolStripMenuItem2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(69, 20);
-            this.toolStripMenuItem2.Text = "Continue";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuContinue_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 48);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(770, 246);
-            this.flowLayoutPanel1.TabIndex = 13;
-            // 
-            // DeviceFormNextGen
+            // DeviceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -262,10 +283,11 @@
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.menuStripMessage);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripMessage;
-            this.Name = "DeviceFormNextGen";
+            this.Name = "DeviceForm";
             this.Text = "MALTXXX";
-            this.Load += new System.EventHandler(this.DeviceFormNextGen_Load);
+            this.Load += new System.EventHandler(this.DeviceForm_Load);
             this.ResizeEnd += new System.EventHandler(this.DeviceForm_ResizeEnd);
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
@@ -289,16 +311,18 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSerialNumber;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFwVersion;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSwVersion;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelOptionCode;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyName;
         
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStripMessage;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem alwaysOnTopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cOUNTERSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMessage;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.MenuStrip menuStripMessage;
     }
 }

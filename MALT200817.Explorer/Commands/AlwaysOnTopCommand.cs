@@ -7,9 +7,9 @@ namespace MALT200817.Explorer.Commands
 
     class AlwaysOnTopCommand : ToolStripButton
     {
-        readonly IMainForm _mainForm;
+        readonly Form _mainForm;
 
-        public AlwaysOnTopCommand(IMainForm mainForm)
+        public AlwaysOnTopCommand(Form mainForm)
         {
             //    Image = Resources.Delete32x32;
             DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -23,8 +23,8 @@ namespace MALT200817.Explorer.Commands
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            _mainForm.AlwaysOnTop = !_mainForm.AlwaysOnTop;
-            Checked = _mainForm.AlwaysOnTop;
+            _mainForm.TopMost = !_mainForm.TopMost;
+            Checked = _mainForm.TopMost;
         }
     }
 }

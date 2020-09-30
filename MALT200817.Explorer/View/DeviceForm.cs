@@ -5,11 +5,11 @@
     using System.Drawing;
     using System.Windows.Forms;
     using Common;
-    using MALT200817.Explorer.Client;
-    using MALT200817.Explorer.Controls;
-    using MALT200817.Library;
+    using Client;
+    using Controls;
+    using Library;
 
-    public partial class DeviceFormNextGen : Form
+    public partial class DeviceForm : Form
     {
         public string Address
         {
@@ -23,6 +23,11 @@
             set { toolStripStatusLabelFamilyCode.Text = value; }
         }
 
+        public string FamilyName 
+        {
+            get { return toolStripStatusLabelFamilyName.Text; }
+            set { toolStripStatusLabelFamilyName.Text = value; }
+        }
 
         public string OptionCode 
         {
@@ -43,10 +48,10 @@
 
         event EventHandler ComponentClick;
         DeviceItem _library;
-        Timer _timer;
+        readonly Timer _timer;
 
 
-        public DeviceFormNextGen()
+        public DeviceForm()
         {
             InitializeComponent();
             menuStripMessage.Visible = false;
@@ -56,7 +61,7 @@
 
         }
 
-        private void DeviceFormNextGen_ComponentClick(object sender, EventArgs e)
+        private void DeviceForm_ComponentClick(object sender, EventArgs e)
         {
             var client = MaltClient.Instance;
             if (!(client.IsConnected && client.LastException == null))
@@ -94,8 +99,7 @@
         {
             _timer.Start();
             flowLayoutPanel1.Controls.Clear();
-            toolStripStatusLabelLibVersion.Text = _library.LibVersion;
-            toolStripStatusLabelFirstName.Text = _library.FirstName;
+
             this.ClientSize = _library.DefaultWinodwSize;
             foreach (Control c in DrawCoponentControls(_library.Components))
             {
@@ -139,15 +143,19 @@
             return controls;
         }
 
-        private void DeviceFormNextGen_Load(object sender, EventArgs e)
+        private void DeviceForm_Load(object sender, EventArgs e)
         {
 #if DEBUG
             toolStripStatusWindowSize.Visible = true;
 #else
             toolStripStatusWindowSize.Visible = false;
 #endif
-            ComponentClick += DeviceFormNextGen_ComponentClick;
+            ComponentClick += DeviceForm_ComponentClick;
             _library = Devices.Library.Search(FamilyCode, OptionCode);
+            toolStripStatusLabelLibVersion.Text = _library.LibVersion;
+            toolStripStatusLabelFirstName.Text = _library.FirstName;
+            toolStripStatusLabelVersion.Text = Application.ProductVersion;
+            this.Text = _library.FirstName + "-" + Address;
             Start();
         }
 
@@ -184,9 +192,34 @@
             Tools.RunNotepadOrNpp(_library.Path);
         }
 
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MaltClient.Instance.Reset(FamilyCode, Address);
+        }
+
+        private void AlwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.TopMost = !this.TopMost;
+            alwaysOnTopToolStripMenuItem.Checked = this.TopMost;
+            if (this.TopMost)
+            {
+                alwaysOnTopToolStripMenuItem.BackColor = Theme.ToolStripMenuCheckedBackColor;
+                alwaysOnTopToolStripMenuItem.ForeColor = Theme.ToolStripMenuCheckedForeColor;
+            }
+            else
+            {
+                alwaysOnTopToolStripMenuItem.BackColor = SystemColors.Control;
+                alwaysOnTopToolStripMenuItem.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void CountersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CountersForm();
+            form.FamilyCode = FamilyCode;
+            form.Address = Address;
+            form.OptionCode = OptionCode;
+            form.Show();
         }
     }
 }

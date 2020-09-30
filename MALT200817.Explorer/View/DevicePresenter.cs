@@ -27,6 +27,7 @@ namespace MALT200817.Explorer.View
         { 
             public string FirstName { get; set; }
             public string FamilyCode { get; set; }
+            public string FamilyName { get; set; }
             public string Address { get; set; }
             public string Version { get; set; }
             public string SerialNumber { get; set; }
@@ -57,25 +58,27 @@ namespace MALT200817.Explorer.View
             _deviceViewLists.Clear();
             foreach (LiveDeviceItem dev in devices)
             {
-                var firstName = Devices.Library.Search(dev.FamilyCode, dev.OptionCode).FirstName;
+                 var libInfo = Devices.Library.Search(dev.FamilyCode, dev.OptionCode);
                 _deviceViewLists.Add(new DeviceListViewItem()
                 {
-                    FirstName = firstName,
+                    FirstName = libInfo.FirstName,
                     FamilyCode = dev.FamilyCode.ToString("X2"),
+                    FamilyName = libInfo.FamilyName,
                     Address = dev.Address.ToString("X2"),
                     Version = dev.Version,
                     SerialNumber = dev.SerialNumber,
                     OptionCode = dev.OptionCode.ToString("X2")
-                }) ;
+                }); 
             }    
         }
 
 
         public void ShowDevice()
         {
-            var dev = new DeviceFormNextGen();
+            var dev = new DeviceForm();
             dev.Address = _selected.Address;
             dev.FamilyCode = _selected.FamilyCode;
+           
             dev.OptionCode = _selected.OptionCode;
             dev.SerialNumber = _selected.SerialNumber;
             dev.Show();

@@ -142,11 +142,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\DeviceFormNextGen.cs">
+    <Compile Include="Theme.cs" />
+    <Compile Include="View\CountersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\DeviceFormNextGen.Designer.cs">
-      <DependentUpon>DeviceFormNextGen.cs</DependentUpon>
+    <Compile Include="View\CountersForm.Designer.cs">
+      <DependentUpon>CountersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DeviceForm.Designer.cs">
+      <DependentUpon>DeviceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\DevicePresenter.cs" />
     <Compile Include="View\LiveDeviceSelectorControl.cs">
@@ -176,8 +183,11 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\DeviceFormNextGen.resx">
-      <DependentUpon>DeviceFormNextGen.cs</DependentUpon>
+    <EmbeddedResource Include="View\CountersForm.resx">
+      <DependentUpon>CountersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DeviceForm.resx">
+      <DependentUpon>DeviceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LiveDeviceSelectorControl.resx">
       <DependentUpon>LiveDeviceSelectorControl.cs</DependentUpon>

@@ -158,6 +158,11 @@
             TxQueue.Enqueue(msg);
         }
 
+        /// <summary>
+        /// Todo: Ebbol Save Counters lesz
+        /// </summary>
+        /// <param name="familyCode"></param>
+        /// <param name="address"></param>
         public void RequestSaveCounters(byte familyCode, byte address)
         {
             var msg = new CanMsg();
@@ -166,6 +171,7 @@
             TxQueue.Enqueue(msg);
         }
 
+        ///Todo: Ebbol DownloadCounter-lesz
         /// <param name="port">1-es indexelésű</param>
         public void RequestPortCounter(byte familyCode, byte address, byte port)
         {

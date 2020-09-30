@@ -75,7 +75,7 @@ namespace MALT200817.Explorer
 
             /*** Main Form ***/
             _mainForm = new MainForm();
-            _mainForm.Text = AppConstants.SoftwareTitle + " - " + Application.ProductVersion;
+            _mainForm.Text = "MALT Explorer"+ " - " + Application.ProductVersion;
             _mainForm.Shown += MainForm_Shown;
             _mainForm.FormClosing += MainForm_FormClosing;
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
@@ -103,7 +103,7 @@ namespace MALT200817.Explorer
                  {
                      new Commands.DevicesConnectCommand(this),
                      new Commands.DevicesForceUpdateCommand(this),
-                     new Commands.AlwaysOnTopCommand(_mainForm),
+                     new Commands.AlwaysOnTopCommand(_mainForm as Form),
                  });
 
             _mainForm.MenuBar = new ToolStripItem[]

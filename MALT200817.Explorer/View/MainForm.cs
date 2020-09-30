@@ -86,5 +86,20 @@ namespace MALT200817.Explorer.View
         {
             get { return devicesViewControl1.DataGrid; }
         }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CountersForm();
+            form.FamilyCode = "03";
+            form.Address = "03";
+            form.OptionCode = "00";
+
+            form.Show();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

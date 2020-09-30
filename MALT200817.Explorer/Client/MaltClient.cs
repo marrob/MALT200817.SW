@@ -153,6 +153,18 @@
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
         }
 
+        public int GetCounter(string familyCode, string address, int port)
+        {
+            var request = "@" + familyCode + ":" + address + ":UPDATE#COUNTER:" + port.ToString("X2");
+            var response = WriteReadFnPtr(request);
+            if (response != "OK")
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+            System.Threading.Thread.Sleep(10);
+            request = "@" + familyCode + ":" + address + ":GET#COUNTER:" + port.ToString("X2");
+            response = WriteReadFnPtr(request);
+            return Tools.HexaByteStrToInt(response.Split(':')[4]);
+        }
+
         public void Dispose()
         {
             Dispose(true);

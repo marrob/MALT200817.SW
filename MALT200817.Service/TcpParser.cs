@@ -64,6 +64,7 @@
                             retval += ":CLR";
                         return retval;
                     }
+                    ///Todo:Download Counter lesz
                     else if (parts[PART_COMMAND] == "UPDATE#COUNTER")
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
