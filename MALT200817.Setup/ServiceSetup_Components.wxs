@@ -13,7 +13,7 @@
         Type="ownProcess"
         Name="MaltService"
         DisplayName="AltonTech MALT200817.Service"
-        Description="MALT Platform Windows Service"
+        Description="MALT Platform Windows Service V$(var.VersionNumber)"
         Start="auto"
         
         Account="LocalSystem"
@@ -22,14 +22,16 @@
         Interactive="no" 
         
         />
-      <!-- Service Start Or Not
+      <!-- Start Or Not -->
+      
+      <!-- Start = "install" ez elindtja -->
       <ServiceControl Id="StartService"
-                      Start="install"
+                     
                       Stop="both"
                       Remove="uninstall"
                       Name="MaltService"
                       Wait="yes" />
-     -->
+     
     </Component>
   </Fragment>
 </Wix>

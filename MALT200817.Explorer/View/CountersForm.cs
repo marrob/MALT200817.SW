@@ -5,16 +5,36 @@
     using System.ComponentModel;
     using System.Windows.Forms;
     using System.Diagnostics;
+    using MALT200817.Explorer.Client;
 
     public partial class CountersForm : Form
     {
 
-    public class CounterItem
-    {
-        public string Label { get; set; }
-        public int Port { get; set; }
-        public string Value { get; set; }
-    }
+        public class CounterItem : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+            
+            public string Label { get; set; }
+            public int Port { get; set; }
+         
+            private string _value;
+
+            public string  Value
+            {
+                get { return _value; }
+                set
+                {
+                    if (_value != value)
+                    {
+                        _value = value;
+                        if (PropertyChanged != null)
+                        {
+                            PropertyChanged(this, new PropertyChangedEventArgs(nameof(Value)));
+                        }
+                    }
+                }
+            }
+        }
        public BindingList<CounterItem> CountersView { get; set; }
 
         public string Address
@@ -69,7 +89,7 @@
 
             foreach (CounterItem item in CountersView)
             {
-                item.Value = Client.MaltClient.Instance.GetCounter(FamilyCode, Address, item.Port).ToString();
+                item.Value = MaltClient.Instance.GetCounter(FamilyCode, Address, item.Port).ToString();
             }
             sw.Stop();
             toolStripStatusLabelUpdateTime.Text = sw.ElapsedMilliseconds.ToString() + "ms";
@@ -78,6 +98,16 @@
         private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadUpdate();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (CounterItem item in CountersView)
+            {
+                MaltClient.Instance.SetCounter(FamilyCode, Address, item.Port, int.Parse(item.Value));
+            }       
+  
+            MaltClient.Instance.SaveCounters(FamilyCode, Address);
         }
     }
 }

@@ -102,5 +102,11 @@
         {
             return byte.Parse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
         }
+        public static int HexaByteStrToInt(string value)
+        {
+            return int.Parse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        }
+
+
     }
 }

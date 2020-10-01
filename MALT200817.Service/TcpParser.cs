@@ -7,14 +7,14 @@
 
     public class TcpParser
     {
-        readonly Explorer _devExp;
+        readonly Explorer _exp;
 
         const string RESPONSE_OK = "OK";
         const string RESPONSE_NOTFOUND = "NOT FOUND";
       
         public TcpParser(Explorer explorer)
         {
-            _devExp = explorer;
+            _exp = explorer;
         }
 
         public string CommandLine(string line)
@@ -43,14 +43,14 @@
                     /*** 1..n-ig, 0-az hiba! ***/
                     if (parts[PART_COMMAND] == "SET#ONE")
                     {
-                        _devExp.RequestSetOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.RequestSetOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
                     else if (parts[PART_COMMAND] == "CLR#ONE")
                     {
 
-                        _devExp.RequestClrOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.RequestClrOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
@@ -58,52 +58,64 @@
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
-                        if (_devExp.GetOne(familyCode, address, port))
+                        if (_exp.GetOne(familyCode, address, port))
                             retval += ":SET";
                         else
                             retval += ":CLR";
                         return retval;
                     }
-                    ///Todo:Download Counter lesz
-                    else if (parts[PART_COMMAND] == "UPDATE#COUNTER")
-                    {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
-                        _devExp.RequestPortCounter(familyCode, address, port);
-                        return RESPONSE_OK;
-                    }
                     //port 1-töl indexelődik
                     else if (parts[PART_COMMAND] == "GET#COUNTER")
+                    {
+                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);                        
+                        if (port == 0)
+                            throw new ArgumentException("Port canno be 0");
+                        _exp.RequestGetPortCounter(familyCode, address, port);
+                        //Meg kell várni hogy a kérésre beérkezzen az üzenet a tárólóba.
+                        System.Threading.Thread.Sleep(10);
+                        var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2") + ":";
+                        retval += _exp.LiveDevices.Search(familyCode, address).Counters[port - 1].ToString("X4");
+                        return retval;
+                    }
+                    else if (parts[PART_COMMAND] == "SET#COUNTER")
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         if (port == 0)
                             throw new ArgumentException("Port canno be 0");
-                        var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2") + ":";
-                        retval += _devExp.LiveDevices.Search(familyCode, address).Counters[port-1].ToString("X4");
-                        return retval;
+
+                        int value = Tools.HexaByteStrToInt(parts[PART_PARAM2]);
+                        _exp.RequestSetPortCounter(familyCode, address, port, value);
+                        _exp.LiveDevices.Search(familyCode, address).Counters[port - 1] = value;
+                        return RESPONSE_OK;
+                    }
+                    else if (parts[PART_COMMAND] == "SAVE#COUNTER")
+                    {
+                        _exp.SaveCounter(familyCode, address);
+                        return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "CLR#SEVERAL")
-                    { 
+                    {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _devExp.RequestClrSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.RequestClrSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "SET#SEVERAL")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _devExp.RequestSetSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.RequestSetSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "GET#SEVERAL")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        var state = _devExp.GetSeveral(familyCode, address, block);
+                        var state = _exp.GetSeveral(familyCode, address, block);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
                         return retval;
                     }
                     if (parts[PART_COMMAND] == "RESET")
                     {
-                        _devExp.RequestReset(familyCode, address);
+                        _exp.RequestReset(familyCode, address);
                         return RESPONSE_OK;
                     }
 
@@ -117,9 +129,9 @@
                 else if (line == "GET#DEVICES")
                 {
                     string devs = string.Empty;
-                    if (_devExp.LiveDevices.Count != 0)
+                    if (_exp.LiveDevices.Count != 0)
                     {
-                        foreach (LiveDeviceItem dev in _devExp.LiveDevices)
+                        foreach (LiveDeviceItem dev in _exp.LiveDevices)
                         {
                             var firstName = Devices.Library.Search(dev.FamilyCode, dev.OptionCode).FirstName;
                             devs += "@" +
@@ -142,7 +154,7 @@
                 }
                 else if (line == "UPDATE#DEVICES:INFO")
                 {
-                    _devExp.DoUpdateDeviceInfo();
+                    _exp.DoUpdateDeviceInfo();
                     return RESPONSE_OK;
                 }
                 else if (line == "DO#SAY:HELLO WOLRD")

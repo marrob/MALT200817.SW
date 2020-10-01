@@ -111,9 +111,7 @@
             var request = "@" + familyCode +  ":" + address + ":" +  "GET#ONE:" + port.ToString("X2");
             var response = WriteReadFnPtr(request);
             if (response[0] == '!')
-            {
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " +  response);
-            }
             var result = response.Substring(response.Length - 3);
             if (result == "CLR")
                 return false;
@@ -133,9 +131,7 @@
             var request = "@" + familyCode + ":" + address + ":" + "RESET";
             var response = WriteReadFnPtr(request);
             if (response != "OK")
-            {
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
-            }
         }
 
         /// <summary>
@@ -155,14 +151,23 @@
 
         public int GetCounter(string familyCode, string address, int port)
         {
-            var request = "@" + familyCode + ":" + address + ":UPDATE#COUNTER:" + port.ToString("X2");
+           var request = "@" + familyCode + ":" + address + ":GET#COUNTER:" + port.ToString("X2");
+           var response = WriteReadFnPtr(request);
+           return Tools.HexaByteStrToInt(response.Split(':')[4]);
+        }
+
+        public void SetCounter(string familyCode, string address, int port, int value)
+        {
+            var request = "@" + familyCode + ":" + address + ":SET#COUNTER:" + port.ToString("X2") + ":" + value.ToString("X4");
             var response = WriteReadFnPtr(request);
             if (response != "OK")
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
-            System.Threading.Thread.Sleep(10);
-            request = "@" + familyCode + ":" + address + ":GET#COUNTER:" + port.ToString("X2");
-            response = WriteReadFnPtr(request);
-            return Tools.HexaByteStrToInt(response.Split(':')[4]);
+        }
+
+        public void SaveCounters(string familyCode, string address)
+        {
+            var request = "@" + familyCode + ":" + address + ":SAVE#COUNTER";
+            var response = WriteReadFnPtr(request);
         }
 
         public void Dispose()

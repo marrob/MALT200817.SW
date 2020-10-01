@@ -33,6 +33,7 @@
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelAddress = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelOptionCode = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelUpdateTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
@@ -40,7 +41,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
             this.knvDataGridView1 = new Konvolucio.MCEL181123.Controls.KnvDataGridView();
             this.ColumnLabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,6 +98,16 @@
             this.toolStripStatusLabelOptionCode.Text = "OPTION CODE";
             this.toolStripStatusLabelOptionCode.ToolTipText = "Option Code";
             // 
+            // toolStripStatusLabelFamilyCode
+            // 
+            this.toolStripStatusLabelFamilyCode.AutoToolTip = true;
+            this.toolStripStatusLabelFamilyCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelFamilyCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.toolStripStatusLabelFamilyCode.Name = "toolStripStatusLabelFamilyCode";
+            this.toolStripStatusLabelFamilyCode.Size = new System.Drawing.Size(84, 19);
+            this.toolStripStatusLabelFamilyCode.Text = "FAMILY CODE";
+            this.toolStripStatusLabelFamilyCode.ToolTipText = "Family Code";
+            // 
             // toolStripStatusLabelUpdateTime
             // 
             this.toolStripStatusLabelUpdateTime.AutoToolTip = true;
@@ -111,7 +121,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(200, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 0);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -129,7 +139,7 @@
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 17);
             this.toolStripStatusLabel2.Text = "AltonTech";
             // 
             // menuStrip1
@@ -155,16 +165,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // toolStripStatusLabelFamilyCode
-            // 
-            this.toolStripStatusLabelFamilyCode.AutoToolTip = true;
-            this.toolStripStatusLabelFamilyCode.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelFamilyCode.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelFamilyCode.Name = "toolStripStatusLabelFamilyCode";
-            this.toolStripStatusLabelFamilyCode.Size = new System.Drawing.Size(84, 19);
-            this.toolStripStatusLabelFamilyCode.Text = "FAMILY CODE";
-            this.toolStripStatusLabelFamilyCode.ToolTipText = "Family Code";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // knvDataGridView1
             // 

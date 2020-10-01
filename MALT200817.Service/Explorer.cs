@@ -173,12 +173,30 @@
 
         ///Todo: Ebbol DownloadCounter-lesz
         /// <param name="port">1-es indexelésű</param>
-        public void RequestPortCounter(byte familyCode, byte address, byte port)
+        public void RequestGetPortCounter(byte familyCode, byte address, byte port)
         {
             port -= 1;
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
             msg.SetPayload(new byte[] { familyCode, 0xEE, 0x01, port });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void RequestSetPortCounter(byte familyCode, byte address, byte port, int value)
+        {
+            port -= 1;
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            var data = BitConverter.GetBytes(value);
+            msg.SetPayload(new byte[] { familyCode, 0xEE, 0x02, port, data[0], data[1], data[2], data[3] });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void SaveCounter(byte familyCode, byte address)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0xEE, 0x03 });
             TxQueue.Enqueue(msg);
         }
 
@@ -197,10 +215,6 @@
             msg.SetPayload(new byte[] { familyCode, 0xDE, 0xF5 });
             TxQueue.Enqueue(msg);
         }
-
-
-
-
 
 
         public void DoUpdateDeviceInfo()
