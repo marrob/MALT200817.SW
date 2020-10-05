@@ -1,12 +1,9 @@
-﻿
-
-namespace MALT200817.Explorer
+﻿namespace MALT200817.Explorer
 {
     using System;
     using System.Windows.Forms;
     using Common;
     using View;
-    using System.Reflection;
     using System.Threading;
     using Events;
     using Properties;
@@ -14,8 +11,10 @@ namespace MALT200817.Explorer
     using Configuration;
     using Library;
     using ErrorHandling;
-    using System.Net.Configuration;
     using System.Diagnostics;
+    using System.ServiceProcess;
+    using System.Linq;
+    using System.Reflection;
 
     static class Program
     {
@@ -50,11 +49,8 @@ namespace MALT200817.Explorer
         }
     }
 
-
     public interface IApp
     {
-        void Connect();
-        void Disconnect();
         void UpdateDeviceList();
     }
 
@@ -63,6 +59,8 @@ namespace MALT200817.Explorer
         readonly IMainForm _mainForm;
         readonly DevicePresenter _devicePresenter;
         public static SynchronizationContext SyncContext = null;
+        readonly System.Windows.Forms.Timer _timer;
+        public static string Name = "MALT Explorer";
 
         public App()
         {
@@ -73,12 +71,15 @@ namespace MALT200817.Explorer
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
             AppLog.Instance.WriteLine("MALT200817.Explorer.App() Constructor started.");
 
+
             /*** Main Form ***/
             _mainForm = new MainForm();
-            _mainForm.Text = "MALT Explorer"+ " - " + Application.ProductVersion;
+            _mainForm.Text = Name + " - " + Application.ProductVersion;
+            _mainForm.ConnectionStatus = "Disconnected";
             _mainForm.Shown += MainForm_Shown;
             _mainForm.FormClosing += MainForm_FormClosing;
             _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
+            _mainForm.Login += MainForm_Login;
 
             /*** MALT TCP Client ***/
             _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv);
@@ -86,6 +87,9 @@ namespace MALT200817.Explorer
             /*** Device Library ***/
             Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
 
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 1000;
+            _timer.Tick += Check_Tick;
 
             var diagMenu = new ToolStripMenuItem("Diag");
             diagMenu.DropDown.Items.AddRange(
@@ -115,10 +119,35 @@ namespace MALT200817.Explorer
 
             _mainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();
 
+            EventAggregator.Instance.Subscribe((Action<ConnectionChangedAppEvent>)(e1 =>
+            {
+                if (e1.IsConnected)
+                    _mainForm.ConnectionStatus = "Connected";
+                else
+                    _mainForm.ConnectionStatus = "Disconnected";
+            }));
+
+            /*** Default User ***/
+            EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>) (e1 =>
+            {
+                _mainForm.Text = Name + " - " + e1.User.Name;
+            }));
+
             /*** Run ***/
             Application.Run((MainForm)_mainForm);
+
         }
 
+        private void MainForm_Login(object sender, EventArgs e)
+        {
+            new UserLoginForm().ShowDialog();
+        }
+
+        private void Check_Tick(object sender, EventArgs e)
+        { 
+            var sc = new ServiceController(AppConstants.WindowsServiceName);
+            _mainForm.ServiceStatus = sc.Status.ToString();
+        }
 
         void MainForm_Shown(object sender, EventArgs e)
         {
@@ -127,23 +156,51 @@ namespace MALT200817.Explorer
 #endif
 
             SyncContext = SynchronizationContext.Current;
+            _mainForm.ProcessStatusUpdate(string.Empty, false);
+           
+
             // _mainForm.LayoutRestore();
+
+            /*** Check Service Running Or Not ***/
+            if (!Tools.DoesServiceExist(AppConstants.WindowsServiceName))
+            {
+                throw new ApplicationException("AltonTech MALT200817.Service('MaltService') is not installed. Please install it.");
+            }
+            else
+            {
+                _timer.Start();
+                var sc = new ServiceController(AppConstants.WindowsServiceName);
+                if (sc.Status != ServiceControllerStatus.Running)
+                {
+                    var yesno = MessageBox.Show("AltonTech MALT200817.Service('MaltService') is not running, it is required for normal operation. Would you like start it?",
+                        "AltonTech MALT200817.Service not running! ", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (yesno == DialogResult.Yes)
+                    {
+                        var msg = "service starting";
+                        _mainForm.ProcessStatusUpdate(msg, true);
+                        AppLog.Instance.WriteLine(msg);
+                        sc.Start();
+                        AppLog.Instance.WriteLine("service is running");
+                        _mainForm.ProcessStatusUpdate("", false);
+                        Thread.Sleep(2000);
+                    }
+                }
+            }
 
             //_mainForm.LayoutRestore();
             /*Ö tölti be a projectet*/
-            Start(Environment.GetCommandLineArgs());
-            /*Kezdő Node Legyen az Adapter node*/
-            //EventAggregator.Instance.Publish<TreeViewSelectionChangedAppEvent>(new TreeViewSelectionChangedAppEvent(_startTreeNode));
-
+    
             EventAggregator.Instance.Publish(new ShowAppEvent());
-
-            // if (Settings.Default.PlayAfterStartUp)
-            //_ioService.Play();
+            var defUsr = AppConfiguration.Instance.Users.FirstOrDefault(n => n.Name == AppConfiguration.Instance.DefaultUserName);
+            if (defUsr != null)
+                EventAggregator.Instance.Publish(new UserChangedAppEvent(defUsr));           
+            
+            Start(Environment.GetCommandLineArgs());
         }
 
         public void Start(string[] args)
         {
-            Connect();
+            new Commands.DevicesConnectCommand(this).PerformClick();
             UpdateDeviceList();
         }
 
@@ -157,16 +214,7 @@ namespace MALT200817.Explorer
             _devicePresenter.Update(devices);
             sp.Stop();
             _mainForm.ConnectionTime = sp.ElapsedMilliseconds.ToString() + "ms";
-        }
-
-        public void Connect()
-        {
-            MaltClient.Instance.Start("", AppConfiguration.Instance.ServicePort);
-        }
-
-        public void Disconnect()
-        {
-            MaltClient.Instance.Dispose();
+            AppLog.Instance.WriteLine("UpdateDeviceList:" + _mainForm.ConnectionTime);
         }
 
 

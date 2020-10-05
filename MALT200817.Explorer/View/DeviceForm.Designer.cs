@@ -42,7 +42,7 @@
             this.toolStripStatusLabelFwVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelLibVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelLogo = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +71,7 @@
             this.toolStripStatusLabelFwVersion,
             this.toolStripStatusLabelLibVersion,
             this.toolStripStatusLabelVersion,
-            this.toolStripStatusLabel2});
+            this.toolStripStatusLabelLogo});
             this.statusStrip2.Location = new System.Drawing.Point(0, 294);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.ShowItemToolTips = true;
@@ -191,14 +191,15 @@
             this.toolStripStatusLabelVersion.Text = "VERSION";
             this.toolStripStatusLabelVersion.ToolTipText = "Software Version";
             // 
-            // toolStripStatusLabel2
+            // toolStripStatusLabelLogo
             // 
-            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(220)))));
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 19);
-            this.toolStripStatusLabel2.Text = "AltonTech";
+            this.toolStripStatusLabelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(220)))));
+            this.toolStripStatusLabelLogo.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabelLogo.ForeColor = System.Drawing.Color.White;
+            this.toolStripStatusLabelLogo.Name = "toolStripStatusLabelLogo";
+            this.toolStripStatusLabelLogo.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabelLogo.Text = "AltonTech";
+            this.toolStripStatusLabelLogo.Click += new System.EventHandler(this.toolStripStatusLabelLogo_Click);
             // 
             // menuStrip1
             // 
@@ -308,7 +309,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelAddress;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLibVersion;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLogo;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSerialNumber;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFwVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;

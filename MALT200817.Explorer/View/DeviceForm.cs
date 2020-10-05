@@ -47,7 +47,7 @@
         }
 
         event EventHandler ComponentClick;
-        DeviceItem _library;
+        DeviceItem _device;
         readonly Timer _timer;
 
 
@@ -64,7 +64,7 @@
         private void DeviceForm_ComponentClick(object sender, EventArgs e)
         {
             var client = MaltClient.Instance;
-            if (!(client.IsConnected && client.LastException == null))
+            if (!client.IsConnected)
             {
                 ErrorHandling("Connection lost...");
             }
@@ -78,19 +78,27 @@
         private void Tick(object sender, EventArgs e)
         {
             var client = MaltClient.Instance;
-            if (!(client.IsConnected && client.LastException == null))
+            if (!client.IsConnected)
             {
                 ErrorHandling("Connection lost...");
             }
             else
             {
-                foreach (Control con in flowLayoutPanel1.Controls)
+                try
                 {
-                    if (con is IKnvOutputComponentControl)
+                    foreach (Control con in flowLayoutPanel1.Controls)
                     {
-                        var component = (con as IKnvOutputComponentControl);
-                        component.State = client.GetOne(FamilyCode, Address, component.Port);
+                        if (con is IKnvOutputComponentControl)
+                        {
+                            var component = (con as IKnvOutputComponentControl);
+                            component.State = client.GetOne(FamilyCode, Address, component.Port);
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    ErrorHandling("Status cannot be updated");
+                    throw ex;
                 }
             }
         }
@@ -100,8 +108,8 @@
             _timer.Start();
             flowLayoutPanel1.Controls.Clear();
 
-            this.ClientSize = _library.DefaultWinodwSize;
-            foreach (Control c in DrawCoponentControls(_library.Components))
+            this.ClientSize = _device.DefaultWinodwSize;
+            foreach (Control c in DrawCoponentControls(_device.Components))
             {
                 flowLayoutPanel1.Controls.Add(c);
             }
@@ -151,11 +159,12 @@
             toolStripStatusWindowSize.Visible = false;
 #endif
             ComponentClick += DeviceForm_ComponentClick;
-            _library = Devices.Library.Search(FamilyCode, OptionCode);
-            toolStripStatusLabelLibVersion.Text = _library.LibVersion;
-            toolStripStatusLabelFirstName.Text = _library.FirstName;
+
+            _device = Devices.Library.Search(FamilyCode, OptionCode);
+            toolStripStatusLabelLibVersion.Text = _device.LibVersion;
+            toolStripStatusLabelFirstName.Text = _device.FirstName;
             toolStripStatusLabelVersion.Text = Application.ProductVersion;
-            this.Text = _library.FirstName + "-" + Address;
+            this.Text = _device.FirstName + "-" + Address;
             Start();
         }
 
@@ -189,7 +198,7 @@
 
         private void toolStripStatusLabelLibVersion_Click(object sender, EventArgs e)
         {
-            Tools.RunNotepadOrNpp(_library.Path);
+            Tools.RunNotepadOrNpp(_device.Path);
         }
 
         private void TestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -220,6 +229,11 @@
             form.Address = Address;
             form.OptionCode = OptionCode;
             form.Show();
+        }
+
+        private void toolStripStatusLabelLogo_Click(object sender, EventArgs e)
+        {
+            new UserLoginForm().ShowDialog();
         }
     }
 }

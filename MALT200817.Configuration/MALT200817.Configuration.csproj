@@ -60,6 +60,7 @@
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="AppConstants.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="UserItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

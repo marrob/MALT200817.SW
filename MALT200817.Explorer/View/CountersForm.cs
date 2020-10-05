@@ -5,37 +5,16 @@
     using System.ComponentModel;
     using System.Windows.Forms;
     using System.Diagnostics;
-    using MALT200817.Explorer.Client;
+    using Client;
+    using Events;
+    using Configuration;
+    using MALT200817.Explorer.Common;
 
     public partial class CountersForm : Form
     {
 
-        public class CounterItem : INotifyPropertyChanged
-        {
-            public event PropertyChangedEventHandler PropertyChanged;
-            
-            public string Label { get; set; }
-            public int Port { get; set; }
-         
-            private string _value;
 
-            public string  Value
-            {
-                get { return _value; }
-                set
-                {
-                    if (_value != value)
-                    {
-                        _value = value;
-                        if (PropertyChanged != null)
-                        {
-                            PropertyChanged(this, new PropertyChangedEventArgs(nameof(Value)));
-                        }
-                    }
-                }
-            }
-        }
-       public BindingList<CounterItem> CountersView { get; set; }
+        public BindingList<CounterItem> Counters { get; set; }
 
         public string Address
         {
@@ -60,8 +39,24 @@
         {
             InitializeComponent();
             knvDataGridView1.AutoGenerateColumns = false;
-            CountersView = new BindingList<CounterItem>();
-            knvDataGridView1.DataSource = CountersView;
+            Counters = new BindingList<CounterItem>();
+            knvDataGridView1.DataSource = Counters;
+
+            EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)
+            (e => {
+
+                if (e.User.Role == UserRole.ADMINISTRATOR ||
+                   e.User.Role == UserRole.DEVELOPER)
+                {
+                    ToolStripMenuItemSave.Visible = true;
+                    ToolStripMenuItemReset.Visible = true;
+                }
+                else
+                {
+                    ToolStripMenuItemSave.Visible = false;
+                    ToolStripMenuItemReset.Visible = false;
+                }
+            }));
         }
         private void CountersForm_Load(object sender, EventArgs e)
         {
@@ -70,7 +65,7 @@
             Text = _deviceItem.FirstName + "-" + Address + " Counters";
             foreach (IComponentItem comp in _deviceItem.Components)
             {
-                CountersView.Add(new CounterItem()
+                Counters.Add(new CounterItem()
                 {
                     Label = comp.Label,
                     Port = comp.Port,
@@ -85,29 +80,34 @@
         {
             var sw = new Stopwatch();
             sw.Start();
-
-
-            foreach (CounterItem item in CountersView)
-            {
+            foreach (CounterItem item in Counters)
                 item.Value = MaltClient.Instance.GetCounter(FamilyCode, Address, item.Port).ToString();
-            }
             sw.Stop();
             toolStripStatusLabelUpdateTime.Text = sw.ElapsedMilliseconds.ToString() + "ms";
+            AppLog.Instance.WriteLine(FamilyCode + Address + "Counters Update:" + toolStripStatusLabelUpdateTime.Text);
         }
 
-        private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadUpdate();
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (CounterItem item in CountersView)
-            {
+            var sw = new Stopwatch();
+            sw.Start();
+            foreach (CounterItem item in Counters)
                 MaltClient.Instance.SetCounter(FamilyCode, Address, item.Port, int.Parse(item.Value));
-            }       
-  
             MaltClient.Instance.SaveCounters(FamilyCode, Address);
+            sw.Stop();
+            toolStripStatusLabelUpdateTime.Text = sw.ElapsedMilliseconds.ToString() + "ms";
+            AppLog.Instance.WriteLine(FamilyCode + Address + "Counters Save:" + toolStripStatusLabelUpdateTime.Text);
+        }
+
+        private void ResetToolStripMenuItemReset_Click(object sender, EventArgs e)
+        {
+            foreach (CounterItem item in Counters)
+                item.Value = "0";
+        }
+
+        private void ToolStripStatusLabelLogo_Click(object sender, EventArgs e)
+        {
+            new UserLoginForm().ShowDialog();
         }
     }
 }

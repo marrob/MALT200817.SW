@@ -18,31 +18,23 @@ namespace MALT200817.Library
 
         public static Devices Library { get; } = new Devices();
 
-        private static Type[] SupportedTypes
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="familyCode">00..FF</param>
+        /// <param name="optionCode">00..FF</param>
+        /// <returns></returns>
+        public DeviceItem Search(string familyCode, string optionCode)
         {
-            get
+            var retval = this.FirstOrDefault(n => n.FamilyCode == Tools.HexaByteStrToInt(familyCode) &&
+                                                  n.OptionCode == Tools.HexaByteStrToInt(optionCode));
+            if (retval == null)
             {
-                return new Type[]
-                {
-                    typeof(string),
-                    typeof(ComponentCollection),
-                    typeof(ComponentRelaySPDT),
-                    typeof(ComponentRelaySPST),
-                    typeof(ComponentDigitalOutput),
-                    typeof(ComponentDigitalInput)
-
-                };
+                retval = this.FirstOrDefault(n => n.FamilyCode == Tools.HexaByteStrToInt(familyCode));
+                retval.FirstName = "This device not supported by options";
             }
-        }
-
-
-        public void Save(string path, DeviceItem device)
-        {
-            var xmlFormat = new XmlSerializer(typeof(DeviceItem), null, SupportedTypes, new XmlRootAttribute(XmlRootElement), XmlNamespace);
-            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                xmlFormat.Serialize(fStream, device);
-            }
+            return retval;
         }
 
         /// <summary>
@@ -55,22 +47,11 @@ namespace MALT200817.Library
             var files = Directory.GetFiles(path);
             foreach (string file in files)
             {
-               Load(file);
+                Add(new DeviceItem().Load(file));
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="familyCode">00..FF</param>
-        /// <param name="optionCode">00..FF</param>
-        /// <returns></returns>
-        public DeviceItem Search(string familyCode, string optionCode)
-        {
-            var retval = this.FirstOrDefault(n => n.FamilyCode == Tools.HexaByteStrToInt(familyCode) &&
-                                                  n.OptionCode == Tools.HexaByteStrToInt(optionCode));
-            return retval;
-        }
+
 
         /// <summary>
         /// 
@@ -84,22 +65,23 @@ namespace MALT200817.Library
             return retval;
         }
 
+        public DeviceItem Search(int familyCode)
+        {
+            var retval = this.FirstOrDefault(n => n.FamilyCode == familyCode);
+            return retval;
+        }
+
+
+        public int GetRealyCount(int familyCode)
+        {
+            var dev = Search(familyCode);
+            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST);
+        }
+
         public int GetRealyCount(int familyCode, int optionCode)
         {
             var dev = Search(familyCode, optionCode);
             return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST );
         }
-
-
-        void Load(string path)
-        {
-            var xmlFormat = new XmlSerializer(typeof(DeviceItem), null, SupportedTypes, new XmlRootAttribute(XmlRootElement), XmlNamespace);
-            DeviceItem instance;
-            using (Stream fStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                instance = (DeviceItem)xmlFormat.Deserialize(fStream);
-            this.Add(instance);
-            instance.Path = path;
-        }
-
     }
 }

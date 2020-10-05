@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <!--  http://stackoverflow.com/questions/1942039/how-to-install-and-start-a-windows-service-using-wix -->
   <?include $(sys.CURRENTDIR)Config.wxi ?>
-  
+    
   <Fragment>
     <Component Id ="ServiceSetup_Components" Directory="ServiceFolder" Guid ="{A052FF43-DBD1-454D-B59E-2763BD11AF5B}">
       <File Id='MALT200817.Service.exe'  Source='$(var.ServiceDirectory)\MALT200817.Service.exe' KeyPath='yes'/>
       <File Id='MALT200817.Configuration.dll'   Source='$(var.ServiceDirectory)\MALT200817.Configuration.dll' KeyPath='no'/>
-
+      <!--Account="LocalSystem"-->
       <ServiceInstall
         Id="ServiceInstaller"
         Type="ownProcess"
@@ -15,24 +16,37 @@
         DisplayName="AltonTech MALT200817.Service"
         Description="MALT Platform Windows Service V$(var.VersionNumber)"
         Start="auto"
-        
-        Account="LocalSystem"
-        ErrorControl="normal" 
+        Account="LocalSystem" 
+        ErrorControl="normal"
         Arguments=" /start MaltService"
-        Interactive="no" 
-        
-        />
+        Interactive="no" >
+        <util:PermissionEx
+            User="Everyone"
+            GenericAll="yes"
+            ServiceChangeConfig="yes"
+            ServiceEnumerateDependents="yes"
+            ChangePermission="yes"
+            ServiceInterrogate="yes"
+            ServicePauseContinue="yes"
+            ServiceQueryConfig="yes"
+            ServiceQueryStatus="yes"
+            ServiceStart="yes"
+            ServiceStop="yes">
+          </util:PermissionEx>
+        </ServiceInstall>
+      
       <!-- Start Or Not -->
       
-      <!-- Start = "install" ez elindtja -->
+      <!-- /Start = "install"/ ez elindtja -->
       <ServiceControl Id="StartService"
-                     
                       Stop="both"
                       Remove="uninstall"
                       Name="MaltService"
                       Wait="yes" />
-     
     </Component>
+
+
+    
   </Fragment>
 </Wix>
 

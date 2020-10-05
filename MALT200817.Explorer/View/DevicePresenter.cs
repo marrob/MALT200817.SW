@@ -58,12 +58,11 @@ namespace MALT200817.Explorer.View
             _deviceViewLists.Clear();
             foreach (LiveDeviceItem dev in devices)
             {
-                 var libInfo = Devices.Library.Search(dev.FamilyCode, dev.OptionCode);
                 _deviceViewLists.Add(new DeviceListViewItem()
                 {
-                    FirstName = libInfo.FirstName,
+                    FirstName = dev.FirstName,
                     FamilyCode = dev.FamilyCode.ToString("X2"),
-                    FamilyName = libInfo.FamilyName,
+                    FamilyName = dev.FamilyName,
                     Address = dev.Address.ToString("X2"),
                     Version = dev.Version,
                     SerialNumber = dev.SerialNumber,

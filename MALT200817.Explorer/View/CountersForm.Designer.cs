@@ -40,7 +40,8 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.knvDataGridView1 = new Konvolucio.MCEL181123.Controls.KnvDataGridView();
             this.ColumnLabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +65,7 @@
             this.statusStrip2.Location = new System.Drawing.Point(0, 570);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.ShowItemToolTips = true;
-            this.statusStrip2.Size = new System.Drawing.Size(300, 24);
+            this.statusStrip2.Size = new System.Drawing.Size(418, 24);
             this.statusStrip2.TabIndex = 10;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -121,7 +122,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 0);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -139,17 +140,19 @@
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 19);
             this.toolStripStatusLabel2.Text = "AltonTech";
+            this.toolStripStatusLabel2.Click += new System.EventHandler(this.ToolStripStatusLabelLogo_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.ToolStripMenuItemReset,
+            this.ToolStripMenuItemSave});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(300, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(418, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -158,14 +161,20 @@
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.testToolStripMenuItem.Text = "Update";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
-            // saveToolStripMenuItem
+            // ToolStripMenuItemReset
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.ToolStripMenuItemReset.Name = "ToolStripMenuItemReset";
+            this.ToolStripMenuItemReset.Size = new System.Drawing.Size(47, 20);
+            this.ToolStripMenuItemReset.Text = "Reset";
+            this.ToolStripMenuItemReset.Click += new System.EventHandler(this.ResetToolStripMenuItemReset_Click);
+            // 
+            // ToolStripMenuItemSave
+            // 
+            this.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave";
+            this.ToolStripMenuItemSave.Size = new System.Drawing.Size(43, 20);
+            this.ToolStripMenuItemSave.Text = "Save";
+            this.ToolStripMenuItemSave.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // knvDataGridView1
             // 
@@ -191,7 +200,7 @@
             this.knvDataGridView1.ShowCellToolTips = false;
             this.knvDataGridView1.ShowEditingIcon = false;
             this.knvDataGridView1.ShowRowErrors = false;
-            this.knvDataGridView1.Size = new System.Drawing.Size(300, 546);
+            this.knvDataGridView1.Size = new System.Drawing.Size(418, 546);
             this.knvDataGridView1.TabIndex = 0;
             this.knvDataGridView1.ZebraRow = true;
             // 
@@ -219,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 594);
+            this.ClientSize = new System.Drawing.Size(418, 594);
             this.Controls.Add(this.knvDataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip2);
@@ -254,7 +263,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPort;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSave;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFamilyCode;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemReset;
     }
 }

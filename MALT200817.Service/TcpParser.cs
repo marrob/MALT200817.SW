@@ -133,7 +133,7 @@
                     {
                         foreach (LiveDeviceItem dev in _exp.LiveDevices)
                         {
-                            var firstName = Devices.Library.Search(dev.FamilyCode, dev.OptionCode).FirstName;
+
                             devs += "@" +
                                 dev.FamilyCode.ToString("X2") + ":" + //FAMILY_CODE
                                 dev.Address.ToString("X2") + ":" +    //ADDRESS
@@ -141,8 +141,9 @@
                                 dev.Version + ":" +                   //VERSION
                                 dev.SerialNumber + ":" +              //SERIALNUMBER
                                 dev.Device.FamilyName + ":" +         //FAMILY_NAME
-                                (firstName ?? "UNKNOWN FIRST NAME") + //FIRST_NAME
+                                dev.FirstName + //FIRST_NAME
                                 ";";
+
                         }
                         return devs.Substring(0, devs.Length - 1);
                     }

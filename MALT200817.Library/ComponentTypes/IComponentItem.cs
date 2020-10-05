@@ -4,7 +4,7 @@
 
     public interface IComponentItem: INotifyPropertyChanged
     {
-        string Label { get; set; }
         int Port { get; set; }
+        string Label { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension>">
   <?include $(sys.CURRENTDIR)Config.wxi ?>
 
   <Product  Id="$(var.ProductCode)"
@@ -16,6 +17,7 @@
      Manufacturer="$(var.LongCompany)"
      InstallerVersion='200' Languages='1033' Compressed='yes' SummaryCodepage='1252' InstallScope="perMachine"  />
 
+  
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <Media Id="1" Cabinet="media.cab" EmbedCab="yes" />
@@ -51,7 +53,7 @@
         <ComponentRef Id="ServiceSetup_Components"/>
         <!--<ComponentRef Id="CmpCreateCommonAppDataFolderWithPermissions" /> -->
         <ComponentGroupRef Id="LabView2018_Components"/>
-        
+
       </Feature>
     </Feature>
 

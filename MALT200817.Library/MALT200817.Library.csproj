@@ -76,6 +76,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Library\MAL23THV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Library\MALT132.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

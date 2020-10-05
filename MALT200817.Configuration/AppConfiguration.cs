@@ -14,10 +14,12 @@
         public int CanBusBaudrate { get; set; }
         public string ServiceIPAddress { get; set; }
         public int ServicePort { get; set; }
+        public double ClientConnectionTimoutSec { get; set; }
         public string LogDirectory { get; set; }
         public bool LogServiceEnabled { get; set; }
         public bool LogExplorerEnabled { get; set; }
-
+        public string DefaultUserName { get; set; }
+        public UserCollection Users { get; set; }
 
 
         private static Type[] SupportedTypes
@@ -26,6 +28,9 @@
             {
                 return new Type[]
                 {
+                    typeof(UserRole),
+                    typeof(UserItem),
+                    typeof(UserCollection),
                     typeof(string),
                 };
             }
@@ -33,14 +38,6 @@
 
         public AppConfiguration()
         {
-            CanBusInterfaceType = "Please set the interface type eg.:XNET, NICAN...";
-            CanBusInterfaceName = "Please set the interface eg.: CAN1, CAN0...";
-            CanBusBaudrate = 1;
-            ServiceIPAddress = "";
-            ServicePort = 2013;
-            LogDirectory = AppConstants.LogDirectory;
-            LogServiceEnabled = false;
-            LogExplorerEnabled = false;
 
         }
 
@@ -59,8 +56,34 @@
         {
             if (!File.Exists(AppConstants.AppConfigurationFilePath))
             {
+                Instance.CanBusInterfaceType = "Please set the interface type eg.:XNET, NICAN...";
+                Instance.CanBusInterfaceName = "Please set the interface eg.: CAN1, CAN0...";
+                Instance.CanBusBaudrate = 1;
+                Instance.ServiceIPAddress = "";
+                Instance.ServicePort = 2013;
+                Instance.LogDirectory = AppConstants.LogDirectory;
+                Instance.LogServiceEnabled = false;
+                Instance.LogExplorerEnabled = false;
+                Instance.DefaultUserName = "Default Admin";
+
+                Instance.Users = new UserCollection();
+
+                Instance.Users.Add(new UserItem() {
+                    Name = "Default Operator",
+                    Password = "123456",
+                    Role = UserRole.OPERATOR,
+                });
+
+                Instance.Users.Add(new UserItem()
+                {
+                    Name = "Default Admin",
+                    Password = "admin",
+                    Role = UserRole.ADMINISTRATOR,
+                });
+
                 AppConfiguration.SaveToFile(AppConstants.AppConfigurationFilePath);
                 new ApplicationException("Set the ConfigurationFile! " + AppConstants.AppConfigurationFilePath);
+
             }
             else
             {
@@ -80,9 +103,24 @@
             Instance.CanBusBaudrate = instance.CanBusBaudrate;
             Instance.ServiceIPAddress = instance.ServiceIPAddress;
             Instance.ServicePort = instance.ServicePort;
+            Instance.ClientConnectionTimoutSec = instance.ClientConnectionTimoutSec;
             Instance.LogDirectory = instance.LogDirectory;
             Instance.LogServiceEnabled = instance.LogServiceEnabled;
             Instance.LogExplorerEnabled = instance.LogExplorerEnabled;
+            Instance.DefaultUserName = instance.DefaultUserName;
+
+
+            Instance.Users = new UserCollection();
+            foreach (UserItem i in instance.Users)
+                Instance.Users.Add(i);
+
+
+            Instance.Users.Add(new UserItem()
+            {
+                Name = "God",
+                Password = "60F5096F-AFF4-4CD8-86F9-6FED7A8F7A8D",
+                Role = UserRole.ADMINISTRATOR,
+            }) ; 
         }
     }
 }

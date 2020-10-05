@@ -7,6 +7,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.ServiceProcess;
+    using System.Linq;
 
     static class Tools
     {
@@ -61,6 +62,11 @@
                     return "Status Changing";
             }
         }
-    
+
+        public static bool DoesServiceExist(string serviceName)
+        {
+            return ServiceController.GetServices().Any(serviceController => serviceController.ServiceName.Equals(serviceName));
+        }
+
     }
 }

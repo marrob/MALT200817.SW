@@ -2,8 +2,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.0.0.27")]
-[assembly: AssemblyFileVersion("0.0.0.27")]
+[assembly: AssemblyVersion("0.0.0.41")]
+[assembly: AssemblyFileVersion("0.0.0.41")]
 
 
 [assembly: AssemblyTitle("MALT200817 Platorm softwares")]

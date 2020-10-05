@@ -5,6 +5,7 @@ namespace MALT200817.Explorer.Commands
     using System;
     using System.Windows.Forms;
     using View;
+    using Configuration;
 
     class DevicesConnectCommand : ToolStripButton
     {
@@ -31,11 +32,13 @@ namespace MALT200817.Explorer.Commands
             base.OnClick(e);
             if (MaltClient.Instance.IsConnected)
             {
-                _app.Disconnect();
+                MaltClient.Instance.Disconnect();
             }
             else
             {
-                _app.Connect();
+                MaltClient.Instance.Start(AppConfiguration.Instance.ServiceIPAddress,
+                                          AppConfiguration.Instance.ServicePort,
+                                          AppConfiguration.Instance.ClientConnectionTimoutSec);
             }
         }
 

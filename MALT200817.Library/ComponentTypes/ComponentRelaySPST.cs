@@ -5,10 +5,10 @@ namespace MALT200817.Library
     public class ComponentRelaySPST: IComponentItem
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public string Label { get; set; }
         public int Port { get; set; }
-        public string PinLabel_NO { get; set; }
+        public string Label { get; set; }
         public string PinLabel_COM { get; set; }
+        public string PinLabel_NO { get; set; }
 
         private object _value;
         public object Value

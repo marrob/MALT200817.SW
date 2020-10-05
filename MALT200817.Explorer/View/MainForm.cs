@@ -16,6 +16,7 @@ namespace MALT200817.Explorer.View
     public interface IMainForm //: IWindowLayoutRestoring
     {
         event EventHandler Shown;
+        event EventHandler Login;
         event FormClosedEventHandler FormClosed;
         event FormClosingEventHandler FormClosing;
         event EventHandler Disposed;
@@ -29,6 +30,8 @@ namespace MALT200817.Explorer.View
         string Version { get; set; }
         string DevicesCount { get; set; }
         string ConnectionTime { get; set; }
+        string ServiceStatus { get; set; }
+        string ConnectionStatus { get; set; }
 
         ToolStripItem[] StatusBar { set; }
 
@@ -39,11 +42,14 @@ namespace MALT200817.Explorer.View
         //void CursorDefault();
 
         DataGridView DevicesDgv { get; }
+        void ProcessStatusUpdate(string msg, bool progressbar);
     }
 
 
     public partial class MainForm : Form, IMainForm
     {
+        public event EventHandler Login;
+
         public string Version
         {
             get { return (toolStripStatusLabelVersion.Text); }
@@ -60,6 +66,31 @@ namespace MALT200817.Explorer.View
         {
             get { return toolStripStatusLabelConnetcionTime.Text; }
             set { toolStripStatusLabelConnetcionTime.Text = value; }
+        }
+
+        public string ServiceStatus
+        {
+            get 
+            {
+                return toolStripStatusLabelServiceStatus.Text;
+            }
+            set 
+            {
+                if (value == "Stopped")
+                    toolStripStatusLabelServiceStatus.BackColor = Color.Red;
+                else if(value == "Running")
+                    toolStripStatusLabelServiceStatus.BackColor = Color.YellowGreen;
+                else
+                    toolStripStatusLabelServiceStatus.BackColor = Color.Yellow;
+
+                toolStripStatusLabelServiceStatus.Text = value;
+            }
+        }
+
+        public string ConnectionStatus
+        { 
+            get { return toolStripStatusLabelConnectionStatus.Text; }
+            set { toolStripStatusLabelConnectionStatus.Text = value; }
         }
 
         public MainForm()
@@ -87,19 +118,16 @@ namespace MALT200817.Explorer.View
             get { return devicesViewControl1.DataGrid; }
         }
 
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        void IMainForm.ProcessStatusUpdate(string msg, bool progressbar)
         {
-            var form = new CountersForm();
-            form.FamilyCode = "03";
-            form.Address = "03";
-            form.OptionCode = "00";
-
-            form.Show();
+            toolStripProgressBar1.Visible = progressbar;
+            toolStripStatusLabelMessage.Visible = progressbar;
+            toolStripStatusLabelMessage.Text = msg;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void toolStripStatusLabelLogo_Click(object sender, EventArgs e)
         {
-
+            Login?.Invoke(this, EventArgs.Empty);
         }
     }
 }

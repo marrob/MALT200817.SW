@@ -13,13 +13,14 @@ namespace MALT200817.Service
 
     public class LiveDeviceItem
     {
-        public int FamilyCode { get; set; }
-        public int Address { get; set; }
-        public int OptionCode { get; set; } /*Az option kódotól független a tipus.*/
-        public string Version { get; set; }
-        public List<byte[]> Ports { get; set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
-        public int[] Counters {get; set;} /*Az indexek a portok, az értékek a számlálók értékei */
-        public string SerialNumber;
+        public int FamilyCode { get; private set; }
+        public int Address { get; private set; }
+        public int OptionCode { get; private set; } /*Az option kódotól független a tipus.*/
+        public string Version { get; private set; }
+        public List<byte[]> Ports { get; private set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
+        public int[] Counters {get; private set; } /*Az indexek a portok, az értékek a számlálók értékei */
+        public string FirstName { get; private set; }
+        public string SerialNumber { get; private set; }
         public DeviceItem Device;
  
 
@@ -29,19 +30,35 @@ namespace MALT200817.Service
             Address = address;
             OptionCode = optionCode;
             Version = "V" + ver1.ToString("X2") + ver0.ToString("X2");
+
             Device =  Devices.Library.Search(familyCode, optionCode);
-          
             if (Device != null)
             {
                 Ports = new List<byte[]>();
                 for (int blocks = 0; blocks < Device.Blocks; blocks++)
                     Ports.Add(new byte[Device.BlockSize]);
-
                 Counters = new int[Devices.Library.GetRealyCount(familyCode, optionCode)];
+                FirstName = Device.FirstName;
             }
             else
             {
-                AppLog.Instance.WriteLine("This device not suppoerted" + familyCode.ToString());
+                Device = Devices.Library.Search(familyCode);
+                if (Device != null)
+                {
+                    Ports = new List<byte[]>();
+                    for (int blocks = 0; blocks < Device.Blocks; blocks++)
+                        Ports.Add(new byte[Device.BlockSize]);
+                    Counters = new int[Devices.Library.GetRealyCount(familyCode)];
+                    AppLog.Instance.WriteLine("This device not supported by option " +
+                    "OptionCode:" + optionCode.ToString("X2"));
+                    FirstName = "This device not supported by option";
+                }
+                else
+                {
+                    AppLog.Instance.WriteLine("This device not suppoerted: " +
+                    "FamilyCode:" + familyCode.ToString("X2") + 
+                    "OptionCode:" + optionCode.ToString("X2"));
+                }
             }
         }
 
