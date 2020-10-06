@@ -3,20 +3,14 @@
 namespace MALT200817.Explorer.View
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using Configuration;
     using Events;
 
     public partial class UserLoginForm : Form
     {
-        private UserItem _userItem;
+        private UserItem User;
 
         public UserLoginForm()
         {
@@ -25,11 +19,11 @@ namespace MALT200817.Explorer.View
 
         private void TextBoxPassword_TextChanged(object sender, EventArgs e)
         {
-            _userItem = AppConfiguration.Instance.Users.FirstOrDefault(n => n.Password == textBoxPassword.Text);
-            if (_userItem != null)
+            User = AppConfiguration.Instance.Users.FirstOrDefault(n => n.Password == textBoxPassword.Text);
+            if (User != null)
             {
-                textBoxYourRole.Text = _userItem.Role.ToString();
-                textBoxYourName.Text = _userItem.Name;
+                textBoxYourRole.Text = User.Role.ToString();
+                textBoxYourName.Text = User.Name;
                 buttonOK.Enabled = true;
             }
             else
@@ -40,9 +34,9 @@ namespace MALT200817.Explorer.View
             }
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void ButtonOK_Click(object sender, EventArgs e)
         {
-            EventAggregator.Instance.Publish(new UserChangedAppEvent(_userItem));
+            EventAggregator.Instance.Publish(new UserChangedAppEvent(User));
             DialogResult = DialogResult.OK;
         }
     }

@@ -18,9 +18,9 @@
         public string LogDirectory { get; set; }
         public bool LogServiceEnabled { get; set; }
         public bool LogExplorerEnabled { get; set; }
+        public bool ExplorerDeviceListAutoUpdate { get; set; }
         public string DefaultUserName { get; set; }
         public UserCollection Users { get; set; }
-
 
         private static Type[] SupportedTypes
         {
@@ -65,6 +65,7 @@
                 Instance.LogServiceEnabled = false;
                 Instance.LogExplorerEnabled = false;
                 Instance.DefaultUserName = "Default Admin";
+                Instance.ExplorerDeviceListAutoUpdate = true;
 
                 Instance.Users = new UserCollection();
 
@@ -81,13 +82,13 @@
                     Role = UserRole.ADMINISTRATOR,
                 });
 
-                AppConfiguration.SaveToFile(AppConstants.AppConfigurationFilePath);
+                SaveToFile(AppConstants.AppConfigurationFilePath);
                 new ApplicationException("Set the ConfigurationFile! " + AppConstants.AppConfigurationFilePath);
 
             }
             else
             {
-                AppConfiguration.LoadFromFile(AppConstants.AppConfigurationFilePath);
+                LoadFromFile(AppConstants.AppConfigurationFilePath);
             }
         }
 
@@ -107,8 +108,8 @@
             Instance.LogDirectory = instance.LogDirectory;
             Instance.LogServiceEnabled = instance.LogServiceEnabled;
             Instance.LogExplorerEnabled = instance.LogExplorerEnabled;
+            Instance.ExplorerDeviceListAutoUpdate = instance.ExplorerDeviceListAutoUpdate;
             Instance.DefaultUserName = instance.DefaultUserName;
-
 
             Instance.Users = new UserCollection();
             foreach (UserItem i in instance.Users)

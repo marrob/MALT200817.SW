@@ -48,7 +48,7 @@ namespace MALT200817.Explorer.View.Tests
         public void ShowSelectedDeviceTest()
         {
             var frm = new MainForm();
-            var dp = new DevicePresenter(frm.DevicesDgv, _devices);
+            var dp = new DevicePresenter(frm.DevicesDgv);
             frm.Load += (sender, e) => (sender as MainForm).Visible = true;
             frm.ShowDialog();
         

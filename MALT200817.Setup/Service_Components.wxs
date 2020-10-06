@@ -5,7 +5,7 @@
     <?include $(sys.CURRENTDIR)Config.wxi ?>
 
     <ComponentGroup Id="Service_Components" Directory="ServiceFolder" >
-      <Component Id="Service_Files" Guid="{59C6A671-4116-40A6-96C0-B53F50965A0F}">
+      <Component Id="Service_Files" Guid="{1671EC15-25C5-4A95-81DF-75EA3C371320}">
         <File Id='NiXnetDotNet.dll'         Source='$(var.ServiceDirectory)\NiXnetDotNet.dll' KeyPath='no'/>
         <File Id='MALT200817.Library.dll'         Source='$(var.ServiceDirectory)\MALT200817.Library.dll' KeyPath='no'/>
       </Component>

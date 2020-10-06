@@ -43,8 +43,10 @@
   -->
   <?define AppDirectory               = "..\MALT200817.Explorer\bin\Release"?>
   <?define ServiceDirectory           = "..\MALT200817.Service\bin\Release"?>
+  <?define AppDfuDirectory            = "..\MALT200817.DFU\bin\Release"?>
   <?define AppResourceDirectory       = ".\Resources"?>
   <?define LabView2018Directory       = "..\MALT200817.LabView.Driver"?>
+  <?define FirmwareDirectory          = "..\Resources\Firmwares\"?>
 
   
 

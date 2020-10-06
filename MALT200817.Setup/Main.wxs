@@ -45,7 +45,8 @@
     <!--//Level: A Feature kikapcsolt, ha 0. Alaphelyzetben 1.  -->
     <Feature Id="AppFeature" Title="Application" Level="1" Description="Device Firmware Update Tool and Frimwares">
       <Feature Id ="App_Feature" Title="Application" Description="Firmware Upgrade Tool" Level="1">
-        <ComponentGroupRef Id="Application_Components"/>
+        <ComponentGroupRef Id="Application_Explorer_Components"/>
+        <ComponentGroupRef Id="Application_Dfu_Components"/>
         <ComponentRef Id="ProgramData_Component"/>
         <ComponentGroupRef Id="Library_Components"/>
         <ComponentGroupRef Id="Service_Components"/>
@@ -53,6 +54,7 @@
         <ComponentRef Id="ServiceSetup_Components"/>
         <!--<ComponentRef Id="CmpCreateCommonAppDataFolderWithPermissions" /> -->
         <ComponentGroupRef Id="LabView2018_Components"/>
+        <ComponentGroupRef Id="Firmwares_Components"/>
 
       </Feature>
     </Feature>

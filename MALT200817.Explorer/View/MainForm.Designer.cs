@@ -68,7 +68,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.devicesViewControl1);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(711, 483);
+            this.splitContainer1.Size = new System.Drawing.Size(711, 459);
             this.splitContainer1.SplitterDistance = 338;
             this.splitContainer1.TabIndex = 8;
             // 
@@ -77,7 +77,7 @@
             this.devicesViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesViewControl1.Location = new System.Drawing.Point(0, 0);
             this.devicesViewControl1.Name = "devicesViewControl1";
-            this.devicesViewControl1.Size = new System.Drawing.Size(711, 483);
+            this.devicesViewControl1.Size = new System.Drawing.Size(711, 459);
             this.devicesViewControl1.TabIndex = 0;
             // 
             // statusStrip2
@@ -168,7 +168,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(347, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(378, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -195,9 +195,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 507);
-            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";

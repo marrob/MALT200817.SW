@@ -30,7 +30,11 @@
                 /* Response Init Info */
                 if (data[0] == 0xF0)
                 {
-                    var newDev = new LiveDeviceItem(data[2], data[3], data[4], data[5], data[6]);
+                    var newDev = new LiveDeviceItem( familyCode:data[2], 
+                                                     address:data[3], 
+                                                     optionCode: data[4], 
+                                                     ver0:data[5], 
+                                                     ver1:data[6]);
                     bool found = false;
                     /*ha ez mind egyezik akkor új eszköz.*/
                     foreach (LiveDeviceItem dev in LiveDevices)
@@ -41,7 +45,10 @@
                        found = true;
                     }
                     if (!found)
+                    {
                         LiveDevices.Add(newDev);
+                        RequestSerialNumber(familyCode: data[2], address: data[3]);
+                    }
                 }
                 /* Response Ports Status */
                 else if (data[1] == 0x04)
@@ -216,7 +223,11 @@
             TxQueue.Enqueue(msg);
         }
 
-
+        /// <summary>
+        /// A Service indulásakor ezt lekéri és ezuztán többet kilens ehhez nem nyúl.
+        /// A kilensek értesülnek róla ha új kártya jön, mivel az új kártyának kötelessége jelezni hogy
+        /// megérkezett.
+        /// </summary>
         public void DoUpdateDeviceInfo()
         {
             /*LiveDevices.Clear(); */
@@ -229,7 +240,7 @@
             {
                 RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
                 RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
-                RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
+                //RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
             }
 
             //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek

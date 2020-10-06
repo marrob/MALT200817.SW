@@ -56,10 +56,10 @@
 
     class App : IApp
     {
-        readonly IMainForm _mainForm;
-        readonly DevicePresenter _devicePresenter;
+        readonly IMainForm MainForm;
+        readonly DevicePresenter DevicePresenter;
         public static SynchronizationContext SyncContext = null;
-        readonly System.Windows.Forms.Timer _timer;
+        readonly System.Windows.Forms.Timer Timer;
         public static string Name = "MALT Explorer";
 
         public App()
@@ -71,25 +71,24 @@
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
             AppLog.Instance.WriteLine("MALT200817.Explorer.App() Constructor started.");
 
-
             /*** Main Form ***/
-            _mainForm = new MainForm();
-            _mainForm.Text = Name + " - " + Application.ProductVersion;
-            _mainForm.ConnectionStatus = "Disconnected";
-            _mainForm.Shown += MainForm_Shown;
-            _mainForm.FormClosing += MainForm_FormClosing;
-            _mainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
-            _mainForm.Login += MainForm_Login;
+            MainForm = new MainForm();
+            MainForm.Text = Name + " - " + Application.ProductVersion;
+            MainForm.ConnectionStatus = "Disconnected";
+            MainForm.Shown += MainForm_Shown;
+            MainForm.FormClosing += MainForm_FormClosing;
+            MainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
+            MainForm.Login += MainForm_Login;
 
             /*** MALT TCP Client ***/
-            _devicePresenter = new DevicePresenter(_mainForm.DevicesDgv);
+            DevicePresenter = new DevicePresenter(MainForm.DevicesDgv);
 
             /*** Device Library ***/
             Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
 
-            _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 1000;
-            _timer.Tick += Check_Tick;
+            Timer = new System.Windows.Forms.Timer();
+            Timer.Interval = 1000;
+            Timer.Tick += Check_Tick;
 
             var diagMenu = new ToolStripMenuItem("Diag");
             diagMenu.DropDown.Items.AddRange(
@@ -107,34 +106,34 @@
                  {
                      new Commands.DevicesConnectCommand(this),
                      new Commands.DevicesForceUpdateCommand(this),
-                     new Commands.AlwaysOnTopCommand(_mainForm as Form),
+                     new Commands.AlwaysOnTopCommand(MainForm as Form),
                  });
 
-            _mainForm.MenuBar = new ToolStripItem[]
+            MainForm.MenuBar = new ToolStripItem[]
                 {
                     toolsMenu,
                 //    viewMenu,
                     diagMenu,
                 };
 
-            _mainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();
+            MainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();
 
             EventAggregator.Instance.Subscribe((Action<ConnectionChangedAppEvent>)(e1 =>
             {
                 if (e1.IsConnected)
-                    _mainForm.ConnectionStatus = "Connected";
+                    MainForm.ConnectionStatus = "Connected";
                 else
-                    _mainForm.ConnectionStatus = "Disconnected";
+                    MainForm.ConnectionStatus = "Disconnected";
             }));
 
             /*** Default User ***/
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>) (e1 =>
             {
-                _mainForm.Text = Name + " - " + e1.User.Name;
+                MainForm.Text = Name + " - " + e1.User.Name;
             }));
 
             /*** Run ***/
-            Application.Run((MainForm)_mainForm);
+            Application.Run((MainForm)MainForm);
 
         }
 
@@ -146,17 +145,17 @@
         private void Check_Tick(object sender, EventArgs e)
         { 
             var sc = new ServiceController(AppConstants.WindowsServiceName);
-            _mainForm.ServiceStatus = sc.Status.ToString();
+            MainForm.ServiceStatus = sc.Status.ToString();
+
+            if(AppConfiguration.Instance.ExplorerDeviceListAutoUpdate)
+                if(MaltClient.Instance.IsConnected)
+                    UpdateDeviceList();
         }
 
         void MainForm_Shown(object sender, EventArgs e)
         {
-#if TRACE
-            AppLog.Instance.WriteLine(GetType().Namespace + "." + GetType().Name + "." + MethodBase.GetCurrentMethod().Name + "()");
-#endif
-
             SyncContext = SynchronizationContext.Current;
-            _mainForm.ProcessStatusUpdate(string.Empty, false);
+            MainForm.ProcessStatusUpdate(string.Empty, false);
            
 
             // _mainForm.LayoutRestore();
@@ -168,7 +167,7 @@
             }
             else
             {
-                _timer.Start();
+                Timer.Start();
                 var sc = new ServiceController(AppConstants.WindowsServiceName);
                 if (sc.Status != ServiceControllerStatus.Running)
                 {
@@ -177,11 +176,11 @@
                     if (yesno == DialogResult.Yes)
                     {
                         var msg = "service starting";
-                        _mainForm.ProcessStatusUpdate(msg, true);
+                        MainForm.ProcessStatusUpdate(msg, true);
                         AppLog.Instance.WriteLine(msg);
                         sc.Start();
                         AppLog.Instance.WriteLine("service is running");
-                        _mainForm.ProcessStatusUpdate("", false);
+                        MainForm.ProcessStatusUpdate("", false);
                         Thread.Sleep(2000);
                     }
                 }
@@ -208,13 +207,12 @@
         {
             var sp = new Stopwatch();
             sp.Start();
-            MaltClient.Instance.UpdateDevicesInfo();
             var devices = MaltClient.Instance.GetDevices();
-            _mainForm.DevicesCount = devices.Count.ToString();
-            _devicePresenter.Update(devices);
+            MainForm.DevicesCount = devices.Count.ToString();
+            DevicePresenter.Update(devices);
             sp.Stop();
-            _mainForm.ConnectionTime = sp.ElapsedMilliseconds.ToString() + "ms";
-            AppLog.Instance.WriteLine("UpdateDeviceList:" + _mainForm.ConnectionTime);
+            MainForm.ConnectionTime = sp.ElapsedMilliseconds.ToString() + "ms";
+            AppLog.Instance.WriteLine("UpdateDeviceList:" + MainForm.ConnectionTime);
         }
 
 
@@ -223,20 +221,14 @@
 
         }
 
-
-
         void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Timer.Stop();
             MaltClient.Instance.Dispose();
-
-            //TimerService.Instance.Dispose();
-            //  _ioService.Dispose();
             //   _mainForm.LayoutSave();
             Settings.Default.Save();
             EventAggregator.Instance.Dispose();
             Settings.Default.Save();
-
             AppLog.Instance.WriteLine("MALT200817.Explorer.App() MainForm_FormClosed.");
         }
     }

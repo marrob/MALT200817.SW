@@ -1,20 +1,10 @@
 ﻿
 namespace MALT200817.Explorer.View
 {
-
     using Client;
-    using Common;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Globalization;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using Library;
-    using Configuration;
 
     public interface IDevicePresenter
     {
@@ -34,31 +24,46 @@ namespace MALT200817.Explorer.View
             public string OptionCode { get; set; }
         }
 
-        DeviceListViewItem _selected;
-        public LiveDeviceCollection _devices;
-        public BindingList<DeviceListViewItem> _deviceViewLists;
-        DataGridView _deviceDgv;
+        DeviceListViewItem SelectedItem;
+        public LiveDeviceCollection LiveDevices;
+        public BindingList<DeviceListViewItem> DevicesListView;
+        DataGridView Dgv;
 
-        public DevicePresenter(DataGridView deviceDgv)
+        public DevicePresenter(DataGridView dgv)
         {
-            _deviceDgv = deviceDgv;
-            _deviceViewLists = new BindingList<DeviceListViewItem>();
-            deviceDgv.DataSource = _deviceViewLists;
-            deviceDgv.DoubleClick += DeviceDgv_DoubleClick;
+
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            Dgv = dgv;
+            DevicesListView = new BindingList<DeviceListViewItem>();
+            dgv.DataSource = DevicesListView;
+            dgv.DoubleClick += DeviceDgv_DoubleClick;
         }
 
         private void DeviceDgv_DoubleClick(object sender, EventArgs e)
         {
-            _selected = (_deviceDgv.CurrentRow.DataBoundItem as DeviceListViewItem);
+            SelectedItem = (Dgv.CurrentRow.DataBoundItem as DeviceListViewItem);
             ShowDevice();
         }
 
+        int saveRow = 0;
+        int SelectedRowIndex = 0;
         public void Update(LiveDeviceCollection devices)
         {
-            _deviceViewLists.Clear();
+            if (Dgv.Rows.Count > 0 && Dgv.FirstDisplayedCell != null)
+                saveRow = Dgv.FirstDisplayedCell.RowIndex;
+
+            if (Dgv.SelectedRows.Count > 0) 
+                SelectedRowIndex = Dgv.SelectedRows[0].Index; 
+
+            DevicesListView.Clear();
+          
             foreach (LiveDeviceItem dev in devices)
             {
-                _deviceViewLists.Add(new DeviceListViewItem()
+                DevicesListView.Add(new DeviceListViewItem()
                 {
                     FirstName = dev.FirstName,
                     FamilyCode = dev.FamilyCode.ToString("X2"),
@@ -68,18 +73,23 @@ namespace MALT200817.Explorer.View
                     SerialNumber = dev.SerialNumber,
                     OptionCode = dev.OptionCode.ToString("X2")
                 }); 
-            }    
-        }
+            }
 
+            if (saveRow != 0 && saveRow < Dgv.Rows.Count)
+                Dgv.FirstDisplayedScrollingRowIndex = saveRow;
+
+            if ((Dgv.Rows.Count - 1) >= SelectedRowIndex) 
+                Dgv.Rows[SelectedRowIndex].Selected = true;
+        }
 
         public void ShowDevice()
         {
             var dev = new DeviceForm();
-            dev.Address = _selected.Address;
-            dev.FamilyCode = _selected.FamilyCode;
-           
-            dev.OptionCode = _selected.OptionCode;
-            dev.SerialNumber = _selected.SerialNumber;
+            dev.Address = SelectedItem.Address;
+            dev.FamilyCode = SelectedItem.FamilyCode;
+            dev.FamilyName = SelectedItem.FamilyName;
+            dev.OptionCode = SelectedItem.OptionCode;
+            dev.SerialNumber = SelectedItem.SerialNumber;
             dev.Show();
         }
     }

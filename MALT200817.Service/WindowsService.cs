@@ -19,9 +19,6 @@
             LogInit();
 #endif
             _myApp = new App();
-
-         
-
         }
 
         protected override void OnStart(string[] args)

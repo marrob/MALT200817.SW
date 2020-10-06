@@ -62,7 +62,7 @@
       <!-- *Desktop* -->
       <!--DesktopFolder = C:\Users\Public\Desktop\-->
       <Directory Id="DesktopFolder" Name="Desktop" />
-      <!-- *Desktop* -->
+      <!-- *MyDocuments* -->
       <Directory Id ="MYDOCUMENTSPATH" SourceName="User's Personal Data Folder">
         <!--C:\Users\Margit Róbert\Documents\Konvolucio\-->
         <Directory Id = "MyDocMnfFolder" Name = "$(var.ShortCompany)">
@@ -72,6 +72,7 @@
             <Directory Id="MyDocFirmwareUpdateFolder" Name="Firmware Update"/>
           </Directory>
         </Directory>
+        
       </Directory>
     </Directory>
   </Fragment>

@@ -19,9 +19,11 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Application_Dfu_Components.wxs" />
+    <Compile Include="Firmwares_Components.wxs" />
     <Compile Include="Library_Components.wxs" />
     <Compile Include="Service_Components.wxs" />
-    <Compile Include="Application_Components.wxs" />
+    <Compile Include="Application_Explorer_Components.wxs" />
     <Compile Include="Directories.wxs" />
     <Compile Include="EventLog_Component.wxs" />
     <Compile Include="LabView2018_Components.wxs" />

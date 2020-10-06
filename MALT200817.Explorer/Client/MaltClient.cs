@@ -11,9 +11,9 @@
 
     public class MaltClient : IDisposable
     {
-        TcpClient _client;
-        NetworkStream _networkStream;
-        StreamReader _streamReader;
+        TcpClient Client;
+        NetworkStream NwStream;
+        StreamReader StreamReader;
 
         bool _disposed = false;
         public static MaltClient Instance { get; } = new MaltClient();
@@ -29,21 +29,21 @@
         {
             try
             {
-                _client = new TcpClient();
+                Client = new TcpClient();
                 //_client.Connect(hostname, port);
                 //_client.SendTimeout = 100000;
                 //_client.ReceiveTimeout = 10000;
 
-                var result = _client.BeginConnect(hostname, port, null, null);
+                var result = Client.BeginConnect(hostname, port, null, null);
 
                 result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(connectionTimeoutSec));
-                if (!_client.Connected)
+                if (!Client.Connected)
                     throw new Exception("Failed to connect.");
 
                 // we have connected
-                _client.EndConnect(result);
-                _networkStream = _client.GetStream();
-                _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
+                Client.EndConnect(result);
+                NwStream = Client.GetStream();
+                StreamReader = new StreamReader(NwStream, Encoding.UTF8);
                 IsConnected = true;
                 EventAggregator.Instance.Publish(new ConnectionChangedAppEvent(IsConnected));
             }
@@ -61,8 +61,8 @@
                     throw new ApplicationException("Not connected.");
                 string ptMessage = Console.ReadLine();
                 byte[] bytes = Encoding.UTF8.GetBytes(line);
-                _networkStream.Write(bytes, 0, bytes.Length);
-                return _streamReader.ReadLine();
+                NwStream.Write(bytes, 0, bytes.Length);
+                return StreamReader.ReadLine();
             }
             catch (Exception ex)
             {
@@ -71,12 +71,17 @@
                 throw ex;
             }
         }
+        /// <summary>
+        /// Ez újra kéri az eszköz listát az eszközöktől, fölösleges CAN busz terhelés!
+        /// </summary>
         public void UpdateDevicesInfo()
         {
-            var resp = WriteReadLine("UPDATE#DEVICES:INFO");
-
-            if (resp != "OK")
-                throw new ApplicationException(resp);
+            var request = "UPDATE#DEVICES:INFO";
+            var response = WriteReadLine("UPDATE#DEVICES:INFO");
+            if (response[0] == '!')
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+            if (response != "OK")
+                throw new ApplicationException(response);
         }
         public LiveDeviceCollection GetDevices()
         {
@@ -200,9 +205,9 @@
             if (disposing)
             {
 
-                if (_client != null && _client.Connected)
+                if (Client != null && Client.Connected)
                 {
-                    _client.Close();
+                    Client.Close();
                 }
             }
             _disposed = true;

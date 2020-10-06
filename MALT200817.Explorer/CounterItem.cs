@@ -18,10 +18,7 @@
                 if (_value != value)
                 {
                     _value = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs(nameof(Value)));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
                 }
             }
         }
