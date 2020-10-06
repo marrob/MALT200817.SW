@@ -64,7 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest_EventAggregator.cs" />
     <Compile Include="View\DeviceCooridnatorTests.cs" />
-    <Compile Include="View\UnitTest_Relay.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MALT200817.Explorer\MALT200817.Explorer.csproj">

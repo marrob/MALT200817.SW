@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konvolucio.MUDS150628.UnitTests2
+namespace MALT200817.Library.UnitTest
 {
     [TestClass]
     public class UnitTest1

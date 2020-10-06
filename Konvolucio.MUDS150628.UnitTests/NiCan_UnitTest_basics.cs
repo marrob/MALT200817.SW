@@ -4,8 +4,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Diagnostics;
     using System.Text;
-
-
+   
     [TestClass()]
     class UnitTest_Nican_basics
     {

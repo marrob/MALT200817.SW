@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E8266244-459D-4218-9C2C-454EA4BDABFA}</ProjectGuid>
+    <ProjectGuid>{9A0445FE-E59D-4CBB-BFFE-52990F2E328A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konvolucio.MUDS150628.UnitTests2</RootNamespace>
-    <AssemblyName>Konvolucio.MUDS150628.UnitTests2</AssemblyName>
+    <RootNamespace>MALT200817.Library.UnitTest</RootNamespace>
+    <AssemblyName>MALT200817.Library.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,20 +49,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NiCan_UnitTest_basics.cs" />
-    <Compile Include="UintTest_AppDfu.cs" />
-    <Compile Include="UintTest_Frimware.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest_Basic.cs" />
+    <Compile Include="UnitTest_Relay.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konvolucio.MUDS150628\Konvolucio.MUDS150628.csproj">
-      <Project>{13fe0bb4-c86b-433c-adec-40082ac3424f}</Project>
-      <Name>Konvolucio.MUDS150628</Name>
+    <ProjectReference Include="..\MALT200817.Library\MALT200817.Library.csproj">
+      <Project>{b4bc807b-7d87-4dcb-abc0-3a34ede3825a}</Project>
+      <Name>MALT200817.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

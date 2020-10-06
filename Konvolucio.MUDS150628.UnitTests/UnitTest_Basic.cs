@@ -2,16 +2,16 @@
 
 namespace Konvolucio.MUDS150628.UnitTest
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using NUnit.Framework;
 
-    [TestFixture]
+    [TestClass()]
     class UnitTest_Basic
     {
-        [Test]
+        [TestMethod()]
         public void _0001_CP1540_TesterPresent()
         {
             UInt32 txId = 0x714;
@@ -41,7 +41,7 @@ namespace Konvolucio.MUDS150628.UnitTest
             }
         }
 
-        [Test]
+        [TestMethod()]
         public void _0002_Bxxx_TesterPresent()
         {
             UInt32 txId = 0x714;
@@ -93,7 +93,7 @@ namespace Konvolucio.MUDS150628.UnitTest
             }
         }
 
-        [Test]
+        [TestMethod()]
         public void _0001_MALT132_TesterPresent()
         {
             UInt32 txId = 0x15510403;
@@ -123,7 +123,7 @@ namespace Konvolucio.MUDS150628.UnitTest
             }
         }
 
-        [Test]
+        [TestMethod()]
         public void _0003_Tachograph_TesterPresent()
         {
             UInt32 txId = 0x38DAEEFB;

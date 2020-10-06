@@ -1,17 +1,17 @@
 ﻿namespace Konvolucio.MUDS150628.UnitTest
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using NUnit.Framework;
 
-    [TestFixture]
+    [TestClass()]
     public class UintTest_Frimware
     {
 
-        [Test]
+        [TestMethod()]
         public void _0001_Create_File_With_Uint32_Numbers()
         {
             byte[] data = new byte[300];
@@ -31,7 +31,7 @@
             }
         }
 
-        [Test]
+        [TestMethod()]
         public void _0002_Create_File_With0xFF()
         {
             byte[] data = new byte[500];

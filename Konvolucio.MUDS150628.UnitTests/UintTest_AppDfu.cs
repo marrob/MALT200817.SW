@@ -1,17 +1,13 @@
-﻿namespace Konvolucio.MUDS150628.UnitTest
+﻿namespace Konvolucio.MUDS150628
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using NUnit.Framework;
     using System.Diagnostics;
 
-    [TestFixture]
+    [TestClass()]
     public class UintTest_AppDfu
     {
-        [Test]
+        [TestMethod()]
         public void _Basic_DFU_Test()
         {
             UInt32 txId = 0x603;

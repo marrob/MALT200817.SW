@@ -1,9 +1,10 @@
-﻿namespace MALT200817.Service.Xnet
+﻿namespace Konvolucio.MUDS150628.Xnet
 {
     using System;
     using NiXnetDotNet;
     using System.Runtime.InteropServices;
     using Common;
+  
 
     public class XnetInterface : ICanInterface
     {
