@@ -9,7 +9,10 @@ namespace MALT200817.DFU
     using Properties;
     using System.Diagnostics;
     using Konvolucio.MUDS150628;
-  
+    using Konvolucio.MUDS150628.NiCanApi;
+    using Configuration;
+    using Common;
+    using Konvolucio.MUDS150628.Xnet;
 
     static class Program
     {
@@ -30,55 +33,38 @@ namespace MALT200817.DFU
         public static SynchronizationContext SyncContext = null;
 
         public IMainForm MainForm { get; set; }
+        string _firmwareFilePath { get; set; }
+
 
         NiCanInterface NiCanInterface;
 
         public App()
         {
 
-            if (Settings.Default.ApplictionSettingsSaveCounter == 0)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.ApplictionSettingsUpgradeCounter++;
-            }
-            Settings.Default.ApplictionSettingsSaveCounter++;
-            Settings.Default.PropertyChanged += (s, e) =>
-            {
-                Debug.WriteLine(GetType().Namespace + "." + GetType().Name + "." +
-                    System.Reflection.MethodBase.GetCurrentMethod().Name + "(): " +
-                    e.PropertyName + ", NewValue: " + Settings.Default[e.PropertyName]);
-            };
+            /*** Application Configuration ***/
+            AppConfiguration.Init();
+            IoLog.Instance.FilePath = @"Konvoluico.MUDS150628_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
+            IoLog.Instance.Enabled = AppConfiguration.Instance.DfuApp.LogEnable;
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.DFU_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
+            AppLog.Instance.Enabled = AppConfiguration.Instance.DfuApp.LogEnable;
+            AppLog.Instance.WriteLine("MALT200817.DFU.App() Constructor started.");
 
-            Settings.Default.SettingsLoaded += (s, e) =>
-            {
-                Debug.WriteLine("SettingsLoaded");
-            };
-
-            Settings.Default.SettingChanging += (s, e) =>
-            {
-                Debug.WriteLine(GetType().Namespace + "." + GetType().Name + "." +
-                    System.Reflection.MethodBase.GetCurrentMethod().Name + "()");
-            };
-
-         
 
             MainForm = new MainForm();
-            MainForm.Text = AppConstants.SoftwareTitle;
-
+            MainForm.Text = "DFU";
             MainForm.FileBrowseEventHandler += ButtonBrowse_Click;
             MainForm.FormClosed += MainForm_FormClosed;
             MainForm.WriteEventHandler += ButtonWrite_Click;
             MainForm.Shown += MainForm_Shown;
-
             MainForm.DeviceRestart += MainForm_DeviceRestart;
         }
 
         private void MainForm_DeviceRestart(object sender, EventArgs e)
         {
-            UInt32 baudRate = 250000;
+            int baudRate = 250000;
             NiCanInterface = new NiCanInterface("CAN0", baudRate);
             NiCanInterface.Connect();
-            NiCanInterface.BusTerminationEnable = true;
+            //NiCanInterface.BusTerminationEnable = true;
             NiCanInterface.Open();
             NiCanInterface.RestartCard(MainForm.Address);
             NiCanInterface.Close();
@@ -88,45 +74,43 @@ namespace MALT200817.DFU
         {
             SyncContext = SynchronizationContext.Current;
 
-            MainForm.Address = (byte)Settings.Default.Address;
-            MainForm.LogEnable = Settings.Default.LogEnable;
-            MainForm.Baudrate = (uint)Settings.Default.Baudrate;
-
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LastPath))
-                if(System.IO.File.Exists(Settings.Default.LastPath))
-                   MainForm.FileName = System.IO.Path.GetFileName(Settings.Default.LastPath);
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            Settings.Default.Address = MainForm.Address;
-            Settings.Default.LogEnable = MainForm.LogEnable;
-            Settings.Default.Baudrate = MainForm.Baudrate;
-            Settings.Default.Save();
         }
 
         private void ButtonWrite_Click(object sender, EventArgs e)
         {
-            byte address = MainForm.Address;
+            int address = MainForm.Address;
 
-            UInt32 txId = (UInt32)0x600 | address;
-            UInt32 rxId = (UInt32)0x700 | address ;
-            UInt32 baudRate = 250000;
+            int txId = AppConfiguration.Instance.DfuApp.TxBaseAddress | address;
+            int rxId = AppConfiguration.Instance.DfuApp.RxBaseAddress | address ;
+            int baudRate = AppConfiguration.Instance.DfuApp.CanBusBaudrate ;
+            string itf = AppConfiguration.Instance.DfuApp.CanBusInterfaceName;
+            string itfType = AppConfiguration.Instance.DfuApp.CanBusInterfaceType;
 
-            NiCanInterface = new NiCanInterface("CAN0", false, txId, rxId, baudRate);
-            NiCanInterface.Connect();
-            NiCanInterface.BusTerminationEnable = true;
-            NiCanInterface.Open();
+
+            if (itfType == "NICAN")
+            {
+                NiCanInterface = new NiCanInterface(itf, false, txId, rxId, baudRate);
+                NiCanInterface.Connect();
+                NiCanInterface.Open();
+
+            }
+            else if (itfType == "XNET")
+            {
+                var jah = new XnetInterface(itf, false, txId, rxId, baudRate);
+            }
+
+
 
 
             MainForm.WriteEnabled = false;
 
             var network = new Iso15765NetwrorkLayer(NiCanInterface);
             network.ReadTimeoutMs = 1000;
-            network.Log = Settings.Default.LogEnable;
-            Settings.Default.LogPath  = AppConstants.LogPath + "_" + DateTime.Now.ToString(AppConstants.FileNameTimestampFormat) + ".txt";
-            network.LogPath = Settings.Default.LogPath;
 
             var dfu = new AppDfu(network);
             
@@ -138,7 +122,7 @@ namespace MALT200817.DFU
             };
             
 
-            byte[] firmware =  Tools.OpenFile(Settings.Default.LastPath);
+            byte[] firmware =  Tools.OpenFile(_firmwareFilePath);
             dfu.Begin(firmware);
 
             Action syncCompleted = () =>{
@@ -165,17 +149,17 @@ namespace MALT200817.DFU
         private void ButtonBrowse_Click(object sender, EventArgs e)
         {
             var ofd =  new OpenFileDialog();
-            if (string.IsNullOrEmpty(Settings.Default.LastPath))
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (string.IsNullOrEmpty(_firmwareFilePath))
+                ofd.InitialDirectory = AppConfiguration.Instance.DfuApp.FirmwareDirecotry;
             else
-                ofd.InitialDirectory = Settings.Default.LastPath;
+                ofd.InitialDirectory = _firmwareFilePath;
             ofd.Filter = AppConstants.FileFilter;
             ofd.FilterIndex = 1;
             ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.LastPath = ofd.FileName;
-                MainForm.FileName = System.IO.Path.GetFileName(Settings.Default.LastPath);
+                _firmwareFilePath = ofd.FileName;
+                MainForm.FileName = System.IO.Path.GetFileName(_firmwareFilePath);
             }
         }
     }

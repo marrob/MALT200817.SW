@@ -9,7 +9,7 @@
         [MarshalAs(UnmanagedType.U8)]
         public UInt64 Timestamp;
         [MarshalAs(UnmanagedType.U4)]
-        public UInt32 Id;
+        public UInt32 ArbitrationId;
         [MarshalAs(UnmanagedType.U1)]
         public Byte Type;
         [MarshalAs(UnmanagedType.U1)]

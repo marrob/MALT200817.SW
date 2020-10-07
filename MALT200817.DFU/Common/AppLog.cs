@@ -1,13 +1,14 @@
 ﻿
-namespace Konvolucio.MUDS150628
+namespace MALT200817.DFU.Common
 {
     using System;
     using System.IO;
     using System.Text;
+    using Configuration;
 
-    public class IoLog
+    public class AppLog
     {
-        public static IoLog Instance { get; } = new IoLog();
+        public static AppLog Instance { get; } = new AppLog();
 
         public string FilePath { get; set; }
         public bool Enabled;
@@ -26,7 +27,7 @@ namespace Konvolucio.MUDS150628
             }
         }
 
-        public IoLog()
+        public AppLog()
         {
             Enabled = true;
             FilePath = "IoLog.txt";
@@ -44,9 +45,9 @@ namespace Konvolucio.MUDS150628
                     }
                     else
                     {
-                        line = DateTime.Now.ToString(Constants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + Constants.NewLine;
+                        line = DateTime.Now.ToString(AppConstants.GenericTimestampFormat, System.Globalization.CultureInfo.InvariantCulture) + ";" + line + AppConstants.NewLine;
                         var fileWrite = new StreamWriter(FilePath, true, Encoding.ASCII);
-                        fileWrite.NewLine = Constants.NewLine;
+                        fileWrite.NewLine = AppConstants.NewLine;
                         fileWrite.Write(line);
                         fileWrite.Flush();
                         fileWrite.Close();

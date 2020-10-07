@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
+﻿
 
 /**
  * Attention!!!
@@ -11,6 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace Konvolucio.MUDS150628.NiCanApi
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Runtime.InteropServices;
+
     // only functions and constants related to NI-CAN USB-8473 (Frame API)
     // consult Nican.h for more info, in order to run properly file Nican.dll should stay beside your.exe
     // USB-8473 support only Frame API, Only CAN Network Interface Object (no CAN Object like CANx::STDxx), 

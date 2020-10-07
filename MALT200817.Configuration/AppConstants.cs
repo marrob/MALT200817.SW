@@ -16,5 +16,6 @@
         public const string NewLine = "\r\n";
         public const string CsvFileSeparator = ",";
         public static string LogDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string DefaultFirmwareDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + SoftwareCustomer + "\\"  + "MALT200817" + "\\" + "Firmwares";
     }
 }

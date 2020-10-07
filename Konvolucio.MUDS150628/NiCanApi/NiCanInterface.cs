@@ -1,27 +1,22 @@
 ﻿
-namespace Konvolucio.MUDS150628
+namespace Konvolucio.MUDS150628.NiCanApi
 {
     using System;
-    using System.ComponentModel;
-    using NiCanApi;
-    using System.Collections.Generic;
-
 
     public class NiCanInterface : IPhysicalLink, IDisposable
     {
 
-        uint _handle = 0;
+        uint Handle = 0;
 
         public bool ExtendedId { get; private set; }
         public string Interface { get; private set; }
         public bool IsConnected { get; private set; }
-        public UInt32 TransmittId { get; private set; }
-        public UInt32 ReceiveId { get; private set; }
-        public UInt32 BaudRate { get; private set; }
-        public bool BusTerminationEnable { get; set; }
+        public int TransmittId { get; private set; }
+        public int ReceiveId { get; private set; }
+        public int BaudRate { get; private set; }
         bool _disposed = false;
 
-        public NiCanInterface(string canItf, bool extid, UInt32 transmittId, UInt32 receiveId, UInt32 baudRate)
+        public NiCanInterface(string canItf, bool extid, int transmittId, int receiveId, int baudRate)
         {
             ExtendedId = extid;
             Interface = canItf;
@@ -30,7 +25,7 @@ namespace Konvolucio.MUDS150628
             BaudRate = baudRate;
         }
 
-        public NiCanInterface(string canItf, UInt32 baudRate)
+        public NiCanInterface(string canItf, int baudRate)
         {
             Interface = canItf;
             BaudRate = baudRate;
@@ -59,7 +54,7 @@ namespace Konvolucio.MUDS150628
 
             if (disposing)
             {
-                NiCanTools.Close(_handle);
+                NiCanTools.Close(Handle);
             }
             _disposed = true;
         }
@@ -71,22 +66,22 @@ namespace Konvolucio.MUDS150628
 
         public void Open()
         {
-            _handle = NiCanTools.Open(Interface, BaudRate);
-            IoLog.Instance.WirteLine("Open");
+            Handle = NiCanTools.Open(Interface, BaudRate);
+            IoLog.Instance.WriteLine("Open");
         }
 
         public void Close()
         {
-            NiCanTools.Close(_handle);
-            IoLog.Instance.WirteLine("Close");
+            NiCanTools.Close(Handle);
+            IoLog.Instance.WriteLine("Close");
         }
         public void Write(byte[] data)
         {
             var niTx = new NiCan.NCTYPE_CAN_FRAME();
             if (ExtendedId)
-                niTx.ArbitrationId = TransmittId | 0x20000000;
+                niTx.ArbitrationId = (UInt32)TransmittId | 0x20000000;
             else
-                niTx.ArbitrationId = TransmittId;
+                niTx.ArbitrationId = (UInt32)TransmittId;
             niTx.DataLength = 8;
             niTx.IsRemote = NiCan.NC_FALSE;
             niTx.Data0 = data[0];
@@ -97,15 +92,15 @@ namespace Konvolucio.MUDS150628
             niTx.Data5 = data[5];
             niTx.Data6 = data[6];
             niTx.Data7 = data[7];
-            NiCan.ncWrite(_handle, NiCan.CanFrameSize, ref niTx);
-            IoLog.Instance.WirteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
+            NiCan.ncWrite(Handle, NiCan.CanFrameSize, ref niTx);
+            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
         }
 
-        public void Read(out byte[] data, int tiemoutMs)
+        public byte[] Read(int tiemoutMs)
         {
             int items = 0;
             long startTick = DateTime.Now.Ticks;
-            data = null;
+            byte[] data = null;
             var rx = new NiCan.NCTYPE_CAN_STRUCT();
             bool isFound = false;
             do
@@ -113,12 +108,12 @@ namespace Konvolucio.MUDS150628
                 if (DateTime.Now.Ticks - startTick > tiemoutMs * 10000)
                     throw new Iso15765TimeoutException("P2 Max Expired,Read Timeout.");
 
-                items = NiCanTools.ReadPending(_handle);
+                items = NiCanTools.ReadPending(Handle);
                 if (items != 0)
                 {
                     for (int i = 0; i < items; i++)
                     {
-                        NiCanTools.NiCanStatusCheck(NiCan.ncRead(_handle, NiCan.CanStructSize, ref rx));
+                        NiCanTools.NiCanStatusCheck(NiCan.ncRead(Handle, NiCan.CanStructSize, ref rx));
                         UInt32 arbId = rx.ArbitrationId & 0x1FFFFFFF;
                         byte[] datatemp = new byte[]
                         {   rx.Data0,
@@ -131,7 +126,7 @@ namespace Konvolucio.MUDS150628
                             rx.Data7, };
                         data = new byte[rx.DataLength];
                         Buffer.BlockCopy(datatemp, 0, data, 0, rx.DataLength);
-                        IoLog.Instance.WirteLine("Rx: 0x" + arbId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
+                        IoLog.Instance.WriteLine("Rx: 0x" + arbId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
                         if (arbId == ReceiveId)
                         {
                             isFound = true;
@@ -140,19 +135,21 @@ namespace Konvolucio.MUDS150628
                 }
 
             } while (!isFound);
+
+            return data;
         }
 
         public void RestartCard(byte moduleAddress)
         {
-            IoLog.Instance.WirteLine("Restart Module:" + moduleAddress);
+            IoLog.Instance.WriteLine("Restart Module:" + moduleAddress);
             var niTx = new NiCan.NCTYPE_CAN_FRAME();
             niTx.ArbitrationId = 0x1558FFFF | 0x20000000;
             niTx.DataLength = 2;
             niTx.IsRemote = NiCan.NC_FALSE;
             niTx.Data0 = 0xAA;
             niTx.Data1 = moduleAddress;
-            NiCan.ncWrite(_handle, NiCan.CanFrameSize, ref niTx);
-            IoLog.Instance.WirteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " "
+            NiCan.ncWrite(Handle, NiCan.CanFrameSize, ref niTx);
+            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " "
                 + Tools.ByteArrayToCStyleString(new byte[] { niTx.Data0, niTx.Data1 }));
         }
 

@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 
 namespace Konvolucio.MUDS150628
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using NiCanApi;
+
     class Program
     {
 
         static void Main(string[] args)
         {
-            UInt32 txId = 0x603;
-            UInt32 rxId = 0x703;
-            UInt32 baudRate = 250000;
+            int txId = 0x603;
+            int rxId = 0x703;
+            int baudRate = 250000;
             var canLink = new NiCanInterface("CAN0", false, txId, rxId, baudRate);
             canLink.Connect();
-            canLink.BusTerminationEnable = true;
+           // canLink.BusTerminationEnable = true;
             canLink.Open();
 
             var network = new Iso15765NetwrorkLayer(canLink);

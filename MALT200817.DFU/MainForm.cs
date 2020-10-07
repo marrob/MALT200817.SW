@@ -30,7 +30,6 @@ namespace MALT200817.DFU
         string FileName { get; set; }
 
         int PoregressValue { get; set; }
-        bool LogEnable { get; set; }
 
         byte Address { get; set; }
 
@@ -39,7 +38,6 @@ namespace MALT200817.DFU
         bool WriteEnabled { get; set; }
 
         int LastWriteTimeMs { get; set; }
-        uint Baudrate { get; set; }
 
         //ToolStripItem[] MenuBar { set; }
         //ToolStripItem[] StatusBar { set; }
@@ -72,10 +70,6 @@ namespace MALT200817.DFU
             remove { buttonBrowse.Click -= value; }
         }
 
-        public bool LogEnable{
-            get { return checkBoxLogEnable.Checked; }
-            set { checkBoxLogEnable.Checked = value; }
-        }
 
         public int PoregressValue
         {
@@ -116,23 +110,15 @@ namespace MALT200817.DFU
             set { toolStripStatusLabelLastWrite.Text = value.ToString(); }
         }
 
-        public uint Baudrate
-        {
-            get { return uint.Parse(comboBox1.SelectedValue.ToString()); }
-            set { comboBox1.SelectedItem = Constants.Baudrate.FirstOrDefault(n => n.Value == value); }
-        }
 
         public MainForm() 
         {
-            InitializeComponent();   
-            comboBox1.DataSource = new BindingSource(Constants.Baudrate, null);
-            comboBox1.DisplayMember = "Key";
-            comboBox1.ValueMember = "Value";
+           InitializeComponent();   
         }
 
         private void buttonOpenLog_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.LogPath);
+           // Process.Start(Settings.Default.LogPath);
         }
 
         private void buttonRestart_Click(object sender, EventArgs e)

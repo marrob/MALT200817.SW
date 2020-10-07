@@ -53,14 +53,14 @@ namespace Konvolucio.MUDS150628.NiCanApi
 
 
 
-        public static uint Open(string canInterface, uint baudrate)
+        public static uint Open(string canInterface, int baudrate)
         {
             int status = 0;
             uint handle = 0;
 
             /*** Config ***/
             uint[] AttrIdList = { NiCan.NC_ATTR_BAUD_RATE, NiCan.NC_ATTR_START_ON_OPEN };
-            uint[] AttrValueList = { baudrate, NiCan.NC_FALSE };
+            uint[] AttrValueList = { (UInt32)baudrate, NiCan.NC_FALSE };
             uint NumAttrs = 2;
             status = NiCan.ncConfig(new StringBuilder(canInterface), NumAttrs, AttrIdList, AttrValueList);
             if (status != 0)

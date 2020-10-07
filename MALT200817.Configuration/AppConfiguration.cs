@@ -20,6 +20,9 @@
         public bool LogExplorerEnabled { get; set; }
         public bool ExplorerDeviceListAutoUpdate { get; set; }
         public string DefaultUserName { get; set; }
+
+        public DfuAppConfiguration DfuApp { get; set; }
+
         public UserCollection Users { get; set; }
 
         private static Type[] SupportedTypes
@@ -28,6 +31,7 @@
             {
                 return new Type[]
                 {
+                    typeof(DfuAppConfiguration),
                     typeof(UserRole),
                     typeof(UserItem),
                     typeof(UserCollection),
@@ -38,7 +42,7 @@
 
         public AppConfiguration()
         {
-
+          
         }
 
         public static AppConfiguration Instance { get; } = new AppConfiguration();
@@ -66,6 +70,13 @@
                 Instance.LogExplorerEnabled = false;
                 Instance.DefaultUserName = "Default Admin";
                 Instance.ExplorerDeviceListAutoUpdate = true;
+
+                Instance.DfuApp = new DfuAppConfiguration();
+                Instance.DfuApp.CanBusInterfaceType = "NICAN";
+                Instance.DfuApp.CanBusInterfaceName = "CAN1";
+                Instance.DfuApp.CanBusBaudrate = 250000;
+                Instance.DfuApp.RxBaseAddress = 0x600;
+                Instance.DfuApp.TxBaseAddress = 0x700;
 
                 Instance.Users = new UserCollection();
 
@@ -111,9 +122,20 @@
             Instance.ExplorerDeviceListAutoUpdate = instance.ExplorerDeviceListAutoUpdate;
             Instance.DefaultUserName = instance.DefaultUserName;
 
+            Instance.DfuApp = new DfuAppConfiguration();
+
+            Instance.DfuApp.CanBusInterfaceType = instance.DfuApp.CanBusInterfaceType;
+            Instance.DfuApp.CanBusInterfaceName = instance.DfuApp.CanBusInterfaceName;
+            Instance.DfuApp.CanBusBaudrate = instance.DfuApp.CanBusBaudrate;
+            Instance.DfuApp.RxBaseAddress = instance.DfuApp.RxBaseAddress;
+            Instance.DfuApp.TxBaseAddress = instance.DfuApp.TxBaseAddress;
+
+
             Instance.Users = new UserCollection();
             foreach (UserItem i in instance.Users)
                 Instance.Users.Add(i);
+
+            
 
 
             Instance.Users.Add(new UserItem()

@@ -3,101 +3,144 @@
     using System;
     using NiXnetDotNet;
     using System.Runtime.InteropServices;
-    using Common;
-  
-
-    public class XnetInterface : ICanInterface
+ 
+    public class XnetInterface : IPhysicalLink, IDisposable
     {
-        private NiXnetSession SessionIn = null;
-        nxFrame[] BufferIn;
-        IntPtr PtrBuffRIn;
-        bool Disposed;
+        public bool ExtendedId { get; private set; }
+        public string Interface { get; private set; }
+        public bool IsConnected { get; private set; }
+        public int TransmittId { get; private set; }
+        public int ReceiveId { get; private set; }
+        public int BaudRate { get; private set; }
+
+        private NiXnetSession _sessionIn = null;
+        XnetFrame[] _bufferIn;
+        IntPtr _ptrBuffRIn;
+        bool _disposed = false;
 
 
-        private NiXnetSession SessionOut = null;
-        nxFrame[] BufferOut;
-        IntPtr PtrBufferOut;
+        private NiXnetSession _sessionOut = null;
+        XnetFrame[] _bufferOut;
+        IntPtr _ptrBufferOut;
 
-        public void Init(UInt64 baudrate, string intfName)
+        public XnetInterface(string canItfName, bool extid, int transmittId, int receiveId, int baudRate)
         {
-            SessionIn = new NiXnetSession(":memory:", "", Array.Empty<string>(), intfName, NiXnetMode.FrameInStream);
-            SessionIn.BaudRate64 = baudrate;
-            BufferIn = new nxFrame[100];
-            GCHandle gchIn = GCHandle.Alloc(BufferIn, GCHandleType.Pinned);
-            PtrBuffRIn = gchIn.AddrOfPinnedObject();
-
-
-            BufferOut = new nxFrame[2];
-            SessionOut = new NiXnetSession(":memory:", "", Array.Empty<string>(), intfName, NiXnetMode.FrameOutStream);
-            SessionOut.BaudRate64 = baudrate;
-            GCHandle gchOut = GCHandle.Alloc(BufferOut, GCHandleType.Pinned);
-            PtrBufferOut = gchOut.AddrOfPinnedObject();
-
-            SessionIn.Start(NiXnetScope.Normal);
-            SessionOut.Start(NiXnetScope.Normal);
-
+            ExtendedId = extid;
+            Interface = canItfName;
+            TransmittId = transmittId;
+            ReceiveId = receiveId;
+            BaudRate = baudRate;
         }
 
-        public CanMsg[] ReadFrame()
+        public void Open()
+        {
+            _sessionIn = new NiXnetSession(":memory:", "", Array.Empty<string>(), Interface, NiXnetMode.FrameInStream);
+            _sessionIn.BaudRate64 = (ulong)BaudRate;
+            _bufferIn = new XnetFrame[100];
+            GCHandle gchIn = GCHandle.Alloc(_bufferIn, GCHandleType.Pinned);
+            _ptrBuffRIn = gchIn.AddrOfPinnedObject();
+
+
+            _bufferOut = new XnetFrame[2];
+            _sessionOut = new NiXnetSession(":memory:", "", Array.Empty<string>(), Interface, NiXnetMode.FrameOutStream);
+            _sessionOut.BaudRate64 = (ulong)BaudRate;
+            GCHandle gchOut = GCHandle.Alloc(_bufferOut, GCHandleType.Pinned);
+            _ptrBufferOut = gchOut.AddrOfPinnedObject();
+
+            _sessionIn.Start(NiXnetScope.Normal);
+            _sessionOut.Start(NiXnetScope.Normal);
+        }
+
+        public XnetFrame[] ReadFrame()
         {
             UInt32 readBytes = 0;
-            var frames = new CanMsg[0];
+            var frames = new XnetFrame[0];
 
             unsafe
             {
-                SessionIn.ReadFrame((void*)PtrBuffRIn, (uint)BufferIn.Length * (uint)sizeof(nxFrame), 0, &readBytes);
-                var framesCnt = readBytes / sizeof(nxFrame);
-                frames = new CanMsg[framesCnt];
+                _sessionIn.ReadFrame((void*)_ptrBuffRIn, (uint)_bufferIn.Length * (uint)sizeof(XnetFrame), 0, &readBytes);
+                var framesCnt = readBytes / sizeof(XnetFrame);
+                frames = new XnetFrame[framesCnt];
 
                 for (int i = 0; i < framesCnt; i++)
                 {
-                    frames[i].Id = BufferIn[i].Id;
-                    frames[i].Length = BufferIn[i].Length;
-                    frames[i].Payload = BufferIn[i].Payload;
+                    frames[i].ArbitrationId = _bufferIn[i].ArbitrationId;
+                    frames[i].Length = _bufferIn[i].Length;
+                    frames[i].Payload = _bufferIn[i].Payload;
                 }
-
             }
             return frames;
         }
 
-        public void WriteFrame(CanMsg[] frames)
+        public void WriteFrame(XnetFrame[] frames)
         {
-            if (frames.Length > BufferOut.Length)
+            if (frames.Length > _bufferOut.Length)
                 throw new ApplicationException("XNET Buffer Out too small.");
 
             for (int i = 0; i < frames.Length; i++)
             {
-                BufferOut[i].Id = frames[i].Id;
-                BufferOut[i].Length = (byte)frames[i].Length;
-                BufferOut[i].Payload = frames[i].Payload;
+                _bufferOut[i].ArbitrationId = frames[i].ArbitrationId;
+                _bufferOut[i].Length = (byte)frames[i].Length;
+                _bufferOut[i].Payload = frames[i].Payload;
             }
 
             unsafe
             {
-                SessionOut.WriteFrame((void*)PtrBufferOut, (uint)frames.Length * (uint)sizeof(nxFrame), 10000);
+                _sessionOut.WriteFrame((void*)_ptrBufferOut, (uint)frames.Length * (uint)sizeof(XnetFrame), 10000);
             }
         }
 
         public void Dispose()
         {
-            SessionIn.Stop(NiXnetScope.Normal);
-            SessionOut.Stop(NiXnetScope.Normal);
+            _sessionIn.Stop(NiXnetScope.Normal);
+            _sessionOut.Stop(NiXnetScope.Normal);
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)
         {
-            if (Disposed)
+            if (_disposed)
                 return;
 
             if (disposing)
             {
-                SessionIn.Dispose();
-                SessionOut.Dispose();
+                _sessionIn.Dispose();
+                _sessionOut.Dispose();
 
             }
-            Disposed = true;
+            _disposed = true;
+        }
+
+        public void Write(byte[] data)
+        {
+            XnetFrame niTx = new XnetFrame();
+   
+            if (ExtendedId)
+                niTx.ArbitrationId = (uint)TransmittId | 0x20000000;
+            else
+                niTx.ArbitrationId = (uint)TransmittId;
+            niTx.SetPayload(data);
+            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
+
+            WriteFrame(new XnetFrame[] { niTx });
+        }
+
+        public byte[] Read(int tiemoutMs)
+        {
+            long startTick = DateTime.Now.Ticks;
+            do
+            {
+                if (DateTime.Now.Ticks - startTick > tiemoutMs * 10000)
+                    throw new Iso15765TimeoutException("P2 Max Expired,Read Timeout.");
+
+                foreach (XnetFrame frame in ReadFrame())
+                {
+                    var data = frame.GetPayload();
+                    IoLog.Instance.WriteLine("Rx: 0x" + frame.ArbitrationId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
+                    return data;
+                }
+            } while (true);
         }
     }
 }

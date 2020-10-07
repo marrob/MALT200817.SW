@@ -50,7 +50,7 @@
 
                 for (int i = 0; i < framesCnt; i++)
                 {
-                    frames[i].Id = BufferIn[i].Id;
+                    frames[i].Id = BufferIn[i].ArbitrationId;
                     frames[i].Length = BufferIn[i].Length;
                     frames[i].Payload = BufferIn[i].Payload;
                 }
@@ -66,7 +66,7 @@
 
             for (int i = 0; i < frames.Length; i++)
             {
-                BufferOut[i].Id = frames[i].Id;
+                BufferOut[i].ArbitrationId = frames[i].Id;
                 BufferOut[i].Length = (byte)frames[i].Length;
                 BufferOut[i].Payload = frames[i].Payload;
             }
