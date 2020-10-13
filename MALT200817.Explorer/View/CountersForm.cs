@@ -42,22 +42,35 @@
             Counters = new BindingList<CounterItem>();
             knvDataGridView1.DataSource = Counters;
 
+            if (App.CurrentUser.Role == UserRole.DEVELOPER ||
+                App.CurrentUser.Role == UserRole.DEVELOPER)
+            ModeAdmin();
+                else
+            ModeOperartor();
+        
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)
             (e => {
 
                 if (e.User.Role == UserRole.ADMINISTRATOR ||
                    e.User.Role == UserRole.DEVELOPER)
-                {
-                    ToolStripMenuItemSave.Visible = true;
-                    ToolStripMenuItemReset.Visible = true;
-                }
+                    ModeAdmin();
                 else
-                {
-                    ToolStripMenuItemSave.Visible = false;
-                    ToolStripMenuItemReset.Visible = false;
-                }
+                    ModeOperartor();
             }));
         }
+
+        void ModeOperartor()
+        {
+            ToolStripMenuItemSave.Visible = false;
+            ToolStripMenuItemReset.Visible = false;
+        }
+
+        void ModeAdmin()
+        {
+            ToolStripMenuItemSave.Visible = true;
+            ToolStripMenuItemReset.Visible = true;
+        }
+
         private void CountersForm_Load(object sender, EventArgs e)
         {
             _deviceItem = Devices.Library.Search(FamilyCode, OptionCode);

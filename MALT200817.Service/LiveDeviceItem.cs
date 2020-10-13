@@ -7,10 +7,6 @@ namespace MALT200817.Service
     using Common;
     using MALT200817.Library;
 
-
-
-
-
     public class LiveDeviceItem
     {
         public int FamilyCode { get; private set; }

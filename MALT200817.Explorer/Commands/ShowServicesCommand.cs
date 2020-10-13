@@ -13,7 +13,7 @@ namespace MALT200817.Explorer.Commands
         {
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
-            Text = "Show Services";
+            Text = "Services";
         }
 
         protected override void OnClick(EventArgs e)

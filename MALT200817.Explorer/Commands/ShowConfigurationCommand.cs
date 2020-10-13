@@ -13,7 +13,7 @@ namespace MALT200817.Explorer.Commands
         {
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
-            Text = "Show Configuration";
+            Text = "Configuration";
 
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)
             (e => {

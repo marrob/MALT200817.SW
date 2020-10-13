@@ -1,6 +1,7 @@
 ﻿namespace MALT200817.Configuration
 {
     using System;
+    using System.Data;
     using System.IO;
     using System.Xml.Serialization;
 
@@ -8,6 +9,8 @@
     {
         const string XmlRootElement = "malt_project";
         const string XmlNamespace = @"http://www.altontech.hu/malt/2020/project/content";
+
+        public static string CurrentPath { get; private set; }
 
         public string CanBusInterfaceType { get; set; }
         public string CanBusInterfaceName { get; set; }
@@ -77,6 +80,8 @@
                 Instance.DfuApp.CanBusBaudrate = 250000;
                 Instance.DfuApp.RxBaseAddress = 0x600;
                 Instance.DfuApp.TxBaseAddress = 0x700;
+                Instance.DfuApp.LogEnable = false;
+                Instance.DfuApp.FirmwareDirecotry = AppConstants.DefaultFirmwareDirectory;
 
                 Instance.Users = new UserCollection();
 
@@ -103,8 +108,15 @@
             }
         }
 
+        public static void Update()
+        {
+            LoadFromFile(CurrentPath);
+        }
+
         static void LoadFromFile(string path)
         {
+            CurrentPath = path;
+
             var xmlFormat = new XmlSerializer(typeof(AppConfiguration), null, SupportedTypes, new XmlRootAttribute(XmlRootElement), XmlNamespace);
             AppConfiguration instance;
             using (Stream fStream = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -129,6 +141,8 @@
             Instance.DfuApp.CanBusBaudrate = instance.DfuApp.CanBusBaudrate;
             Instance.DfuApp.RxBaseAddress = instance.DfuApp.RxBaseAddress;
             Instance.DfuApp.TxBaseAddress = instance.DfuApp.TxBaseAddress;
+            Instance.DfuApp.LogEnable = instance.DfuApp.LogEnable;
+            Instance.DfuApp.FirmwareDirecotry = instance.DfuApp.FirmwareDirecotry;
 
 
             Instance.Users = new UserCollection();

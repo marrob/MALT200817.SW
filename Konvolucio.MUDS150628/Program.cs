@@ -17,12 +17,11 @@ namespace Konvolucio.MUDS150628
             int rxId = 0x703;
             int baudRate = 250000;
             var canLink = new NiCanInterface("CAN0", false, txId, rxId, baudRate);
-            canLink.Connect();
            // canLink.BusTerminationEnable = true;
             canLink.Open();
 
             var network = new Iso15765NetwrorkLayer(canLink);
-            network.Log = false;
+            network.LogEnabled = false;
             var dfu = new AppDfu(network);
             IoLog.Instance.FilePath = @"D:\io_log.txt";
             Console.WriteLine("LogPath:" +  IoLog.Instance.FilePath);

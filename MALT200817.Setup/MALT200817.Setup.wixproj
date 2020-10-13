@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Application_Dfu_Components.wxs" />
+    <Compile Include="Registry_Components.wxs" />
     <Compile Include="Firmwares_Components.wxs" />
     <Compile Include="Library_Components.wxs" />
     <Compile Include="Service_Components.wxs" />

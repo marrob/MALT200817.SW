@@ -53,7 +53,7 @@
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(711, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(354, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,7 +68,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.devicesViewControl1);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(711, 459);
+            this.splitContainer1.Size = new System.Drawing.Size(354, 432);
             this.splitContainer1.SplitterDistance = 338;
             this.splitContainer1.TabIndex = 8;
             // 
@@ -77,7 +77,7 @@
             this.devicesViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesViewControl1.Location = new System.Drawing.Point(0, 0);
             this.devicesViewControl1.Name = "devicesViewControl1";
-            this.devicesViewControl1.Size = new System.Drawing.Size(711, 459);
+            this.devicesViewControl1.Size = new System.Drawing.Size(354, 432);
             this.devicesViewControl1.TabIndex = 0;
             // 
             // statusStrip2
@@ -93,10 +93,10 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabelVersion,
             this.toolStripStatusLabelLogo});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 483);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 456);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.ShowItemToolTips = true;
-            this.statusStrip2.Size = new System.Drawing.Size(711, 24);
+            this.statusStrip2.Size = new System.Drawing.Size(354, 24);
             this.statusStrip2.TabIndex = 9;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -168,7 +168,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(378, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(21, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -194,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 507);
+            this.ClientSize = new System.Drawing.Size(354, 480);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip2);

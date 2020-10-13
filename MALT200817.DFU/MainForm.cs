@@ -12,6 +12,8 @@ namespace MALT200817.DFU
     using System.Windows.Forms;
     using Properties;
     using Konvolucio.MUDS150628;
+    using Common;
+    using Configuration;
 
     public interface IMainForm
     {
@@ -19,12 +21,15 @@ namespace MALT200817.DFU
         event EventHandler Shown;
         event FormClosedEventHandler FormClosed;
         event FormClosingEventHandler FormClosing;
-
+        event EventHandler BtnConnectClick;
+        event EventHandler<int> DeviceRestart;
         event EventHandler Disposed;
 
         event EventHandler WriteEventHandler;
-        event EventHandler DeviceRestart;
         event EventHandler FileBrowseEventHandler;
+        event EventHandler ShowConfiguration;
+
+        ConnectionStatusTypes ConnectionStatus { get; set; }
 
         string Text { get; set; }
         string FileName { get; set; }
@@ -37,26 +42,50 @@ namespace MALT200817.DFU
 
         bool WriteEnabled { get; set; }
 
-        int LastWriteTimeMs { get; set; }
-
-        //ToolStripItem[] MenuBar { set; }
-        //ToolStripItem[] StatusBar { set; }
-        //bool AlwaysOnTop { get; set; }
-
-
-        //event KeyEventHandler KeyUp;
-        //event HelpEventHandler HelpRequested; /*????*/
-
-        //void CursorWait();
-        //void CursorDefault();
+        string Version { get; set; }
     }
 
     public partial class MainForm : Form, IMainForm
     {
-        public event EventHandler DeviceRestart
+        public event EventHandler BtnConnectClick
         {
-            add { buttonRestart.Click += value; }
-            remove { buttonRestart.Click -= value; }
+            add { buttonConnect.Click += value; }
+            remove { buttonConnect.Click -= value; }
+        }
+
+        public event EventHandler<int> DeviceRestart;
+        public event EventHandler ShowConfiguration;
+
+        public string Version 
+        {
+            get { return toolStripStatusLabelVersion.Text; }
+            set { toolStripStatusLabelVersion.Text = value; }
+        }
+
+        public ConnectionStatusTypes ConnectionStatus
+        {
+            get { return (ConnectionStatusTypes)Enum.Parse(typeof(ConnectionStatusTypes), buttonConnect.Text); }
+            set 
+            {
+                buttonConnect.Text = value.ToString();
+                if (value == ConnectionStatusTypes.Connected)
+                {
+                    buttonConfig.Enabled = false;
+                    buttonBrowse.Enabled = false;
+                    NumericUpDownAddress.Enabled = false;
+                    buttonRestart.Enabled = true;
+                    buttonWrite.Enabled = true;                   
+                }
+                else
+                {
+                    buttonConfig.Enabled = true;
+                    buttonBrowse.Enabled = true;
+                    NumericUpDownAddress.Enabled = true;
+                    buttonRestart.Enabled = false;
+                    buttonWrite.Enabled = false;
+
+                }
+            }
         }
 
         public event EventHandler WriteEventHandler
@@ -69,7 +98,6 @@ namespace MALT200817.DFU
             add { buttonBrowse.Click += value; }
             remove { buttonBrowse.Click -= value; }
         }
-
 
         public int PoregressValue
         {
@@ -104,26 +132,33 @@ namespace MALT200817.DFU
             }
         }
 
-        public int LastWriteTimeMs
-        {
-            get { return int.Parse(toolStripStatusLabelLastWrite.Text);  }
-            set { toolStripStatusLabelLastWrite.Text = value.ToString(); }
-        }
-
 
         public MainForm() 
         {
            InitializeComponent();   
         }
 
-        private void buttonOpenLog_Click(object sender, EventArgs e)
+        private void TextFileName_TextChanged(object sender, EventArgs e)
         {
-           // Process.Start(Settings.Default.LogPath);
+            if (textFileName.Text.Length != 0)
+                buttonWrite.Enabled = true;
+            else
+                buttonWrite.Enabled = false;
+        }
+
+        private void ButtonConfig_Click(object sender, EventArgs e)
+        {
+            ShowConfiguration?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void ButtonLogs_Click(object sender, EventArgs e)
+        {
+            Tools.OpenFolder(AppConfiguration.Instance.LogDirectory);
         }
 
         private void buttonRestart_Click(object sender, EventArgs e)
         {
-
+            DeviceRestart?.Invoke(this, Address);
         }
     }
 }

@@ -61,6 +61,7 @@
         public static SynchronizationContext SyncContext = null;
         readonly System.Windows.Forms.Timer Timer;
         public static string Name = "MALT Explorer";
+        public static UserItem CurrentUser;
 
         public App()
         {
@@ -79,6 +80,7 @@
             MainForm.FormClosing += MainForm_FormClosing;
             MainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
             MainForm.Login += MainForm_Login;
+            
 
             /*** MALT TCP Client ***/
             DevicePresenter = new DevicePresenter(MainForm.DevicesDgv);
@@ -112,7 +114,6 @@
             MainForm.MenuBar = new ToolStripItem[]
                 {
                     toolsMenu,
-                //    viewMenu,
                     diagMenu,
                 };
 
@@ -130,6 +131,7 @@
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>) (e1 =>
             {
                 MainForm.Text = Name + " - " + e1.User.Name;
+                CurrentUser = e1.User;
             }));
 
             /*** Run ***/
@@ -190,10 +192,20 @@
             /*Ö tölti be a projectet*/
     
             EventAggregator.Instance.Publish(new ShowAppEvent());
+
+            /*** Default User ***/
             var defUsr = AppConfiguration.Instance.Users.FirstOrDefault(n => n.Name == AppConfiguration.Instance.DefaultUserName);
             if (defUsr != null)
-                EventAggregator.Instance.Publish(new UserChangedAppEvent(defUsr));           
-            
+            {
+                EventAggregator.Instance.Publish(new UserChangedAppEvent(defUsr));
+            }
+            else
+            {
+                var jonDoe = new UserItem() { Name = "Jhon Doe", Role = UserRole.OPERATOR, Password = "" };
+                EventAggregator.Instance.Publish(new UserChangedAppEvent(jonDoe));
+            }
+
+
             Start(Environment.GetCommandLineArgs());
         }
 

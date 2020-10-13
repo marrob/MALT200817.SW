@@ -14,6 +14,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
         public int TransmittId { get; private set; }
         public int ReceiveId { get; private set; }
         public int BaudRate { get; private set; }
+    
         bool _disposed = false;
 
         public NiCanInterface(string canItf, bool extid, int transmittId, int receiveId, int baudRate)
@@ -29,11 +30,6 @@ namespace Konvolucio.MUDS150628.NiCanApi
         {
             Interface = canItf;
             BaudRate = baudRate;
-        }
-
-        public void Connect()
-        {
-
         }
 
         public void Disconnect()
@@ -139,15 +135,15 @@ namespace Konvolucio.MUDS150628.NiCanApi
             return data;
         }
 
-        public void RestartCard(byte moduleAddress)
+        public void DeviceRestart(int address)
         {
-            IoLog.Instance.WriteLine("Restart Module:" + moduleAddress);
+            IoLog.Instance.WriteLine("Restart Module:" + address);
             var niTx = new NiCan.NCTYPE_CAN_FRAME();
             niTx.ArbitrationId = 0x1558FFFF | 0x20000000;
             niTx.DataLength = 2;
             niTx.IsRemote = NiCan.NC_FALSE;
             niTx.Data0 = 0xAA;
-            niTx.Data1 = moduleAddress;
+            niTx.Data1 = (byte)address;
             NiCan.ncWrite(Handle, NiCan.CanFrameSize, ref niTx);
             IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " "
                 + Tools.ByteArrayToCStyleString(new byte[] { niTx.Data0, niTx.Data1 }));

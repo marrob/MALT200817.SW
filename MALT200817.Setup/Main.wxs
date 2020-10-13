@@ -30,8 +30,10 @@
     <WixVariable Id="WixUILicenseRtf" Value=".\Resources\License.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value=".\Resources\Banner_500x70.jpg" />
     -->
-    <!-- Define App Icon -->
+    <!-- Define icons -->
     <Icon Id="AppAddRemove.ico" SourceFile=".\Resources\AppAddRemove.ico"/>
+    <Icon Id="dfu.ico" SourceFile=".\Resources\dfu.ico"/>
+    
     <!-- Set Your Installer's Icon in Add/Remove Programs -->
     <Property Id="ARPPRODUCTICON" Value="AppAddRemove.ico"/>
     <!-- Set CompoanyLink' in Add/Remove Programs -->
@@ -45,6 +47,7 @@
     <!--//Level: A Feature kikapcsolt, ha 0. Alaphelyzetben 1.  -->
     <Feature Id="AppFeature" Title="Application" Level="1" Description="Device Firmware Update Tool and Frimwares">
       <Feature Id ="App_Feature" Title="Application" Description="Firmware Upgrade Tool" Level="1">
+        <ComponentGroupRef Id ="Registry_Components"/>
         <ComponentGroupRef Id="Application_Explorer_Components"/>
         <ComponentGroupRef Id="Application_Dfu_Components"/>
         <ComponentRef Id="ProgramData_Component"/>

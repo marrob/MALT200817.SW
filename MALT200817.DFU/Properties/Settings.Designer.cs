@@ -22,5 +22,29 @@ namespace MALT200817.DFU.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastUsedAddress {
+            get {
+                return ((string)(this["LastUsedAddress"]));
+            }
+            set {
+                this["LastUsedAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastUsedPath {
+            get {
+                return ((string)(this["LastUsedPath"]));
+            }
+            set {
+                this["LastUsedPath"] = value;
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Konvolucio.MUDS150628
     using System.Text;
 
 
-    public static class Tools
+    internal static class Tools
     {
 
         /// <summary>

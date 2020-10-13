@@ -13,7 +13,7 @@ namespace MALT200817.Explorer.Commands
         {
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
-            Text = "Show Library Folder";
+            Text = "Library Folder";
 
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)
             (e => {

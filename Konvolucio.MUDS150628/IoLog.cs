@@ -5,7 +5,7 @@ namespace Konvolucio.MUDS150628
     using System.IO;
     using System.Text;
 
-    public class IoLog
+    internal class IoLog
     {
         public static IoLog Instance { get; } = new IoLog();
 

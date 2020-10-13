@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- This is how we include wxi files -->
+    <?include $(sys.CURRENTDIR)Config.wxi ?>
+    <ComponentGroup Id="Registry_Components" Directory="AppFolder" >
+     
+      <Component Id="Registry_RegistryId" Guid="{643DE78E-8BC5-4711-AD3E-A72FB21BDEBE}" >
+        <RemoveFolder Id="AppProgramsFolder" On='uninstall'  Directory='AppProgramsFolder'/>
+        <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+      </Component>
+    
+    </ComponentGroup>
+  </Fragment>
+</Wix>

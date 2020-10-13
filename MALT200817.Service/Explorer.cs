@@ -47,8 +47,10 @@
                     if (!found)
                     {
                         LiveDevices.Add(newDev);
-                        RequestSerialNumber(familyCode: data[2], address: data[3]);
                     }
+                    /*** Minden egyes bejelenkezéskor ezeket elkéri ***/
+                    RequestSerialNumber(familyCode: data[2], address: data[3]);
+                    RequestPortsStatus(familyCode: data[2], address: data[3], autosend: true);
                 }
                 /* Response Ports Status */
                 else if (data[1] == 0x04)
@@ -157,11 +159,11 @@
             }
         }
 
-        public void RequestPortsStatus(byte familyCode, byte address)
+        public void RequestPortsStatus(byte familyCode, byte address, bool autosend)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
-            msg.SetPayload(new byte[] { familyCode, 0x04, 1 });
+            msg.SetPayload(new byte[] { familyCode, 0x04, autosend? (byte)0x01 : (byte)0x00 });
             TxQueue.Enqueue(msg);
         }
 
@@ -238,7 +240,7 @@
 
             foreach (LiveDeviceItem dev in LiveDevices)
             {
-                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address);
+                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address, true);
                 RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
                 //RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
             }

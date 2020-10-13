@@ -61,16 +61,10 @@
     </Compile>
     <Compile Include="Client\LiveDeviceItem.cs" />
     <Compile Include="Client\LiveDeviceCollection.cs" />
-    <Compile Include="Commands\CountersUpdateCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Commands\DevicesConnectCommand.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\DevicesForceUpdateCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Commands\CountersSaveCommand.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\ShowServicesCommand.cs">
@@ -86,12 +80,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\AlwaysOnTopCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Commands\ColumnAutosizeCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Commands\UpdatesCommands.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Common\AppLog.cs" />

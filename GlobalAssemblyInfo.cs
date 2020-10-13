@@ -2,10 +2,10 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.0.0.43")]
-[assembly: AssemblyFileVersion("0.0.0.43")]
+[assembly: AssemblyVersion("0.0.0.46")]
+[assembly: AssemblyFileVersion("0.0.0.46")]
 
-
+/*
 [assembly: AssemblyTitle("MALT200817 Platorm softwares")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -14,3 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+*/

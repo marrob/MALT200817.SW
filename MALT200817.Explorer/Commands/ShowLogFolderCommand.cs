@@ -12,7 +12,7 @@ namespace MALT200817.Explorer.Commands
         {
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             //    Size = new System.Drawing.Size(50, 50);
-            Text = "Show Log Folder";
+            Text = "Log Folder";
         }
         protected override void OnClick(EventArgs e)
         {

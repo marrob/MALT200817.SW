@@ -17,7 +17,6 @@ namespace MALT200817.Explorer.Commands
             Text = "Always On Top";
 
             _mainForm = mainForm;
-            //   _diagnosticsView = diagnosticsView;
         }
 
         protected override void OnClick(EventArgs e)

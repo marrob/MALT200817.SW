@@ -51,6 +51,11 @@
             _sessionOut.Start(NiXnetScope.Normal);
         }
 
+        public void Close()
+        {
+            Dispose();
+        }
+
         public XnetFrame[] ReadFrame()
         {
             UInt32 readBytes = 0;
@@ -138,9 +143,25 @@
                 {
                     var data = frame.GetPayload();
                     IoLog.Instance.WriteLine("Rx: 0x" + frame.ArbitrationId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
-                    return data;
+
+                    if ((frame.ArbitrationId & 0x1FFFFFFF) == ReceiveId)
+                        return data;
                 }
             } while (true);
+        }
+
+
+        public void DeviceRestart(int address)
+        {
+            IoLog.Instance.WriteLine("Device restart, address:" + address); 
+
+             var frame = new XnetFrame(); 
+            frame.ArbitrationId = 0x1558FFFF | 0x20000000;
+            frame.Length = 2;
+            frame.SetPayload(new byte[] { 0xAA, (byte)address });
+            WriteFrame(new XnetFrame[] { frame });
+            IoLog.Instance.WriteLine("Tx: 0x" + frame.ArbitrationId.ToString("X4") + " "
+                + Tools.ByteArrayToCStyleString(frame.GetPayload()));
         }
     }
 }
