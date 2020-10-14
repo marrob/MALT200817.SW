@@ -5,9 +5,9 @@ namespace Konvolucio.MUDS150628
     using System.IO;
     using System.Text;
 
-    internal class IoLog
+    internal class AppLog
     {
-        public static IoLog Instance { get; } = new IoLog();
+        public static AppLog Instance { get; } = new AppLog();
 
         public string FilePath { get; set; }
         public bool Enabled;
@@ -26,7 +26,7 @@ namespace Konvolucio.MUDS150628
             }
         }
 
-        public IoLog()
+        public AppLog()
         {
             Enabled = true;
             FilePath = "IoLog.txt";

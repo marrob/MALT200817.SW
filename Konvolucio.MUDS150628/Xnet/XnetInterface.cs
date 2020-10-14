@@ -126,7 +126,7 @@
             else
                 niTx.ArbitrationId = (uint)TransmittId;
             niTx.SetPayload(data);
-            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
+            Log.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
 
             WriteFrame(new XnetFrame[] { niTx });
         }
@@ -142,7 +142,7 @@
                 foreach (XnetFrame frame in ReadFrame())
                 {
                     var data = frame.GetPayload();
-                    IoLog.Instance.WriteLine("Rx: 0x" + frame.ArbitrationId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
+                    Log.WriteLine("Rx: 0x" + frame.ArbitrationId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
 
                     if ((frame.ArbitrationId & 0x1FFFFFFF) == ReceiveId)
                         return data;
@@ -153,14 +153,14 @@
 
         public void DeviceRestart(int address)
         {
-            IoLog.Instance.WriteLine("Device restart, address:" + address); 
+            Log.WriteLine("Device restart, address:" + address); 
 
              var frame = new XnetFrame(); 
             frame.ArbitrationId = 0x1558FFFF | 0x20000000;
             frame.Length = 2;
             frame.SetPayload(new byte[] { 0xAA, (byte)address });
             WriteFrame(new XnetFrame[] { frame });
-            IoLog.Instance.WriteLine("Tx: 0x" + frame.ArbitrationId.ToString("X4") + " "
+            Log.WriteLine("Tx: 0x" + frame.ArbitrationId.ToString("X4") + " "
                 + Tools.ByteArrayToCStyleString(frame.GetPayload()));
         }
     }

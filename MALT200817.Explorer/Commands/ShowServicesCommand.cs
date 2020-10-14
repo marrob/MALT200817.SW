@@ -6,13 +6,14 @@ namespace MALT200817.Explorer.Commands
     using Configuration;
     using Common;
     using System.Diagnostics;
+    using Properties;
 
     class ShowServicesCommand : ToolStripButton
     {
         public ShowServicesCommand()
         {
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.services32;
             Text = "Services";
         }
 

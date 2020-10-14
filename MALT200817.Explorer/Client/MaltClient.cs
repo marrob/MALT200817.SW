@@ -71,18 +71,7 @@
                 throw ex;
             }
         }
-        /// <summary>
-        /// Ez újra kéri az eszköz listát az eszközöktől, fölösleges CAN busz terhelés!
-        /// </summary>
-        public void UpdateDevicesInfo()
-        {
-            var request = "UPDATE#DEVICES:INFO";
-            var response = WriteReadLine("UPDATE#DEVICES:INFO");
-            if (response[0] == '!')
-                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
-            if (response != "OK")
-                throw new ApplicationException(response);
-        }
+
         public LiveDeviceCollection GetDevices()
         {
             var retval = new LiveDeviceCollection();

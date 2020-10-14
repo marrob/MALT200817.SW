@@ -107,6 +107,21 @@
             return int.Parse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
         }
 
-
+        public static DateTime TimeParse (string value)
+        {
+            try
+            {
+                return  DateTime.ParseExact(value, "HH:mm", CultureInfo.InvariantCulture);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("{0}: Bad Format", value);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("{0}: Overflow", value);
+            }
+            return DateTime.MinValue;
+        }
     }
 }

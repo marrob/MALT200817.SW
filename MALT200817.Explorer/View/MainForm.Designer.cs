@@ -34,8 +34,6 @@
             this.devicesViewControl1 = new MALT200817.Explorer.View.LiveDeviceSelectorControl();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelMessage = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabelServiceStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelConnectionStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusDevicesCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -53,7 +51,7 @@
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(354, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(321, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,7 +66,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.devicesViewControl1);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(354, 432);
+            this.splitContainer1.Size = new System.Drawing.Size(321, 432);
             this.splitContainer1.SplitterDistance = 338;
             this.splitContainer1.TabIndex = 8;
             // 
@@ -77,15 +75,13 @@
             this.devicesViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesViewControl1.Location = new System.Drawing.Point(0, 0);
             this.devicesViewControl1.Name = "devicesViewControl1";
-            this.devicesViewControl1.Size = new System.Drawing.Size(354, 432);
+            this.devicesViewControl1.Size = new System.Drawing.Size(321, 432);
             this.devicesViewControl1.TabIndex = 0;
             // 
             // statusStrip2
             // 
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton1,
-            this.toolStripStatusLabelMessage,
-            this.toolStripProgressBar1,
             this.toolStripStatusLabelServiceStatus,
             this.toolStripStatusLabelConnectionStatus,
             this.toolStripStatusDevicesCount,
@@ -96,7 +92,7 @@
             this.statusStrip2.Location = new System.Drawing.Point(0, 456);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.ShowItemToolTips = true;
-            this.statusStrip2.Size = new System.Drawing.Size(354, 24);
+            this.statusStrip2.Size = new System.Drawing.Size(321, 24);
             this.statusStrip2.TabIndex = 9;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -109,24 +105,6 @@
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
             this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
             this.toolStripSplitButton1.Text = "toolStripSplitButton1";
-            // 
-            // toolStripStatusLabelMessage
-            // 
-            this.toolStripStatusLabelMessage.AutoToolTip = true;
-            this.toolStripStatusLabelMessage.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabelMessage.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelMessage.Name = "toolStripStatusLabelMessage";
-            this.toolStripStatusLabelMessage.Size = new System.Drawing.Size(36, 19);
-            this.toolStripStatusLabelMessage.Text = "MSG";
-            this.toolStripStatusLabelMessage.ToolTipText = "Connection Time";
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 18);
-            this.toolStripProgressBar1.Step = 1;
-            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.toolStripProgressBar1.Value = 50;
             // 
             // toolStripStatusLabelServiceStatus
             // 
@@ -168,7 +146,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(21, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(128, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -194,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 480);
+            this.ClientSize = new System.Drawing.Size(321, 480);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip2);
@@ -223,8 +201,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLogo;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelMessage;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelServiceStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelConnectionStatus;
     }

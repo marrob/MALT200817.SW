@@ -5,13 +5,13 @@ namespace MALT200817.Explorer.Commands
     using System.Windows.Forms;
     using Configuration;
     using Common;
-
+    using Properties;
     class ShowLogFolderCommand : ToolStripButton
     {
         public ShowLogFolderCommand()
         {
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.log24;
             Text = "Log Folder";
         }
         protected override void OnClick(EventArgs e)

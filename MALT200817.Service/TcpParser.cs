@@ -67,7 +67,7 @@
                     //port 1-töl indexelődik
                     else if (parts[PART_COMMAND] == "GET#COUNTER")
                     {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);                        
+                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         if (port == 0)
                             throw new ArgumentException("Port canno be 0");
                         _exp.RequestGetPortCounter(familyCode, address, port);
@@ -151,13 +151,13 @@
                     {
                         return RESPONSE_NOTFOUND;
                     }
-
                 }
-                else if (line == "UPDATE#DEVICES:INFO")
+                else if (line == "DO#MIANTENACNE")
                 {
-                    _exp.DoUpdateDeviceInfo();
+
                     return RESPONSE_OK;
                 }
+
                 else if (line == "DO#SAY:HELLO WOLRD")
                 {
                     return "HELLO WORLD";
@@ -168,6 +168,7 @@
                     AppLog.Instance.WriteLine("TcpParser:Response an error, message is" + msg + "Command was:" + line);
                     return msg;
                 }
+               
             }
             catch (Exception ex)
             {

@@ -60,6 +60,7 @@
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="AppConstants.cs" />
     <Compile Include="DfuAppConfiguration.cs" />
+    <Compile Include="ServiceScheduleMaintenance.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="UserItem.cs" />
   </ItemGroup>

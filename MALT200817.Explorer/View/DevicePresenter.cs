@@ -90,6 +90,7 @@ namespace MALT200817.Explorer.View
             dev.FamilyName = SelectedItem.FamilyName;
             dev.OptionCode = SelectedItem.OptionCode;
             dev.SerialNumber = SelectedItem.SerialNumber;
+            dev.FwVersion = SelectedItem.Version;
             dev.Show();
         }
     }

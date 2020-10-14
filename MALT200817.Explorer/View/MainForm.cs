@@ -1,12 +1,10 @@
-﻿
-
-namespace MALT200817.Explorer.View
+﻿namespace MALT200817.Explorer.View
 {
     using System;
     using System.Drawing;
     using System.Windows.Forms;
 
-    public interface IMainForm //: IWindowLayoutRestoring
+    public interface IMainForm
     {
         event EventHandler Shown;
         event EventHandler Login;
@@ -14,28 +12,16 @@ namespace MALT200817.Explorer.View
         event FormClosingEventHandler FormClosing;
         event EventHandler Disposed;
 
-
         string Text { get; set; }
-
         ToolStripItem[] MenuBar { set; }
         bool AlwaysOnTop { get; set; }
-
         string Version { get; set; }
         string DevicesCount { get; set; }
         string ConnectionTime { get; set; }
         string ServiceStatus { get; set; }
         string ConnectionStatus { get; set; }
-
         ToolStripItem[] StatusBar { set; }
-
-        //event KeyEventHandler KeyUp;
-        //event HelpEventHandler HelpRequested; /*????*/
-
-        //void CursorWait();
-        //void CursorDefault();
-
         DataGridView DevicesDgv { get; }
-        void ProcessStatusUpdate(string msg, bool progressbar);
     }
 
 
@@ -109,13 +95,6 @@ namespace MALT200817.Explorer.View
         public DataGridView DevicesDgv
         {
             get { return devicesViewControl1.DataGrid; }
-        }
-
-        void IMainForm.ProcessStatusUpdate(string msg, bool progressbar)
-        {
-            toolStripProgressBar1.Visible = progressbar;
-            toolStripStatusLabelMessage.Visible = progressbar;
-            toolStripStatusLabelMessage.Text = msg;
         }
 
         private void toolStripStatusLabelLogo_Click(object sender, EventArgs e)

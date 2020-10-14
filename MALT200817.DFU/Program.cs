@@ -148,6 +148,7 @@ namespace MALT200817.DFU
 
         private void ButtonWrite_Click(object sender, EventArgs e)
         {
+            AppLog.Instance.Enabled = AppConfiguration.Instance.DfuApp.LogEnable;
             MainForm.WriteEnabled = false;
             Iso15765NetwrorkLayer network = null;
             if (AppConfiguration.Instance.DfuApp.CanBusInterfaceType == "NICAN")
@@ -155,8 +156,7 @@ namespace MALT200817.DFU
             else
                 network = new Iso15765NetwrorkLayer(_xnetLink);
             network.ReadTimeoutMs = 1000;
-            network.LogPath = AppLog.Instance.FilePath;
-            network.LogEnabled = AppLog.Instance.Enabled;
+            Log.LogWriteLinePtr = AppLog.Instance.WriteLine;
 
 
             var dfu = new AppDfu(network);

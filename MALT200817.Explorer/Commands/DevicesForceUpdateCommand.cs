@@ -5,18 +5,17 @@ namespace MALT200817.Explorer.Commands
     using System;
     using System.Windows.Forms;
     using View;
+    using Properties;
 
     class DevicesForceUpdateCommand : ToolStripButton
     {
-        IApp _app;
+        readonly IApp _app;
         public DevicesForceUpdateCommand(IApp app)
         {
             _app = app;
-            //    Image = Resources.Delete32x32;
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.refresh32;
             Text = "Devices Force Upate";
-            //   _diagnosticsView = diagnosticsView;
         }
 
         protected override void OnClick(EventArgs e)

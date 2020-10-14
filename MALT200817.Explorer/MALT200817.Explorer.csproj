@@ -230,6 +230,44 @@
   <ItemGroup>
     <None Include="Resources\Warning48.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\configure32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\services48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\services32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disconnect32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\counter32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveAs32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\number0_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

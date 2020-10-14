@@ -215,8 +215,9 @@
             // 
             // testToolStripMenuItem
             // 
+            this.testToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.restart32;
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.testToolStripMenuItem.Text = "Reset";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
             // 
@@ -224,16 +225,17 @@
             // 
             this.alwaysOnTopToolStripMenuItem.Checked = true;
             this.alwaysOnTopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alwaysOnTopToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.alwaysOnTopToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.pin32;
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.alwaysOnTopToolStripMenuItem.Text = "Alway On Top";
             this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.AlwaysOnTopToolStripMenuItem_Click);
             // 
             // cOUNTERSToolStripMenuItem
             // 
+            this.cOUNTERSToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.counter32x32;
             this.cOUNTERSToolStripMenuItem.Name = "cOUNTERSToolStripMenuItem";
-            this.cOUNTERSToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.cOUNTERSToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.cOUNTERSToolStripMenuItem.Text = "Counters";
             this.cOUNTERSToolStripMenuItem.Click += new System.EventHandler(this.CountersToolStripMenuItem_Click);
             // 

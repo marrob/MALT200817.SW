@@ -27,6 +27,7 @@
         public DfuAppConfiguration DfuApp { get; set; }
 
         public UserCollection Users { get; set; }
+        public ServiceScheduleMaintenance MaintenancegSchedule { get; set; }
 
         private static Type[] SupportedTypes
         {
@@ -39,6 +40,7 @@
                     typeof(UserItem),
                     typeof(UserCollection),
                     typeof(string),
+                    typeof(ServiceScheduleMaintenance),
                 };
             }
         }
@@ -98,6 +100,10 @@
                     Role = UserRole.ADMINISTRATOR,
                 });
 
+                Instance.MaintenancegSchedule = new ServiceScheduleMaintenance();
+                Instance.MaintenancegSchedule.DailyTime = "00:00";
+                Instance.MaintenancegSchedule.Enabled = false;
+
                 SaveToFile(AppConstants.AppConfigurationFilePath);
                 new ApplicationException("Set the ConfigurationFile! " + AppConstants.AppConfigurationFilePath);
 
@@ -149,6 +155,9 @@
             foreach (UserItem i in instance.Users)
                 Instance.Users.Add(i);
 
+            Instance.MaintenancegSchedule = new ServiceScheduleMaintenance();
+            Instance.MaintenancegSchedule.DailyTime = instance.MaintenancegSchedule.DailyTime;
+            Instance.MaintenancegSchedule.Enabled = instance.MaintenancegSchedule.Enabled;
             
 
 

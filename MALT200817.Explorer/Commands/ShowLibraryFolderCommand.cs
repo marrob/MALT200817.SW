@@ -6,13 +6,13 @@ namespace MALT200817.Explorer.Commands
     using Configuration;
     using Common;
     using Events;
-
+    using Properties;
     class ShowLibraryFolderCommand : ToolStripButton
     {
         public ShowLibraryFolderCommand()
         {
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.data32;
             Text = "Library Folder";
 
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)

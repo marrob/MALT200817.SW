@@ -157,10 +157,7 @@
         void MainForm_Shown(object sender, EventArgs e)
         {
             SyncContext = SynchronizationContext.Current;
-            MainForm.ProcessStatusUpdate(string.Empty, false);
-           
-
-            // _mainForm.LayoutRestore();
+ 
 
             /*** Check Service Running Or Not ***/
             if (!Tools.DoesServiceExist(AppConstants.WindowsServiceName))
@@ -178,19 +175,15 @@
                     if (yesno == DialogResult.Yes)
                     {
                         var msg = "service starting";
-                        MainForm.ProcessStatusUpdate(msg, true);
                         AppLog.Instance.WriteLine(msg);
                         sc.Start();
                         AppLog.Instance.WriteLine("service is running");
-                        MainForm.ProcessStatusUpdate("", false);
                         Thread.Sleep(2000);
                     }
                 }
             }
 
-            //_mainForm.LayoutRestore();
             /*Ö tölti be a projectet*/
-    
             EventAggregator.Instance.Publish(new ShowAppEvent());
 
             /*** Default User ***/
@@ -237,7 +230,6 @@
         {
             Timer.Stop();
             MaltClient.Instance.Dispose();
-            //   _mainForm.LayoutSave();
             Settings.Default.Save();
             EventAggregator.Instance.Dispose();
             Settings.Default.Save();

@@ -13,7 +13,6 @@
     public partial class CountersForm : Form
     {
 
-
         public BindingList<CounterItem> Counters { get; set; }
 
         public string Address
@@ -121,6 +120,11 @@
         private void ToolStripStatusLabelLogo_Click(object sender, EventArgs e)
         {
             new UserLoginForm().ShowDialog();
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadUpdate();
         }
     }
 }

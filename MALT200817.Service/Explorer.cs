@@ -225,28 +225,44 @@
             TxQueue.Enqueue(msg);
         }
 
-        /// <summary>
-        /// A Service indulásakor ezt lekéri és ezuztán többet kilens ehhez nem nyúl.
-        /// A kilensek értesülnek róla ha új kártya jön, mivel az új kártyának kötelessége jelezni hogy
-        /// megérkezett.
-        /// </summary>
-        public void DoUpdateDeviceInfo()
-        {
-            /*LiveDevices.Clear(); */
-            /*Nem törölhetek, mert ha jön egy kliens vagy és ráfrissít, és a többi kliens pedig épp keres benne, akkor az baj.*/
-            RequestAllInitInfo();
-            //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
-            Thread.Sleep(250);
 
+
+        public void InitCardsForFirstStart()
+        {
+            RequestAllInitInfo();
+        }
+
+        public void SaveCounters()
+        {
             foreach (LiveDeviceItem dev in LiveDevices)
             {
-                RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address, true);
                 RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
-                //RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
             }
-
-            //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek
-            Thread.Sleep(250);
         }
+
+
+        ///// <summary>
+        ///// A Service indulásakor ezt lekéri és ezuztán többet kilens ehhez nem nyúl.
+        ///// A kilensek értesülnek róla ha új kártya jön, mivel az új kártyának kötelessége jelezni hogy
+        ///// megérkezett.
+        ///// </summary>
+        //public void DoUpdateDeviceInfo()
+        //{
+        //    /*LiveDevices.Clear(); */
+        //    /*Nem törölhetek, mert ha jön egy kliens vagy és ráfrissít, és a többi kliens pedig épp keres benne, akkor az baj.*/
+        //    RequestAllInitInfo();
+        //    //Meg kell várni hogy a lista felépüljön és utána lekrédezni a státuszokat
+        //    Thread.Sleep(250);
+
+        //    foreach (LiveDeviceItem dev in LiveDevices)
+        //    {
+        //        RequestPortsStatus((byte)dev.FamilyCode, (byte)dev.Address, true);
+        //        RequestSaveCounters((byte)dev.FamilyCode, (byte)dev.Address);
+        //        //RequestSerialNumber((byte)dev.FamilyCode, (byte)dev.Address);
+        //    }
+
+        //    //Meg kell várni hogy a lekérdezett státuszok is megérkezzenek
+        //    Thread.Sleep(250);
+        //}
     }
 }

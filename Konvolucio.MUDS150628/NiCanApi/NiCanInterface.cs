@@ -63,13 +63,13 @@ namespace Konvolucio.MUDS150628.NiCanApi
         public void Open()
         {
             Handle = NiCanTools.Open(Interface, BaudRate);
-            IoLog.Instance.WriteLine("Open");
+            Log.WriteLine("Open");
         }
 
         public void Close()
         {
             NiCanTools.Close(Handle);
-            IoLog.Instance.WriteLine("Close");
+            Log.WriteLine("Close");
         }
         public void Write(byte[] data)
         {
@@ -89,7 +89,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
             niTx.Data6 = data[6];
             niTx.Data7 = data[7];
             NiCan.ncWrite(Handle, NiCan.CanFrameSize, ref niTx);
-            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
+            Log.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " " + Tools.ByteArrayToCStyleString(data));
         }
 
         public byte[] Read(int tiemoutMs)
@@ -122,7 +122,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
                             rx.Data7, };
                         data = new byte[rx.DataLength];
                         Buffer.BlockCopy(datatemp, 0, data, 0, rx.DataLength);
-                        IoLog.Instance.WriteLine("Rx: 0x" + arbId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
+                        Log.WriteLine("Rx: 0x" + arbId.ToString("X4") + " " + "Data:" + Tools.ByteArrayToCStyleString(data));
                         if (arbId == ReceiveId)
                         {
                             isFound = true;
@@ -137,7 +137,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
 
         public void DeviceRestart(int address)
         {
-            IoLog.Instance.WriteLine("Restart Module:" + address);
+            Log.WriteLine("Restart Module:" + address);
             var niTx = new NiCan.NCTYPE_CAN_FRAME();
             niTx.ArbitrationId = 0x1558FFFF | 0x20000000;
             niTx.DataLength = 2;
@@ -145,7 +145,7 @@ namespace Konvolucio.MUDS150628.NiCanApi
             niTx.Data0 = 0xAA;
             niTx.Data1 = (byte)address;
             NiCan.ncWrite(Handle, NiCan.CanFrameSize, ref niTx);
-            IoLog.Instance.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " "
+            Log.WriteLine("Tx: 0x" + niTx.ArbitrationId.ToString("X4") + " "
                 + Tools.ByteArrayToCStyleString(new byte[] { niTx.Data0, niTx.Data1 }));
         }
 

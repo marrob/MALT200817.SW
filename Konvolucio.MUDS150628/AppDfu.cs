@@ -91,7 +91,7 @@ namespace Konvolucio.MUDS150628
                 BackgroundWorker.ReportProgress(0, "Request: Programming Mode");
                 FlashErase();
                 BackgroundWorker.ReportProgress(0, "Request: Flash Erase");
-                IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+                Log.WriteLine(MethodBase.GetCurrentMethod().Name);
                 /*FIGYELJ ARRA HOGY A blockSize csak páros lehet, a szerver 0xFE-jelez vissza!*/
                 blockSize = (byte)(RequestDwonLoad(firmware.Length) - 2);
                 BackgroundWorker.ReportProgress(0, "I will send bytes:" + firmware.Length);
@@ -171,7 +171,7 @@ namespace Konvolucio.MUDS150628
         {
             byte[] response;
             byte[] request = new byte[] { Services.EcuReset, (byte)reset };
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(request, out response);
         }
 
@@ -179,7 +179,7 @@ namespace Konvolucio.MUDS150628
         {
             byte[] response;
             byte[] request = new byte[] {Services.DiagSesssionControl, (byte)session };
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(request, out response);
         }
 
@@ -187,7 +187,7 @@ namespace Konvolucio.MUDS150628
         {
             byte[] response;
             byte[] request = new byte[] { Services.TesterPresent, param };
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(request, out response ); 
         }
 
@@ -197,7 +197,7 @@ namespace Konvolucio.MUDS150628
             byte[] request = new byte[1 + 1 + 1 + 4 + 4];
             request[0] = Services.RequestDownload;
             Buffer.BlockCopy(BitConverter.GetBytes(memorySize), 0, request, 7, sizeof(int));
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(request, out response);
             return response[2];
         }
@@ -205,14 +205,14 @@ namespace Konvolucio.MUDS150628
         public void FlashErase()
         {
             byte[] response;
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(new byte[] {Services.RutineControl, 0x01, 0xFF, 0x01 }, out response);
         }
 
         public uint GetChecksum()
         {
             byte[] response;
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(new byte[] { Services.RutineControl, 0x01, 0xFF, 0x02 }, out response);
             uint cheksum = BitConverter.ToUInt16(response, 2);
             return cheksum;
@@ -231,7 +231,7 @@ namespace Konvolucio.MUDS150628
                 if (data.Length > 253)
                     throw new Exception("TransferData: data too long...");
             byte[] response;
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             var request = new byte[2 + data.Length];
             request[0] = Services.TransferData;
             request[1] = blockSequenceCounter;
@@ -245,7 +245,7 @@ namespace Konvolucio.MUDS150628
         {
             byte[] response;
             byte[] request = new byte[] { Services.RequestTransferExit };
-            IoLog.Instance.WriteLine(MethodBase.GetCurrentMethod().Name);
+            Log.WriteLine(MethodBase.GetCurrentMethod().Name);
             NetwrorkLayer.Transport(request, out response);
         }
         void ResponseChecek(byte sid, byte[] response)

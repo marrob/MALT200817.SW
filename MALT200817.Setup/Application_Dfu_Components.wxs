@@ -16,7 +16,9 @@
           <Shortcut Id="_MALT200817.DFU" Directory="AppProgramsFolder" WorkingDirectory="AppFolder" Icon="dfu.ico" Name="$(var.ProductName) DFU" Advertise="yes" />
           <Shortcut Id="DesktopShortcut"    Directory="DesktopFolder"  WorkingDirectory = "AppFolder"  Icon="dfu.ico"  Name="$(var.ProductName) DFU" Advertise="yes" />
         </File>
-        <File Name="Konvolucio.MUDS150628.dll" Source="$(var.AppDfuDirectory)\Konvolucio.MUDS150628.dll" KeyPath="no" Checksum="yes"> </File>      
+        <File Name="Konvolucio.MUDS150628.dll" Source="$(var.AppDfuDirectory)\Konvolucio.MUDS150628.dll" KeyPath="no" Checksum="yes"> </File>
+        <File Id="Dfu_NiXnetDotNet.dll" Name="NiXnetDotNet.dll" Source="$(var.AppDfuDirectory)\NiXnetDotNet.dll" KeyPath="no" Checksum="yes"> </File>
+        <File Id ="Dfu_nican.dll" Name="nican.dll" Source="$(var.AppDfuDirectory)\nican.dll" KeyPath="no" Checksum="yes"> </File>
       </Component>
     </ComponentGroup>
   </Fragment>

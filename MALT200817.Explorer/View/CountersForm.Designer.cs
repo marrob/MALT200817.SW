@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CountersForm));
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelAddress = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelOptionCode = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
@@ -39,13 +38,14 @@
             this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.knvDataGridView1 = new Konvolucio.MCEL181123.Controls.KnvDataGridView();
             this.ColumnLabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.knvDataGridView1)).BeginInit();
@@ -68,16 +68,6 @@
             this.statusStrip2.Size = new System.Drawing.Size(418, 24);
             this.statusStrip2.TabIndex = 10;
             this.statusStrip2.Text = "statusStrip2";
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
             // toolStripStatusLabelAddress
             // 
@@ -122,7 +112,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(31, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -140,7 +130,7 @@
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 17);
             this.toolStripStatusLabel2.Text = "AltonTech";
             this.toolStripStatusLabel2.Click += new System.EventHandler(this.ToolStripStatusLabelLogo_Click);
             // 
@@ -155,26 +145,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(418, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.testToolStripMenuItem.Text = "Update";
-            // 
-            // ToolStripMenuItemReset
-            // 
-            this.ToolStripMenuItemReset.Name = "ToolStripMenuItemReset";
-            this.ToolStripMenuItemReset.Size = new System.Drawing.Size(47, 20);
-            this.ToolStripMenuItemReset.Text = "Reset";
-            this.ToolStripMenuItemReset.Click += new System.EventHandler(this.ResetToolStripMenuItemReset_Click);
-            // 
-            // ToolStripMenuItemSave
-            // 
-            this.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave";
-            this.ToolStripMenuItemSave.Size = new System.Drawing.Size(43, 20);
-            this.ToolStripMenuItemSave.Text = "Save";
-            this.ToolStripMenuItemSave.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // knvDataGridView1
             // 
@@ -224,6 +194,40 @@
             this.ColumnValue.HeaderText = "Value";
             this.ColumnValue.Name = "ColumnValue";
             // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.refresh32;
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.testToolStripMenuItem.Text = "Update";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItemReset
+            // 
+            this.ToolStripMenuItemReset.Image = global::MALT200817.Explorer.Properties.Resources.number0_32;
+            this.ToolStripMenuItemReset.Name = "ToolStripMenuItemReset";
+            this.ToolStripMenuItemReset.Size = new System.Drawing.Size(63, 20);
+            this.ToolStripMenuItemReset.Text = "Reset";
+            this.ToolStripMenuItemReset.Click += new System.EventHandler(this.ResetToolStripMenuItemReset_Click);
+            // 
+            // ToolStripMenuItemSave
+            // 
+            this.ToolStripMenuItemSave.Image = global::MALT200817.Explorer.Properties.Resources.SaveAs32;
+            this.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave";
+            this.ToolStripMenuItemSave.Size = new System.Drawing.Size(59, 20);
+            this.ToolStripMenuItemSave.Text = "Save";
+            this.ToolStripMenuItemSave.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
             // CountersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,7 +238,7 @@
             this.Controls.Add(this.statusStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CountersForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CountersForm";
             this.Load += new System.EventHandler(this.CountersForm_Load);
             this.statusStrip2.ResumeLayout(false);

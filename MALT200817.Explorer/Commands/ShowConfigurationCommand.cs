@@ -6,13 +6,13 @@ namespace MALT200817.Explorer.Commands
     using Configuration;
     using Common;
     using Events;
-
+    using Properties;
     class ShowConfigurationCommand : ToolStripButton
     {
         public ShowConfigurationCommand()
         {
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.configure32x32;
             Text = "Configuration";
 
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)

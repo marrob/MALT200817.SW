@@ -4,16 +4,17 @@ namespace MALT200817.Explorer.Commands
     using System;
     using System.Windows.Forms;
     using View;
-
+    using Properties;
+    
     class AlwaysOnTopCommand : ToolStripButton
     {
         readonly Form _mainForm;
 
         public AlwaysOnTopCommand(Form mainForm)
         {
-            //    Image = Resources.Delete32x32;
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            Image = Resources.pin32;
             Text = "Always On Top";
 
             _mainForm = mainForm;

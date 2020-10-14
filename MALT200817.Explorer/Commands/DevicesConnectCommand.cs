@@ -6,6 +6,7 @@ namespace MALT200817.Explorer.Commands
     using System.Windows.Forms;
     using View;
     using Configuration;
+    using Properties;
 
     class DevicesConnectCommand : ToolStripButton
     {
@@ -13,18 +14,17 @@ namespace MALT200817.Explorer.Commands
         public DevicesConnectCommand(IApp app)
         {
             _app = app;
-            //    Image = Resources.Delete32x32;
-            DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //    Size = new System.Drawing.Size(50, 50);
+            DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             if (MaltClient.Instance.IsConnected)
             {
                 Text = "Disconnect";
+                Image = Resources.disconnect32;
             }
             else
             {
                 Text = "Connecting";
+                Image = Resources.connect32;
             }
-            //   _diagnosticsView = diagnosticsView;
         }
 
         protected override void OnClick(EventArgs e)
