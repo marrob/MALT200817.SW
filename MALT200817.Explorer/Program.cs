@@ -131,7 +131,10 @@
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>) (e1 =>
             {
                 MainForm.Text = Name + " - " + e1.User.Name;
-                CurrentUser = e1.User;
+                App.CurrentUser = new UserItem();
+                App.CurrentUser.Name = e1.User.Name;
+                App.CurrentUser.Role = e1.User.Role;
+                App.CurrentUser.Password = e1.User.Password;
             }));
 
             /*** Run ***/
@@ -217,7 +220,6 @@
             DevicePresenter.Update(devices);
             sp.Stop();
             MainForm.ConnectionTime = sp.ElapsedMilliseconds.ToString() + "ms";
-            AppLog.Instance.WriteLine("UpdateDeviceList:" + MainForm.ConnectionTime);
         }
 
 

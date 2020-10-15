@@ -9,6 +9,7 @@
     using Events;
     using Configuration;
     using MALT200817.Explorer.Common;
+    using System.Security.Cryptography.X509Certificates;
 
     public partial class CountersForm : Form
     {
@@ -41,12 +42,12 @@
             Counters = new BindingList<CounterItem>();
             knvDataGridView1.DataSource = Counters;
 
-            if (App.CurrentUser.Role == UserRole.DEVELOPER ||
+            if (App.CurrentUser.Role == UserRole.ADMINISTRATOR ||
                 App.CurrentUser.Role == UserRole.DEVELOPER)
             ModeAdmin();
                 else
             ModeOperartor();
-        
+
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>)
             (e => {
 
