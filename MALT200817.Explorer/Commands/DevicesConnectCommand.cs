@@ -38,7 +38,7 @@ namespace MALT200817.Explorer.Commands
             {
                 MaltClient.Instance.Start(AppConfiguration.Instance.ServiceIPAddress,
                                           AppConfiguration.Instance.ServicePort,
-                                          AppConfiguration.Instance.ClientConnectionTimoutSec);
+                                          AppConfiguration.Instance.ClientConnectionTimoutMs);
             }
         }
 

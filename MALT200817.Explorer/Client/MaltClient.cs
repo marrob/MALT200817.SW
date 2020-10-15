@@ -25,7 +25,7 @@
             
         }
 
-        public void Start(string hostname, int port, double connectionTimeoutSec)
+        public void Start(string hostname, int port, double connectionTimeoutMs)
         {
             try
             {
@@ -36,7 +36,7 @@
 
                 var result = Client.BeginConnect(hostname, port, null, null);
 
-                result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(connectionTimeoutSec));
+                result.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(connectionTimeoutMs));
                 if (!Client.Connected)
                     throw new Exception("Failed to connect.");
 

@@ -17,7 +17,7 @@
         public int CanBusBaudrate { get; set; }
         public string ServiceIPAddress { get; set; }
         public int ServicePort { get; set; }
-        public double ClientConnectionTimoutSec { get; set; }
+        public double ClientConnectionTimoutMs { get; set; }
         public string LogDirectory { get; set; }
         public bool LogServiceEnabled { get; set; }
         public bool LogExplorerEnabled { get; set; }
@@ -70,6 +70,7 @@
                 Instance.CanBusBaudrate = 1;
                 Instance.ServiceIPAddress = "";
                 Instance.ServicePort = 2013;
+                Instance.ClientConnectionTimoutMs = 1000;
                 Instance.LogDirectory = AppConstants.LogDirectory;
                 Instance.LogServiceEnabled = false;
                 Instance.LogExplorerEnabled = false;
@@ -133,7 +134,7 @@
             Instance.CanBusBaudrate = instance.CanBusBaudrate;
             Instance.ServiceIPAddress = instance.ServiceIPAddress;
             Instance.ServicePort = instance.ServicePort;
-            Instance.ClientConnectionTimoutSec = instance.ClientConnectionTimoutSec;
+            Instance.ClientConnectionTimoutMs = instance.ClientConnectionTimoutMs;
             Instance.LogDirectory = instance.LogDirectory;
             Instance.LogServiceEnabled = instance.LogServiceEnabled;
             Instance.LogExplorerEnabled = instance.LogExplorerEnabled;
