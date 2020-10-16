@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CountersForm));
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelAddress = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelOptionCode = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelFamilyCode = new System.Windows.Forms.ToolStripStatusLabel();
@@ -38,14 +39,13 @@
             this.toolStripStatusLabelVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.knvDataGridView1 = new Konvolucio.MCEL181123.Controls.KnvDataGridView();
             this.ColumnLabel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.knvDataGridView1)).BeginInit();
@@ -69,13 +69,22 @@
             this.statusStrip2.TabIndex = 10;
             this.statusStrip2.Text = "statusStrip2";
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
             // toolStripStatusLabelAddress
             // 
             this.toolStripStatusLabelAddress.AutoToolTip = true;
-            this.toolStripStatusLabelAddress.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusLabelAddress.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.toolStripStatusLabelAddress.Name = "toolStripStatusLabelAddress";
-            this.toolStripStatusLabelAddress.Size = new System.Drawing.Size(60, 19);
+            this.toolStripStatusLabelAddress.Size = new System.Drawing.Size(56, 19);
             this.toolStripStatusLabelAddress.Text = "ADDRESS";
             this.toolStripStatusLabelAddress.ToolTipText = "Address";
             // 
@@ -107,12 +116,12 @@
             this.toolStripStatusLabelUpdateTime.Name = "toolStripStatusLabelUpdateTime";
             this.toolStripStatusLabelUpdateTime.Size = new System.Drawing.Size(82, 19);
             this.toolStripStatusLabelUpdateTime.Text = "UPDATE TIME";
-            this.toolStripStatusLabelUpdateTime.ToolTipText = "Family Code";
+            this.toolStripStatusLabelUpdateTime.ToolTipText = "Update Time";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(31, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(35, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -145,6 +154,30 @@
             this.menuStrip1.Size = new System.Drawing.Size(418, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.refresh32;
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.testToolStripMenuItem.Text = "Update";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItemReset
+            // 
+            this.ToolStripMenuItemReset.Image = global::MALT200817.Explorer.Properties.Resources.number0_32;
+            this.ToolStripMenuItemReset.Name = "ToolStripMenuItemReset";
+            this.ToolStripMenuItemReset.Size = new System.Drawing.Size(63, 20);
+            this.ToolStripMenuItemReset.Text = "Reset";
+            this.ToolStripMenuItemReset.Click += new System.EventHandler(this.ResetToolStripMenuItemReset_Click);
+            // 
+            // ToolStripMenuItemSave
+            // 
+            this.ToolStripMenuItemSave.Image = global::MALT200817.Explorer.Properties.Resources.SaveAs32;
+            this.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave";
+            this.ToolStripMenuItemSave.Size = new System.Drawing.Size(59, 20);
+            this.ToolStripMenuItemSave.Text = "Save";
+            this.ToolStripMenuItemSave.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // knvDataGridView1
             // 
@@ -193,40 +226,6 @@
             this.ColumnValue.DataPropertyName = "Value";
             this.ColumnValue.HeaderText = "Value";
             this.ColumnValue.Name = "ColumnValue";
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Image = global::MALT200817.Explorer.Properties.Resources.refresh32;
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.testToolStripMenuItem.Text = "Update";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
-            // 
-            // ToolStripMenuItemReset
-            // 
-            this.ToolStripMenuItemReset.Image = global::MALT200817.Explorer.Properties.Resources.number0_32;
-            this.ToolStripMenuItemReset.Name = "ToolStripMenuItemReset";
-            this.ToolStripMenuItemReset.Size = new System.Drawing.Size(63, 20);
-            this.ToolStripMenuItemReset.Text = "Reset";
-            this.ToolStripMenuItemReset.Click += new System.EventHandler(this.ResetToolStripMenuItemReset_Click);
-            // 
-            // ToolStripMenuItemSave
-            // 
-            this.ToolStripMenuItemSave.Image = global::MALT200817.Explorer.Properties.Resources.SaveAs32;
-            this.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave";
-            this.ToolStripMenuItemSave.Size = new System.Drawing.Size(59, 20);
-            this.ToolStripMenuItemSave.Text = "Save";
-            this.ToolStripMenuItemSave.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 19);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
             // CountersForm
             // 
