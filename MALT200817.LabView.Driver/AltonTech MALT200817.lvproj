@@ -10,15 +10,24 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="Private" Type="Folder" URL="../Private">
-			<Property Name="NI.DISK" Type="Bool">true</Property>
+		<Item Name="UnitTest" Type="Folder">
+			<Item Name="Execute Cmd.vi" Type="VI" URL="../UnitTest/Execute Cmd.vi"/>
+			<Item Name="Get Counter.vi" Type="VI" URL="../UnitTest/Get Counter.vi"/>
+			<Item Name="Get Devices Test.vi" Type="VI" URL="../UnitTest/Get Devices Test.vi"/>
+			<Item Name="Get One Status Test.vi" Type="VI" URL="../UnitTest/Get One Status Test.vi"/>
+			<Item Name="Get Several Status Test.vi" Type="VI" URL="../UnitTest/Get Several Status Test.vi"/>
+			<Item Name="MALT IOPS.vi" Type="VI" URL="../UnitTest/MALT IOPS.vi"/>
+			<Item Name="MALT Set Rapidly.vi" Type="VI" URL="../UnitTest/MALT Set Rapidly.vi"/>
+			<Item Name="MALT132 IOPS.vi" Type="VI" URL="../UnitTest/MALT132 IOPS.vi"/>
+			<Item Name="MALT132.seq" Type="Document" URL="../UnitTest/MALT132.seq"/>
+			<Item Name="ResponseTimeTest.vi" Type="VI" URL="../UnitTest/ResponseTimeTest.vi"/>
+			<Item Name="Set One Test.vi" Type="VI" URL="../UnitTest/Set One Test.vi"/>
+			<Item Name="Set Several Test.vi" Type="VI" URL="../UnitTest/Set Several Test.vi"/>
+			<Item Name="ViTestFixture.vi" Type="VI" URL="../UnitTest/ViTestFixture.vi"/>
+			<Item Name="YAV IOPSx.vi" Type="VI" URL="../UnitTest/YAV IOPSx.vi"/>
+			<Item Name="YAV Set Rapidly.vi" Type="VI" URL="../UnitTest/YAV Set Rapidly.vi"/>
 		</Item>
-		<Item Name="Public" Type="Folder" URL="../Public">
-			<Property Name="NI.DISK" Type="Bool">true</Property>
-		</Item>
-		<Item Name="UnitTest" Type="Folder" URL="../UnitTest">
-			<Property Name="NI.DISK" Type="Bool">true</Property>
-		</Item>
+		<Item Name="AltonTech MALT200817.lvlib" Type="Library" URL="../AltonTech MALT200817.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="instr.lib" Type="Folder">
 				<Item Name="Action CAN.ctl" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Lower Layer/MultiCAN.llb/Action CAN.ctl"/>
@@ -261,6 +270,7 @@
 				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
 				<Item Name="NI_LVConfig.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/config.llb/NI_LVConfig.lvlib"/>
 				<Item Name="NI_PackedLibraryUtility.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/LVLibp/NI_PackedLibraryUtility.lvlib"/>
+				<Item Name="NI_XML.lvlib" Type="Library" URL="/&lt;vilib&gt;/xml/NI_XML.lvlib"/>
 				<Item Name="Not A Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Not A Semaphore.vi"/>
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
 				<Item Name="Obtain Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Obtain Semaphore Reference.vi"/>
@@ -388,11 +398,12 @@
 			<Item Name="Advapi32.dll" Type="Document" URL="Advapi32.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="AltonTech MALT200817.lvlib" Type="Library" URL="../AltonTech MALT200817.lvlib"/>
+			<Item Name="DOMUserDefRef.dll" Type="Document" URL="DOMUserDefRef.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
 			<Item Name="kernel32.dll" Type="Document" URL="kernel32.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="MALT WriteRead.vi" Type="VI" URL="../Private/MALT WriteRead.vi"/>
 			<Item Name="ncvi.dll" Type="Document" URL="ncvi.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -400,6 +411,9 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="nixlvapi.dll" Type="Document" URL="nixlvapi.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="System.ServiceProcess" Type="Document" URL="System.ServiceProcess">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 		</Item>

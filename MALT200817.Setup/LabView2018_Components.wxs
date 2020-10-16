@@ -24,6 +24,7 @@
               <Directory Id="LabView_Types" Name="Types"/>
               <Directory Id ="LabView_Devices" Name="Devices">
                 <Directory Id ="LabView_MALT132" Name="MALT132"/>
+                <Directory Id ="LabView_MALT23HVT" Name="MALT23HVT"/>
                 <Directory Id ="LabView_MALT160T" Name="MALT160T"/>
               </Directory>
               <Directory Id ="LabView_Platform" Name="Platform"/>
@@ -82,6 +83,15 @@
         <File Id = "_MALT160T_Set_One.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT160T\MALT160T Set One.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_MALT160T_Set_Several.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT160T\MALT160T Set Several.vi" KeyPath="no" Checksum="yes"/>
       </Component>
+      
+      <Component Id="LabView_MALT23HVT_Files" Directory="LabView_MALT23HVT" Guid="{1A8E2EFB-53F0-4B14-87C2-F479751E74DD}">
+        <!-- <File Id = "_MALT160T.mnu" Source="$(var.LabView2018Directory)\Public\Devices\MALT160T\MALT160T.mnu" KeyPath="no" Checksum="yes"/>-->
+        <File Id = "_MALT23HVT_Get_One.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT23HVT\MALT23HVT Get One.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT23HVT_Get_Several.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT23HVT\MALT23HVT Get Several.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT23HVT_Set_One.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT23HVT\MALT23HVT Set One.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT23HVT_Set_Several.vi" Source="$(var.LabView2018Directory)\Public\Devices\MALT23HVT\MALT23HVT Set Several.vi" KeyPath="no" Checksum="yes"/>
+      </Component>
+      
       <Component Id="LabView_Platform_Files" Directory="LabView_Platform" Guid="{5D20B637-8719-4729-B6CF-71E9EC4C1DB6}">
         <!-- <File Id = "_dir_LabView_Platform_Files.mnu" Source="$(var.LabView2018Directory)\Public\Platform\dir.mnu" KeyPath="no" Checksum="yes"/>-->
         <File Id = "_MALT_Get_Devices.vi" Source="$(var.LabView2018Directory)\Public\Platform\MALT Get Devices.vi" KeyPath="no" Checksum="yes"/>
