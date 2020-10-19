@@ -65,8 +65,8 @@
         {
             if (!File.Exists(AppConstants.AppConfigurationFilePath))
             {
-                Instance.CanBusInterfaceType = "Please set the interface type eg.:XNET, NICAN...";
-                Instance.CanBusInterfaceName = "Please set the interface eg.: CAN1, CAN0...";
+                Instance.CanBusInterfaceType = "XNET";
+                Instance.CanBusInterfaceName = "CAN1";
                 Instance.CanBusBaudrate = 1;
                 Instance.ServiceIPAddress = "";
                 Instance.ServicePort = 2013;
