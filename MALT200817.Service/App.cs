@@ -8,8 +8,6 @@
     using Library;
     using System.IO;
     using System.Threading;
-    using System.Data;
-    using Common;
 
     public class App
     {
@@ -41,37 +39,45 @@
             _tcpServer.ParserCallback = _tcpParser.CommandLine;
             _tcpServer.Begin(null);
             _startTimestamp = DateTime.Now;
-              
-            /*** Device Lib ***/
-            Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
-            AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Directory.Exists(AppConstants.LibraryDirectory).ToString());
-            AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Devices.Library.Count.ToString());
 
-            if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
+            try
             {
-                var baudrate = AppConfiguration.Instance.CanBusBaudrate;
-                var itfName = AppConfiguration.Instance.CanBusInterfaceName.Trim().ToUpper();
-                var itf = new XnetInterface();
-                itf.Init((UInt64)baudrate, itfName);
-                CanService = new CanService(itf, _explorer);
+                /*** Device Lib ***/
+                Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
+                AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Directory.Exists(AppConstants.LibraryDirectory).ToString());
+                AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Devices.Library.Count.ToString());
+
+                if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
+                {
+                    var baudrate = AppConfiguration.Instance.CanBusBaudrate;
+                    var itfName = AppConfiguration.Instance.CanBusInterfaceName.Trim().ToUpper();
+                    var itf = new XnetInterface();
+                    itf.Init((UInt64)baudrate, itfName);
+                    CanService = new CanService(itf, _explorer);
+                }
+                else if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "NICAN")
+                {
+                    AppLog.Instance.WriteLine("App:Start: NICAN is not supported yet.");
+                    throw new ApplicationException("App:Start: NICAN is not supported yet.");
+                }
+                else
+                {
+                    AppLog.Instance.WriteLine("Start CAN interface type is not supported.");
+                    throw new ApplicationException("Start CAN interface type is not supported.");
+                }
+
+                AppLog.Instance.WriteLine("App:Start:canService.Begin()");
+                CanService.Begin(null);
+
+                Maintenance();
+
+                AppLog.Instance.WriteLine("App:Start:Sequence complete...");
             }
-            else if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "NICAN")
+            catch (Exception ex)
             {
-                AppLog.Instance.WriteLine("App:Start: NICAN is not supported yet.");
-                throw new ApplicationException("App:Start: NICAN is not supported yet.");
-            }
-            else
-            {
-                AppLog.Instance.WriteLine("Start CAN interface type is not supported.");
-                throw new ApplicationException("Start CAN interface type is not supported.");
+                AppLog.Instance.WriteLine("App:Start:" + ex.Message);
             }
 
-            AppLog.Instance.WriteLine("App:Start:canService.Begin()");
-            CanService.Begin(null);
-
-            Maintenance();
-
-            AppLog.Instance.WriteLine("App:Start:Sequence complete...");
         }
 
         public void Stop()
