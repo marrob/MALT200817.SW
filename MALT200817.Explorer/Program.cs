@@ -68,7 +68,7 @@
 
             /*** Application Configuration ***/
             AppConfiguration.Init();
-            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.Explorer_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"//MALT200817.Explorer_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogExplorerEnabled;
             AppLog.Instance.WriteLine("MALT200817.Explorer.App() Constructor started.");
 

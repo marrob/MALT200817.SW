@@ -24,7 +24,7 @@
         public App()
         {
             AppConfiguration.Init();
-            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + "MALT200817.Service_" + DateTime.Now.ToString("yyMMdd_HHmmss")+".txt";
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + "//MALT200817.Service_" + DateTime.Now.ToString("yyMMdd_HHmmss")+".txt";
             AppLog.Instance.Enabled = AppConfiguration.Instance.LogServiceEnabled;
             AppLog.Instance.WriteLine("App");
             _explorer = new Explorer();

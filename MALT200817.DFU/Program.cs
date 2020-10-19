@@ -49,7 +49,7 @@ namespace MALT200817.DFU
 
             /*** Application Configuration ***/
             AppConfiguration.Init();
-            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"MALT200817.DFU_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
+            AppLog.Instance.FilePath = AppConfiguration.Instance.LogDirectory + @"//MALT200817.DFU_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".txt";
             AppLog.Instance.Enabled = AppConfiguration.Instance.DfuApp.LogEnable;
             AppLog.Instance.WriteLine("MALT200817.DFU.App() Constructor started.");
 
