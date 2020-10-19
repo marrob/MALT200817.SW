@@ -78,7 +78,7 @@
                 Instance.ExplorerDeviceListAutoUpdate = true;
 
                 Instance.DfuApp = new DfuAppConfiguration();
-                Instance.DfuApp.CanBusInterfaceType = "NICAN";
+                Instance.DfuApp.CanBusInterfaceType = "XNET";
                 Instance.DfuApp.CanBusInterfaceName = "CAN1";
                 Instance.DfuApp.CanBusBaudrate = 250000;
                 Instance.DfuApp.RxBaseAddress = 0x600;

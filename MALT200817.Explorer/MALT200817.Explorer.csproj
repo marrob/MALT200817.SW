@@ -61,6 +61,9 @@
     </Compile>
     <Compile Include="Client\LiveDeviceItem.cs" />
     <Compile Include="Client\LiveDeviceCollection.cs" />
+    <Compile Include="Commands\HelpCommand - Copy.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Commands\DevicesConnectCommand.cs">
       <SubType>Component</SubType>
     </Compile>

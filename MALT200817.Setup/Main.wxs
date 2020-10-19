@@ -33,7 +33,9 @@
     <!-- Define icons -->
     <Icon Id="AppAddRemove.ico" SourceFile=".\Resources\AppAddRemove.ico"/>
     <Icon Id="dfu.ico" SourceFile=".\Resources\dfu.ico"/>
-    
+    <Icon Id="checklist.ico" SourceFile=".\Resources\checklist.ico"/>
+
+
     <!-- Set Your Installer's Icon in Add/Remove Programs -->
     <Property Id="ARPPRODUCTICON" Value="AppAddRemove.ico"/>
     <!-- Set CompoanyLink' in Add/Remove Programs -->
@@ -48,8 +50,9 @@
     <Feature Id="AppFeature" Title="Application" Level="1" Description="Device Firmware Update Tool and Frimwares">
       <Feature Id ="App_Feature" Title="Application" Description="Firmware Upgrade Tool" Level="1">
         <ComponentGroupRef Id ="Registry_Components"/>
-        <ComponentGroupRef Id="Application_Explorer_Components"/>
-        <ComponentGroupRef Id="Application_Dfu_Components"/>
+        <ComponentGroupRef Id ="Application_Explorer_Components"/>
+        <ComponentGroupRef Id ="Application_Dfu_Components"/>
+        <ComponentGroupRef Id ="Application_Checklist_Components"/>
         <ComponentRef Id="ProgramData_Component"/>
         <ComponentGroupRef Id="Library_Components"/>
         <ComponentGroupRef Id="Service_Components"/>

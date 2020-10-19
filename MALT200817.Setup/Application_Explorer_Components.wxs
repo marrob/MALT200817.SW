@@ -5,13 +5,7 @@
     <?include $(sys.CURRENTDIR)Config.wxi ?>
     
     <ComponentGroup Id="Application_Explorer_Components" Directory="AppFolder" >  
-      <!--
-      <Component Id ="Explorer_RegistryId" Guid="{DD628932-1855-4DE3-8E0D-63D47830619F}" >
-        <RemoveFolder Id="AppProgramsFolder" On='uninstall'  Directory='AppProgramsFolder'/>
-        <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
-      </Component>
-      -->
-      <Component Id="App_Files" Guid="{F1E00504-6CC7-4E1B-AF54-96D2EAF2FD13}">
+      <Component Id="App_Explorer_Files" Guid="{F1E00504-6CC7-4E1B-AF54-96D2EAF2FD13}">
         <File Name="MALT200817.Explorer.exe" Source="$(var.AppDirectory)\MALT200817.Explorer.exe" KeyPath="yes" Checksum="yes">
           <Shortcut Id="_MALT200817.Explorer.exe" Directory="AppProgramsFolder" WorkingDirectory="AppFolder" Icon="AppAddRemove.ico" Name="$(var.AppName)" Advertise="yes" />
           <Shortcut Id="Explorer_DesktopShortcut" Directory="DesktopFolder"  WorkingDirectory = "AppFolder"  Icon="AppAddRemove.ico"  Name="$(var.AppName)" Advertise="yes" />

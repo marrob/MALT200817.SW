@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- This is how we include wxi files -->
+    <?include $(sys.CURRENTDIR)Config.wxi ?>
+    
+    <ComponentGroup Id="Application_Checklist_Components" Directory="AppFolder" >  
+      <Component Id="App_Checklist_Files" Guid="{857FD4B4-97C5-41C6-91BF-F28561B9AD90}">
+        <File Name="MALT200817.Checklist.exe" Source="$(var.AppChecklistDirectory)\MALT200817.Checklist.exe" KeyPath="yes" Checksum="yes">
+          <Shortcut Id="_MALT200817.Checklist.exe" Directory="AppProgramsFolder" WorkingDirectory="AppFolder" Icon="checklist.ico" Name="$(var.ProductName) Checklist" Advertise="yes" />
+        </File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
