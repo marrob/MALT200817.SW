@@ -35,7 +35,7 @@ namespace MALT200817.Checklist
                 //Console.WriteLine(keyName);
                 RegistryKey subkey = key.OpenSubKey(keyName);
                 displayName = subkey.GetValue("DisplayName") as string;
-              //  Console.WriteLine(displayName);
+                //  Console.WriteLine(displayName);
                 if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
                 {
                     return true;
@@ -46,10 +46,10 @@ namespace MALT200817.Checklist
             key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
             foreach (String keyName in key.GetSubKeyNames())
             {
-                
+
                 RegistryKey subkey = key.OpenSubKey(keyName);
                 displayName = subkey.GetValue("DisplayName") as string;
-             //   Console.WriteLine(displayName);
+                //   Console.WriteLine(displayName);
                 if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
                 {
                     return true;
@@ -85,7 +85,60 @@ namespace MALT200817.Checklist
         {
             return ServiceController.GetServices().Any(serviceController => serviceController.ServiceName.Equals(serviceName));
         }
+        /*
+        static void GetVersion(string nameToSearch)
+        {
+            // Get HKEY_LOCAL_MACHINE
+            RegistryKey baseRegistryKey = Registry.LocalMachine;
+
+            // If 32-bit OS
+            string subKey
+            //= "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            // If 64-bit OS
+            = "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            RegistryKey unistallKey = baseRegistryKey.OpenSubKey(subKey);
+
+            string[] allApplications = unistallKey.GetSubKeyNames();
+            foreach (string s in allApplications)
+            {
+                RegistryKey appKey = baseRegistryKey.OpenSubKey(subKey + "\\" + s);
+                string appName = (string)appKey.GetValue("DisplayName");
+                if (appName == nameToSearch)
+                {
+                    string appVersion = (string)appKey.GetValue("DisplayVersion");
+                    Console.WriteLine("Name:{0}, Version{1}", appName, appVersion);
+                    break;
+                }
 
 
+            }
+
+        }
+
+        static void ListAll()
+        {
+            // Get HKEY_LOCAL_MACHINE
+            RegistryKey baseRegistryKey = Registry.LocalMachine;
+
+            // If 32-bit OS
+            string subKey
+            //= "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            // If 64-bit OS
+            = "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            RegistryKey unistallKey = baseRegistryKey.OpenSubKey(subKey);
+
+            string[] allApplications = unistallKey.GetSubKeyNames();
+            foreach (string s in allApplications)
+            {
+                RegistryKey appKey = baseRegistryKey.OpenSubKey(subKey + "\\" + s);
+                string appName = (string)appKey.GetValue("DisplayName");
+                string appVersion = (string)appKey.GetValue("DisplayVersion");
+                Console.WriteLine("Name:{0}, Version{1}", appName, appVersion);
+
+            }
+
+        }
+    }
+        */
     }
 }

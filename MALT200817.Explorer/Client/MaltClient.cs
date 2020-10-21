@@ -7,8 +7,6 @@
     using Common;
     using Events;
 
-
-
     public class MaltClient : IDisposable
     {
         TcpClient Client;

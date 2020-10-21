@@ -35,7 +35,6 @@
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelServiceStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelConnectionStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusDevicesCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelConnetcionTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -83,7 +82,6 @@
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton1,
             this.toolStripStatusLabelServiceStatus,
-            this.toolStripStatusLabelConnectionStatus,
             this.toolStripStatusDevicesCount,
             this.toolStripStatusLabelConnetcionTime,
             this.toolStripStatusLabel1,
@@ -116,16 +114,6 @@
             this.toolStripStatusLabelServiceStatus.Text = "-";
             this.toolStripStatusLabelServiceStatus.ToolTipText = "AltonTech MALT200817.Service(MaltService) Status";
             // 
-            // toolStripStatusLabelConnectionStatus
-            // 
-            this.toolStripStatusLabelConnectionStatus.AutoToolTip = true;
-            this.toolStripStatusLabelConnectionStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.toolStripStatusLabelConnectionStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-            this.toolStripStatusLabelConnectionStatus.Name = "toolStripStatusLabelConnectionStatus";
-            this.toolStripStatusLabelConnectionStatus.Size = new System.Drawing.Size(16, 19);
-            this.toolStripStatusLabelConnectionStatus.Text = "-";
-            this.toolStripStatusLabelConnectionStatus.ToolTipText = "Connection Status";
-            // 
             // toolStripStatusDevicesCount
             // 
             this.toolStripStatusDevicesCount.Name = "toolStripStatusDevicesCount";
@@ -146,7 +134,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(128, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(111, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelVersion
@@ -202,7 +190,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLogo;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelServiceStatus;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelConnectionStatus;
     }
 }
 

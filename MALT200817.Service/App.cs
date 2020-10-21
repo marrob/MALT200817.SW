@@ -13,7 +13,7 @@
     {
         TcpService _tcpServer;
         readonly TcpParser _tcpParser;
-        CanService CanService;
+        CanService _canService;
         readonly Explorer _explorer;
         DateTime _startTimestamp;
         DateTime _lastMaintenanceTimestamp;
@@ -27,7 +27,6 @@
             AppLog.Instance.WriteLine("App");
             _explorer = new Explorer();
             _tcpParser = new TcpParser(_explorer);
-
             _maintenanceTimer = new Timer(MainTenanceTask, null, 0, 1000);
         }
 
@@ -45,7 +44,7 @@
                 /*** Device Lib ***/
                 Devices.Library.LoadLibrary(AppConstants.LibraryDirectory);
                 AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Directory.Exists(AppConstants.LibraryDirectory).ToString());
-                AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Exists:" + Devices.Library.Count.ToString());
+                AppLog.Instance.WriteLine("App:Start:LibraryDirectory:Devices:" + Devices.Library.Count.ToString());
 
                 if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "XNET")
                 {
@@ -53,7 +52,7 @@
                     var itfName = AppConfiguration.Instance.CanBusInterfaceName.Trim().ToUpper();
                     var itf = new XnetInterface();
                     itf.Init((UInt64)baudrate, itfName);
-                    CanService = new CanService(itf, _explorer);
+                    _canService = new CanService(itf, _explorer);
                 }
                 else if (AppConfiguration.Instance.CanBusInterfaceType.Trim().ToUpper() == "NICAN")
                 {
@@ -67,7 +66,7 @@
                 }
 
                 AppLog.Instance.WriteLine("App:Start:canService.Begin()");
-                CanService.Begin(null);
+                _canService.Begin(null);
 
                 Maintenance();
 
@@ -84,14 +83,17 @@
         {
             AppLog.Instance.WriteLine("App:Stop: Start");
             AppLog.Instance.WriteLine("App:Stop: TCP Server Start Dispose.");
-            _tcpServer.Dispose();
+            if (_tcpServer != null)
+                _tcpServer.Dispose();
             AppLog.Instance.WriteLine("App:Stop: TCP Server End Dispose.");
             AppLog.Instance.WriteLine("App:Stop: CAN Server Start Dispose.");
-            CanService.Dispose();
+            if(_canService != null)
+             _canService.Dispose();
             AppLog.Instance.WriteLine("App:Stop: CAN Server End Dispose.");
             var elapsed = DateTime.Now - _startTimestamp;
             AppLog.Instance.WriteLine("UpTime:" + elapsed.TotalHours.ToString("N3") + " hours");
             AppLog.Instance.WriteLine("App:Stop :MaintenanceTimer.Dispose();");
+            if(_maintenanceTimer!= null)
             _maintenanceTimer.Dispose();
             AppLog.Instance.WriteLine("App:Stop: Stop sequence complete... Bye");
         }

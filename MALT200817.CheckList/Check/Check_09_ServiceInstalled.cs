@@ -6,7 +6,7 @@ namespace MALT200817.Checklist
     using MALT200817.Configuration;
     using NiXnetDotNet;
 
-    public class Check_10_ServiceRunning : ICheckItem
+    public class Check_09_ServiceInstalled : ICheckItem
     {
 
         string _dut = "AltonTech MALT200817.Service(MaltService)";
@@ -16,7 +16,7 @@ namespace MALT200817.Checklist
         {
             get 
             {
-                return "Az " + _dut + " futásának ellenőrzése.";
+                return "Az " + _dut + " meglétének ellenőrzése.";
             }
         }
 
@@ -25,20 +25,26 @@ namespace MALT200817.Checklist
 
         public void Process()
         {
-            var status = Tools.GetServiceStatus(AppConstants.WindowsServiceName);
 
-            if ( status == "Running") 
+
+            if (Tools.DoesServiceExist(AppConstants.WindowsServiceName)) 
             {
-                Result = "A " + _dut + " szolgáltatás fut. OK.";
+                Result = "A " + _dut + " szolgáltatás telepítve van. OK.";
                 Status = ResultStatusType.Ok;
             }
             else
             {
-                Result = "A " + _dut + " szolgáltatás nem fut, állapota: Error." + status;
+                Result = "A " + _dut + " szolgáltatás nincs telepitve. Error.";
                 Status = ResultStatusType.Failed;
             }
 
 
+        }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
         }
     }
 }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MALT200817.Checklist
 {
-    public class Check_01_Max : ICheckItem
+    public class Check_02_LabView : ICheckItem
     {
 
-        string _dut = "NI Measurement & Automation Explorer 20.0.0";
+        string _dut = "NI LabVIEW 2018 (32-bit)";
 
         public string Description 
         {
@@ -34,9 +34,15 @@ namespace MALT200817.Checklist
             }
             else
             {
-                Result = "A(z) " + _dut + "nincs telepitve vagy nem  megfelelő verzió. Error.";
+                Result = "A(z) " + _dut + " nincs telepitve vagy nem  megfelelő verzió. Rendben.";
                 Status = ResultStatusType.Failed;
             }   
+        }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
         }
     }
 }

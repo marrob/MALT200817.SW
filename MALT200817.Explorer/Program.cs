@@ -75,7 +75,6 @@
             /*** Main Form ***/
             MainForm = new MainForm();
             MainForm.Text = Name + " - " + Application.ProductVersion;
-            MainForm.ConnectionStatus = "Disconnected";
             MainForm.Shown += MainForm_Shown;
             MainForm.FormClosing += MainForm_FormClosing;
             MainForm.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
@@ -106,26 +105,19 @@
             toolsMenu.DropDown.Items.AddRange(
                  new ToolStripItem[]
                  {
-                     new Commands.DevicesConnectCommand(this),
                      new Commands.DevicesForceUpdateCommand(this),
                      new Commands.AlwaysOnTopCommand(MainForm as Form),
                  });
 
             MainForm.MenuBar = new ToolStripItem[]
-                {
+                { 
+                    new Commands.DevicesConnectCommand(this),
                     toolsMenu,
                     diagMenu,
                 };
 
             MainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();
 
-            EventAggregator.Instance.Subscribe((Action<ConnectionChangedAppEvent>)(e1 =>
-            {
-                if (e1.IsConnected)
-                    MainForm.ConnectionStatus = "Connected";
-                else
-                    MainForm.ConnectionStatus = "Disconnected";
-            }));
 
             /*** Default User ***/
             EventAggregator.Instance.Subscribe((Action<UserChangedAppEvent>) (e1 =>

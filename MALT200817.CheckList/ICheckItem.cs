@@ -8,9 +8,10 @@ namespace MALT200817.Checklist
 {
     public interface ICheckItem
     {
-        string Description { get; }
-        string Result { get; }
-        ResultStatusType Status { get; }
+        string Description { get;  }
+        string Result { get; set; }
+        ResultStatusType Status { get; set; }
         void Process();
+        void Dispose();
     }
 }

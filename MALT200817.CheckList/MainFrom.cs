@@ -14,11 +14,19 @@ namespace MALT200817.Checklist
     public interface IMainForm
     {
         event EventHandler Shown;
+        event EventHandler Reset;
     }
 
     public partial class MainFrom : Form
     {
-        public List<ICheckItem> CheckItems { get; set; }
+        public event EventHandler Reset
+        {
+            add { toolStripMenuItemReset.Click += value; }
+            remove { toolStripMenuItemReset.Click -= value; }
+        }
+
+
+
         public MainFrom()
         {
             InitializeComponent();

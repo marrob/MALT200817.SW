@@ -36,7 +36,15 @@ namespace MALT200817.Checklist
             {
                 Result = "A(z) " + _dut + "nincs telepitve vagy nem  megfelelő verzió. Error.";
                 Status = ResultStatusType.Failed;
-            }   
+            }
+
+
+
+        }
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
         }
     }
 }

@@ -50,17 +50,17 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Check_00_NetFramework.cs" />
-    <Compile Include="Check_10_ServiceRunning.cs" />
-    <Compile Include="Check_09_ServiceInstalled.cs" />
-    <Compile Include="Check_08_XnetIfaceName.cs" />
-    <Compile Include="Check_07_XnetDevice.cs" />
-    <Compile Include="Check_06_XnetCanBusInterfaceType.cs" />
-    <Compile Include="Check_05_ConfigFile.cs" />
-    <Compile Include="Check_04_TestStand.cs" />
-    <Compile Include="Check_03_Xnet.cs" />
-    <Compile Include="Check_02_LabView.cs" />
-    <Compile Include="Check_01_Max.cs" />
+    <Compile Include="Check\Check_00_NetFramework.cs" />
+    <Compile Include="Check\Check_10_ServiceRunning.cs" />
+    <Compile Include="Check\Check_09_ServiceInstalled.cs" />
+    <Compile Include="Check\Check_08_XnetIfaceName.cs" />
+    <Compile Include="Check\Check_07_XnetDevice.cs" />
+    <Compile Include="Check\Check_06_XnetCanBusInterfaceType.cs" />
+    <Compile Include="Check\Check_05_ConfigFile.cs" />
+    <Compile Include="Check\Check_04_TestStand.cs" />
+    <Compile Include="Check\Check_03_Xnet.cs" />
+    <Compile Include="Check\Check_02_LabView.cs" />
+    <Compile Include="Check\Check_01_Max.cs" />
     <Compile Include="CheckItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

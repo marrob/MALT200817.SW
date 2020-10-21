@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MALT200817.Checklist
 {
-    public class Check_00_NetFramework : ICheckItem
+    public class Check_04_TestStand : ICheckItem
     {
 
-        string _dut = "Microsoft .NET Framework 4.7.2 Targeting Pack";
+        string _dut = "NI TestStand 2017";
 
         public string Description 
         {
@@ -34,9 +34,15 @@ namespace MALT200817.Checklist
             }
             else
             {
-                Result = "A(z) " + _dut + " Nincs telepitve vagy nem megfelelő verzió. Error.";
+                Result = "A(z) " + _dut + "nincs telepitve vagy nem  megfelelő verzió. Error.";
                 Status = ResultStatusType.Failed;
             }   
+        }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
         }
     }
 }

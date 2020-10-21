@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.ComponentModel;
 namespace MALT200817.Checklist
 {
     public partial class CheckItemControl : UserControl
@@ -22,27 +22,28 @@ namespace MALT200817.Checklist
         public void Update(ICheckItem item)
         { 
             
+            if(item is INotifyPropertyChanged)
+                (item as INotifyPropertyChanged).PropertyChanged += CheckItemControl_PropertyChanged;
+
             label1.Text = item.Description;
 
-            try
+
+
+        }
+
+        private void CheckItemControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var item = sender as ICheckItem;
+
+            textBox1.Text = item.Result;
+            if (item.Status == ResultStatusType.Ok)
             {
-                item.Process();
-                textBox1.Text = item.Result;
-                if (item.Status == ResultStatusType.Ok)
-                {
-                    textBox1.BackColor = Color.Lime;
-                }
-                else
-                {
-                    textBox1.BackColor = Color.Red;
-                }
+                textBox1.BackColor = Color.Lime;
             }
-            catch (Exception ex)
+            else
             {
-                textBox1.Text = "Az értékelés során hibatörtént..." + ex.Message;
                 textBox1.BackColor = Color.Red;
             }
-
         }
     }
 }

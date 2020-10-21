@@ -272,5 +272,11 @@
   <ItemGroup>
     <None Include="Resources\number0_32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\netconnect32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop_Normal_Red32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,5 +43,11 @@ namespace MALT200817.Checklist
 
             Result += " Értéke: " + AppConfiguration.Instance.CanBusInterfaceType;
         }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
+        }
     }
 }

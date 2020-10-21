@@ -123,6 +123,16 @@ namespace MALT200817.Explorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap netconnect32 {
+            get {
+                object obj = ResourceManager.GetObject("netconnect32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap number0_32 {
             get {
                 object obj = ResourceManager.GetObject("number0_32", resourceCulture);
@@ -216,6 +226,16 @@ namespace MALT200817.Explorer.Properties {
         internal static System.Drawing.Bitmap services32 {
             get {
                 object obj = ResourceManager.GetObject("services32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stop_Normal_Red32 {
+            get {
+                object obj = ResourceManager.GetObject("Stop_Normal_Red32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

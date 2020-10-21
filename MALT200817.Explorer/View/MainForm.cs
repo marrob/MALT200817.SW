@@ -19,7 +19,6 @@
         string DevicesCount { get; set; }
         string ConnectionTime { get; set; }
         string ServiceStatus { get; set; }
-        string ConnectionStatus { get; set; }
         ToolStripItem[] StatusBar { set; }
         DataGridView DevicesDgv { get; }
     }
@@ -66,11 +65,6 @@
             }
         }
 
-        public string ConnectionStatus
-        { 
-            get { return toolStripStatusLabelConnectionStatus.Text; }
-            set { toolStripStatusLabelConnectionStatus.Text = value; }
-        }
 
         public MainForm()
         {

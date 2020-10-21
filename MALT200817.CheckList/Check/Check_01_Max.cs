@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MALT200817.Checklist
 {
-    public class Check_04_TestStand : ICheckItem
+    public class Check_01_Max : ICheckItem
     {
 
-        string _dut = "NI TestStand 2017";
+        string _dut = "NI Measurement & Automation Explorer 20.0.0";
 
         public string Description 
         {
@@ -37,6 +37,12 @@ namespace MALT200817.Checklist
                 Result = "A(z) " + _dut + "nincs telepitve vagy nem  megfelelő verzió. Error.";
                 Status = ResultStatusType.Failed;
             }   
+        }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
         }
     }
 }

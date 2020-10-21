@@ -42,5 +42,11 @@ namespace MALT200817.Checklist
                 Status = ResultStatusType.Failed;
             }   
         }
+
+        public void Dispose()
+        {
+            Result = string.Empty;
+            Status = ResultStatusType.Unknown;
+        }
     }
 }
