@@ -18,6 +18,9 @@ namespace MALT200817.Explorer.Commands
 
         protected override void OnClick(EventArgs e)
         {
+
+            new HelpForm().Show();
+
             base.OnClick(e);
         }
     }

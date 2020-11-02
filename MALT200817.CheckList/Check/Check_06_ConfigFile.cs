@@ -1,25 +1,30 @@
 ﻿
+
 namespace MALT200817.Checklist
 {
-
-    using System.Collections.Generic;
     using MALT200817.Configuration;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading.Tasks;
     using System.ComponentModel;
-    public class Check_10_ServiceInstalled : ICheckItem, INotifyPropertyChanged
+
+    public class Check_06_ConfigFile : ICheckItem, INotifyPropertyChanged
     {
-
-        string m_dut = "AltonTech MALT200817.Service(MaltService)";
-
         public event PropertyChangedEventHandler PropertyChanged;
+        string _dut = AppConstants.AppConfigurationFilePath;
+       
 
         public string Description 
         {
             get 
             {
-                return "Az " + m_dut + " meglétének ellenőrzése.";
+                return "Az " + _dut + " meglétének ellenőrzése...";
             }
         }
-
         string m_result;
         public string Result
         {
@@ -50,24 +55,22 @@ namespace MALT200817.Checklist
 
         public void Process()
         {
-
-
-            if (Tools.DoesServiceExist(AppConstants.WindowsServiceName)) 
+            if (File.Exists(AppConstants.AppConfigurationFilePath))
             {
-                Result = "A " + m_dut + " szolgáltatás telepítve van. OK.";
+                Result = "A(z) " + _dut + " OK.";
                 Status = ResultStatusType.Ok;
+                AppConfiguration.Init();
             }
             else
             {
-                Result = "A " + m_dut + " szolgáltatás nincs telepitve. Error.";
+                Result = "A(z) " + _dut + " nem létezik. Error.";
                 Status = ResultStatusType.Failed;
-            }
-
+            }   
         }
 
         public void Dispose()
         {
-     //       Result = string.Empty;
+        //    Result = string.Empty;
 //Status = ResultStatusType.Unknown;
         }
     }

@@ -1,22 +1,30 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+
 namespace MALT200817.Checklist
 {
-
-    using System.Collections.Generic;
-    using MALT200817.Configuration;
-    using System.ComponentModel;
-    public class Check_10_ServiceInstalled : ICheckItem, INotifyPropertyChanged
+    public class Check_05_TestStand : ICheckItem, INotifyPropertyChanged
     {
-
-        string m_dut = "AltonTech MALT200817.Service(MaltService)";
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string[] AcceptVesions =
+        {
+             "4.51.134",
+        };
+
+
+        string m_dut = "NI TestStand";
 
         public string Description 
         {
             get 
             {
-                return "Az " + m_dut + " meglétének ellenőrzése.";
+                return "A(z) " + m_dut + " meglétének és verziójának ellenőrzése...";
             }
         }
 
@@ -48,26 +56,31 @@ namespace MALT200817.Checklist
             }
         }
 
+
         public void Process()
         {
-
-
-            if (Tools.DoesServiceExist(AppConstants.WindowsServiceName)) 
+            var ver = Tools.IsApplicationInstalled(m_dut);
+            if (ver == null)
             {
-                Result = "A " + m_dut + " szolgáltatás telepítve van. OK.";
+                Status = ResultStatusType.Failed;
+                Result = "A(z) " + m_dut + " nincs telepítve.";
+
+            }
+            else if (AcceptVesions.Contains(ver))
+            {
                 Status = ResultStatusType.Ok;
+                Result = "A(z) " + m_dut + " OK. aktuális verzió:" + ver;
             }
             else
             {
-                Result = "A " + m_dut + " szolgáltatás nincs telepitve. Error.";
-                Status = ResultStatusType.Failed;
+                Status = ResultStatusType.Warning;
+                Result = "A(z) " + m_dut + " nem támogatott verzió, aktuális verzió:" + ver;
             }
-
         }
 
         public void Dispose()
         {
-     //       Result = string.Empty;
+          //  Result = string.Empty;
 //Status = ResultStatusType.Unknown;
         }
     }

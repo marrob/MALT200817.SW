@@ -25,19 +25,20 @@ namespace MALT200817.Checklist
     {
         MainFrom _mainForm;
 
-        List<ICheckItem> _checkList = new List<ICheckItem>()
+        List<ICheckItem> m_checkList = new List<ICheckItem>()
             {
-                new Check_00_NetFramework(),
-                new Check_01_Max(),
-                new Check_02_LabView(),
-                new Check_03_Xnet(),
-                new Check_04_TestStand(),
-                new Check_05_ConfigFile(),
-                new Check_06_XnetCanBusInterfaceType(),
-                new Check_07_XnetDevice(),
-                new Check_08_XnetIfaceName(),
-                new Check_09_ServiceInstalled(),
-                new Check_10_ServiceRunning()
+                new Check_00_OsVer(),
+                new Check_01_NetFramework(),
+                new Check_02_Max(),
+                new Check_03_LabView(),
+                new Check_04_Xnet(),
+                new Check_05_TestStand(),
+                new Check_06_ConfigFile(),
+                new Check_07_XnetCanBusInterfaceType(),
+                new Check_08_XnetDevice(),
+                new Check_09_XnetIfaceName(),
+                new Check_10_ServiceInstalled(),
+                new Check_11_ServiceRunning()
             };
 
         public App()
@@ -46,7 +47,10 @@ namespace MALT200817.Checklist
 
             _mainForm.Shown += MainForm_Shown;
             _mainForm.Reset += MainForm_Reset;
- 
+
+             var x  =  Tools.IsApplicationInstalled("Notepad++");
+
+
 
             Application.Run(_mainForm);
         }
@@ -55,25 +59,20 @@ namespace MALT200817.Checklist
 
         private void MainForm_Reset(object sender, EventArgs e)
         {
-            foreach (ICheckItem item in _checkList)
+
+            foreach (ICheckItem item in m_checkList)
+            {
+                item.Result = "még dolgozom... kérlek várj...";
+                item.Status = ResultStatusType.Unknown;
+            }
+
+            foreach (ICheckItem item in m_checkList)
             {
                 item.Dispose();
             }
-        }
 
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
- 
-
-            List<Control> controls = new List<Control>();
-
-            foreach (ICheckItem item in _checkList)
+            foreach (ICheckItem item in m_checkList)
             {
-                var ctrlItem = new CheckItemControl();
-                controls.Add(ctrlItem);
-                ctrlItem.Update(item);
-                _mainForm.AddCheckItem(ctrlItem);
-
                 try
                 {
                     item.Process();
@@ -84,7 +83,35 @@ namespace MALT200817.Checklist
                     item.Status = ResultStatusType.Failed;
                 }
             }
+        }
 
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+
+            var controls = new List<Control>();
+            int i = 0;
+            foreach (ICheckItem item in m_checkList)
+            {
+                var ctrlItem = new CheckItemControl();
+                ctrlItem.Index = i++.ToString() + ".";
+                controls.Add(ctrlItem);
+                ctrlItem.Update(item);
+                _mainForm.AddCheckItem(ctrlItem);
+            }
+
+
+            foreach (ICheckItem item in m_checkList)
+            {
+                try
+                {
+                    item.Process();
+                }
+                catch (Exception ex)
+                {
+                    item.Result = "Az értékelés során hibatörtént..." + ex.Message;
+                    item.Status = ResultStatusType.Failed;
+                }
+            }
 
 
         }

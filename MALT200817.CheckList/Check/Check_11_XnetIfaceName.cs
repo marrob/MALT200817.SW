@@ -2,27 +2,53 @@
 
 namespace MALT200817.Checklist
 {
-
     using System.Collections.Generic;
     using MALT200817.Configuration;
     using NiXnetDotNet;
+    using System.ComponentModel;
 
-    public class Check_08_XnetIfaceName : ICheckItem
+    public class Check_09_XnetIfaceName : ICheckItem, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        string _dut = "XNET interfész név ";
+        string m_dut = "XNET interfész név ";
        
 
         public string Description 
         {
             get 
             {
-                return "Az " + _dut + " helyességének elleőrzése";
+                return "Az " + m_dut + " helyességének elleőrzése";
             }
         }
 
-        public string Result { get; set; }
-        public ResultStatusType Status { get; set; }
+        string m_result;
+        public string Result
+        {
+            get { return m_result; }
+            set
+            {
+                if (m_result != value)
+                {
+                    m_result = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result)));
+                }
+            }
+        }
+
+        ResultStatusType m_status;
+        public ResultStatusType Status
+        {
+            get { return m_status; }
+            set
+            {
+                if (m_status != value)
+                {
+                    m_status = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+                }
+            }
+        }
 
         public void Process()
         {
@@ -56,8 +82,8 @@ namespace MALT200817.Checklist
 
         public void Dispose()
         {
-            Result = string.Empty;
-            Status = ResultStatusType.Unknown;
+//Result = string.Empty;
+//Status = ResultStatusType.Unknown;
         }
     }
 }

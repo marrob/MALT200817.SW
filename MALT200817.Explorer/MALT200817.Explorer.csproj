@@ -61,7 +61,7 @@
     </Compile>
     <Compile Include="Client\LiveDeviceItem.cs" />
     <Compile Include="Client\LiveDeviceCollection.cs" />
-    <Compile Include="Commands\HelpCommand - Copy.cs">
+    <Compile Include="Commands\HelpCommand.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\DevicesConnectCommand.cs">
@@ -144,6 +144,12 @@
       <DependentUpon>DeviceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\DevicePresenter.cs" />
+    <Compile Include="View\HelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LiveDeviceSelectorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\DeviceForm.resx">
       <DependentUpon>DeviceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LiveDeviceSelectorControl.resx">
       <DependentUpon>LiveDeviceSelectorControl.cs</DependentUpon>
@@ -278,5 +287,38 @@
   <ItemGroup>
     <None Include="Resources\Stop_Normal_Red32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Manual\images\logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\images\logo_204x60.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\images\todo.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\navbar.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt132\malt132.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt132\malt132_001.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt160t\malt160t.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt160t\malt160t.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\style\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

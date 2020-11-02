@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,53 +12,48 @@ namespace MALT200817.Checklist
 {
     public class Tools
     {
-        public static bool IsApplicationInstalled(string p_name)
+        /// <summary>
+        /// Telepített szotverek lekérdezése
+        /// </summary>
+        /// <param name="p_name"></param>
+        /// <returns>Ha null: nincs telepítve. Ha 1.9: Az 1.9-es verzió van telepítve.</returns>
+        public static string IsApplicationInstalled(string p_name)
         {
             string displayName;
-            RegistryKey key;
+            RegistryKey key; 
 
-            // search in: CurrentUser
             key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
             foreach (String keyName in key.GetSubKeyNames())
             {
                 RegistryKey subkey = key.OpenSubKey(keyName);
                 displayName = subkey.GetValue("DisplayName") as string;
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
+                if (displayName != null && displayName.Contains(p_name))
                 {
-                    return true;
+                    return (string)subkey.GetValue("DisplayVersion");
                 }
             }
-
-            // search in: LocalMachine_32
             key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
             foreach (String keyName in key.GetSubKeyNames())
             {
-                //Console.WriteLine(keyName);
                 RegistryKey subkey = key.OpenSubKey(keyName);
                 displayName = subkey.GetValue("DisplayName") as string;
-                //  Console.WriteLine(displayName);
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return true;
-                }
+                Console.WriteLine(displayName);
+
+                if (displayName!= null && displayName.Contains(p_name))
+                    return (string)subkey.GetValue("DisplayVersion");
             }
 
-            // search in: LocalMachine_64
             key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
             foreach (String keyName in key.GetSubKeyNames())
             {
 
                 RegistryKey subkey = key.OpenSubKey(keyName);
                 displayName = subkey.GetValue("DisplayName") as string;
-                //   Console.WriteLine(displayName);
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return true;
-                }
+                Console.WriteLine(displayName);
+                if (displayName != null && displayName.Contains(p_name))
+                    return (string)subkey.GetValue("DisplayVersion");
             }
-
-            // NOT FOUND
-            return false;
+            return null;
         }
 
         public static string GetServiceStatus(string servicename)
@@ -85,60 +81,36 @@ namespace MALT200817.Checklist
         {
             return ServiceController.GetServices().Any(serviceController => serviceController.ServiceName.Equals(serviceName));
         }
-        /*
-        static void GetVersion(string nameToSearch)
+
+        private static ManagementObject GetMngObj(string className)
         {
-            // Get HKEY_LOCAL_MACHINE
-            RegistryKey baseRegistryKey = Registry.LocalMachine;
+            var wmi = new ManagementClass(className);
 
-            // If 32-bit OS
-            string subKey
-            //= "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            // If 64-bit OS
-            = "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            RegistryKey unistallKey = baseRegistryKey.OpenSubKey(subKey);
-
-            string[] allApplications = unistallKey.GetSubKeyNames();
-            foreach (string s in allApplications)
+            foreach (var o in wmi.GetInstances())
             {
-                RegistryKey appKey = baseRegistryKey.OpenSubKey(subKey + "\\" + s);
-                string appName = (string)appKey.GetValue("DisplayName");
-                if (appName == nameToSearch)
-                {
-                    string appVersion = (string)appKey.GetValue("DisplayVersion");
-                    Console.WriteLine("Name:{0}, Version{1}", appName, appVersion);
-                    break;
-                }
-
-
+                var mo = (ManagementObject)o;
+                if (mo != null) return mo;
             }
 
+            return null;
         }
 
-        static void ListAll()
+        public static string GetOsVer()
         {
-            // Get HKEY_LOCAL_MACHINE
-            RegistryKey baseRegistryKey = Registry.LocalMachine;
-
-            // If 32-bit OS
-            string subKey
-            //= "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            // If 64-bit OS
-            = "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            RegistryKey unistallKey = baseRegistryKey.OpenSubKey(subKey);
-
-            string[] allApplications = unistallKey.GetSubKeyNames();
-            foreach (string s in allApplications)
+            try
             {
-                RegistryKey appKey = baseRegistryKey.OpenSubKey(subKey + "\\" + s);
-                string appName = (string)appKey.GetValue("DisplayName");
-                string appVersion = (string)appKey.GetValue("DisplayVersion");
-                Console.WriteLine("Name:{0}, Version{1}", appName, appVersion);
+                ManagementObject mo = GetMngObj("Win32_OperatingSystem");
 
+                if (null == mo)
+                    return string.Empty;
+
+                return mo["Version"] as string;
             }
-
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
     }
-        */
-    }
+     
 }

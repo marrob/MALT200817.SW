@@ -1,22 +1,34 @@
 ﻿
+
 namespace MALT200817.Checklist
 {
-
-    using System.Collections.Generic;
     using MALT200817.Configuration;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading.Tasks;
     using System.ComponentModel;
-    public class Check_10_ServiceInstalled : ICheckItem, INotifyPropertyChanged
+
+    public class Check_07_XnetCanBusInterfaceType : ICheckItem, INotifyPropertyChanged
     {
-
-        string m_dut = "AltonTech MALT200817.Service(MaltService)";
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string[] AcceptTypes =
+        {
+            "XNET",
+        };
+
+        string m_dut = "CanBusInterfaceType";
+       
 
         public string Description 
         {
             get 
             {
-                return "Az " + m_dut + " meglétének ellenőrzése.";
+                return "Az " + m_dut + " értékének ellenőrzése...";
             }
         }
 
@@ -50,24 +62,23 @@ namespace MALT200817.Checklist
 
         public void Process()
         {
-
-
-            if (Tools.DoesServiceExist(AppConstants.WindowsServiceName)) 
+            if (AcceptTypes.Contains(AppConfiguration.Instance.CanBusInterfaceType))
             {
-                Result = "A " + m_dut + " szolgáltatás telepítve van. OK.";
+                Result = "A(z) " + m_dut + " OK.";
                 Status = ResultStatusType.Ok;
             }
             else
             {
-                Result = "A " + m_dut + " szolgáltatás nincs telepitve. Error.";
+                Result = "A(z) " + m_dut + " csak XNET lehet! Error.";
                 Status = ResultStatusType.Failed;
-            }
+            }   
 
+            Result += " Értéke: " + AppConfiguration.Instance.CanBusInterfaceType;
         }
 
         public void Dispose()
         {
-     //       Result = string.Empty;
+          //  Result = string.Empty;
 //Status = ResultStatusType.Unknown;
         }
     }

@@ -1,22 +1,30 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+
 namespace MALT200817.Checklist
 {
-
-    using MALT200817.Configuration;
-    using System.ComponentModel;
-
-    public class Check_11_ServiceRunning : ICheckItem, INotifyPropertyChanged
+    public class Check_02_Max : ICheckItem, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        string m_dut = "AltonTech MALT200817.Service(MaltService)";
-       
+        public string[] AcceptVesions =
+        {
+            "19.00.49152",
+            "20.0.0",
+        };
+
+        string m_dut = "NI Measurement & Automation Explorer";
 
         public string Description 
         {
             get 
             {
-                return "Az " + m_dut + " futásának ellenőrzése.";
+                return "A(z) " + m_dut + " meglétének és verziójának ellenőrzése...";
             }
         }
 
@@ -48,26 +56,32 @@ namespace MALT200817.Checklist
             }
         }
 
+
         public void Process()
         {
-            var status = Tools.GetServiceStatus(AppConstants.WindowsServiceName);
-
-            if ( status == "Running") 
+            var ver = Tools.IsApplicationInstalled(m_dut);
+            if (ver == null)
             {
-                Result = "A " + m_dut + " szolgáltatás fut. OK.";
+                Status = ResultStatusType.Failed;
+                Result = "A(z) " + m_dut + " nincs telepítve.";
+
+            }
+            else if (AcceptVesions.Contains(ver))
+            {
                 Status = ResultStatusType.Ok;
+                Result = "A(z) " + m_dut + " OK. aktuális verzió:" + ver;
             }
             else
             {
-                Result = "A " + m_dut + " szolgáltatás nem fut, állapota: Error." + status;
-                Status = ResultStatusType.Failed;
+                Status = ResultStatusType.Warning;
+                Result = "A(z) " + m_dut + " nem támogatott verzió, aktuális verzió:" + ver;
             }
         }
 
         public void Dispose()
         {
-       //     Result = string.Empty;
-//Status = ResultStatusType.Unknown;
+        //    Result = string.Empty;
+        //    Status = ResultStatusType.Unknown;
         }
     }
 }

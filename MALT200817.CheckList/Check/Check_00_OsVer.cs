@@ -8,43 +8,43 @@ using System.ComponentModel;
 
 namespace MALT200817.Checklist
 {
-    public class Check_03_LabView : ICheckItem, INotifyPropertyChanged
+    public class Check_00_OsVer : ICheckItem, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string[] AcceptVesions =
         {
-            "16.05.49153",
+            "10.0.19041",
         };
 
-        string m_dut = "NI LabVIEW";
-
+        
         public string Description 
         {
             get 
             {
-                return "A(z) " + m_dut + " meglétének és verziójának ellenőrzése...";
+                return "Az operációs rendszer verziójának ellenörzése.";
             }
         }
+
         string m_result;
-        public string Result
+        public string Result 
         {
             get { return m_result; }
-            set
+            set 
             {
                 if (m_result != value)
                 {
                     m_result = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result)));
-                }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result))); 
+                }    
             }
         }
 
         ResultStatusType m_status;
-        public ResultStatusType Status
-        {
+        public ResultStatusType Status 
+        { 
             get { return m_status; }
-            set
+            set 
             {
                 if (m_status != value)
                 {
@@ -54,32 +54,25 @@ namespace MALT200817.Checklist
             }
         }
 
-
         public void Process()
         {
-            var ver = Tools.IsApplicationInstalled(m_dut);
-            if (ver == null)
-            {
-                Status = ResultStatusType.Failed;
-                Result = "A(z) " + m_dut + " nincs telepítve.";
-
-            }
-            else if (AcceptVesions.Contains(ver))
+            var ver = Tools.GetOsVer();
+            if (AcceptVesions.Contains(ver))
             {
                 Status = ResultStatusType.Ok;
-                Result = "A(z) " + m_dut + " OK. aktuális verzió:" + ver;
+                Result = "Az OS OK. aktuális verzió:" + ver;
             }
             else
             {
                 Status = ResultStatusType.Warning;
-                Result = "A(z) " + m_dut + " nem támogatott verzió, aktuális verzió:" + ver;
+                Result = "Az OS nem támogatott, aktuális verzió:" + Tools.GetOsVer();
             }
-        }
 
+        }
         public void Dispose()
         {
-           // Result = string.Empty;
-           // Status = ResultStatusType.Unknown;
+          //  Result = string.Empty ;
+         //   Status = ResultStatusType.Unknown;
         }
     }
 }

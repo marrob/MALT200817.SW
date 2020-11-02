@@ -1,0 +1,514 @@
+<html lang="hu">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>MALT Platform felhasználói és fejlesztői kézikönyv</title>
+    <link rel="stylesheet" href="../../style/style.css">
+    <meta name="author" content="Margit Róbert Konovolúció Bt.">
+  </head>
+  <body>
+    <h1>MALT132</h1>
+    <h2>Specifikáció </h2>
+    <ul>
+      <li>Relék száma: 32</li>
+      <li>Relé típusa: <a href="https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&amp;DocId=Data+Sheet%7FPE%7F0919%7Fpdf%7FEnglish%7FENG_DS_PE_0919.pdf%7F1-1393219-0">
+          SCHRACK PE014024</a> </li>
+      <li>Csatlakozók:
+        <ul>
+          <li>VPC 510 104 135 Tripaddle </li>
+          <li>WEIDMULLER <a href="https://download.weidmueller.com/asset/download/file/40061">
+              SL 3.50/04/90G </a> </li>
+          <li>WEIDMULLER SL 3.5/3/90G</li>
+        </ul>
+      </li>
+      <li>Tápfeszültség: 24VDC</li>
+    </ul>
+    <h2>Lábkiosztás</h2>
+    Todo
+    <h2>Támogatott üzenetek</h2>
+    <table class="table_message col-12" style="width: 835px; height: 774px;">
+      <thead>
+        <tr>
+          <td>Description</td>
+          <td>Dir</td>
+          <td>Id</td>
+          <td>Length</td>
+          <td width="7%">Byte0</td>
+          <td width="7%">Byte1</td>
+          <td width="7%">Byte2</td>
+          <td width="7%">Byte3</td>
+          <td width="7%">Byte4</td>
+          <td width="7%">Byte5</td>
+          <td width="7%">Byte6</td>
+          <td width="7%">Byte7</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-left">Request Reset</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>7</td>
+          <td>family code</td>
+          <td>0x03</td>
+          <td>0x00</td>
+          <td>0x00</td>
+          <td>0x00</td>
+          <td>0x00</td>
+          <td>0x06</td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Request Clr One </td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>4</td>
+          <td>family code</td>
+          <td>0x01</td>
+          <td>relay number</td>
+          <td>0x00</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Request Set One </td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>4</td>
+          <td>family code</td>
+          <td>0x01</td>
+          <td>relay number</td>
+          <td>0x01</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Request Clr Several</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>7/8</td>
+          <td>family code</td>
+          <td>0x03</td>
+          <td>relays <br>
+            byte 0</td>
+          <td>relays <br>
+            byte 1</td>
+          <td>relays <br>
+            byte 2</td>
+          <td>relays <br>
+            byte 3</td>
+          <td>0x00</td>
+          <td>0x00<sup>1</sup></td>
+        </tr>
+        <tr>
+          <td class="text-left">Request Set Several</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>7/8</td>
+          <td>family code</td>
+          <td>0x03</td>
+          <td>relays <br>
+            byte 0</td>
+          <td>relays <br>
+            byte 1</td>
+          <td>relays <br>
+            byte 2</td>
+          <td>relays <br>
+            byte 3</td>
+          <td>0x01</td>
+          <td>0x00<sup>1</sup></td>
+        </tr>
+        <tr>
+          <td class="text-left">Request Ports Status</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>3</td>
+          <td>family code</td>
+          <td>0x04</td>
+          <td>autosend?</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td id="response_ports_status" style="text-align: left;"> <a href="./messages.html#response_ports">Response
+              Ports Status </a></td>
+          <td>Tx</td>
+          <td>0x155203yy</td>
+          <td>6</td>
+          <td>family code</td>
+          <td>0x04</td>
+          <td>relays <br>
+            byte 0 </td>
+          <td>relays <br>
+            byte 1</td>
+          <td>relays <br>
+            byte 2</td>
+          <td>relays <br>
+            byte 3</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Serial number<sup>3</sup></td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>3</td>
+          <td>family code</td>
+          <td>0xDE</td>
+          <td>0xF5</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Response Serial number<sup>3</sup></td>
+          <td>Tx</td>
+          <td>0x155203yy</td>
+          <td>7</td>
+          <td>family code</td>
+          <td>0xDE</td>
+          <td>0xF0</td>
+          <td>0xC3<br>
+            byte 0</td>
+          <td>0xD8<br>
+            byte 1</td>
+          <td>0x12<br>
+            byte 2</td>
+          <td>0x00<br>
+            byte 3</td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Port Counter Reset</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>3<br>
+          </td>
+          <td>family code </td>
+          <td>0xEE</td>
+          <td>0x00<br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Get Port Counter<sup>2</sup></td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>4</td>
+          <td>family code</td>
+          <td>0xEE</td>
+          <td>0x01</td>
+          <td>relay number</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Response Get Port Counter</td>
+          <td>Tx</td>
+          <td>0x155203yy </td>
+          <td>8<br>
+          </td>
+          <td>family code </td>
+          <td>0xEE<br>
+          </td>
+          <td>0x01<br>
+          </td>
+          <td>relay number </td>
+          <td>counter<br>
+            byte 0<br>
+          </td>
+          <td>counter<br>
+            byte 1<br>
+          </td>
+          <td>counter<br>
+            byte 2<br>
+          </td>
+          <td>counter<br>
+            byte 3<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Set Port Counter<sup>2</sup><br>
+          </td>
+          <td>Rx </td>
+          <td>0x155103yy </td>
+          <td>8<br>
+          </td>
+          <td>family code </td>
+          <td>0xEE<br>
+          </td>
+          <td>0x02<br>
+          </td>
+          <td>relay number </td>
+          <td>counter<br>
+            byte 0 </td>
+          <td>counter<br>
+            byte 1 </td>
+          <td>counter<br>
+            byte 2 </td>
+          <td>counter<br>
+            byte 3 </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Save Port Counters<sup>2</sup></td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>3</td>
+          <td>family code</td>
+          <td>0xEE</td>
+          <td>0x03</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Read EEPROM</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>5</td>
+          <td>family code</td>
+          <td>0xFA</td>
+          <td>0xF1</td>
+          <td>addr<br>
+            byte 0</td>
+          <td>addr<br>
+            byte 1</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Response Read EEPROM</td>
+          <td>Tx</td>
+          <td>0x155203yy</td>
+          <td>7</td>
+          <td>family code</td>
+          <td>0xFA</td>
+          <td>0xF1</td>
+          <td>addr<br>
+            byte 0</td>
+          <td>addr<br>
+            byte 1</td>
+          <td>data<br>
+            byte 0</td>
+          <td>data<br>
+            byte 1</td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: left;">Request Write EEPROM</td>
+          <td>Rx</td>
+          <td>0x155103yy</td>
+          <td>7</td>
+          <td>family code</td>
+          <td>0xFA</td>
+          <td>0xF2</td>
+          <td>addr<br>
+            byte 0</td>
+          <td>addr<br>
+            byte 1</td>
+          <td>data<br>
+            byte 0</td>
+          <td>data<br>
+            byte 1</td>
+          <td><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="width: 1018px;"><sup>1</sup>Kompatibilitási okok miatt ez a
+      bájt opcionális.<br>
+      <sup>2</sup>Nem kompatibilis a YAV rendszerével, mivel ez a funkció
+      hiányzik, vagy nem ismert a rendszerükben.<br>
+      <sup>3</sup>Nem minden YAV eszköz/eszköz verzió támogatja</p>
+    <h3>Jelölések</h3>
+    <p>"relay number": <b>relészám ami 0-től indexelődik! A PC-s API fölött
+        az indexelés 1-re tér át.</b></p>
+    <p><a href="protokol.html#common_messages"> COMMON </a> messages </p>
+    <h2>Kártya inicializálása</h2>
+    Paraméterek: Family code:0x03, Address:0x03, Version:00.9A, <strong>K1
+      relay On</strong>
+    <table class="table_traffic">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Direction</td>
+          <td>Length</td>
+          <td>Data</td>
+          <td>Comment</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0x1558FFFF</td>
+          <td>Rx</td>
+          <td>2</td>
+          <td class="text-left">0xAB 0xFF</td>
+          <td class="text-left">Request All Init Info</td>
+        </tr>
+        <tr>
+          <td>0x15520303</td>
+          <td>Tx</td>
+          <td>2</td>
+          <td class="text-left">0xF0 0x01 0x03 0x03 0x00 0x9A 0x00</td>
+          <td class="text-left">Response Init Info</td>
+        </tr>
+        <tr>
+          <td>0x15510303</td>
+          <td>Rx</td>
+          <td>3</td>
+          <td class="text-left">0x03 0x04 0x01</td>
+          <td class="text-left">Request Ports Status</td>
+        </tr>
+        <tr>
+          <td>0x15520303</td>
+          <td>Tx</td>
+          <td>7</td>
+          <td class="text-left">0x03 0x04 <strong>0x01</strong> 0x00 0x00
+            0x00 0x00</td>
+          <td class="text-left">Response Ports Status</td>
+        </tr>
+        <tr>
+          <td>0x15510303</td>
+          <td>Rx</td>
+          <td>3</td>
+          <td class="text-left">0x03 0xEE 0x11 </td>
+          <td class="text-left">Request Save Counters</td>
+        </tr>
+        <tr>
+          <td>0x15520303</td>
+          <td>Tx</td>
+          <td>4</td>
+          <td class="text-left">0x03 0xEE 0x12 0x01 </td>
+          <td class="text-left">Response Save Counters Ack</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="response_ports_ClrSetOne_traffic"> Egy kimenet állapotának
+      módosítása - Request Clr One/Request Set One </h2>
+    <p class="h2"><br>
+    </p>
+    <h2>Sorozatszám - Request Serial number</h2>
+    <h2>LED-es állapot jelzések</h2>
+    <h2>Funkcionális tesztek</h2>
+    <ul>
+      <li>Húzz megmiden relét és ellenőrizd, hogy miden relé meghuzott-e DMM
+        continuity tesztel. </li>
+      <li> A kártya teljesítmény felévteléből meg mondható ha egy relé nics
+        meghúzva?
+        <ul>
+          <li>MALT160T alaphelyzetben: 13.7mAx23.69V = 324.69mW </li>
+          <li>MALT160T 1 relé bekapcsolva: 16.6mAx23.7V = 393.8mW </li>
+          <li>MALT160T 2 relé bekapcsolva: 18.9mAx23.68V = 447.55mW </li>
+          <li>MALT160T 180 relé bekapcsolva: 394mAx22.89V = 9018mW </li>
+        </ul>
+        Ha minden relé meg van húzva akkor 9W ez az 50mW-hoz képest
+        50mW/9000mW*100%=0.55% </li>
+    </ul>
+    <h3>Fejlesztői tesztek</h3>
+    <ul>
+      <li>Ellenőrizd a tápegység maximális terhelhetőségét: minimum 5W</li>
+    </ul>
+    <h3>Sorozatgyártós tesztek</h3>
+    <ul>
+      <li>Kártya tápfeszültség alá helyezése után</li>
+      <ol>
+        <li>A narancs lednek világítania kell</li>
+        <li>A zöld LED-nek 5sec ig gyorsan kell villogni kell, majd tovább
+          lassan.</li>
+        <li>Piros LED nem villoghat és nem is világíthat.</li>
+        <li>Beapcsolás pillanatában relé nem kattanhat.</li>
+      </ol>
+      <li>6TL feluletéről a kártya sorozszámának olvasása.</li>
+      <ol>
+        <li>A kártya sorozatszámának egyedinek kell lennia</li>
+        <li> <s> A kárty sorozatszám 24bites véletlen szám ami az első
+            bekapcsoláskor generálodik.</s> </li>
+      </ol>
+      <li>6TL felületéről az kártya összes reléjének reszetelése (előtte <strong>mindet</strong>
+        kapcsold be) </li>
+      <li>6TL felületéről a relé számláló tesztelése
+        <ol>
+          <li>Nyisd meg a 6TL felületét majd RELAY COUNTER felületet.</li>
+          <li>Jegyezz fel pár számláló értéket (elején közepé végén)</li>
+          <li>Indísd újr a 6TL felületét (6TL felül inditásakor kerülnek
+            mentésre a relé számló értékei) </li>
+          <li>Ellenőrizd a relé számló értékeit</li>
+          <li>Zárd be a 6TL felületét</li>
+          <li>Indísd újra a kárytát a táp elvételével</li>
+          <li>Ellenőrizd a relészámló értékeit ismét.</li>
+        </ol>
+        <i> <s> (A DEBUG Firmware jelzi a beírásnak az idejét 32db rel kb
+            320ms-ig tart DEBUG.DEVICE:MemoryRelayCntSave elapsed: 341 ms) </s></i>
+      </li>
+      <li>Kártya bejelenkezésének tesztelése</li>
+      <ol>
+        <li>Zárd be a 6TL felületét, ha meg volt nyitva</li>
+        <li>Kapcsold ki a kártyák tápjájt, ha táp alatt voltak</li>
+        <li>Indisd el a 6TL felületét.</li>
+        <li>Helyezd táp alá a kártyákat</li>
+        <li>Minden kártyánk meg kell hogy jelenjen a 6TL felületén</li>
+      </ol>
+      <li>Terminalban jelzett és a kiolvaott sorozatszának egyeznie kell.</li>
+      <li>Késletetési idők tesztelése</li>
+      <li>Minden sebesség beállitásban tesztelni a kártyákat</li>
+    </ul>
+
+  </body>
+</html>

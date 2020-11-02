@@ -110,7 +110,8 @@
                  });
 
             MainForm.MenuBar = new ToolStripItem[]
-                { 
+                {
+                    new Commands.HelpCommand(),
                     new Commands.DevicesConnectCommand(this),
                     toolsMenu,
                     diagMenu,

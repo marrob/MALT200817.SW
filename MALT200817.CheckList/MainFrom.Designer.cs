@@ -110,6 +110,7 @@
             // 
             // toolStripMenuItemReset
             // 
+            this.toolStripMenuItemReset.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripMenuItemReset.Name = "toolStripMenuItemReset";
             this.toolStripMenuItemReset.Size = new System.Drawing.Size(47, 20);
             this.toolStripMenuItemReset.Text = "Reset";
