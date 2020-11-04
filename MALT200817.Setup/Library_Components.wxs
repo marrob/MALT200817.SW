@@ -6,9 +6,11 @@
     <ComponentGroup Id="Library_Components" Directory="AppDataLibraryFolder"  >
 
       <Component Id="Lib_Files" Guid="{D4F93D84-5422-441A-8B09-3F20906235D1}" >
-          <File Id="_MALT132.xml" Source="$(var.AppDirectory)\Library\MALT132.xml"  Checksum="yes"/>
-          <File Id="_MALT160T.xml" Source="$(var.AppDirectory)\Library\MALT160T.xml" Checksum="yes"/>
-          <File Id="_MAL23THV.xml" Source="$(var.AppDirectory)\Library\MAL23THV.xml" Checksum="yes"/>
+        <File Id="_MAL23THV.xml" Source="$(var.AppDirectory)\Library\MAL23THV.xml" Checksum="yes"/>
+        <File Id="_MALT132.xml" Source="$(var.AppDirectory)\Library\MALT132.xml"  Checksum="yes"/>
+        <File Id="_MALT40IO.xml" Source="$(var.AppDirectory)\Library\MALT40IO.xml" Checksum="yes"/>
+        <File Id="_MALT160T.xml" Source="$(var.AppDirectory)\Library\MALT160T.xml" Checksum="yes"/>
+        <File Id="_MALT16PIN.xml" Source="$(var.AppDirectory)\Library\MALT16PIN.xml" Checksum="yes"/>
       </Component>
     </ComponentGroup>
   </Fragment>

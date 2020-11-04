@@ -24,10 +24,11 @@ namespace MALT200817.Explorer.View
             public string OptionCode { get; set; }
         }
 
-        DeviceListViewItem SelectedItem;
+        
         public LiveDeviceCollection LiveDevices;
         public BindingList<DeviceListViewItem> DevicesListView;
-        DataGridView Dgv;
+        DataGridView _dgv;
+        DeviceListViewItem _selectedItem;
 
         public DevicePresenter(DataGridView dgv)
         {
@@ -37,7 +38,7 @@ namespace MALT200817.Explorer.View
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            Dgv = dgv;
+            _dgv = dgv;
             DevicesListView = new BindingList<DeviceListViewItem>();
             dgv.DataSource = DevicesListView;
             dgv.DoubleClick += DeviceDgv_DoubleClick;
@@ -45,19 +46,22 @@ namespace MALT200817.Explorer.View
 
         private void DeviceDgv_DoubleClick(object sender, EventArgs e)
         {
-            SelectedItem = (Dgv.CurrentRow.DataBoundItem as DeviceListViewItem);
-            ShowDevice();
+            _selectedItem = (_dgv.CurrentRow.DataBoundItem as DeviceListViewItem);
+            if (!(_selectedItem.FamilyName.Contains("Error")))
+            {
+                ShowDevice();
+            }
         }
 
         int saveRow = 0;
         int SelectedRowIndex = 0;
         public void Update(LiveDeviceCollection devices)
         {
-            if (Dgv.Rows.Count > 0 && Dgv.FirstDisplayedCell != null)
-                saveRow = Dgv.FirstDisplayedCell.RowIndex;
+            if (_dgv.Rows.Count > 0 && _dgv.FirstDisplayedCell != null)
+                saveRow = _dgv.FirstDisplayedCell.RowIndex;
 
-            if (Dgv.SelectedRows.Count > 0) 
-                SelectedRowIndex = Dgv.SelectedRows[0].Index; 
+            if (_dgv.SelectedRows.Count > 0) 
+                SelectedRowIndex = _dgv.SelectedRows[0].Index; 
 
             DevicesListView.Clear();
           
@@ -75,22 +79,22 @@ namespace MALT200817.Explorer.View
                 }); 
             }
 
-            if (saveRow != 0 && saveRow < Dgv.Rows.Count)
-                Dgv.FirstDisplayedScrollingRowIndex = saveRow;
+            if (saveRow != 0 && saveRow < _dgv.Rows.Count)
+                _dgv.FirstDisplayedScrollingRowIndex = saveRow;
 
-            if ((Dgv.Rows.Count - 1) >= SelectedRowIndex) 
-                Dgv.Rows[SelectedRowIndex].Selected = true;
+            if ((_dgv.Rows.Count - 1) >= SelectedRowIndex) 
+                _dgv.Rows[SelectedRowIndex].Selected = true;
         }
 
         public void ShowDevice()
         {
             var dev = new DeviceForm();
-            dev.Address = SelectedItem.Address;
-            dev.FamilyCode = SelectedItem.FamilyCode;
-            dev.FamilyName = SelectedItem.FamilyName;
-            dev.OptionCode = SelectedItem.OptionCode;
-            dev.SerialNumber = SelectedItem.SerialNumber;
-            dev.FwVersion = SelectedItem.Version;
+            dev.Address = _selectedItem.Address;
+            dev.FamilyCode = _selectedItem.FamilyCode;
+            dev.FamilyName = _selectedItem.FamilyName;
+            dev.OptionCode = _selectedItem.OptionCode;
+            dev.SerialNumber = _selectedItem.SerialNumber;
+            dev.FwVersion = _selectedItem.Version;
             dev.Show();
         }
     }

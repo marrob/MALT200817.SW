@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- This is how we include wxi files -->
+    <?include $(sys.CURRENTDIR)Config.wxi ?>
+
+
+    <DirectoryRef Id="AppFolder">
+      <Directory Id="ManualFolder" Name="Manual">
+        <Directory Id="ProductsFolder" Name="Products">
+          <Directory Id="malt132Folder" Name="malt132"/>
+          <Directory Id="malt160tFolder" Name="malt160t"/>
+          <Directory Id="malt16pinFolder" Name="malt16pin"/>
+          <Directory Id="malt23thvFolder" Name="malt23thv"/>
+          <Directory Id="malt40ioFolder" Name="malt40io"/>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+
+      <ComponentGroup Id="Manual_Components">  
+        
+      <Component Id="Manual_Components_Files" Directory="ManualFolder" Guid="{FF562584-98B0-41AF-9E69-E24C22D8B25D}">
+        <File Id="_index.html" Source="$(var.ManualDirectory)\index.html" KeyPath="no" Checksum="yes"/>
+      </Component>
+        
+        <Component Id="Product_malt132_Files" Directory="malt132Folder" Guid="{73BE403C-A3C4-46E5-BFCD-DA50B37903AF}">
+          <File Id="_malt132.html" Source="$(var.ManualDirectory)\products\malt132\malt132.html" KeyPath="no" Checksum="yes"/>
+        </Component>
+        
+        <Component Id="Product_malt160t_Files" Directory="malt160tFolder" Guid="">
+          <File Id="_malt160t.html" Source="$(var.ManualDirectory)\products\malt160t\malt160t.html" KeyPath="no" Checksum="yes"/>
+        </Component>
+
+      </ComponentGroup>
+  </Fragment>
+</Wix>

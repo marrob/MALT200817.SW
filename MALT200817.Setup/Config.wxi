@@ -48,7 +48,7 @@
   <?define AppResourceDirectory       = ".\Resources"?>
   <?define LabView2018Directory       = "..\MALT200817.LabView.Driver"?>
   <?define FirmwareDirectory          = "..\Resources\Firmwares\"?>
-
+  <?define ManualDirectory            = ..\MALT200817.Explorer\bin\Release\Manual?>
 
 
 

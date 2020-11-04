@@ -31,7 +31,7 @@ namespace MALT200817.Service
                 if (_device != null)
                     return _device.FamilyName;
                 else
-                    return "Unknown FamilyName";
+                    return "Error Unknown Family Name";
             }
         }
         private readonly DeviceItem _device;

@@ -79,6 +79,12 @@
     <Content Include="Library\MAL23THV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Library\MALT40IO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Library\MALT16PIN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Library\MALT132.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

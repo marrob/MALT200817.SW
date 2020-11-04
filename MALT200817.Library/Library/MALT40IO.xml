@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <malt_device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.altontech.hu/malt/2020/project/content">
   <LibVersion>0</LibVersion>
-  <FamilyName>MALT132</FamilyName>
+  <FamilyName>MALT16PIN</FamilyName>
   <FamilyCode>3</FamilyCode>
   <OptionCode>0</OptionCode>
   <BlockSize>4</BlockSize>
   <Blocks>1</Blocks>
-  <FirstName>MALT132</FirstName>
+  <FirstName>MALT16PIN</FirstName>
   <DefaultWinodwSize>
     <Width>455</Width>
     <Height>793</Height>
