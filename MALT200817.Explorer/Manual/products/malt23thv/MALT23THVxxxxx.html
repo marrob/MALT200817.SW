@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>MALT Platform felhasználói és fejlesztői kéziköny</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../style/style.css">
+    </head>
+    <body>
+        <header>
+            <div class = "header left"></div>
+            <div class = "header right">
+                Hungary<br>
+                Vác<br>
+                Sándor Utca 8<br> 
+            </div>
+        </header>
+        <nav class="product__nav__container">
+           <a href="../../index.html"> Főoldal</a> > MALT23THV 
+        </nav>
+
+        <h1 class = "main__title">MALT23THV</h1>
+
+        <article class = product__container>
+            <div class = "product__left__menu__container">
+                <p> 
+                    <h4>Kapcsolási rajz</h4> 
+                <p> 
+                    <h4>3D Model</h4> 
+                </p>
+                <p> 
+                    <h4>Gerber</h4> 
+                </p>
+
+            </div>
+                          
+            <div class = "product__middle__menu__container">
+                <h2>Specifikáció</h2>
+                <ul>
+                    <li>Relék száma:23</li>
+                    <li>Relé típusa: <a href="https://standexelectronics.com/wp-content/uploads/datasheets/33/3305185478e.pdf">
+                         MEDER SHV05-1A85-78L4K</a> </li>
+                    <li>Csatlakozók
+                        <ul>
+                            <li>VPC 510 104 135 Tripaddle </li>
+                            <li>WEIDMULLER <a href="https://download.weidmueller.com/asset/download/file/40061"> SL 3.50/04/90G </a> </li>
+                            <li>WEIDMULLER SL 3.5/3/90G</li>
+                        </ul> 
+                    <li>Tápfeszültség: 24VDC</li>
+                </ul>
+                <h2>Lábkiosztás</h2>
+                <h2>Protokoll</h2>
+                <h2>LED-es állapot jelzések</h2>
+
+                <h2>Funkcionális tesztek</h2>
+                
+                <h3>Fejlesztői tesztek</h3>
+                <ul>
+                    <li>Ellenőrizd a tápegység maximális terhelhetőségét: minimum 10W (5V/2A)</li>
+                </ul>
+                <h3>Srorozatgyártós tesztek</h3>
+                <ul>
+                    <li>Káryta tápfeszültség alá helyezése után</li>
+                    <ol>
+                        <li>A narancs lednek világítania kell</li>
+                        <li>A zöld LED-nek 5sec ig gyorsan kell vilogni kell, majd tovább lassan.</li>
+                        <li>Piros LED nem villoghat és nem is világíthat.</li>
+                        <li>Beapcsolás pillanatában relé nem kattanhat.</li>
+                    </ol>
+                    <li>6TL feluletéről a kártya sorozszámának olvasása.</li>
+                        <ol>
+                            <li>6TL platform esetén nem támogatott</li>
+                            <li>A kártya sorozatszámának egyedinek kell lennie</li>
+                            <li> <s> A kárty sorozatszám 24bites véletlen szám ami az első bekapcsoláskor generálodik.</s></li>
+                        </ol>
+                    <li>6TL felületéről az kártya összes reléjének reszetelése (előtte <strong>mindet</strong> kapcsold be)</li>
+                    <li>6TL felületéről a relé számláló tesztelése
+                    <ol>
+                        <li>Nyisd meg a 6TL felületét majd RELAY COUNTER felületet.</li>
+                        <li>Jegyezz fel pár számláló értéket (elején közepé végén)</li>
+                        <li>Indísd újr a 6TL felületét (6TL felül inditásakor kerülnek mentésre a relé számló értékei)</li>
+                        <li>Ellenőrizd a relé számló értékeit</li>
+                        <li>Zárd be a 6TL felületét</li>
+                        <li>Indísd újra a kárytát a táp elvételével</li>
+                        <li>Ellenőrizd a relészámló értékeit ismét.</li>
+                    </ol>
+                    <i> <s> (A DEBUG Firmware jelzi a beírásnak az idejét 32db rel kb 320ms-ig tart DEBUG.DEVICE:MemoryRelayCntSave elapsed: 341 ms) </s></i>
+                    <li>Kártya bejelenkezésének tesztelése</li>
+                        <ol>
+                            <li>Zárd be a 6TL felületét, ha meg volt nyitva</li>
+                            <li>Kapcsold ki a kártyák tápjájt, ha táp alatt voltak</li>
+                            <li>Indisd el a 6TL felületét.</li>
+                            <li>Helyezd táp alá a kártyákat</li>
+                            <li>Minden kártyánk meg kell hogy jelenjen a 6TL felületén</li>
+                        </ol>
+                    <li>Terminalban jelzett és a kiolvaott sorozatszának egyeznie kell.</li>
+                    <li>Késletetési idők tesztelése</li>
+                    <li>Minden sebesség beállitásban tesztelni a kártyákat</li>
+                </ul>
+            </div>
+
+
+
+            <div class = "product__right__menu__container"></div>
+        </article>
+    </body>
+</html>

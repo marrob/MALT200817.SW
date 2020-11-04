@@ -1,4 +1,7 @@
 
+header h1{
+    text-align: left;
+}
 
 .prducts__table img {
     width: 250px;
@@ -7,12 +10,6 @@
 
 }
 
-body{
-  margin-left: auto;
-  margin-right: auto;
-  width: 1024px;
-  border:2px solid red;
-}
 
 
 .product__container{

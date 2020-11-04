@@ -6,7 +6,7 @@
     <meta name="author" content="Margit Róbert Konovolúció Bt.">
   </head>
   <body>
-    <header> <h1>MALT132</h1> </header>
+    <header> <h1>MALT16PIN</h1> </header>
     <main>
       <nav>
         <ul>
@@ -15,11 +15,13 @@
         </ul>
       </nav>
       <section>
+
         <h2>Specifikáció </h2>
         <ul>
-          <li>Relék száma: 32</li>
+          <li>Relék száma: 16</li>
           <li>Relé típusa: <a href="https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&amp;DocId=Data+Sheet%7FPE%7F0919%7Fpdf%7FEnglish%7FENG_DS_PE_0919.pdf%7F1-1393219-0">
-              SCHRACK PE014024</a> </li>
+              SCHRACK PE014024</a> 
+          </li>
           <li>Csatlakozók:
             <ul>
               <li>VPC 510 104 135 Tripaddle </li>
@@ -30,6 +32,9 @@
           </li>
           <li>Tápfeszültség: 24VDC</li>
         </ul>
+      </section>
+
+      <section>
         <h2>Lábkiosztás</h2>
         Todo
         <h2>Támogatott üzenetek</h2>
@@ -448,27 +453,7 @@
             </tr>
           </tbody>
         </table>
-        <h2 id="response_ports_ClrSetOne_traffic"> Egy kimenet állapotának
-          módosítása - Request Clr One/Request Set One </h2>
-        <p class="h2"><br>
-        </p>
-        <h2>Sorozatszám - Request Serial number</h2>
-        <h2>LED-es állapot jelzések</h2>
-        <h2>Funkcionális tesztek</h2>
-        <ul>
-          <li>Húzz megmiden relét és ellenőrizd, hogy miden relé meghuzott-e DMM
-            continuity tesztel. </li>
-          <li> A kártya teljesítmény felévteléből meg mondható ha egy relé nics
-            meghúzva?
-            <ul>
-              <li>MALT160T alaphelyzetben: 13.7mAx23.69V = 324.69mW </li>
-              <li>MALT160T 1 relé bekapcsolva: 16.6mAx23.7V = 393.8mW </li>
-              <li>MALT160T 2 relé bekapcsolva: 18.9mAx23.68V = 447.55mW </li>
-              <li>MALT160T 180 relé bekapcsolva: 394mAx22.89V = 9018mW </li>
-            </ul>
-            Ha minden relé meg van húzva akkor 9W ez az 50mW-hoz képest
-            50mW/9000mW*100%=0.55% </li>
-        </ul>
+      </section>
     </main>
     <footer>
 

@@ -12,7 +12,7 @@ namespace MALT200817.Explorer.Commands
         {
             
             DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            Image = Resources.pin32;
+            Image = Resources.help32;
             Text = "Help";
         }
 
