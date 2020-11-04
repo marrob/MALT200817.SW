@@ -142,12 +142,20 @@
 
         private void Check_Tick(object sender, EventArgs e)
         { 
+
             var sc = new ServiceController(AppConstants.WindowsServiceName);
             MainForm.ServiceStatus = sc.Status.ToString();
 
-            if(AppConfiguration.Instance.ExplorerDeviceListAutoUpdate)
-                if(MaltClient.Instance.IsConnected)
-                    UpdateDeviceList();
+            try
+            {
+                if (AppConfiguration.Instance.ExplorerDeviceListAutoUpdate)
+                    if (MaltClient.Instance.IsConnected)
+                        UpdateDeviceList();
+            }
+            catch /*Ha nem sikerül lekérdezni az eszközöket akkor leálla pollingozás*/
+            {
+                Timer.Stop();
+            }
         }
 
         void MainForm_Shown(object sender, EventArgs e)

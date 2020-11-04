@@ -139,7 +139,7 @@
             var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == familyCode && n.Address == address);
             if (dev == null)
                 throw new ApplicationException("MALT Device Not found: CardType:" + familyCode.ToString("X2") + ", Address:" + address.ToString("X2"));
-            var retval = new byte[dev.Device.BlockSize];
+            var retval = new byte[dev.BlockSize];
             Array.Copy(dev.Ports[FIRST_BLOCK], retval, retval.Length);
             return retval;
         }

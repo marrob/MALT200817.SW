@@ -140,7 +140,7 @@
                                 dev.OptionCode.ToString("X2") + ":" + //OPTION_CODE
                                 dev.Version + ":" +                   //VERSION
                                 dev.SerialNumber + ":" +              //SERIALNUMBER
-                                dev.Device.FamilyName + ":" +         //FAMILY_NAME
+                                dev.FamilyName + ":" +                //FAMILY_NAME
                                 dev.FirstName + //FIRST_NAME
                                 ";";
 
