@@ -111,10 +111,10 @@
 
             MainForm.MenuBar = new ToolStripItem[]
                 {
-                    new Commands.HelpCommand(),
                     new Commands.DevicesConnectCommand(this),
                     toolsMenu,
                     diagMenu,
+                    new Commands.HelpCommand(),
                 };
 
             MainForm.Version = typeof(Program).Assembly.GetName().Version.ToString();

@@ -8,8 +8,8 @@
   <Blocks>1</Blocks>
   <FirstName>MALT16PIN</FirstName>
   <DefaultWinodwSize>
-    <Width>455</Width>
-    <Height>793</Height>
+    <Width>450</Width>
+    <Height>457</Height>
   </DefaultWinodwSize>
   <Components>
     <anyType xsi:type="ComponentRelaySPST">
@@ -21,92 +21,92 @@
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K2</Label>
       <Port>2</Port>
-      <PinLabel_NO>68</PinLabel_NO>
-      <PinLabel_COM>37</PinLabel_COM>
+      <PinLabel_NO>36</PinLabel_NO>
+      <PinLabel_COM>48</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K3</Label>
       <Port>3</Port>
-      <PinLabel_NO>69</PinLabel_NO>
-      <PinLabel_COM>38</PinLabel_COM>
+      <PinLabel_NO>36</PinLabel_NO>
+      <PinLabel_COM>47</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K4</Label>
       <Port>4</Port>
-      <PinLabel_NO>70</PinLabel_NO>
-      <PinLabel_COM>39</PinLabel_COM>
+      <PinLabel_NO>37</PinLabel_NO>
+      <PinLabel_COM>46</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K5</Label>
       <Port>5</Port>
-      <PinLabel_NO>71</PinLabel_NO>
-      <PinLabel_COM>40</PinLabel_COM>
+      <PinLabel_NO>38</PinLabel_NO>
+      <PinLabel_COM>45</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K6</Label>
       <Port>6</Port>
-      <PinLabel_NO>72</PinLabel_NO>
-      <PinLabel_COM>41</PinLabel_COM>
+      <PinLabel_NO>39</PinLabel_NO>
+      <PinLabel_COM>44</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K7</Label>
       <Port>7</Port>
-      <PinLabel_NO>73</PinLabel_NO>
-      <PinLabel_COM>42</PinLabel_COM>
+      <PinLabel_NO>40</PinLabel_NO>
+      <PinLabel_COM>43</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K8</Label>
       <Port>8</Port>
-      <PinLabel_NO>74</PinLabel_NO>
-      <PinLabel_COM>43</PinLabel_COM>
+      <PinLabel_NO>41</PinLabel_NO>
+      <PinLabel_COM>42</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K9</Label>
       <Port>9</Port>
-      <PinLabel_NO>75</PinLabel_NO>
-      <PinLabel_COM>44</PinLabel_COM>
+      <PinLabel_NO>50</PinLabel_NO>
+      <PinLabel_COM>63</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K10</Label>
       <Port>10</Port>
-      <PinLabel_NO>76</PinLabel_NO>
-      <PinLabel_COM>45</PinLabel_COM>
+      <PinLabel_NO>50</PinLabel_NO>
+      <PinLabel_COM>62</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K11</Label>
       <Port>11</Port>
-      <PinLabel_NO>77</PinLabel_NO>
-      <PinLabel_COM>46</PinLabel_COM>
+      <PinLabel_NO>50</PinLabel_NO>
+      <PinLabel_COM>61</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K12</Label>
       <Port>12</Port>
-      <PinLabel_NO>78</PinLabel_NO>
-      <PinLabel_COM>47</PinLabel_COM>
+      <PinLabel_NO>51</PinLabel_NO>
+      <PinLabel_COM>60</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K13</Label>
       <Port>13</Port>
-      <PinLabel_NO>79</PinLabel_NO>
-      <PinLabel_COM>48</PinLabel_COM>
+      <PinLabel_NO>52</PinLabel_NO>
+      <PinLabel_COM>59</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K14</Label>
       <Port>14</Port>
-      <PinLabel_NO>80</PinLabel_NO>
-      <PinLabel_COM>49</PinLabel_COM>
+      <PinLabel_NO>53</PinLabel_NO>
+      <PinLabel_COM>58</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K15</Label>
       <Port>15</Port>
-      <PinLabel_NO>81</PinLabel_NO>
-      <PinLabel_COM>50</PinLabel_COM>
+      <PinLabel_NO>54</PinLabel_NO>
+      <PinLabel_COM>57</PinLabel_COM>
     </anyType>
     <anyType xsi:type="ComponentRelaySPST">
       <Label>K16</Label>
       <Port>16</Port>
-      <PinLabel_NO>82</PinLabel_NO>
-      <PinLabel_COM>51</PinLabel_COM>
+      <PinLabel_NO>55</PinLabel_NO>
+      <PinLabel_COM>56</PinLabel_COM>
     </anyType>
   </Components>
 </malt_device>

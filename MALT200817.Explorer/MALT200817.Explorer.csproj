@@ -294,7 +294,7 @@
     <Content Include="Manual\images\logo_204x60.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Manual\images\todo.PNG">
+    <Content Include="Manual\images\todo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Manual\index.html">
@@ -312,14 +312,24 @@
     <Content Include="Manual\products\malt160t\malt160t.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Manual\products\malt160t\malt160t.png">
+    <Content Include="Manual\products\malt160t\malt160t_001.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Manual\products\malt16pin\malt16pin.html" />
-    <Content Include="Manual\products\malt23thv\malt23thv.html" />
-    <Content Include="Manual\products\malt23thv\MALT23THV_001.PNG" />
-    <Content Include="Manual\products\malt23thv\VPC HV.png" />
-    <Content Include="Manual\products\malt40io\malt40io.html" />
+    <Content Include="Manual\products\malt16pin\malt16pin.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt23thv\malt23thv.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt23thv\malt23thv_001.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt23thv\VPC HV.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Manual\products\malt40io\malt40io.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Manual\style\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
