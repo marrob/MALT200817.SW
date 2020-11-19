@@ -63,6 +63,36 @@ namespace MALT200817.Explorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buttongary32 {
+            get {
+                object obj = ResourceManager.GetObject("buttongary32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap buttongary321 {
+            get {
+                object obj = ResourceManager.GetObject("buttongary321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap buttongreen32 {
+            get {
+                object obj = ResourceManager.GetObject("buttongreen32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap configure32x32 {
             get {
                 object obj = ResourceManager.GetObject("configure32x32", resourceCulture);
@@ -246,6 +276,36 @@ namespace MALT200817.Explorer.Properties {
         internal static System.Drawing.Bitmap Stop_Normal_Red32 {
             get {
                 object obj = ResourceManager.GetObject("Stop_Normal_Red32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap switchblue32 {
+            get {
+                object obj = ResourceManager.GetObject("switchblue32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap switchoff32 {
+            get {
+                object obj = ResourceManager.GetObject("switchoff32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap switchon32 {
+            get {
+                object obj = ResourceManager.GetObject("switchon32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -30,19 +30,19 @@
                 /* Response Init Info */
                 if (data[0] == 0xF0)
                 {
-                    var newDev = new LiveDeviceItem( familyCode:data[2], 
-                                                     address:data[3], 
-                                                     optionCode: data[4], 
-                                                     ver0:data[5], 
-                                                     ver1:data[6]);
+                    var newDev = new LiveDeviceItem(familyCode: data[2],
+                                                     address: data[3],
+                                                     optionCode: data[4],
+                                                     ver0: data[5],
+                                                     ver1: data[6]);
                     bool found = false;
                     /*ha ez mind egyezik akkor új eszköz.*/
                     foreach (LiveDeviceItem dev in LiveDevices)
                     {
-                        if ( dev.Address == newDev.Address &&
+                        if (dev.Address == newDev.Address &&
                              dev.FamilyCode == newDev.FamilyCode)
 
-                       found = true;
+                            found = true;
                     }
                     if (!found)
                     {
@@ -50,14 +50,35 @@
                     }
                     /*** Minden egyes bejelenkezéskor ezeket elkéri ***/
                     RequestSerialNumber(familyCode: data[2], address: data[3]);
-                    RequestPortsStatus(familyCode: data[2], address: data[3], autosend: true);
+                    RequestOutputPortsStatus(familyCode: data[2], address: data[3], autosend: true);
                 }
-                /* Response Ports Status */
+
+                else if (data[1] == 0x02) { 
+                 /*Response Output Port Status*/
+                }
+
+                /* Response Output Ports Status */
                 else if (data[1] == 0x04)
                 {
                     var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
-                    dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
+                    dev.UpdateOutputPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
                 }
+
+                /*Response Input Port Status */
+                else if (data[1] == 0x06)
+                {
+                    /*
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    dev.SetPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
+                    */
+                }
+                /*Response Input Ports Status */
+                else if (data[1] == 0x07)
+                {
+                    var dev = LiveDevices.Search(familyCode: data[0], address: (byte)(frame.Id & DEV_ADDR));
+                    dev.UpdateInputPortsStatus((int)data[6], new byte[] { data[2], data[3], data[4], data[5] });
+                }
+
                 /* Response Serial Number*/
                 else if (data[1] == 0xDE)
                 {
@@ -79,7 +100,7 @@
         }
 
         /// <param name="port">1-es indexelésű</param>
-        public void RequestClrOne(byte familyCode, byte address, int port)
+        public void ClrOneOutput(byte familyCode, byte address, int port)
         {
             if (port == 0)
                 throw new Exception("Error: parameter port cannot be 0.");
@@ -91,7 +112,7 @@
             TxQueue.Enqueue(msg);
         }
         /// <param name="port">1-jelenti a K1-egyet indexelésű</param>
-        public void RequestSetOne(byte familyCode, byte address, int port)
+        public void SetOneOutput(byte familyCode, byte address, int port)
         {
             if (port == 0)
                 throw new Exception("Error: parameter port cannot be 0.");
@@ -104,7 +125,7 @@
         }
 
         /// <param name="port">1-es indexelésű</param>
-        public bool GetOne(byte familyCode, byte address, int port)
+        public bool GetOneOutput(byte familyCode, byte address, int port)
         {
             if (port == 0)
                 throw new Exception("Error: parameter port cannot be 0.");
@@ -114,11 +135,25 @@
             var block = port / 32; 
             var byteIndex = (port / 8) - (4 * block); //ha egy port szám nagyobb mint egy block akkor azzal korrigálni kell.
             var bitIndex = port % 8;
-            return (dev.Ports[block][byteIndex] & (1 << bitIndex)) != 0;
+            return (dev.OutputPorts[block][byteIndex] & (1 << bitIndex)) != 0;
+
+        }
+        /// <param name="port">1-es indexelésű</param>
+        public bool GetOneInput(byte familyCode, byte address, int port)
+        {
+            if (port == 0)
+                throw new Exception("Error: parameter port cannot be 0.");
+            port -= 1;
+
+            var dev = LiveDevices.Search(familyCode, address);
+            var block = port / 32;
+            var byteIndex = (port / 8) - (4 * block); //ha egy port szám nagyobb mint egy block akkor azzal korrigálni kell.
+            var bitIndex = port % 8;
+            return (dev.InputPorts[block][byteIndex] & (1 << bitIndex)) != 0;
 
         }
 
-        public void RequestClrSeveral(byte familyCode, byte address, byte[] several, byte block)
+        public void ClrSeveralOutput(byte familyCode, byte address, byte[] several, byte block)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
@@ -126,7 +161,7 @@
             TxQueue.Enqueue(msg);
         }
 
-        public void RequestSetSeveral(byte familyCode, byte address, byte[] several, byte block)
+        public void SetSeveralOutput(byte familyCode, byte address, byte[] several, byte block)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
@@ -134,13 +169,24 @@
             TxQueue.Enqueue(msg);
         }
 
-        public byte[] GetSeveral(byte familyCode, byte address, byte block)
+        public byte[] GetSeveralOutput(byte familyCode, byte address, byte block)
         {
             var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == familyCode && n.Address == address);
             if (dev == null)
                 throw new ApplicationException("MALT Device Not found: CardType:" + familyCode.ToString("X2") + ", Address:" + address.ToString("X2"));
             var retval = new byte[dev.BlockSize];
-            Array.Copy(dev.Ports[FIRST_BLOCK], retval, retval.Length);
+            Array.Copy(dev.OutputPorts[FIRST_BLOCK], retval, retval.Length);
+            return retval;
+        }
+
+        public byte[] GetSeveralInput(byte familyCode, byte address, byte block)
+        {
+            /*Todo ez itt nincs kész!*/
+            var dev = LiveDevices.FirstOrDefault(n => n.FamilyCode == familyCode && n.Address == address);
+            if (dev == null)
+                throw new ApplicationException("MALT Device Not found: CardType:" + familyCode.ToString("X2") + ", Address:" + address.ToString("X2"));
+            var retval = new byte[dev.BlockSize];
+            Array.Copy(dev.InputPorts[FIRST_BLOCK], retval, retval.Length);
             return retval;
         }
 
@@ -154,16 +200,24 @@
             /*Ez kell valamiért MALT160T-nek, majd megnézni mért nemgy megy*/
             for (byte i = 0; i < 4; i++)
             {
-                RequestSetSeveral(familyCode, address, new byte[] { 0, 0, 0, 0 }, i);
+                SetSeveralOutput(familyCode, address, new byte[] { 0, 0, 0, 0 }, i);
                 TxQueue.Enqueue(msg);
             }
         }
 
-        public void RequestPortsStatus(byte familyCode, byte address, bool autosend)
+        public void RequestOutputPortsStatus(byte familyCode, byte address, bool autosend)
         {
             var msg = new CanMsg();
             msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
             msg.SetPayload(new byte[] { familyCode, 0x04, autosend? (byte)0x01 : (byte)0x00 });
+            TxQueue.Enqueue(msg);
+        }
+
+        public void RequesInputPortsStatus(byte familyCode, byte address, bool autosend)
+        {
+            var msg = new CanMsg();
+            msg.Id = EXT_ID | DEV_ID | HOST_TX_ID | (UInt32)familyCode << 8 | address;
+            msg.SetPayload(new byte[] { familyCode, 0x07, autosend ? (byte)0x01 : (byte)0x00 });
             TxQueue.Enqueue(msg);
         }
 

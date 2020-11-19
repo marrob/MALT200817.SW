@@ -41,7 +41,7 @@ namespace MALT200817.Explorer.Controls
         }
         public int Port { get; set; }
 
-        public string RelayLabel
+        public string Label
         {
             get { return labelRelayNum.Text; }
             set { labelRelayNum.Text = value; }

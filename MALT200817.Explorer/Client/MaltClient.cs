@@ -100,14 +100,14 @@
             return retval;
         }
 
-        public bool GetOne(int familyCode, int address,  int port)
+        public bool GetOneOutput(int familyCode, int address,  int port)
         {
-            var result = GetOne(familyCode.ToString("X2"), address.ToString("X2"), port);
+            var result = GetOneOutput(familyCode.ToString("X2"), address.ToString("X2"), port);
             return result;
         }
-        public bool GetOne(string familyCode, string address, int port)
+        public bool GetOneOutput(string familyCode, string address, int port)
         {
-            var request = "@" + familyCode +  ":" + address + ":" +  "GET#ONE:" + port.ToString("X2");
+            var request = "@" + familyCode +  ":" + address + ":" +  "GET#ONE#DO:" + port.ToString("X2");
             var response = WriteReadLine(request);
             if (response[0] == '!')
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " +  response);
@@ -120,17 +120,24 @@
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
         }
 
-        public void SetOne(int familyCode, int address, int port, bool state)
-        {
-            SetOne(familyCode.ToString("X2"), address.ToString("X2"), port, state);
-        }
+        public bool GetOneInput(string familyCode, string address, int port) {
 
-        public void Reset(string familyCode, string address)
-        {
-            var request = "@" + familyCode + ":" + address + ":" + "RESET";
+            var request = "@" + familyCode + ":" + address + ":" + "GET#ONE#DI:" + port.ToString("X2");
             var response = WriteReadLine(request);
-            if (response != "OK")
+            if (response[0] == '!')
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+            var result = response.Substring(response.Length - 3);
+            if (result == "CLR")
+                return false;
+            else if (result == "SET")
+                return true;
+            else
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+        }
+            
+        public void SetOneOutput(int familyCode, int address, int port, bool state)
+        {
+            SetOneOutput(familyCode.ToString("X2"), address.ToString("X2"), port, state);
         }
 
         /// <summary>
@@ -140,9 +147,17 @@
         /// <param name="address"></param>
         /// <param name="port">port0=>K1 </param>
         /// <param name="state"></param>
-        public void SetOne(string familyCode, string address, int port, bool state) 
+        public void SetOneOutput(string familyCode, string address, int port, bool state) 
         {
-            var request = "@" + familyCode + ":" + address + ":" + (state == true ? "SET#ONE" : "CLR#ONE") + ":" + port.ToString("X2");
+            var request = "@" + familyCode + ":" + address + ":" + (state == true ? "SET#ONE#DO" : "CLR#ONE#DO") + ":" + port.ToString("X2");
+            var response = WriteReadLine(request);
+            if (response != "OK")
+                throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
+        }
+
+        public void Reset(string familyCode, string address)
+        {
+            var request = "@" + familyCode + ":" + address + ":" + "RESET";
             var response = WriteReadLine(request);
             if (response != "OK")
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
@@ -164,6 +179,8 @@
             if (response != "OK")
                 throw new ApplicationException("Request: " + request + "\r\n" + "Response: " + response);
         }
+
+
 
         public void SaveCounters(string familyCode, string address)
         {

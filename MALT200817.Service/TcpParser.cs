@@ -41,24 +41,35 @@
                     var address = Tools.HexaByteStrToByte(parts[PART_ADDRES]);
 
                     /*** 1..n-ig, 0-az hiba! ***/
-                    if (parts[PART_COMMAND] == "SET#ONE")
+                    if (parts[PART_COMMAND] == "SET#ONE#DO")
                     {
-                        _exp.RequestSetOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.SetOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
-                    else if (parts[PART_COMMAND] == "CLR#ONE")
+                    else if (parts[PART_COMMAND] == "CLR#ONE#DO")
                     {
 
-                        _exp.RequestClrOne(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.ClrOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
-                    else if (parts[PART_COMMAND] == "GET#ONE")
+                    else if (parts[PART_COMMAND] == "GET#ONE#DO")
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
-                        if (_exp.GetOne(familyCode, address, port))
+                        if (_exp.GetOneOutput(familyCode, address, port))
+                            retval += ":SET";
+                        else
+                            retval += ":CLR";
+                        return retval;
+                    }
+                    /*** 1..n-ig, 0-az hiba! ***/
+                    else if (parts[PART_COMMAND] == "GET#ONE#DI")
+                    {
+                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
+                        if (_exp.GetOneInput(familyCode, address, port))
                             retval += ":SET";
                         else
                             retval += ":CLR";
@@ -93,22 +104,22 @@
                         _exp.SaveCounter(familyCode, address);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "CLR#SEVERAL")
+                    else if (parts[PART_COMMAND] == "CLR#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.RequestClrSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.ClrSeveralOutput(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "SET#SEVERAL")
+                    else if (parts[PART_COMMAND] == "SET#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.RequestSetSeveral(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.SetSeveralOutput(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "GET#SEVERAL")
+                    else if (parts[PART_COMMAND] == "GET#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        var state = _exp.GetSeveral(familyCode, address, block);
+                        var state = _exp.GetSeveralOutput(familyCode, address, block);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
                         return retval;

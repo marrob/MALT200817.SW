@@ -6,7 +6,8 @@
   <OptionCode>5</OptionCode>
   <FirstName>MALT160T</FirstName>
   <BlockSize>4</BlockSize>
-  <Blocks>5</Blocks>
+  <OutputBlocks>5</OutputBlocks>
+  <InputBlocks>0</InputBlocks>
   <DefaultWinodwSize>
     <Width>455</Width>
     <Height>783</Height>

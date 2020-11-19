@@ -71,7 +71,7 @@
             else if (sender is IKnvOutputComponentControl)
             {
                 var component = sender as IKnvOutputComponentControl;
-                client.SetOne(FamilyCode, Address, component.Port, !component.State);
+                client.SetOneOutput(FamilyCode, Address, component.Port, !component.State);
             }
         }
 
@@ -91,7 +91,11 @@
                         if (con is IKnvOutputComponentControl)
                         {
                             var component = (con as IKnvOutputComponentControl);
-                            component.State = client.GetOne(FamilyCode, Address, component.Port);
+                            component.State = client.GetOneOutput(FamilyCode, Address, component.Port);
+                        }
+                        else if (con is IKnvInputComponentControl) {
+                            var component = (con as IKnvInputComponentControl);
+                            component.State = client.GetOneInput(FamilyCode, Address, component.Port);
                         }
                     }
                 }
@@ -126,7 +130,7 @@
                     var ctrl = new KnvRealySpdtControl()
                     {
                         Port = i.Port,
-                        RelayLabel = comp.Label,
+                        Label = comp.Label,
                         NcPinLabel = comp.PinLabel_NC,
                         NoPinLabel = comp.PinLabel_NO,
                         ComPinLabel = comp.PinLabel_COM
@@ -140,11 +144,34 @@
                     var ctrl = new KnvRealySpstControl()
                     {
                         Port = i.Port,
-                        RelayLabel = comp.Label,
+                        Label = comp.Label,
                         NoPinLabel = comp.PinLabel_NO,
                         ComPinLabel = comp.PinLabel_COM
                     };
                     ctrl.ComponentClick += ComponentClick;
+                    controls.Add(ctrl);
+                }
+                else if (i is ComponentDigitalOutput)
+                {
+                    var comp = (i as ComponentDigitalOutput);
+                    var ctrl = new KnvDoControl()
+                    {
+                        Port = comp.Port,
+                        Label = comp.Label,
+                        DoPinLabel = comp.PinLabel_DO,
+                    };
+                    ctrl.ComponentClick += ComponentClick;
+                    controls.Add(ctrl);
+                }
+                else if(  i is ComponentDigitalInput)
+                {
+                    var comp = (i as ComponentDigitalInput);
+                    var ctrl = new KnvDiControl()
+                    {
+                        Port = comp.Port,
+                        Label = comp.Label,
+                        DiPinLabel = comp.PinLabel_DI,
+                    };
                     controls.Add(ctrl);
                 }
             }

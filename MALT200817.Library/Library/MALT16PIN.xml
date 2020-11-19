@@ -5,7 +5,8 @@
   <FamilyCode>5</FamilyCode>
   <OptionCode>0</OptionCode>
   <BlockSize>4</BlockSize>
-  <Blocks>1</Blocks>
+  <OutputBlocks>1</OutputBlocks>
+  <InputBlocks>0</InputBlocks>
   <FirstName>MALT16PIN</FirstName>
   <DefaultWinodwSize>
     <Width>450</Width>

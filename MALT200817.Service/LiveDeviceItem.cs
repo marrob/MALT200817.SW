@@ -13,7 +13,13 @@ namespace MALT200817.Service
         public bool IsDeviceOk { get; private set; }
         public int OptionCode { get; private set; } /*Az option kódotól független a tipus.*/
         public string Version { get; private set; }
-        public List<byte[]> Ports { get; private set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
+        /*
+         *Az elsö bájt legkisebb helyiértéke az első port
+         *A lista egy sora egy block (ami 4 bájt), ennyi fér bele egy CAN üzenetbe.
+         *A blockok száma (lista sorai) nincsenek maximializáva)
+         */
+        public List<byte[]> OutputPorts { get; private set; } 
+        public List<byte[]> InputPorts { get; private set; } /*Az elsö bájt legkisebb helyiértéke az első port*/
         public int[] Counters {get; private set; } /*Az indexek a portok, az értékek a számlálók értékei */
         public string FirstName { get; private set; }
         public string SerialNumber { get; private set; }
@@ -47,9 +53,15 @@ namespace MALT200817.Service
             _device =  Devices.Library.Search(familyCode, optionCode);
             if (_device != null)
             {
-                Ports = new List<byte[]>();
-                for (int blocks = 0; blocks < _device.Blocks; blocks++)
-                    Ports.Add(new byte[_device.BlockSize]);
+                OutputPorts = new List<byte[]>();
+                for (int blocks = 0; blocks < _device.OutputBlocks; blocks++)
+                    OutputPorts.Add(new byte[_device.BlockSize]);
+
+                InputPorts = new List<byte[]>();
+                for (int blocks = 0; blocks < _device.InputBlocks; blocks++)
+                    InputPorts.Add(new byte[_device.BlockSize]);
+
+
                 Counters = new int[Devices.Library.GetRealyCount(familyCode, optionCode)];
                 FirstName = _device.FirstName;
                 IsDeviceOk = true;
@@ -59,9 +71,9 @@ namespace MALT200817.Service
                 _device = Devices.Library.Search(familyCode);
                 if (_device != null)
                 {
-                    Ports = new List<byte[]>();
-                    for (int blocks = 0; blocks < _device.Blocks; blocks++)
-                        Ports.Add(new byte[_device.BlockSize]);
+                    OutputPorts = new List<byte[]>();
+                    for (int blocks = 0; blocks < _device.OutputBlocks; blocks++)
+                        OutputPorts.Add(new byte[_device.BlockSize]);
                     Counters = new int[Devices.Library.GetRealyCount(familyCode)];
                     AppLog.Instance.WriteLine("This device not supported by option " +
                     "OptionCode:" + optionCode.ToString("X2"));
@@ -94,10 +106,16 @@ namespace MALT200817.Service
             return hashCode;
         }
 
-        public void SetPortsStatus(int block, byte[] ports)
+        public void UpdateOutputPortsStatus(int block, byte[] ports)
         {
-            if (Ports != null)
-                Array.Copy(ports, Ports[block], ports.Length);            
+            if (OutputPorts != null)
+                Array.Copy(ports, OutputPorts[block], ports.Length);            
+        }
+
+        public void UpdateInputPortsStatus(int block, byte[] ports)
+        {
+            if (OutputPorts != null)
+                Array.Copy(ports, InputPorts[block], ports.Length);
         }
 
         public void SetSerialNumber(byte[] serialNumByteArray)

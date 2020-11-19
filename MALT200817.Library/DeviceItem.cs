@@ -24,7 +24,12 @@ namespace MALT200817.Library
         public int OptionCode { get; set; }
         public string FirstName { get; set; }
         public int BlockSize { get; set; }
-        public int Blocks { get; set; }
+        /// <summary>
+        /// Kimineit blokok száma, alaphelyzetben 1 blokk 4 *8bit széles = 32port/block
+        /// A relékártyának output blokaji vannak
+        /// </summary>
+        public int OutputBlocks { get; set; }
+        public int InputBlocks { get; set; }
         public Size DefaultWinodwSize { get; set; }
         public ComponentCollection Components {get; set;}
 
@@ -77,7 +82,8 @@ namespace MALT200817.Library
                 OptionCode = instance.OptionCode;
                 FirstName = instance.FirstName;
                 BlockSize = instance.BlockSize;
-                Blocks = instance.Blocks;
+                OutputBlocks = instance.OutputBlocks;
+                InputBlocks = instance.InputBlocks;
                 Components = new ComponentCollection();
                 foreach (object i in instance.Components)
                     Components.Add(i);

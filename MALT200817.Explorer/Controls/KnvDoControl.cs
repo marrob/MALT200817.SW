@@ -3,29 +3,22 @@
 namespace MALT200817.Explorer.Controls
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    public partial class KnvRealySpstControl : UserControl, IKnvOutputComponentControl
+    public partial class KnvDoControl : UserControl, IKnvOutputComponentControl
     {
         public event EventHandler ComponentClick;
 
         bool _state;
         public bool State
         {
-            get
+            get 
             {
                 return _state;
             }
             set
             {
-                if (_state != value)
+                if (_state != value )
                 {
                     if (value)
                         On();
@@ -38,15 +31,14 @@ namespace MALT200817.Explorer.Controls
 
 
         void On()
-        {
-            pictureBox1.Image = Properties.Resources.relay_spst_on;
+        { 
+            pictureBox1.Image = Properties.Resources.switchon32;
         }
-
+        
         void Off()
         {
-            pictureBox1.Image = Properties.Resources.relay_spst_off;
+            pictureBox1.Image = Properties.Resources.switchblue32;
         }
-
         public int Port { get; set; }
 
         public string Label
@@ -55,29 +47,24 @@ namespace MALT200817.Explorer.Controls
             set { labelRelayNum.Text = value; }
         }
 
-        public string ComPinLabel
+
+        public string DoPinLabel
         {
-            get { return labelComPin.Text; }
-            set { labelComPin.Text = value; }
-        }
-        
-        public string NoPinLabel
-        {
-            get { return labelNoPin.Text; }
-            set { labelNoPin.Text = value; }
+            get { return labelDoPin.Text; }
+            set { labelDoPin.Text = value; }
         }
 
-        public KnvRealySpstControl()
+        public KnvDoControl()
         {
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void labelRelayNum_Click(object sender, EventArgs e)
         {
             ComponentClick?.Invoke(this, EventArgs.Empty);
         }
 
-        private void labelRelayNum_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             ComponentClick?.Invoke(this, EventArgs.Empty);
         }
