@@ -69,7 +69,7 @@
                     {
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
-                        if (_exp.GetOneInput(familyCode, address, port))
+                        if (_exp.GetOneInputStatus(familyCode, address, port))
                             retval += ":SET";
                         else
                             retval += ":CLR";
@@ -81,7 +81,7 @@
                         var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
                         if (port == 0)
                             throw new ArgumentException("Port canno be 0");
-                        _exp.RequestGetPortCounter(familyCode, address, port);
+                        _exp.GetCounter(familyCode, address, port);
                         //Meg kell várni hogy a kérésre beérkezzen az üzenet a tárólóba.
                         System.Threading.Thread.Sleep(10);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2") + ":";
@@ -95,38 +95,38 @@
                             throw new ArgumentException("Port canno be 0");
 
                         int value = Tools.HexaByteStrToInt(parts[PART_PARAM2]);
-                        _exp.RequestSetPortCounter(familyCode, address, port, value);
+                        _exp.SetPortCounter(familyCode, address, port, value);
                         _exp.LiveDevices.Search(familyCode, address).Counters[port - 1] = value;
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "SAVE#COUNTER")
                     {
-                        _exp.SaveCounter(familyCode, address);
+                        _exp.SaveCounters(familyCode, address);
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "CLR#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.ClrSeveralOutput(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.ClrOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "SET#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.SetSeveralOutput(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        _exp.SetOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
                         return RESPONSE_OK;
                     }
                     else if (parts[PART_COMMAND] == "GET#SEVERAL#DO")
                     {
                         var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        var state = _exp.GetSeveralOutput(familyCode, address, block);
+                        var state = _exp.GetOutputs(familyCode, address, block);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
                         return retval;
                     }
                     if (parts[PART_COMMAND] == "RESET")
                     {
-                        _exp.RequestReset(familyCode, address);
+                        _exp.ResetIo(familyCode, address);
                         return RESPONSE_OK;
                     }
 
