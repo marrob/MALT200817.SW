@@ -352,7 +352,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\switchblue32.png" />
-    <None Include="Resources\switchoff321.png" />
     <None Include="Resources\buttongary321.png" />
     <None Include="Resources\buttongreen32.png" />
     <None Include="Resources\buttongary32.png" />
