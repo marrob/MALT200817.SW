@@ -58,10 +58,8 @@
         <ComponentGroupRef Id="Service_Components"/>
         <ComponentRef Id ="EventSource_Component"/>
         <ComponentRef Id="ServiceSetup_Components"/>
-        <!--<ComponentRef Id="CmpCreateCommonAppDataFolderWithPermissions" /> -->
         <ComponentGroupRef Id="LabView2018_Components"/>
         <ComponentGroupRef Id="Firmwares_Components"/>
-        <!--<ComponentGroupRef Id="Manual_Components"/>-->
 
       </Feature>
     </Feature>

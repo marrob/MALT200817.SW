@@ -7,6 +7,7 @@
   </head>
   <body>
     <main>
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html"><img src ="images/logo_204x60.jpg" alt="AltonTech"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +25,10 @@
                     Fejlesztői dokumentációk
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="getting-started.html">Ismerkedjünk meg</a>
+                  <a class="dropdown-item" href="new-devoce.html">Új eszköz</a>
                   <a class="dropdown-item" href="protokol.html">CAN busz protokoll</a>
+                  
                 </div>
               </li>
 
@@ -33,7 +37,7 @@
                 Termékek
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="MALT132.html">MALT132</a>
+                <a class="dropdown-item" href="products/malt132/malt132.html">MALT132</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="MALTMMI.html">MALTMMI - tervezés alatt</a>
@@ -51,37 +55,33 @@
         </div>
       </nav>
 
-    </header><h1 class="text-center">MALT platform felhasználói és fejlesztői kéziköny</h1></header>
+    </header>
+    
+    <h1 class="text-center">MALT platform felhasználói és fejlesztői kéziköny</h1></header>
 
       <section>
         <h2 class="text-center">Termékek</h2>
         <table class="table table-striped table-bordered table-hover prducts__table">
           <thead>
             <tr>
-              <td><br>
-              </td>
+              <td><br></td>
               <td>Family Name</td>
               <td>First Name</td>
               <td>Leírás</td>
-              <td>PCB Version</td>
-              <td>Family Code</td>
-              <td>Option Code</td>
-              <td>6TL Kompatibilitás </td>
+              <td>Family/Option Code</td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><img src="./images/todo.PNG"></td>
-              <td>MALTMMI<td>
-              <td><a href="./MALTMMI.html">MALTMMI</a> </td>
+              <td>MALTMMI</td>
+                <td><a href="./MALTMMI.html">MALTMMI</a> </td>
               <td>
                 <li>Man Machine Interface</li>
                 <li>CAN bus gateway</li>
+                <li>Részleges 6TL kompatiblitás</li>
               </td>
-              <td>MALTMMIV00</td>
-              <td>0x00</td>
-              <td>0x00</td>
-              <td>Részleges. Az MMI-nak felel meg. </td>
+              <td>0x00/0x00</td>              
             </tr>
             <tr>
               <td> <img src="./products/malt40io/malt40io_001.png"></td>
@@ -91,27 +91,21 @@
                 <li>IO kártya</li>
                 <li>40db bemenet </li>
                 <li>40db kimenet </li>
+                <li>Részleges 6TL kompatiblitás</li>
               </td>
-              <td>MALT16PINV00</td>
-              <td>0x01</td>
-              <td>0x??</td>
-              <td>Részleges.<br></td>
+              <td>0x01/0x??</td>
             </tr>
             <tr>
               <td><img src="./products/malt132/malt132_001.png"></td>
               <td> MALT132</td>
               <td><a href="./products/malt132/malt132.html">MALT132</a></td>
               <td>
-                <li> Relékártya</li>
+                <li>Relékártya</li>
                 <li>32db relé</li>
-                <li> középfeszültségű</li>
+                <li>Középfeszültségű</li>
+                <li>Teljes 6TL kompatiblitás</li>
               </td>
-              <td>MALT132V00</td>
-              <td>0x03</td>
-              <td>0x00</td>
-              <td>Teljes.<br>
-                A <a href="./products/MALT132/YAV90132-620021E1.pdf">
-                  YAV90132 </a> felel meg.</td>
+              <td>0x03/0x00</td>
             </tr>
             <tr>
               <td> <img src="./products/malt23thv/MALT23THV_001.PNG"> </td>
@@ -121,11 +115,9 @@
                 <li>Relékártya</li>
                 <li>23dbrelé</li>
                 <li>nagy feszültségű</li>
+                <li>Részleges 6TL kompatiblitás</li>
               </td>
-              <td>MALT23THVV00</td>
-              <td>0x03</td>
-              <td>0x10</td>
-              <td>Részleges.A <a href="./products/MALT132/YAV90132-620021E1.pdf"> YAV90132 </a> felel meg.</td>
+              <td>0x03/0x10</td>
             </tr>
             <tr>
               <td> <img src="./products/malt16pin/malt16pin_001.png"></td>
@@ -136,11 +128,9 @@
                 <li>16db relé</li>
                 <li>Nagy áramú</li>
                 <li><strong>P</strong>ower <strong>I</strong>n</li>
+                <li>Részleges 6TL kompatiblitás</li>
               </td>
-              <td>MALT16PINV00</td>
-              <td>0x05</td>
-              <td>0x00 </td>
-              <td>Részleges.<br></td>
+              <td>0x05/0x00</td>
             </tr>
             <tr>
               <td><img src="./products/malt160t/malt160t_001.png"></td>
@@ -149,26 +139,42 @@
               <td>
                 <li>Relékártya</li>
                 <li>160db</li>
-                <li>alacsony feszültségű</li>
+                <li>Alacsony feszültségű</li>
+                <li>Részleges 6TL kompatiblitás</li>
               </td>
-              <td>MALT160TV00</td>
-              <td>0x15</td>
-              <td>0x05</td>
-              <td>Részleges. <br>
-                A <a href="./products/MALT160T/YAV90057.pdf"> YAV90057 </a>
-                felel meg. </td>
+              <td>0x15/0x05</td>
             </tr>
-
-
-
+            <tr>
+              <td><img src="./products/maltcon/maltcon_main.JPG"></td>
+              <td> MALT160T </td>
+              <td><a href="./products/malt160t/maltcon.html">MALTCON</a></td>
+              <td>
+                <li>Fixture azonosítás</li>
+                <li>Ciklus számlálás</li>
+                <li>Teszt start nyomógombok</li>
+                <li>Részleges 6TL kompatiblitás</li>
+              </td>
+              <td>0x??/0x??</td>
+            </tr>
+            <tr>
+              <td><img src="./products/malt24vi/malt24vi.JPG"></td>
+              <td>MALT132</td>
+              <td><a href="./products/malt160t/malt24vi.html">MALT24VI</a></td>
+              <td>
+                <li>FESTO szelepsziget</li>
+                <li>24db szelep vezérléshez</li>
+              </td>
+              <td>0x03/0x11</td>
+            </tr>
           </tbody>
           <tfoot>
           </tfoot>
         </table>
     </section>
     </main>
-  <footer>
-  </footer>
+    <footer class="jumbotron text-center">
+      <p class="text-muted">Készült az AtlonTech megbízásából.</p>
+    </footer>
   <script src="node_modules\jquery\dist\jquery.js"></script>
   <script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
   </body>

@@ -21,7 +21,6 @@
   <ItemGroup>
     <Compile Include="Application_Dfu_Components.wxs" />
     <Compile Include="Application_Checklist_Components.wxs" />
-    <Compile Include="Manual_Components.wxs" />
     <Compile Include="AppProgramsFolderRemove_Components.wxs" />
     <Compile Include="Firmwares_Components.wxs" />
     <Compile Include="Library_Components.wxs" />

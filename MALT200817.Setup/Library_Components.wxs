@@ -11,6 +11,7 @@
         <File Id="_MALT40IO.xml" Source="$(var.AppDirectory)\Library\MALT40IO.xml" Checksum="yes"/>
         <File Id="_MALT160T.xml" Source="$(var.AppDirectory)\Library\MALT160T.xml" Checksum="yes"/>
         <File Id="_MALT16PIN.xml" Source="$(var.AppDirectory)\Library\MALT16PIN.xml" Checksum="yes"/>
+        <File Id="_MALT24VI.xml" Source="$(var.AppDirectory)\Library\MALT24VI.xml" Checksum="yes"/>
       </Component>
     </ComponentGroup>
   </Fragment>
