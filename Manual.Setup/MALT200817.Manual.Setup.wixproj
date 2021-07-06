@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>f75c97a7-9c9a-4ab5-bb26-011664440f96</ProjectGuid>
+    <ProjectGuid>{239c6c13-a26b-46b5-8df2-3c4d4d0ca15d}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>MALT200817.Setup</OutputName>
     <OutputType>Package</OutputType>
@@ -19,19 +19,10 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Application_Dfu_Components.wxs" />
-    <Compile Include="Application_Checklist_Components.wxs" />
-    <Compile Include="Manual_Components.wxs" />
-    <Compile Include="AppProgramsFolderRemove_Components.wxs" />
-    <Compile Include="Firmwares_Components.wxs" />
-    <Compile Include="Library_Components.wxs" />
-    <Compile Include="Service_Components.wxs" />
-    <Compile Include="Application_Explorer_Components.wxs" />
+    <Compile Include="Application_Manual_Components.wxs" />
     <Compile Include="Directories.wxs" />
-    <Compile Include="EventLog_Component.wxs" />
-    <Compile Include="LabView2018_Components.wxs" />
     <Compile Include="Main.wxs" />
-    <Compile Include="ServiceSetup_Components.wxs" />
+    <Compile Include="AppProgramsFolderRemove_Components.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.wxi" />

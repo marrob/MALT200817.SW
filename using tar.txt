@@ -1,0 +1,36 @@
+tar -cvzf archive name.tar path to folder to compress
+tar -zxvf archive name.tar -C path to extraction location
+
+tar -cvzf manual.tar "./manual"
+
+tar -zxvf "./manual.tar" "./manual"
+
+
+|| tar -zxvf "./manual.tar" "./manual"
+
+
+
+ExeCommand ='cmd.exe /c mkdir "manual"'
+ExeCommand ='notepad echo_test.txt'
+ExeCommand ='cmd.exe /c pause'
+ 
+cmd.exe /c man.bat
+cmd.exe man.bat
+ 
+ 
+ 
+ 
+ ExeCommand ='cmd.exe /c ver &amp; pause'
+
+deferred Indicates that the custom action runs in-script (possibly with elevated privileges). immediate Indicates that the custom action will run during normal processing time with user privileges. This is the default.
+
+  <CustomAction Id ="echo_test"                     
+            Directory  ="AppFolder"
+            ExeCommand ='cmd.exe /c ver &amp; mkdir "test"  &amp; pause'
+            Execute    ="deferred"
+            Impersonate='no'
+            Return     ="asyncNoWait" />
+
+<InstallExecuteSequence>
+  <Custom Action='echo_test' Before='InstallFinalize'/>
+</InstallExecuteSequence>
