@@ -1,4 +1,9 @@
 
+main.container{
+  padding-top: 80px;
+}
+
+
 header h1{
     text-align: left;
 }
@@ -9,6 +14,7 @@ header h1{
   /*  border: 1px solid red;*/
 
 }
+
 
 
 

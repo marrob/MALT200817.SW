@@ -7,76 +7,50 @@
   </head>
   <body>
 
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/index.html"><img src ="/images/logo_204x60.jpg" alt="AltonTech"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Fejlesztői dokumentációk
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/getting-started.html">Ismerkedjünk meg</a>
-                  <a class="dropdown-item" href="/new-device.html">Új eszköz</a>
-                  <a class="dropdown-item" href="/protokol.html">CAN busz protokoll</a>
-                </div>
-              </li>
-            <li class="nav-item dropdown">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="/index.html"><img src ="/images/logo_204x60.jpg" alt="AltonTech"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Termékek
+                  Fejlesztői dokumentációk
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/products/malt132/malt132.html">MALT132</a>
-                <a class="dropdown-item" href="/products/malt24vi/malt24vi.html">MALT24VI</a>
-                
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/products/maltmmi/maltmmi.html">MALTMMI - tervezés alatt</a>
+                <a class="dropdown-item" href="/getting-started.html">Ismerkedjünk meg</a>
+                <a class="dropdown-item" href="/new-device.html">Új eszköz</a>
+                <a class="dropdown-item" href="/protokol.html">CAN busz protokoll</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Változások</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Termékek
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/products/malt132/malt132.html">MALT132</a>
+              <a class="dropdown-item" href="/products/malt24vi/malt24vi.html">MALT24VI</a>
+              
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/products/maltmmi/maltmmi.html">MALTMMI - tervezés alatt</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Változások</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-  <main>
-    <section>
-      <h1>Függőségek</h1>
-
-      Futtatáshoz:
-      <ul>
-        <li>Windows 10</li>
-        <li>NI-XNET 19</li>
-      </ul>
-
-      fejelesztéshez
-
-      <ul>
-        <li>Windows 10</li>
-        <li>NI XNET 19</li>
-        <li>NI-CAN 18. firmware frissítéshez</li>
-      </ul>
-
-
-      A egy kártya családhoz(Family Name) tartozhat egy vagy több Option Name/First Name(First Name-et átnevezni Option name-re) kártya is. 
-      Egy családhoz tartozó kártyák azonos kártyának számítanaka, csak más felület jelenik meg hozzá.
-
-
-     <div class="row">
+  <main class="container">
+    <div class="row">
       <div class="col-12">
         <div class="card mb-3 mt-3">
           <div class="row g-0">
@@ -85,15 +59,28 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Driverek és MALT Explorer</h5>
+                <h5 class="card-title">Driverek és MALT Explorer - MALT200817.Setup</h5>
                 <p class="card-text">
                   <ul>
-                    <li>A szoftve</li>
-                    <li>Az eszköz segítséget nyujt a szoftver követelmények biztosításában. </li>
-                    <li>Béta verzió, visszajelzéseket várunk rá, hogy van-e haszna, illetve mivel lehet javítani.</li>
+                    <li><a href="https://drive.google.com/drive/folders/1sGMCsaswdplB9Y3GIl5GLBXkz079KyLb?usp=sharing" target="_blank">MALT200817.Setup</a></li>
+                    <li> Függőségek futtatáshoz: 
+                      <ul>
+                        <li> <a href="https://www.microsoft.com/hu-hu/software-download/windows10" target="_blank">Windows 10 64/32-bit </a></li>
+                        <li> <a href="https://www.ni.com/hu-hu/support/downloads/drivers/download.ni-xnet.html#354220" target="_blank">NI-XNET 19</a></li>
+                     </ul>
+                    </li>
+                    <li>
+                      Függőségek fejlesztéshez:
+                      <ul>
+                        <li><a href="https://visualstudio.microsoft.com/vs/" target="_blank">Visual Studio 2019</a></li>
+                        <li><a href="https://wixtoolset.org/releases/" target="_blank">Wix Toolset v3.11.2</a></li>
+                        <li><a href="https://www.ni.com/hu-hu/support/downloads/software-products/download.labview.html#369643" target="_blank">LabView 2018 SP1</a></li>
+                        <li><a href="https://www.ni.com/hu-hu/support/downloads/drivers/download.ni-can.html#344641" target="_blank">NI-CAN 18</a></li>
+                      </ul>
+                    </li>
                   </ul>
                 </p>
-                <p class="card-text"><small class="text-muted">Last updated 2021.07.06</small></p>
+                <p class="card-text"><small class="text-muted">Last updated 2021.07.07</small></p>
               </div>
             </div>
           </div>
@@ -113,9 +100,9 @@
                 <h5 class="card-title">MALT200817 Checklist</h5>
                 <p class="card-text">
                   <ul>
-                    <li>A szoftve</li>
                     <li>Az eszköz segítséget nyujt a szoftver követelmények biztosításában. </li>
                     <li>Béta verzió, visszajelzéseket várunk rá, hogy van-e haszna, illetve mivel lehet javítani.</li>
+                    <li>MALT200817.Setup csomag része</li>
                   </ul>
                 </p>
                 <p class="card-text"><small class="text-muted">Last updated 2021.07.06</small></p>
@@ -126,9 +113,25 @@
       </div>
     </div>
 
-
-    <h1> Általános jellemzők </h1>
-
-
-    </section>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Eszközök általános jellemzői</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Egy kártya családhoz(Family) egy vagy több Option (First Name-et átnevezni Option name-re) kártya is tartozhat.</li>
+            <li class="list-group-item">Egy családhoz tartozó kártyák azonos kártyának számítanaka, csak más felület jelenik meg hozzá.</li>
+            <li class="list-group-item">A third item</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </main>
+  <footer class="jumbotron text-center">
+    <p class="text-muted">Készült az AtlonTech megbízásából.</p>
+  </footer>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
