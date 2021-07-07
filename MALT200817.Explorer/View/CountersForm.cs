@@ -78,12 +78,15 @@
             Text = _deviceItem.OptionName + "-" + Address + " Counters";
             foreach (IComponentItem comp in _deviceItem.Components)
             {
-                Counters.Add(new CounterItem()
+                if (comp.IsCountable)
                 {
-                    Label = comp.Label,
-                    Port = comp.Port,
-                    Value = "?"
-                });
+                    Counters.Add(new CounterItem()
+                    {
+                        Label = comp.Label,
+                        Port = comp.Port,
+                        Value = "?"
+                    });
+                }
             }
 
             ReadUpdate();

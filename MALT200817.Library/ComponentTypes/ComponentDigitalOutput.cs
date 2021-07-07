@@ -7,6 +7,7 @@
         public event PropertyChangedEventHandler PropertyChanged;
         public string Label { get; set; }
         public int Port { get; set; }
+        public bool IsCountable { get { return false; } }
         public string PinLabel_DO { get; set; }
 
         private object _value;

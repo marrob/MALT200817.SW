@@ -69,7 +69,7 @@ namespace MALT200817.Explorer.View
             {
                 DevicesListView.Add(new DeviceListViewItem()
                 {
-                    FirstName = dev.FirstName,
+                    FirstName = dev.OptionName,
                     FamilyCode = dev.FamilyCode.ToString("X2"),
                     FamilyName = dev.FamilyName,
                     Address = dev.Address.ToString("X2"),

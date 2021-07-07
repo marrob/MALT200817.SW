@@ -93,7 +93,7 @@
                         Version = items[3],
                         SerialNumber = items[4],
                         FamilyName = items[5],
-                        FirstName = items[6]
+                        OptionName = items[6]
                     });
                 }
             }

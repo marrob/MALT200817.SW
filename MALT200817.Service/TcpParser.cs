@@ -29,34 +29,34 @@
                 }
                 else if (line[0] == '@')
                 {
-                    const int PART_FAMILY_CODE = 0;
-                    const int PART_ADDRES = 1;
-                    const int PART_COMMAND = 2;
-                    const int PART_PARAM1 = 3;
-                    const int PART_PARAM2 = 4;
+                    const int FAMILY_CODE = 0;
+                    const int ADDRESS = 1;
+                    const int COMMAND = 2;
+                    const int PARAM1 = 3;
+                    const int PARAM2 = 4;
 
                     var parts = line.Substring(1).Split(':');
 
-                    var familyCode = Tools.HexaByteStrToByte(parts[PART_FAMILY_CODE]);
-                    var address = Tools.HexaByteStrToByte(parts[PART_ADDRES]);
+                    var familyCode = Tools.HexaByteStrToByte(parts[FAMILY_CODE]);
+                    var address = Tools.HexaByteStrToByte(parts[ADDRESS]);
 
                     /*** 1..n-ig, 0-az hiba! ***/
-                    if (parts[PART_COMMAND] == "SET#ONE#DO")
+                    if (parts[COMMAND] == "SET#ONE#DO")
                     {
-                        _exp.SetOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.SetOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
-                    else if (parts[PART_COMMAND] == "CLR#ONE#DO")
+                    else if (parts[COMMAND] == "CLR#ONE#DO")
                     {
 
-                        _exp.ClrOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PART_PARAM1]));
+                        _exp.ClrOneOutput(familyCode, address, Tools.HexaByteStrToByte(parts[PARAM1]));
                         return RESPONSE_OK;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
-                    else if (parts[PART_COMMAND] == "GET#ONE#DO")
+                    else if (parts[COMMAND] == "GET#ONE#DO")
                     {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var port = Tools.HexaByteStrToByte(parts[PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
                         if (_exp.GetOneOutput(familyCode, address, port))
                             retval += ":SET";
@@ -65,9 +65,9 @@
                         return retval;
                     }
                     /*** 1..n-ig, 0-az hiba! ***/
-                    else if (parts[PART_COMMAND] == "GET#ONE#DI")
+                    else if (parts[COMMAND] == "GET#ONE#DI")
                     {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var port = Tools.HexaByteStrToByte(parts[PARAM1]);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" + port.ToString("X2");
                         if (_exp.GetOneInputStatus(familyCode, address, port))
                             retval += ":SET";
@@ -76,9 +76,9 @@
                         return retval;
                     }
                     //port 1-töl indexelődik
-                    else if (parts[PART_COMMAND] == "GET#COUNTER")
+                    else if (parts[COMMAND] == "GET#COUNTER")
                     {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var port = Tools.HexaByteStrToByte(parts[PARAM1]);
                         if (port == 0)
                             throw new ArgumentException("Port canno be 0");
                         _exp.GetCounter(familyCode, address, port);
@@ -88,43 +88,43 @@
                         retval += _exp.LiveDevices.Search(familyCode, address).Counters[port - 1].ToString("X4");
                         return retval;
                     }
-                    else if (parts[PART_COMMAND] == "SET#COUNTER")
+                    else if (parts[COMMAND] == "SET#COUNTER")
                     {
-                        var port = Tools.HexaByteStrToByte(parts[PART_PARAM1]);
+                        var port = Tools.HexaByteStrToByte(parts[PARAM1]);
                         if (port == 0)
                             throw new ArgumentException("Port canno be 0");
 
-                        int value = Tools.HexaByteStrToInt(parts[PART_PARAM2]);
+                        int value = Tools.HexaByteStrToInt(parts[PARAM2]);
                         _exp.SetPortCounter(familyCode, address, port, value);
                         _exp.LiveDevices.Search(familyCode, address).Counters[port - 1] = value;
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "SAVE#COUNTER")
+                    else if (parts[COMMAND] == "SAVE#COUNTER")
                     {
                         _exp.SaveCounters(familyCode, address);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "CLR#SEVERAL#DO")
+                    else if (parts[COMMAND] == "CLR#SEVERAL#DO")
                     {
-                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.ClrOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        var block = Tools.HexaByteStrToByte(parts[PARAM2]);
+                        _exp.ClrOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PARAM1]), block);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "SET#SEVERAL#DO")
+                    else if (parts[COMMAND] == "SET#SEVERAL#DO")
                     {
-                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
-                        _exp.SetOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PART_PARAM1]), block);
+                        var block = Tools.HexaByteStrToByte(parts[PARAM2]);
+                        _exp.SetOutputs(familyCode, address, Tools.ConvertHexStringToByteArray(parts[PARAM1]), block);
                         return RESPONSE_OK;
                     }
-                    else if (parts[PART_COMMAND] == "GET#SEVERAL#DO")
+                    else if (parts[COMMAND] == "GET#SEVERAL#DO")
                     {
-                        var block = Tools.HexaByteStrToByte(parts[PART_PARAM2]);
+                        var block = Tools.HexaByteStrToByte(parts[PARAM2]);
                         var state = _exp.GetOutputs(familyCode, address, block);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
                         return retval;
                     }
-                    if (parts[PART_COMMAND] == "RESET")
+                    if (parts[COMMAND] == "RESET")
                     {
                         _exp.ResetIo(familyCode, address);
                         return RESPONSE_OK;
@@ -132,7 +132,7 @@
 
                     else
                     {
-                        var msg = "!UNKNOWN DEVICE COMMAND: '" + parts[PART_COMMAND] + "'";
+                        var msg = "!UNKNOWN DEVICE COMMAND: '" + parts[COMMAND] + "'";
                         AppLog.Instance.WriteLine("TcpParser:Response an error, message is" + msg + "Command was:" + line);
                         return msg;
                     }
@@ -151,7 +151,7 @@
                                 dev.OptionCode.ToString("X2") + ":" + //OPTION_CODE
                                 dev.Version + ":" +                   //VERSION
                                 dev.SerialNumber + ":" +              //SERIALNUMBER
-                                dev.FamilyName + ":" +                //FAMILY_NAME
+                                dev.FamilyName + ":" +                //OPTION_NAME
                                 dev.FirstName + //FIRST_NAME
                                 ";";
 

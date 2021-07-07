@@ -14,173 +14,125 @@
     <Height>793</Height>
   </DefaultWinodwSize>
   <Components>
-    <anyType xsi:type="ComponentRelaySPDT">
+    <anyType xsi:type="ComponentCoil">
       <Label>Y1</Label>
       <Port>1</Port>
-      <PinLabel_NC>3</PinLabel_NC>
-      <PinLabel_NO>67</PinLabel_NO>
-      <PinLabel_COM>36</PinLabel_COM>
+      <PinLabel>3</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K2</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y2</Label>
       <Port>2</Port>
-      <PinLabel_NC>4</PinLabel_NC>
-      <PinLabel_NO>68</PinLabel_NO>
-      <PinLabel_COM>37</PinLabel_COM>
+      <PinLabel>4</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K3</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y3</Label>
       <Port>3</Port>
-      <PinLabel_NC>5</PinLabel_NC>
-      <PinLabel_NO>69</PinLabel_NO>
-      <PinLabel_COM>38</PinLabel_COM>
+      <PinLabel>5</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K4</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y4</Label>
       <Port>4</Port>
-      <PinLabel_NC>6</PinLabel_NC>
-      <PinLabel_NO>70</PinLabel_NO>
-      <PinLabel_COM>39</PinLabel_COM>
+      <PinLabel>6</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K5</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y5</Label>
       <Port>5</Port>
-      <PinLabel_NC>7</PinLabel_NC>
-      <PinLabel_NO>71</PinLabel_NO>
-      <PinLabel_COM>40</PinLabel_COM>
+      <PinLabel>7</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K6</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y6</Label>
       <Port>6</Port>
-      <PinLabel_NC>8</PinLabel_NC>
-      <PinLabel_NO>72</PinLabel_NO>
-      <PinLabel_COM>41</PinLabel_COM>
+      <PinLabel>8</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K7</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y7</Label>
       <Port>7</Port>
-      <PinLabel_NC>9</PinLabel_NC>
-      <PinLabel_NO>73</PinLabel_NO>
-      <PinLabel_COM>42</PinLabel_COM>
+      <PinLabel>9</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K8</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y8</Label>
       <Port>8</Port>
-      <PinLabel_NC>10</PinLabel_NC>
-      <PinLabel_NO>74</PinLabel_NO>
-      <PinLabel_COM>43</PinLabel_COM>
+      <PinLabel>10</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K9</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y9</Label>
       <Port>9</Port>
-      <PinLabel_NC>11</PinLabel_NC>
-      <PinLabel_NO>75</PinLabel_NO>
-      <PinLabel_COM>44</PinLabel_COM>
+      <PinLabel>11</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K10</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y10</Label>
       <Port>10</Port>
-      <PinLabel_NC>12</PinLabel_NC>
-      <PinLabel_NO>76</PinLabel_NO>
-      <PinLabel_COM>45</PinLabel_COM>
+      <PinLabel>12</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K11</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y11</Label>
       <Port>11</Port>
-      <PinLabel_NC>13</PinLabel_NC>
-      <PinLabel_NO>77</PinLabel_NO>
-      <PinLabel_COM>46</PinLabel_COM>
+      <PinLabel>13</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K12</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y12</Label>
       <Port>12</Port>
-      <PinLabel_NC>14</PinLabel_NC>
-      <PinLabel_NO>78</PinLabel_NO>
-      <PinLabel_COM>47</PinLabel_COM>
+      <PinLabel>14</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K13</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y13</Label>
       <Port>13</Port>
-      <PinLabel_NC>15</PinLabel_NC>
-      <PinLabel_NO>79</PinLabel_NO>
-      <PinLabel_COM>48</PinLabel_COM>
+      <PinLabel>15</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K14</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y14</Label>
       <Port>14</Port>
-      <PinLabel_NC>16</PinLabel_NC>
-      <PinLabel_NO>80</PinLabel_NO>
-      <PinLabel_COM>49</PinLabel_COM>
+      <PinLabel>16</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K15</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y15</Label>
       <Port>15</Port>
-      <PinLabel_NC>17</PinLabel_NC>
-      <PinLabel_NO>81</PinLabel_NO>
-      <PinLabel_COM>50</PinLabel_COM>
+      <PinLabel>17</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K16</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y16</Label>
       <Port>16</Port>
-      <PinLabel_NC>18</PinLabel_NC>
-      <PinLabel_NO>82</PinLabel_NO>
-      <PinLabel_COM>51</PinLabel_COM>
+      <PinLabel>18</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K17</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y17</Label>
       <Port>17</Port>
-      <PinLabel_NC>19</PinLabel_NC>
-      <PinLabel_NO>83</PinLabel_NO>
-      <PinLabel_COM>52</PinLabel_COM>
+      <PinLabel>19</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K18</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y18</Label>
       <Port>18</Port>
-      <PinLabel_NC>20</PinLabel_NC>
-      <PinLabel_NO>84</PinLabel_NO>
-      <PinLabel_COM>53</PinLabel_COM>
+      <PinLabel>20</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K19</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y19</Label>
       <Port>19</Port>
-      <PinLabel_NC>21</PinLabel_NC>
-      <PinLabel_NO>85</PinLabel_NO>
-      <PinLabel_COM>54</PinLabel_COM>
+      <PinLabel>21</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K20</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y20</Label>
       <Port>20</Port>
-      <PinLabel_NC>22</PinLabel_NC>
-      <PinLabel_NO>86</PinLabel_NO>
-      <PinLabel_COM>55</PinLabel_COM>
+      <PinLabel>22</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K21</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y21</Label>
       <Port>21</Port>
-      <PinLabel_NC>23</PinLabel_NC>
-      <PinLabel_NO>87</PinLabel_NO>
-      <PinLabel_COM>56</PinLabel_COM>
+      <PinLabel>23</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K22</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y22</Label>
       <Port>22</Port>
-      <PinLabel_NC>24</PinLabel_NC>
-      <PinLabel_NO>88</PinLabel_NO>
-      <PinLabel_COM>57</PinLabel_COM>
+      <PinLabel>24</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K23</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y23</Label>
       <Port>23</Port>
-      <PinLabel_NC>25</PinLabel_NC>
-      <PinLabel_NO>89</PinLabel_NO>
-      <PinLabel_COM>58</PinLabel_COM>
+      <PinLabel>25</PinLabel>
     </anyType>
-    <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K24</Label>
+    <anyType xsi:type="ComponentCoil">
+      <Label>Y24</Label>
       <Port>24</Port>
-      <PinLabel_NC>26</PinLabel_NC>
-      <PinLabel_NO>90</PinLabel_NO>
-      <PinLabel_COM>59</PinLabel_COM>
+      <PinLabel>26</PinLabel>
     </anyType>
   </Components>
 </malt_device>

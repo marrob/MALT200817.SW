@@ -8,6 +8,7 @@
     using Client;
     using Controls;
     using Library;
+    using System.Linq;
 
     public partial class DeviceForm : Form
     {
@@ -71,6 +72,11 @@
             else if (sender is IKnvOutputComponentControl)
             {
                 var component = sender as IKnvOutputComponentControl;
+                client.SetOneOutput(FamilyCode, Address, component.Port, !component.State);
+            }
+            else if (sender is IKnvCoilComponentControl)
+            {
+                var component = sender as IKnvCoilComponentControl;
                 client.SetOneOutput(FamilyCode, Address, component.Port, !component.State);
             }
         }
@@ -171,7 +177,7 @@
                     ctrl.ComponentClick += ComponentClick;
                     controls.Add(ctrl);
                 }
-                else if(  i is ComponentDigitalInput)
+                else if (i is ComponentDigitalInput)
                 {
                     var comp = (i as ComponentDigitalInput);
                     var ctrl = new KnvDiControl()
@@ -180,6 +186,18 @@
                         Label = comp.Label,
                         DiPinLabel = comp.PinLabel_DI,
                     };
+                    controls.Add(ctrl);
+                }
+                else if (i is ComponentCoil)
+                {
+                    var comp = (i as ComponentCoil);
+                    var ctrl = new KnvCoilControl()
+                    {
+                        Port = comp.Port,
+                        Label = comp.Label,
+                        PinLabel = comp.PinLabel,
+                    };
+                    ctrl.ComponentClick += ComponentClick;
                     controls.Add(ctrl);
                 }
             }
@@ -200,6 +218,13 @@
             toolStripStatusLabelFirstName.Text = _device.OptionName;
             toolStripStatusLabelVersion.Text = Application.ProductVersion;
             this.Text = _device.OptionName + "-" + Address;
+
+
+            if (_device.Components.Count(i => (i as IComponentItem).IsCountable) > 0)
+                cOUNTERSToolStripMenuItem.Visible = true;
+            else
+                cOUNTERSToolStripMenuItem.Visible = false;
+
             Start();
         }
 

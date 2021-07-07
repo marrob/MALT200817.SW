@@ -14,6 +14,6 @@ namespace MALT200817.Explorer.Client
         public int Address { get; set; }
         public string Version { get; set; }
         public string SerialNumber { get; set; }   
-        public string FirstName { get; set; }
+        public string OptionName { get; set; }
     }
 }

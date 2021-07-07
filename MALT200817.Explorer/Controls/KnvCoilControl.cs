@@ -54,7 +54,7 @@ namespace MALT200817.Explorer.Controls
             set { labelCoilNum.Text = value; }
         }
 
-        public string LabelPin
+        public string PinLabel
         {
             get { return labelPin.Text; }
             set { labelPin.Text = value; }

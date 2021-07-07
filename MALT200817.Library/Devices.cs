@@ -51,8 +51,6 @@ namespace MALT200817.Library
             }
         }
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -71,17 +69,25 @@ namespace MALT200817.Library
             return retval;
         }
 
-
-        public int GetRealyCount(int familyCode)
+        /// <summary>
+        /// Vissza adja a szálalóval renedelkező komponensek számát, ezt a library alapján teszi.
+        /// </summary>
+        /// <param name="familyCode"></param>
+        /// <returns>komponensek száma</returns>
+        public int GetCountableComponentCount(int familyCode)
         {
             var dev = Search(familyCode);
-            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST);
+            return dev.Components.Count(n => (n as IComponentItem).IsCountable);
         }
-
-        public int GetRealyCount(int familyCode, int optionCode)
+        /// <summary>
+        /// Vissza adja a számlálvóval renedelkező komponensek számát, ezt a library alapján teszi.
+        /// </summary>
+        /// <param name="familyCode"></param>
+        /// <returns>komponensek száma</returns>
+        public int GetCountableComponentCount(int familyCode, int optionCode)
         {
             var dev = Search(familyCode, optionCode);
-            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST);
+            return dev.Components.Count(n => (n as IComponentItem).IsCountable);
         }
     }
 }

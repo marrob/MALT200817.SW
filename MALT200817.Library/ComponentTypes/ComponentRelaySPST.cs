@@ -7,6 +7,7 @@ namespace MALT200817.Library
         public event PropertyChangedEventHandler PropertyChanged;
         public int Port { get; set; }
         public string Label { get; set; }
+        public bool IsCountable { get { return true; } }
         public string PinLabel_COM { get; set; }
         public string PinLabel_NO { get; set; }
 

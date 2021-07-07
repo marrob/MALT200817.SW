@@ -38,7 +38,7 @@
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::MALT200817.Explorer.Properties.Resources.coil_off;
-            this.pictureBox1.Location = new System.Drawing.Point(140, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(108, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // labelPin
             // 
             this.labelPin.BackColor = System.Drawing.Color.LightBlue;
-            this.labelPin.Location = new System.Drawing.Point(176, 13);
+            this.labelPin.Location = new System.Drawing.Point(146, 12);
             this.labelPin.Name = "labelPin";
             this.labelPin.Size = new System.Drawing.Size(31, 13);
             this.labelPin.TabIndex = 3;
@@ -73,10 +73,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelCoilNum);
-            this.Controls.Add(this.labelPin);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelPin);
             this.Name = "KnvCoilControl";
-            this.Size = new System.Drawing.Size(217, 38);
+            this.Size = new System.Drawing.Size(183, 38);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

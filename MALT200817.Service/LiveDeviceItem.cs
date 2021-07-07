@@ -62,7 +62,7 @@ namespace MALT200817.Service
                     InputPorts.Add(new byte[_device.BlockSize]);
 
 
-                Counters = new int[Devices.Library.GetRealyCount(familyCode, optionCode)];
+                Counters = new int[Devices.Library.GetCountableComponentCount(familyCode, optionCode)];
                 FirstName = _device.OptionName;
                 IsDeviceOk = true;
             }
@@ -74,7 +74,7 @@ namespace MALT200817.Service
                     OutputPorts = new List<byte[]>();
                     for (int blocks = 0; blocks < _device.OutputBlocks; blocks++)
                         OutputPorts.Add(new byte[_device.BlockSize]);
-                    Counters = new int[Devices.Library.GetRealyCount(familyCode)];
+                    Counters = new int[Devices.Library.GetCountableComponentCount(familyCode)];
                     AppLog.Instance.WriteLine("This device not supported by option " +
                     "OptionCode:" + optionCode.ToString("X2"));
                     FirstName = "This device not supported by option";
