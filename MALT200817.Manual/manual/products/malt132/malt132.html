@@ -8,520 +8,123 @@
   </head>
   <body>
 
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/index.html"><img src ="/images/logo_204x60.jpg" alt="AltonTech"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Fejlesztői dokumentációk
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/getting-started.html">Ismerkedjünk meg</a>
-                  <a class="dropdown-item" href="/new-device.html">Új eszköz</a>
-                  <a class="dropdown-item" href="/protokol.html">CAN busz protokoll</a>
-                </div>
-              </li>
-            <li class="nav-item dropdown">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="/index.html"><img src ="/images/logo_204x60.jpg" alt="AltonTech"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Termékek
+                  Fejlesztői dokumentációk
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/products/malt132/malt132.html">MALT132</a>
-                <a class="dropdown-item" href="/products/malt24vi/malt24vi.html">MALT24VI</a>
-                
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/products/maltmmi/maltmmi.html">MALTMMI - tervezés alatt</a>
+                <a class="dropdown-item" href="/getting-started.html">Ismerkedjünk meg</a>
+                <a class="dropdown-item" href="/new-device.html">Új eszköz</a>
+                <a class="dropdown-item" href="/protokol.html">CAN busz protokoll</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Változások</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
-
-    <header> <h1>MALT132</h1> </header>
-    <main>
-      <nav>
-        <ul>
-          <li> <a href="../../index.html">Főoldal </a> </li>
-          <li> <a href="">CAN protokol</a> </li>
-        </ul>
-      </nav>
-      <section>
-        <h2>Specifikáció </h2>
-        <ul>
-          <li>Relék száma: 32</li>
-          <li>Relé típusa: <a href="https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&amp;DocId=Data+Sheet%7FPE%7F0919%7Fpdf%7FEnglish%7FENG_DS_PE_0919.pdf%7F1-1393219-0">
-              SCHRACK PE014024</a> </li>
-          <li>Csatlakozók:
-            <ul>
-              <li>VPC 510 104 135 Tripaddle </li>
-              <li>WEIDMULLER <a href="https://download.weidmueller.com/asset/download/file/40061">
-                  SL 3.50/04/90G </a> </li>
-              <li>WEIDMULLER SL 3.5/3/90G</li>
-            </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Termékek
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/products/maltmmi/maltmmi.html">MALTMMI</a>
+              <a class="dropdown-item" href="/products/malt40io/malt40io.html">MALT40IO</a>
+              <a class="dropdown-item" href="/products/malt132/malt132.html">MALT132</a>
+              <a class="dropdown-item" href="/products/malt23thv/malt23thv.html">MALT23THV</a>
+              <a class="dropdown-item" href="/products/malt16pin/malt16pin.html">MALT16PIN</a>
+              <a class="dropdown-item" href="/products/malt160t/malt160t.html">MALT160T</a>
+              <a class="dropdown-item" href="/products/maltcon/maltcon.html">MALT160T</a>
+              <a class="dropdown-item" href="/products/malt24vi/malt24vi.html">MALT24VI</a>
+              <div class="dropdown-divider"></div>
+            </div>
           </li>
-          <li>Tápfeszültség: 24VDC</li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Változások</a>
+          </li>
         </ul>
-        <h2>Lábkiosztás</h2>
-        Todo
-        <h2>Támogatott üzenetek</h2>
-        <table class="table_message col-12" style="width: 835px; height: 774px;">
-          <thead>
-            <tr>
-              <td>Description</td>
-              <td>Dir</td>
-              <td>Id</td>
-              <td>Length</td>
-              <td width="7%">Byte0</td>
-              <td width="7%">Byte1</td>
-              <td width="7%">Byte2</td>
-              <td width="7%">Byte3</td>
-              <td width="7%">Byte4</td>
-              <td width="7%">Byte5</td>
-              <td width="7%">Byte6</td>
-              <td width="7%">Byte7</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left">Request Reset</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>7</td>
-              <td>family code</td>
-              <td>0x03</td>
-              <td>0x00</td>
-              <td>0x00</td>
-              <td>0x00</td>
-              <td>0x00</td>
-              <td>0x06</td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-left">Request Clr One </td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>4</td>
-              <td>family code</td>
-              <td>0x01</td>
-              <td>relay number</td>
-              <td>0x00</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-left">Request Set One </td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>4</td>
-              <td>family code</td>
-              <td>0x01</td>
-              <td>relay number</td>
-              <td>0x01</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-left">Request Clr Several</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>7/8</td>
-              <td>family code</td>
-              <td>0x03</td>
-              <td>relays <br>
-                byte 0</td>
-              <td>relays <br>
-                byte 1</td>
-              <td>relays <br>
-                byte 2</td>
-              <td>relays <br>
-                byte 3</td>
-              <td>0x00</td>
-              <td>0x00<sup>1</sup></td>
-            </tr>
-            <tr>
-              <td class="text-left">Request Set Several</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>7/8</td>
-              <td>family code</td>
-              <td>0x03</td>
-              <td>relays <br>
-                byte 0</td>
-              <td>relays <br>
-                byte 1</td>
-              <td>relays <br>
-                byte 2</td>
-              <td>relays <br>
-                byte 3</td>
-              <td>0x01</td>
-              <td>0x00<sup>1</sup></td>
-            </tr>
-            <tr>
-              <td class="text-left">Request Ports Status</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>3</td>
-              <td>family code</td>
-              <td>0x04</td>
-              <td>autosend?</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td id="response_ports_status" style="text-align: left;"> <a href="./messages.html#response_ports">Response
-                  Ports Status </a></td>
-              <td>Tx</td>
-              <td>0x155203yy</td>
-              <td>6</td>
-              <td>family code</td>
-              <td>0x04</td>
-              <td>relays <br>
-                byte 0 </td>
-              <td>relays <br>
-                byte 1</td>
-              <td>relays <br>
-                byte 2</td>
-              <td>relays <br>
-                byte 3</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Serial number<sup>3</sup></td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>3</td>
-              <td>family code</td>
-              <td>0xDE</td>
-              <td>0xF5</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Response Serial number<sup>3</sup></td>
-              <td>Tx</td>
-              <td>0x155203yy</td>
-              <td>7</td>
-              <td>family code</td>
-              <td>0xDE</td>
-              <td>0xF0</td>
-              <td>0xC3<br>
-                byte 0</td>
-              <td>0xD8<br>
-                byte 1</td>
-              <td>0x12<br>
-                byte 2</td>
-              <td>0x00<br>
-                byte 3</td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Port Counter Reset</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>3<br>
-              </td>
-              <td>family code </td>
-              <td>0xEE</td>
-              <td>0x00<br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Get Port Counter<sup>2</sup></td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>4</td>
-              <td>family code</td>
-              <td>0xEE</td>
-              <td>0x01</td>
-              <td>relay number</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Response Get Port Counter</td>
-              <td>Tx</td>
-              <td>0x155203yy </td>
-              <td>8<br>
-              </td>
-              <td>family code </td>
-              <td>0xEE<br>
-              </td>
-              <td>0x01<br>
-              </td>
-              <td>relay number </td>
-              <td>counter<br>
-                byte 0<br>
-              </td>
-              <td>counter<br>
-                byte 1<br>
-              </td>
-              <td>counter<br>
-                byte 2<br>
-              </td>
-              <td>counter<br>
-                byte 3<br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Set Port Counter<sup>2</sup><br>
-              </td>
-              <td>Rx </td>
-              <td>0x155103yy </td>
-              <td>8<br>
-              </td>
-              <td>family code </td>
-              <td>0xEE<br>
-              </td>
-              <td>0x02<br>
-              </td>
-              <td>relay number </td>
-              <td>counter<br>
-                byte 0 </td>
-              <td>counter<br>
-                byte 1 </td>
-              <td>counter<br>
-                byte 2 </td>
-              <td>counter<br>
-                byte 3 </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Save Port Counters<sup>2</sup></td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>3</td>
-              <td>family code</td>
-              <td>0xEE</td>
-              <td>0x03</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Read EEPROM</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>5</td>
-              <td>family code</td>
-              <td>0xFA</td>
-              <td>0xF1</td>
-              <td>addr<br>
-                byte 0</td>
-              <td>addr<br>
-                byte 1</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Response Read EEPROM</td>
-              <td>Tx</td>
-              <td>0x155203yy</td>
-              <td>7</td>
-              <td>family code</td>
-              <td>0xFA</td>
-              <td>0xF1</td>
-              <td>addr<br>
-                byte 0</td>
-              <td>addr<br>
-                byte 1</td>
-              <td>data<br>
-                byte 0</td>
-              <td>data<br>
-                byte 1</td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">Request Write EEPROM</td>
-              <td>Rx</td>
-              <td>0x155103yy</td>
-              <td>7</td>
-              <td>family code</td>
-              <td>0xFA</td>
-              <td>0xF2</td>
-              <td>addr<br>
-                byte 0</td>
-              <td>addr<br>
-                byte 1</td>
-              <td>data<br>
-                byte 0</td>
-              <td>data<br>
-                byte 1</td>
-              <td><br>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="width: 1018px;"><sup>1</sup>Kompatibilitási okok miatt ez a
-          bájt opcionális.<br>
-          <sup>2</sup>Nem kompatibilis a YAV rendszerével, mivel ez a funkció
-          hiányzik, vagy nem ismert a rendszerükben.<br>
-          <sup>3</sup>Nem minden YAV eszköz/eszköz verzió támogatja</p>
-        <h3>Jelölések</h3>
-        <p>"relay number": <b>relészám ami 0-től indexelődik! A PC-s API fölött
-            az indexelés 1-re tér át.</b></p>
-        <p><a href="protokol.html#common_messages"> COMMON </a> messages </p>
-        <h2>Kártya inicializálása</h2>
-        Paraméterek: Family code:0x03, Address:0x03, Version:00.9A, <strong>K1
-          relay On</strong>
-        <table class="table_traffic">
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>Direction</td>
-              <td>Length</td>
-              <td>Data</td>
-              <td>Comment</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0x1558FFFF</td>
-              <td>Rx</td>
-              <td>2</td>
-              <td class="text-left">0xAB 0xFF</td>
-              <td class="text-left">Request All Init Info</td>
-            </tr>
-            <tr>
-              <td>0x15520303</td>
-              <td>Tx</td>
-              <td>2</td>
-              <td class="text-left">0xF0 0x01 0x03 0x03 0x00 0x9A 0x00</td>
-              <td class="text-left">Response Init Info</td>
-            </tr>
-            <tr>
-              <td>0x15510303</td>
-              <td>Rx</td>
-              <td>3</td>
-              <td class="text-left">0x03 0x04 0x01</td>
-              <td class="text-left">Request Ports Status</td>
-            </tr>
-            <tr>
-              <td>0x15520303</td>
-              <td>Tx</td>
-              <td>7</td>
-              <td class="text-left">0x03 0x04 <strong>0x01</strong> 0x00 0x00
-                0x00 0x00</td>
-              <td class="text-left">Response Ports Status</td>
-            </tr>
-            <tr>
-              <td>0x15510303</td>
-              <td>Rx</td>
-              <td>3</td>
-              <td class="text-left">0x03 0xEE 0x11 </td>
-              <td class="text-left">Request Save Counters</td>
-            </tr>
-            <tr>
-              <td>0x15520303</td>
-              <td>Tx</td>
-              <td>4</td>
-              <td class="text-left">0x03 0xEE 0x12 0x01 </td>
-              <td class="text-left">Response Save Counters Ack</td>
-            </tr>
-          </tbody>
-        </table>
-        <h2 id="response_ports_ClrSetOne_traffic"> Egy kimenet állapotának
-          módosítása - Request Clr One/Request Set One </h2>
-        <p class="h2"><br>
-        </p>
-        <h2>Sorozatszám - Request Serial number</h2>
-        <h2>LED-es állapot jelzések</h2>
-        <h2>Funkcionális tesztek</h2>
-        <ul>
-          <li>Húzz megmiden relét és ellenőrizd, hogy miden relé meghuzott-e DMM
-            continuity tesztel. </li>
-          <li> A kártya teljesítmény felévteléből meg mondható ha egy relé nics
-            meghúzva?
-            <ul>
-              <li>MALT160T alaphelyzetben: 13.7mAx23.69V = 324.69mW </li>
-              <li>MALT160T 1 relé bekapcsolva: 16.6mAx23.7V = 393.8mW </li>
-              <li>MALT160T 2 relé bekapcsolva: 18.9mAx23.68V = 447.55mW </li>
-              <li>MALT160T 180 relé bekapcsolva: 394mAx22.89V = 9018mW </li>
-            </ul>
-            Ha minden relé meg van húzva akkor 9W ez az 50mW-hoz képest
-            50mW/9000mW*100%=0.55% </li>
-        </ul>
-    </main>
-    <footer class="jumbotron text-center">
-      <p class="text-muted">Készült az AtlonTech megbízásából.</p>
-    </footer>
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+      </div>
+    </nav>
+  </header>
+  
+  <main class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-3 mt-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/products/malt132/malt132_001.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">MALT132 - Relékártya</h5>
+                <p class="card-text">
+                  <ul>
+                    <li>Relék száma: 32</li>
+                    <li>Relé típusa: <a href="https://www.te.com/usa-en/product-1-1393219-0.html" target="_blank"> SCHRACK PE014024</a> </li>
+                    <li>Táp és busz csatlakozó: <a href="https://download.weidmueller.com/asset/download/file/40061" target="_blank"> WEIDMULLER SL 3.50/04/90G </a></li>
+                    <li>Interfész csatlakozó: VPC 510 104 135 Tripaddle </li>
+                    <li>Tápfeszültség: 24VDC</li>
+                    <li>Egyedi sorozatszám támogatása</li>
+                    <li>Egyes relék ciklus számlálása</li>
+                    <li>Family/Option Code: 0x03/0x00</li>
+                    <li>Family/Option Name: MALT132/MALT132 </li>
+                  </ul>
+                </p>
+                <p class="card-text"><small class="text-muted">Last updated 2021.07.07</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-3 mt-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/products/malt132/malt132_explorer.JPG" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">MALT132 - Explorer felülete </h5>
+                <p class="card-text">
+                  <ul>
+                  </ul>
+                </p>
+                <p class="card-text"><small class="text-muted">Last updated 2021.07.07</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" > 
+      <div class="col-12">
+        <div class="card my-3 col-md-6" >
+          <div class="card-body">
+            <h5 class="card-title">Technikai dokumentációk</h5>
+            <p class="card-text">
+              <ul>
+                <li> Kapcsolási rajz: <a href="/products/malt132/MALT132_210708_1209.PDF" target="_blank">MALT132_210708_1209.PDF</a></li>
+               
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="jumbotron text-center">
+    <p class="text-muted">Készült az AtlonTech megbízásából.</p>
+  </footer>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
