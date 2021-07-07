@@ -97,6 +97,7 @@
                             var component = (con as IKnvInputComponentControl);
                             component.State = client.GetOneInput(FamilyCode, Address, component.Port);
                         }
+                       
                     }
                 }
                 catch (Exception ex)

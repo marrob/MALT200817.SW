@@ -14,7 +14,7 @@
   </DefaultWinodwSize>
   <Components>
     <anyType xsi:type="ComponentRelaySPDT">
-      <Label>K1</Label>
+      <Label>Y1</Label>
       <Port>1</Port>
       <PinLabel_NC>3</PinLabel_NC>
       <PinLabel_NO>67</PinLabel_NO>

@@ -61,6 +61,7 @@
     <Compile Include="ComponentCollection.cs" />
     <Compile Include="ComponentTypes\ComponentDigitalInput.cs" />
     <Compile Include="ComponentTypes\ComponentDigitalOutput.cs" />
+    <Compile Include="ComponentTypes\ComponentValve.cs" />
     <Compile Include="ComponentTypes\ComponentRelaySPST.cs" />
     <Compile Include="ComponentTypes\ComponentRelaySPDT.cs" />
     <Compile Include="Devices.cs" />
