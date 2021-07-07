@@ -37,7 +37,7 @@ namespace MALT200817.Library
             device.OptionCode = 5;
             device.BlockSize = 4;
             device.OutputBlocks = 5;
-            device.FirstName = "MALT160T";
+            device.OptionName = "MALT160T";
             device.DefaultWinodwSize = new Size(455, 783);
             device.Components = new ComponentCollection();
 

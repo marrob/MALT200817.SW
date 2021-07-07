@@ -3,11 +3,11 @@
   <LibVersion>0</LibVersion>
   <FamilyName>MALT40IO</FamilyName>
   <FamilyCode>1</FamilyCode>
+  <OptionName>MALT40IO</OptionName>
   <OptionCode>0</OptionCode>
   <BlockSize>4</BlockSize>
   <OutputBlocks>2</OutputBlocks>
   <InputBlocks>2</InputBlocks>
-  <FirstName>MALT40IO</FirstName>
   <DefaultWinodwSize>
     <Width>455</Width>
     <Height>793</Height>

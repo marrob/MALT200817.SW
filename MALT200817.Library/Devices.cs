@@ -32,7 +32,7 @@ namespace MALT200817.Library
             if (retval == null)
             {
                 retval = this.FirstOrDefault(n => n.FamilyCode == Tools.HexaByteStrToInt(familyCode));
-                retval.FirstName = "This device not supported by options";
+                retval.OptionName = "This device not supported by options";
             }
             return retval;
         }
@@ -81,7 +81,7 @@ namespace MALT200817.Library
         public int GetRealyCount(int familyCode, int optionCode)
         {
             var dev = Search(familyCode, optionCode);
-            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST );
+            return dev.Components.Count(n => n is ComponentRelaySPDT || n is ComponentRelaySPST);
         }
     }
 }

@@ -21,4 +21,11 @@ namespace MALT200817.Explorer.Controls
         int Port { get; set; }
         bool State { get; set; }
     }
+
+    public interface IKnvCoilComponentControl
+    {
+        string Label { get; set; }
+        int Port { get; set; }
+        bool State { get; set; }
+    }
 }

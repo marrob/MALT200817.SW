@@ -3,11 +3,11 @@
   <LibVersion>0</LibVersion>
   <FamilyName>MALT132</FamilyName>
   <FamilyCode>3</FamilyCode>
+  <OptionName>MALT23THV</OptionName>
   <OptionCode>16</OptionCode>
   <BlockSize>4</BlockSize>
   <OutputBlocks>1</OutputBlocks>
   <InputBlocks>0</InputBlocks>
-  <FirstName>MALT23THV</FirstName>
   <DefaultWinodwSize>
     <Width>455</Width>
     <Height>600</Height>

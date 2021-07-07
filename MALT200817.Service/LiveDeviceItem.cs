@@ -63,7 +63,7 @@ namespace MALT200817.Service
 
 
                 Counters = new int[Devices.Library.GetRealyCount(familyCode, optionCode)];
-                FirstName = _device.FirstName;
+                FirstName = _device.OptionName;
                 IsDeviceOk = true;
             }
             else

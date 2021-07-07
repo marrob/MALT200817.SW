@@ -93,11 +93,18 @@
                             var component = (con as IKnvOutputComponentControl);
                             component.State = client.GetOneOutput(FamilyCode, Address, component.Port);
                         }
-                        else if (con is IKnvInputComponentControl) {
+                        else if (con is IKnvInputComponentControl)
+                        {
                             var component = (con as IKnvInputComponentControl);
                             component.State = client.GetOneInput(FamilyCode, Address, component.Port);
                         }
+                        else if (con is IKnvCoilComponentControl) 
+                        {
+                            var component = (con as IKnvCoilComponentControl);
+                            component.State = client.GetOneOutput(FamilyCode, Address, component.Port);
+                        }
                        
+
                     }
                 }
                 catch (Exception ex)
@@ -190,9 +197,9 @@
 
             _device = Devices.Library.Search(FamilyCode, OptionCode);
             toolStripStatusLabelLibVersion.Text = _device.LibVersion;
-            toolStripStatusLabelFirstName.Text = _device.FirstName;
+            toolStripStatusLabelFirstName.Text = _device.OptionName;
             toolStripStatusLabelVersion.Text = Application.ProductVersion;
-            this.Text = _device.FirstName + "-" + Address;
+            this.Text = _device.OptionName + "-" + Address;
             Start();
         }
 

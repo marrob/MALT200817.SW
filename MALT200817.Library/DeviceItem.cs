@@ -21,8 +21,8 @@ namespace MALT200817.Library
         public string LibVersion { get; set; }
         public string FamilyName { get; set; }
         public int FamilyCode { get; set; }
+        public string OptionName { get; set; }
         public int OptionCode { get; set; }
-        public string FirstName { get; set; }
         public int BlockSize { get; set; }
         /// <summary>
         /// Kimineit blokok száma, alaphelyzetben 1 blokk 4 *8bit széles = 32port/block
@@ -49,7 +49,8 @@ namespace MALT200817.Library
                     typeof(ComponentRelaySPDT),
                     typeof(ComponentRelaySPST),
                     typeof(ComponentDigitalOutput),
-                    typeof(ComponentDigitalInput)
+                    typeof(ComponentDigitalInput),
+                    typeof(ComponentCoil)
 
                 };
             }
@@ -80,7 +81,7 @@ namespace MALT200817.Library
                 FamilyName = instance.FamilyName;
                 FamilyCode = instance.FamilyCode;
                 OptionCode = instance.OptionCode;
-                FirstName = instance.FirstName;
+                OptionName = instance.OptionName;
                 BlockSize = instance.BlockSize;
                 OutputBlocks = instance.OutputBlocks;
                 InputBlocks = instance.InputBlocks;

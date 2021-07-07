@@ -98,6 +98,12 @@
     <Compile Include="Controls\KnvDoControl.Designer.cs">
       <DependentUpon>KnvDoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KnvRealySpstControl - Copy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\KnvRealySpstControl - Copy.Designer.cs">
+      <DependentUpon>KnvRealySpstControl - Copy.cs</DependentUpon>
+    </Compile>
     <Compile Include="CounterItem.cs" />
     <Compile Include="ErrorHandling\ErrorHandlerService.cs" />
     <Compile Include="ErrorHandling\ErrorHandlingForm.cs">
@@ -112,11 +118,11 @@
     <Compile Include="Controls\KnvDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\KnvRealySpstControl.cs">
+    <Compile Include="Controls\KnvCoilControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\KnvRealySpstControl.Designer.cs">
-      <DependentUpon>KnvRealySpstControl.cs</DependentUpon>
+    <Compile Include="Controls\KnvCoilControl.Designer.cs">
+      <DependentUpon>KnvCoilControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\KnvRealySpdtControl.cs">
       <SubType>UserControl</SubType>
@@ -187,11 +193,14 @@
     <EmbeddedResource Include="Controls\KnvDoControl.resx">
       <DependentUpon>KnvDoControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\KnvRealySpstControl - Copy.resx">
+      <DependentUpon>KnvRealySpstControl - Copy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ErrorHandling\ErrorHandlingForm.resx">
       <DependentUpon>ErrorHandlingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\KnvRealySpstControl.resx">
-      <DependentUpon>KnvRealySpstControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\KnvCoilControl.resx">
+      <DependentUpon>KnvCoilControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\KnvRealySpdtControl.resx">
       <DependentUpon>KnvRealySpdtControl.cs</DependentUpon>
@@ -307,7 +316,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\switchblue32.png" />
-    <None Include="Resources\buttongary321.png" />
     <None Include="Resources\buttongreen32.png" />
     <None Include="Resources\buttongary32.png" />
     <None Include="Resources\lighton32.png" />
@@ -317,6 +325,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manual\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coil_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coil_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 
 namespace MALT200817.Library
 {
-    public class ComponentValve: IComponentItem
+    public class ComponentCoil: IComponentItem
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public int Port { get; set; }

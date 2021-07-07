@@ -3,8 +3,8 @@
   <LibVersion>0</LibVersion>
   <FamilyName>MALT160T</FamilyName>
   <FamilyCode>21</FamilyCode>
+  <OptionName>MALT160T</OptionName>
   <OptionCode>5</OptionCode>
-  <FirstName>MALT160T</FirstName>
   <BlockSize>4</BlockSize>
   <OutputBlocks>5</OutputBlocks>
   <InputBlocks>0</InputBlocks>

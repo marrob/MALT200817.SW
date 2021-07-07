@@ -3,11 +3,11 @@
   <LibVersion>0</LibVersion>
   <FamilyName>MALT132</FamilyName>
   <FamilyCode>3</FamilyCode>
+  <OptionName>MALT132</OptionName>
   <OptionCode>0</OptionCode>
   <BlockSize>4</BlockSize>
   <OutputBlocks>1</OutputBlocks>
   <InputBlocks>0</InputBlocks>
-  <FirstName>MALT132</FirstName>
   <DefaultWinodwSize>
     <Width>455</Width>
     <Height>793</Height>

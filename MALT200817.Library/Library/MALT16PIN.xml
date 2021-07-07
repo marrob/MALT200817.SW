@@ -3,11 +3,11 @@
   <LibVersion>0</LibVersion>
   <FamilyName>MALT16PIN</FamilyName>
   <FamilyCode>5</FamilyCode>
+  <OptionName>MALT16PIN</OptionName>
   <OptionCode>0</OptionCode>
   <BlockSize>4</BlockSize>
   <OutputBlocks>1</OutputBlocks>
   <InputBlocks>0</InputBlocks>
-  <FirstName>MALT16PIN</FirstName>
   <DefaultWinodwSize>
     <Width>450</Width>
     <Height>457</Height>

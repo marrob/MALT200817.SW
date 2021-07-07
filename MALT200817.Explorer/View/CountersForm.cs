@@ -75,7 +75,7 @@
         {
             _deviceItem = Devices.Library.Search(FamilyCode, OptionCode);
             toolStripStatusLabelVersion.Text = Application.ProductVersion;
-            Text = _deviceItem.FirstName + "-" + Address + " Counters";
+            Text = _deviceItem.OptionName + "-" + Address + " Counters";
             foreach (IComponentItem comp in _deviceItem.Components)
             {
                 Counters.Add(new CounterItem()
