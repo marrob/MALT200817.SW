@@ -11,9 +11,12 @@ namespace MALT200817.Manual.Open
     {
         static void Main(string[] args)
         {
-           string docPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + "\\AltonTech\\MaltManual";
+            //   string docPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + "\\AltonTech\\MaltManual";
 
-            new App().Check(docPath);
+            string docPath = @"D:\@@@!ProjectS\KonvolucioApp\MALT200817.Manual\manual";
+            //new App().Check(docPath);
+            new App().Run(docPath);
+
 
 
         }
@@ -54,7 +57,7 @@ namespace MALT200817.Manual.Open
         /// <summary>
         /// Futtatja
         /// </summary>
-        void Run(string path) {
+        public void Run(string path) {
             //https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp/14913755#14913755
             try
             {
