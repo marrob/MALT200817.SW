@@ -1,31 +1,31 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" href="style/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, charset=utf-8">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/style.css">
     <title>MALT Platform felhasználói és fejlesztői kéziköny</title>
   </head>
   <body>
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <a class="navbar-brand" href="/index.html"><img src ="/images/logo_204x60.jpg" alt="AltonTech"></a>
+      <a class="navbar-brand" href="./index.html"><img src ="./images/logo_204x60.jpg" alt="AltonTech"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Fejlesztői dokumentációk
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/getting-started.html">Ismerkedjünk meg</a>
-                <a class="dropdown-item" href="/new-device.html">Új eszköz</a>
-                <a class="dropdown-item" href="/protokol.html">CAN busz protokoll</a>
+                <a class="dropdown-item" href="./getting-started.html">Ismerkedjünk meg</a>
+                <a class="dropdown-item" href="./new-device.html">Új eszköz</a>
+                <a class="dropdown-item" href="./protokol.html">CAN busz protokoll</a>
               </div>
             </li>
           <li class="nav-item dropdown">
@@ -33,12 +33,12 @@
               Termékek
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/products/malt132/malt132.html">MALT132</a>
-              <a class="dropdown-item" href="/products/malt24vi/malt24vi.html">MALT24VI</a>
+              <a class="dropdown-item" href="./products/malt132/malt132.html">MALT132</a>
+              <a class="dropdown-item" href="./products/malt24vi/malt24vi.html">MALT24VI</a>
               
               <a class="dropdown-item" href="#">Another action</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/products/maltmmi/maltmmi.html">MALTMMI - tervezés alatt</a>
+              <a class="dropdown-item" href="./products/maltmmi/maltmmi.html">MALTMMI - tervezés alatt</a>
             </div>
           </li>
           <li class="nav-item">
@@ -51,22 +51,41 @@
 
   <main class="container">
     <div class="row">
+      <div class="col-12 ">
+        <div class="card my-3">
+          <img src="./images/platform.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center">AltonTech MALT Platform szoftver környezetének vázlata</h5>
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="/images/maltexplorer.JPG" class="img-fluid rounded-start" alt="...">
+              <img src="./images/maltexplorer.JPG" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">Driverek és MALT Explorer - MALT200817.Setup</h5>
                 <p class="card-text">
                   <ul>
-                    <li><a href="https://drive.google.com/drive/folders/1sGMCsaswdplB9Y3GIl5GLBXkz079KyLb?usp=sharing" target="_blank">MALT200817.Setup</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1sGMCsaswdplB9Y3GIl5GLBXkz079KyLb?usp=sharing" target="_blank">MALT200817.Setup </a>tartalmazza:</li>
+                    <ul>
+                      <li>MALT200817 Checklist</li>
+                      <li>MALT200817.Service</li>
+                      <li>MALT Explorer</li>
+                      <li>Device Library</li>
+                      <li>MALT200817 DFU</li>
+                    </ul>
                     <li> Függőségek futtatáshoz: 
                       <ul>
                         <li> <a href="https://www.microsoft.com/hu-hu/software-download/windows10" target="_blank">Windows 10 64/32-bit </a></li>
                         <li> <a href="https://www.ni.com/hu-hu/support/downloads/drivers/download.ni-xnet.html#354220" target="_blank">NI-XNET 19</a></li>
+                        <li> <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472" target="_blank">.NET 4.7.2 Framework</a></li>
                      </ul>
                     </li>
                     <li>
@@ -90,10 +109,10 @@
 
     <div class="row">
       <div class="col-12">
-        <div class="card mb-3">
+        <div class="card mb-3 ">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="/images/checklist.JPG" class="img-fluid rounded-start" alt="...">
+              <img src="./images/checklist.JPG" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -113,7 +132,55 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-3 ">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="./images/maltdfu.JPG" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">MALT200817 DFU Device Firmware Update</h5>
+                <p class="card-text">
+                  <ul>
+                    <li>Segítségével az egyes eszközök Firmware frissíthejtük.</li>
+                  </ul>
+                </p>
+                <p class="card-text"><small class="text-muted">Last updated 2021.07.08</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-3" id="maltservice">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="./images/maltservice.JPG" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">AltonTech MALT200817.Service - MaltService</h5>
+                <p class="card-text">
+                  <ul>
+                    <li>A szolgáltatás feladta a kapcsolattartás az NI-XNET kártya és a számítógépen futó kliens alkalmazás között.</li>
+                    <li>A szolgáltás saját naplózóval van ellátva. Engedélyezése: <b>MALT Explorer->Diag->Configuartion</b>->LogServiceEnabled:true </li>
+                    <li>lekérdezése cmd: <i> sc query "MaltService" <i> </li>
+                    <li>leállítása cmd: <i> sc stop "MaltService" <i> </li>
+                    <li>idítása cmd: <i> sc start "MaltService" <i> </li>
+                  </ul>
+                </p>
+                <p class="card-text"><small class="text-muted">Last updated 2021.07.08</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-12">
@@ -142,11 +209,30 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h5>Elérési útvonalak</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <b>Service & Explorer:</b> "C:\Program Files (x86)\AltonTech\"</li>
+            <li class="list-group-item"> <b>Platform Configuartion (config.xml):</b> "C:\ProgramData\AltonTech\MALT200817\config.xml"</li>
+            <li class="list-group-item"> <b>Device Library:</b> "C:\ProgramData\AltonTech\MALT200817\Library\"</li>
+            <li class="list-group-item"> <b>LV2018 32bit on Win 64bit:</b> "C:\Program Files (x86)\National Instruments\LabVIEW 2018\instr.lib\AltonTech MALT\"</li>
+            <li class="list-group-item"> <b>Firmwares:</b> "C:\Users\%username%\Documents\AltonTech\MALT200817\Firmware Update\"</li>
+            <li class="list-group-item"> <b>Logs:</b> "C:\Users\%username%\Documents\Logs"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
   </main>
   <footer class="jumbotron text-center">
     <p class="text-muted">Készült az AtlonTech megbízásából.</p>
   </footer>
-<script src="node_modules/jquery/dist/jquery.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
