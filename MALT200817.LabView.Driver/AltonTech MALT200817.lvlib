@@ -9,64 +9,84 @@
 </Property>
 	<Item Name="Private" Type="Folder">
 		<Property Name="NI.LibItem.Scope" Type="Int">2</Property>
-		<Item Name="MALT BytesSwap.vi" Type="VI" URL="../Private/MALT BytesSwap.vi"/>
-		<Item Name="MALT DeviceReqW1PCreate.vi" Type="VI" URL="../Private/MALT DeviceReqW1PCreate.vi"/>
-		<Item Name="MALT DeviceReqW2PCreate.vi" Type="VI" URL="../Private/MALT DeviceReqW2PCreate.vi"/>
-		<Item Name="MALT ErrorHelper.vi" Type="VI" URL="../Private/MALT ErrorHelper.vi"/>
-		<Item Name="MALT GetServiceStatus.vi" Type="VI" URL="../Private/MALT GetServiceStatus.vi"/>
-		<Item Name="MALT SplitList.vi" Type="VI" URL="../Private/MALT SplitList.vi"/>
-		<Item Name="MALT SplitParam.vi" Type="VI" URL="../Private/MALT SplitParam.vi"/>
-		<Item Name="MALT WriteRead.vi" Type="VI" URL="../Private/MALT WriteRead.vi"/>
-		<Item Name="MALT XmlNodeReadValue Int.vi" Type="VI" URL="../Private/MALT XmlNodeReadValue Int.vi"/>
-		<Item Name="MALT XmlNodeReadValue Str.vi" Type="VI" URL="../Private/MALT XmlNodeReadValue Str.vi"/>
+		<Item Name="MALT BytesSwap.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT BytesSwap.vi"/>
+		<Item Name="MALT DeviceReqW1PCreate.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT DeviceReqW1PCreate.vi"/>
+		<Item Name="MALT DeviceReqW2PCreate.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT DeviceReqW2PCreate.vi"/>
+		<Item Name="MALT ErrorHelper.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT ErrorHelper.vi"/>
+		<Item Name="MALT GetServiceStatus.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT GetServiceStatus.vi"/>
+		<Item Name="MALT SplitList.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT SplitList.vi"/>
+		<Item Name="MALT SplitParam.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT SplitParam.vi"/>
+		<Item Name="MALT WriteRead.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT WriteRead.vi"/>
+		<Item Name="MALT XmlNodeReadValue Int.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT XmlNodeReadValue Int.vi"/>
+		<Item Name="MALT XmlNodeReadValue Str.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/MALT XmlNodeReadValue Str.vi"/>
 	</Item>
 	<Item Name="Public" Type="Folder">
 		<Item Name="Devices" Type="Folder">
-			<Item Name="MALT23HVT" Type="Folder">
-				<Item Name="MALT23HVT Get One.vi" Type="VI" URL="../Public/Devices/MALT23HVT/MALT23HVT Get One.vi"/>
-				<Item Name="MALT23HVT Get Several.vi" Type="VI" URL="../Public/Devices/MALT23HVT/MALT23HVT Get Several.vi"/>
-				<Item Name="MALT23HVT Set One.vi" Type="VI" URL="../Public/Devices/MALT23HVT/MALT23HVT Set One.vi"/>
-				<Item Name="MALT23HVT Set Several.vi" Type="VI" URL="../Public/Devices/MALT23HVT/MALT23HVT Set Several.vi"/>
+			<Item Name="MALT16PIN" Type="Folder">
+				<Item Name="MALT16PIN Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT16PIN/MALT16PIN Output Get One.vi"/>
+				<Item Name="MALT16PIN Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT16PIN/MALT16PIN Output Get Several.vi"/>
+				<Item Name="MALT16PIN Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT16PIN/MALT16PIN Output Set One.vi"/>
+				<Item Name="MALT16PIN Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT16PIN/MALT16PIN Output Set Several.vi"/>
+			</Item>
+			<Item Name="MALT23THV" Type="Folder">
+				<Item Name="MALT23THV Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT23THV/MALT23THV Output Get One.vi"/>
+				<Item Name="MALT23THV Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT23THV/MALT23THV Output Get Several.vi"/>
+				<Item Name="MALT23THV Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT23THV/MALT23THV Output Set One.vi"/>
+				<Item Name="MALT23THV Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT23THV/MALT23THV Output Set Several.vi"/>
+			</Item>
+			<Item Name="MALT24VI" Type="Folder">
+				<Item Name="MALT24VI Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT24VI/MALT24VI Output Get One.vi"/>
+				<Item Name="MALT24VI Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT24VI/MALT24VI Output Get Several.vi"/>
+				<Item Name="MALT24VI Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT24VI/MALT24VI Output Set One.vi"/>
+				<Item Name="MALT24VI Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT24VI/MALT24VI Output Set Several.vi"/>
+			</Item>
+			<Item Name="MALT40IO" Type="Folder">
+				<Item Name="MALT40IO Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Get One.vi"/>
+				<Item Name="MALT40IO Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Get Several.vi"/>
+				<Item Name="MALT40IO Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Set One.vi"/>
+				<Item Name="MALT40IO Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Set Several.vi"/>
 			</Item>
 			<Item Name="MALT132" Type="Folder">
-				<Item Name="MALT132 Get One.vi" Type="VI" URL="../Public/Devices/MALT132/MALT132 Get One.vi"/>
-				<Item Name="MALT132 Get Several.vi" Type="VI" URL="../Public/Devices/MALT132/MALT132 Get Several.vi"/>
-				<Item Name="MALT132 Set One.vi" Type="VI" URL="../Public/Devices/MALT132/MALT132 Set One.vi"/>
-				<Item Name="MALT132 Set Several.vi" Type="VI" URL="../Public/Devices/MALT132/MALT132 Set Several.vi"/>
+				<Item Name="MALT132 Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT132/MALT132 Output Get One.vi"/>
+				<Item Name="MALT132 Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT132/MALT132 Output Get Several.vi"/>
+				<Item Name="MALT132 Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT132/MALT132 Output Set One.vi"/>
+				<Item Name="MALT132 Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT132/MALT132 Output Set Several.vi"/>
 			</Item>
 			<Item Name="MALT160T" Type="Folder">
-				<Item Name="MALT160T Get One.vi" Type="VI" URL="../Public/Devices/MALT160T/MALT160T Get One.vi"/>
-				<Item Name="MALT160T Get Several.vi" Type="VI" URL="../Public/Devices/MALT160T/MALT160T Get Several.vi"/>
-				<Item Name="MALT160T Set One.vi" Type="VI" URL="../Public/Devices/MALT160T/MALT160T Set One.vi"/>
-				<Item Name="MALT160T Set Several.vi" Type="VI" URL="../Public/Devices/MALT160T/MALT160T Set Several.vi"/>
+				<Item Name="MALT160T Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT160T/MALT160T Output Get One.vi"/>
+				<Item Name="MALT160T Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT160T/MALT160T Output Get Several.vi"/>
+				<Item Name="MALT160T Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT160T/MALT160T Output Set One.vi"/>
+				<Item Name="MALT160T Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT160T/MALT160T Output Set Several.vi"/>
 			</Item>
-			<Item Name="MALT Get Counter.vi" Type="VI" URL="../Public/Devices/MALT Get Counter.vi"/>
-			<Item Name="MALT Get One.vi" Type="VI" URL="../Public/Devices/MALT Get One.vi"/>
-			<Item Name="MALT Get Several.vi" Type="VI" URL="../Public/Devices/MALT Get Several.vi"/>
-			<Item Name="MALT Set One.vi" Type="VI" URL="../Public/Devices/MALT Set One.vi"/>
-			<Item Name="MALT Set Several.vi" Type="VI" URL="../Public/Devices/MALT Set Several.vi"/>
+			<Item Name="MALTCON" Type="Folder"/>
+			<Item Name="MALTMMI" Type="Folder"/>
+			<Item Name="MALT Get Counter.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Get Counter.vi"/>
+			<Item Name="MALT Output  Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output  Set Several.vi"/>
+			<Item Name="MALT Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get One.vi"/>
+			<Item Name="MALT Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get Several.vi"/>
+			<Item Name="MALT Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Set One.vi"/>
 		</Item>
 		<Item Name="Global" Type="Folder">
 			<Property Name="NI.LibItem.Scope" Type="Int">2</Property>
-			<Item Name="MALT Global.vi" Type="VI" URL="../Private/Global/MALT Global.vi"/>
+			<Item Name="MALT Global.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Private/Global/MALT Global.vi"/>
 		</Item>
 		<Item Name="Platform" Type="Folder">
-			<Item Name="MALT Get Devices.vi" Type="VI" URL="../Public/Platform/MALT Get Devices.vi"/>
+			<Item Name="MALT Get Devices.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Platform/MALT Get Devices.vi"/>
 		</Item>
 		<Item Name="Tools" Type="Folder">
-			<Item Name="MALT ByteArrayToHexStringArray.vi" Type="VI" URL="../Public/Tools/MALT ByteArrayToHexStringArray.vi"/>
-			<Item Name="MALT GetTimestamp.vi" Type="VI" URL="../Public/Tools/MALT GetTimestamp.vi"/>
-			<Item Name="MALT HexStringArrayToByteArray.vi" Type="VI" URL="../Public/Tools/MALT HexStringArrayToByteArray.vi"/>
-			<Item Name="MALT HexStringToASCIIString.vi" Type="VI" URL="../Public/Tools/MALT HexStringToASCIIString.vi"/>
-			<Item Name="MALT HexStringToByteArray.vi" Type="VI" URL="../Public/Tools/MALT HexStringToByteArray.vi"/>
+			<Item Name="MALT ByteArrayToHexStringArray.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Tools/MALT ByteArrayToHexStringArray.vi"/>
+			<Item Name="MALT GetTimestamp.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Tools/MALT GetTimestamp.vi"/>
+			<Item Name="MALT HexStringArrayToByteArray.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Tools/MALT HexStringArrayToByteArray.vi"/>
+			<Item Name="MALT HexStringToASCIIString.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Tools/MALT HexStringToASCIIString.vi"/>
+			<Item Name="MALT HexStringToByteArray.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Tools/MALT HexStringToByteArray.vi"/>
 		</Item>
 		<Item Name="Types" Type="Folder">
 			<Property Name="NI.LibItem.Scope" Type="Int">1</Property>
-			<Item Name="MALT CardTypes.ctl" Type="VI" URL="../Public/Types/MALT CardTypes.ctl"/>
-			<Item Name="MALT Parameters Type.ctl" Type="VI" URL="../Public/Types/MALT Parameters Type.ctl"/>
-			<Item Name="MALT ServiceControlerStatusType.ctl" Type="VI" URL="../Public/Types/MALT ServiceControlerStatusType.ctl"/>
+			<Item Name="MALT CardTypes.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT CardTypes.ctl"/>
+			<Item Name="MALT Parameters Type.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT Parameters Type.ctl"/>
+			<Item Name="MALT ServiceControlerStatusType.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT ServiceControlerStatusType.ctl"/>
 		</Item>
-		<Item Name="MALT Close.vi" Type="VI" URL="../Public/MALT Close.vi"/>
-		<Item Name="MALT Open.vi" Type="VI" URL="../Public/MALT Open.vi"/>
+		<Item Name="MALT Close.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/MALT Close.vi"/>
+		<Item Name="MALT Open.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/MALT Open.vi"/>
 	</Item>
 </Library>
