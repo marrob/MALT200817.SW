@@ -1,8 +1,16 @@
-﻿//A valós build szám ettől 1-el kissebb pl: 0.0.0.94, akkor a valós: 0.0.0.93
+//Az build szam a setup futat??sa ut??n n??.
 
 using System.Reflection;
-[assembly: AssemblyVersion("0.0.0.94")]
-[assembly: AssemblyFileVersion("0.0.0.94")]
+[assembly: AssemblyVersion("0.0.0.102")]
+[assembly: AssemblyFileVersion("0.0.0.102")]
+
+
+
+
+
+
+
+
 
 
 

@@ -98,11 +98,11 @@
     <Compile Include="Controls\KnvDoControl.Designer.cs">
       <DependentUpon>KnvDoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\KnvRealySpstControl - Copy.cs">
+    <Compile Include="Controls\KnvRealySpstControl .cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\KnvRealySpstControl - Copy.Designer.cs">
-      <DependentUpon>KnvRealySpstControl - Copy.cs</DependentUpon>
+    <Compile Include="Controls\KnvRealySpstControl .Designer.cs">
+      <DependentUpon>KnvRealySpstControl .cs</DependentUpon>
     </Compile>
     <Compile Include="CounterItem.cs" />
     <Compile Include="ErrorHandling\ErrorHandlerService.cs" />
@@ -193,8 +193,8 @@
     <EmbeddedResource Include="Controls\KnvDoControl.resx">
       <DependentUpon>KnvDoControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\KnvRealySpstControl - Copy.resx">
-      <DependentUpon>KnvRealySpstControl - Copy.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\KnvRealySpstControl .resx">
+      <DependentUpon>KnvRealySpstControl .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorHandling\ErrorHandlingForm.resx">
       <DependentUpon>ErrorHandlingForm.cs</DependentUpon>

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace _post.setup
+namespace Konvolucio.PostBuildTool
 {
     class Program
     {
@@ -19,10 +19,11 @@ namespace _post.setup
             string msiFileName = "MALT200817.Setup";
             string msiPath = @"D:\@@@!ProjectS\KonvolucioApp\MALT200817.SW\MALT200817.Setup\bin\Release\" + msiFileName + ".msi";
             string prgDisplayName = "MALT200817";
-            string manualPath = @"D:\angular\marrob.github.io\";
+            // string manualPath = @"D:\angular\marrob.github.io\";
+            string appExplorerPath = @"C:\Program Files (x86)\AltonTech\MALT200817.Explorer\MALT200817.Explorer.exe";
 
 
-
+            
             /*------------------------------------------------------------------------*/
             Console.WriteLine("Assembly módosítása folyamatban...");
             /*
@@ -33,11 +34,15 @@ namespace _post.setup
              * 
              */
             string assamblyText = Tools.ReadFile(assamblyPath);
+            string version = Tools.GetAssemblyVersion(assamblyText);
+
             string assamblyResult = Tools.IncraseAssamblyBuildNumber(assamblyText);
-            string version = Tools.GetAssemblyVersion(assamblyResult);
+            string incVersion = Tools.GetAssemblyVersion(assamblyResult);
             Tools.WriteFile(assamblyResult, assamblyPath);
-            Console.WriteLine("Assembly sikeresen módosítva.");
             
+            Console.WriteLine("Assembly sikeresen módosítva. Következő fordítás AssemblyVersion:" + incVersion);
+            Console.WriteLine("Jelenlegi fordítás AssemblyVersion:" + version);
+
             string targetMsiPath = Path.GetDirectoryName(msiPath) + "\\" + msiFileName + "_" + version + ".msi";
 
             if (File.Exists(targetMsiPath)) { 
@@ -54,7 +59,7 @@ namespace _post.setup
             else
             {
                 File.Copy(msiPath, targetMsiPath);
-                Console.WriteLine("Az új MSI fájl elkészült az új verziószámmal:" + msiFileName + "_" + version);
+                Console.WriteLine("Az új MSI fájl elkészült, AssemblyVersion:" + msiFileName + "_" + version);
             }
 
 
@@ -75,6 +80,11 @@ namespace _post.setup
             /*------------------------------------------------------------------------*/
             Console.WriteLine("MSI telepítése folyamatban...");
             Tools.MsiInstall(targetMsiPath);
+            Console.WriteLine("MSI telepítése kész...");
+
+            /*------------------------------------------------------------------------*/
+            Console.WriteLine("Explorer indítása");
+            Tools.RunApp(appExplorerPath);
 
 
             Console.WriteLine("OK...");
@@ -143,14 +153,22 @@ namespace _post.setup
         }
 
         public static void MsiInstall(string msiPath)
+        { 
+            var startInfo = new ProcessStartInfo();
+            startInfo.Arguments = @"/i " + msiPath; //+ "/q";
+            startInfo.FileName = "MsiExec.exe";
+            var process = Process.Start(startInfo);
+            process.WaitForExit();
+        }
+
+        public static void RunApp(string displayName)
         {
             Process process = new Process();
             ProcessStartInfo processInfo = new ProcessStartInfo();
-            processInfo.Arguments = @"/i " + msiPath; //+ "/q";
-            processInfo.FileName = "MsiExec.exe";
+            processInfo.FileName = displayName;
             process.StartInfo = processInfo;
             process.Start();
-            process.WaitForExit();
+            
         }
 
         public static string ReadFile(string path)
@@ -169,12 +187,8 @@ namespace _post.setup
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("File does not exits", path);
-
             using (StreamWriter sw = new StreamWriter(path, false))
-            {
                     sw.WriteLine(text);
-            }
-
         }
 
         public static List<string> RegListPrograms() 

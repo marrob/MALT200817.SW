@@ -50,7 +50,7 @@
             this.labelNum.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNum.Location = new System.Drawing.Point(3, 0);
             this.labelNum.Name = "labelNum";
-            this.labelNum.Size = new System.Drawing.Size(108, 38);
+            this.labelNum.Size = new System.Drawing.Size(111, 38);
             this.labelNum.TabIndex = 4;
             this.labelNum.Text = "DI128";
             this.labelNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
