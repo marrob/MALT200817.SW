@@ -47,7 +47,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALT200817.Library.UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALT200817.Checklist", "MALT200817.CheckList\MALT200817.Checklist.csproj", "{D7F5CB4D-D9DA-4B17-8661-771A9A005FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_post.setup", "_post.setup\_post.setup.csproj", "{FF246C95-E04D-4EDA-B8E1-E07B5DD706FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konvolucio.PostBuildActionTool", "_post.setup\Konvolucio.PostBuildActionTool.csproj", "{FF246C95-E04D-4EDA-B8E1-E07B5DD706FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALT200817.Manual", "MALT200817.Manual\MALT200817.Manual.csproj", "{B032F947-84AE-41CA-ADBD-667667A40DFD}"
 EndProject

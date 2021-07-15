@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;;
+using System.Text;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -19,10 +19,11 @@ namespace _post.setup
             string msiFileName = "MALT200817.Setup";
             string msiPath = @"D:\@@@!ProjectS\KonvolucioApp\MALT200817.SW\MALT200817.Setup\bin\Release\" + msiFileName + ".msi";
             string prgDisplayName = "MALT200817";
+            string manualPath = @"D:\angular\marrob.github.io\";
 
 
 
-            /*------------------------------------------------------------------------*/ 
+            /*------------------------------------------------------------------------*/
             Console.WriteLine("Assembly módosítása folyamatban...");
             /*
              * 

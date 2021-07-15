@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FF246C95-E04D-4EDA-B8E1-E07B5DD706FF}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_post.setup</RootNamespace>
-    <AssemblyName>_post.setup</AssemblyName>
+    <RootNamespace>Konvolucio.PostBuildActionTool</RootNamespace>
+    <AssemblyName>Konvolucio.PostBuildActionTool</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

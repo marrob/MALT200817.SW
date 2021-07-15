@@ -61,10 +61,10 @@
 			<Item Name="MALTCON" Type="Folder"/>
 			<Item Name="MALTMMI" Type="Folder"/>
 			<Item Name="MALT Get Counter.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Get Counter.vi"/>
-			<Item Name="MALT Output  Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output  Set Several.vi"/>
 			<Item Name="MALT Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get One.vi"/>
 			<Item Name="MALT Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get Several.vi"/>
 			<Item Name="MALT Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Set One.vi"/>
+			<Item Name="MALT Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Set Several.vi"/>
 		</Item>
 		<Item Name="Global" Type="Folder">
 			<Property Name="NI.LibItem.Scope" Type="Int">2</Property>
@@ -82,7 +82,7 @@
 		</Item>
 		<Item Name="Types" Type="Folder">
 			<Property Name="NI.LibItem.Scope" Type="Int">1</Property>
-			<Item Name="MALT CardTypes.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT CardTypes.ctl"/>
+			<Item Name="MALT Family Codes.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT Family Codes.ctl"/>
 			<Item Name="MALT Parameters Type.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT Parameters Type.ctl"/>
 			<Item Name="MALT ServiceControlerStatusType.ctl" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Types/MALT ServiceControlerStatusType.ctl"/>
 		</Item>

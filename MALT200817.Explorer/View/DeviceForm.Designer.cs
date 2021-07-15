@@ -94,9 +94,9 @@
             this.toolStripStatusLabelFirstName.AutoToolTip = true;
             this.toolStripStatusLabelFirstName.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.toolStripStatusLabelFirstName.Name = "toolStripStatusLabelFirstName";
-            this.toolStripStatusLabelFirstName.Size = new System.Drawing.Size(72, 19);
-            this.toolStripStatusLabelFirstName.Text = "FIRST NAME";
-            this.toolStripStatusLabelFirstName.ToolTipText = "First Name";
+            this.toolStripStatusLabelFirstName.Size = new System.Drawing.Size(90, 19);
+            this.toolStripStatusLabelFirstName.Text = "OPTION  NAME";
+            this.toolStripStatusLabelFirstName.ToolTipText = "Option Name";
             // 
             // toolStripStatusLabelAddress
             // 
@@ -147,7 +147,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(14, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelSerialNumber

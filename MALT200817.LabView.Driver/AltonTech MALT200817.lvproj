@@ -64,7 +64,7 @@
 				<Item Name="H730050 Info.vi" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Core/H7300-50.llb/H730050 Info.vi"/>
 				<Item Name="H730050 Init Actions.vi" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Core/H7300-50.llb/H730050 Init Actions.vi"/>
 				<Item Name="H730050 Message Dispatcher.vi" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Core/H7300-50.llb/H730050 Message Dispatcher.vi"/>
-				<Item Name="MALT132 Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT132/MALT132 Set One.vi"/>
+				<Item Name="MALT Output  Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output  Set Several.vi"/>
 				<Item Name="message.ctl" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Lower Layer/MultiCAN.llb/message.ctl"/>
 				<Item Name="MMI Action.ctl" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Core/MMI-Core.llb/MMI Action.ctl"/>
 				<Item Name="MMI Info.ctl" Type="VI" URL="/&lt;instrlib&gt;/Phi6/Common/Instrum/Phi6 Core/MMI-Core.llb/MMI Info.ctl"/>

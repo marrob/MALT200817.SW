@@ -134,7 +134,7 @@
       </Component>
       <Component Id="LabView_Types_Files" Directory="LabView_Types" Guid="{5524A340-18A6-45D0-BA42-45AB322C9C94}">
         <File Id = "_MALT_ServiceControlerStatusType.ctl" Source="$(var.LabView2018Directory)\Public\Types\MALT ServiceControlerStatusType.ctl" KeyPath="no" Checksum="yes"/>
-        <File Id = "_MALT_CardTypes.ctl" Source="$(var.LabView2018Directory)\Public\Types\MALT CardTypes.ctl" KeyPath="no" Checksum="yes"/>
+        <File Id = "_MALT_Family_Codes.ctll" Source="$(var.LabView2018Directory)\Public\Types\MALT Family Codes.ctl" KeyPath="no" Checksum="yes"/>
         <File Id = "_MALT_Parameters_Type.ctl" Source="$(var.LabView2018Directory)\Public\Types\MALT Parameters Type.ctl" KeyPath="no" Checksum="yes"/>
       </Component>
       <Component Id="LabView_UnitTest_Files" Directory="LabView_UnitTest" Guid="{01A6B3C1-C29F-421B-AAA9-9082A0EE459D}">
@@ -151,6 +151,7 @@
         <File Id = "_ResponseTimeTest.vi" Source="$(var.LabView2018Directory)\UnitTest\ResponseTimeTest.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_One_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set One Test.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_Set_Several_Test.vi" Source="$(var.LabView2018Directory)\UnitTest\Set Several Test.vi" KeyPath="no" Checksum="yes"/>
+        <File Id = "_TcpWriteRead.vi" Source="$(var.LabView2018Directory)\UnitTest\TcpWriteRead.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_ViTestFixture.vi" Source="$(var.LabView2018Directory)\UnitTest\ViTestFixture.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_YAV_IOPSx.vi" Source="$(var.LabView2018Directory)\UnitTest\YAV IOPSx.vi" KeyPath="no" Checksum="yes"/>
         <File Id = "_YAV_Set_Rapidly.vi" Source="$(var.LabView2018Directory)\UnitTest\YAV Set Rapidly.vi" KeyPath="no" Checksum="yes"/>
