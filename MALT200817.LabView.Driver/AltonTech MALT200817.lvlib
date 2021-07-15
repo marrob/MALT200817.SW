@@ -41,6 +41,7 @@
 				<Item Name="MALT24VI Output Set Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT24VI/MALT24VI Output Set Several.vi"/>
 			</Item>
 			<Item Name="MALT40IO" Type="Folder">
+				<Item Name="MALT40IO Input Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Input Get One.vi"/>
 				<Item Name="MALT40IO Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Get One.vi"/>
 				<Item Name="MALT40IO Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Get Several.vi"/>
 				<Item Name="MALT40IO Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT40IO/MALT40IO Output Set One.vi"/>
@@ -61,6 +62,7 @@
 			<Item Name="MALTCON" Type="Folder"/>
 			<Item Name="MALTMMI" Type="Folder"/>
 			<Item Name="MALT Get Counter.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Get Counter.vi"/>
+			<Item Name="MALT Input Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Input Get One.vi"/>
 			<Item Name="MALT Output Get One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get One.vi"/>
 			<Item Name="MALT Output Get Several.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Get Several.vi"/>
 			<Item Name="MALT Output Set One.vi" Type="VI" URL="/&lt;instrlib&gt;/AltonTech MALT/Public/Devices/MALT Output Set One.vi"/>
