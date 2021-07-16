@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
 
+
 namespace Konvolucio.PostBuildTool
 {
     class Program
@@ -21,9 +22,12 @@ namespace Konvolucio.PostBuildTool
             string prgDisplayName = "MALT200817";
             // string manualPath = @"D:\angular\marrob.github.io\";
             string appExplorerPath = @"C:\Program Files (x86)\AltonTech\MALT200817.Explorer\MALT200817.Explorer.exe";
+            string lvlibPath = @"D:\@@@!ProjectS\KonvolucioApp\MALT200817.SW\MALT200817.LabView.Driver\AltonTech MALT200817.lvlib";
 
 
-            
+
+
+
             /*------------------------------------------------------------------------*/
             Console.WriteLine("Assembly módosítása folyamatban...");
             /*
@@ -35,6 +39,7 @@ namespace Konvolucio.PostBuildTool
              */
             string assamblyText = Tools.ReadFile(assamblyPath);
             string version = Tools.GetAssemblyVersion(assamblyText);
+
 
             string assamblyResult = Tools.IncraseAssamblyBuildNumber(assamblyText);
             string incVersion = Tools.GetAssemblyVersion(assamblyResult);
@@ -49,6 +54,14 @@ namespace Konvolucio.PostBuildTool
                 File.Delete(targetMsiPath);
                 Console.WriteLine("A cél MSI fájl már létezett, ezért töröltem itt:" + msiFileName + "_" + version);
             }
+
+            /*------------------------------------------------------------------------*/
+            Console.WriteLine("lvlib fájl beolvasása");
+            string lvlibString = Tools.ReadFile(lvlibPath);
+            Console.WriteLine("lvlib fájl verzió módosítása, ami a kövektező verzióban fog érvényesűlni");
+            string lvlibUpdated = Tools.SetNiLibVersion(lvlibString, incVersion);
+            Console.WriteLine("lvlib fájlba írása");
+            Tools.WriteFile(lvlibUpdated, lvlibPath);
 
             /*------------------------------------------------------------------------*/
             if (!File.Exists(msiPath))
@@ -100,14 +113,14 @@ namespace Konvolucio.PostBuildTool
     }
 
 
-    static class Tools
+    public static class Tools
     {
 
-         public static string IncraseAssamblyBuildNumber(string text)
-         {
-            Regex rx = new Regex(@"\d+.(\d+).\d+.(?<build>\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            MatchCollection matches = rx.Matches(text);
-           //Console.WriteLine("{0} matches found in:\n   {1}", matches.Count, text);
+        public static string IncraseAssamblyBuildNumber(string assembly)
+        {
+            var rx = new Regex(@"\d+.(\d+).\d+.(?<build>\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            MatchCollection matches = rx.Matches(assembly);
+            //Console.WriteLine("{0} matches found in:\n   {1}", matches.Count, text);
 
             string version = string.Empty;
             foreach (Match match in matches)
@@ -122,24 +135,35 @@ namespace Konvolucio.PostBuildTool
             {
                 int build = int.Parse(version);
                 build++;
-                result = text.Replace(version, build.ToString());
+                result = assembly.Replace(version, build.ToString());
             }
             return result;
-         }
+        }
+
+        public static string SetNiLibVersion(string lvlib, string version)
+        {
+
+            /*<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>*/
+            var rx = new Regex("<Property Name=\"NI.Lib.Version\" Type=\"Str\">(?<version>\\d+.\\d+.\\d+.\\d+)</Property>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Match match = rx.Match(lvlib);
+            string result = string.Empty;
+            if (match.Success) {
+                return lvlib.Replace(match.Groups["version"].Value, version);
+            }
+            return result;
+        }
 
         public static string GetAssemblyVersion(string text)
         {
-            Regex rx = new Regex(@"(?<version>\d+.\d+.\d+.\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            MatchCollection matches = rx.Matches(text);
-
-            string version = string.Empty;
-            foreach (Match match in matches)
-            {
-                GroupCollection groups = match.Groups;
-                version = groups["version"].Value;
-                break;
-            }
-            return version;
+            /* using System.Reflection;
+             * [assembly: AssemblyVersion("0.0.0.85")]
+             * [assembly: AssemblyFileVersion("0.0.0.85")]*/
+            Regex rx = new Regex(@"(\d+.\d+.\d+.\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Match match = rx.Match(text);
+            string result = string.Empty;
+            if (match.Success)
+                result = match.Value;
+            return result;
         }
 
         public static void MsiUninstall(string displayName)
@@ -153,7 +177,7 @@ namespace Konvolucio.PostBuildTool
         }
 
         public static void MsiInstall(string msiPath)
-        { 
+        {
             var startInfo = new ProcessStartInfo();
             startInfo.Arguments = @"/i " + msiPath; //+ "/q";
             startInfo.FileName = "MsiExec.exe";
@@ -168,7 +192,7 @@ namespace Konvolucio.PostBuildTool
             processInfo.FileName = displayName;
             process.StartInfo = processInfo;
             process.Start();
-            
+
         }
 
         public static string ReadFile(string path)
@@ -188,10 +212,10 @@ namespace Konvolucio.PostBuildTool
             if (!File.Exists(path))
                 throw new FileNotFoundException("File does not exits", path);
             using (StreamWriter sw = new StreamWriter(path, false))
-                    sw.WriteLine(text);
+                sw.WriteLine(text);
         }
 
-        public static List<string> RegListPrograms() 
+        public static List<string> RegListPrograms()
         {
             var programs = new List<string>();
             string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
@@ -199,10 +223,10 @@ namespace Konvolucio.PostBuildTool
             {
                 Console.WriteLine(key.Name);
 
-                foreach(string subkey_name in key.GetSubKeyNames())
+                foreach (string subkey_name in key.GetSubKeyNames())
                 {
-                    using (RegistryKey subkey = key.OpenSubKey(subkey_name)) 
-                    { 
+                    using (RegistryKey subkey = key.OpenSubKey(subkey_name))
+                    {
                         programs.Add(subkey.GetValue("DisplayName")?.ToString());
                     }
                 }
@@ -230,10 +254,10 @@ namespace Konvolucio.PostBuildTool
                             Debug.WriteLine(progName);
                             if (progName.ToString().Contains(displayName))
                             {
-                                string  uninstallString = subkey.GetValue("UninstallString")?.ToString();
-                                        uninstallString = uninstallString.Replace("/I", "/X");
-                                        uninstallString = uninstallString.Replace("MsiExec.exe", "").Trim();
-                                       // uninstallString += " /quiet /qn";
+                                string uninstallString = subkey.GetValue("UninstallString")?.ToString();
+                                uninstallString = uninstallString.Replace("/I", "/X");
+                                uninstallString = uninstallString.Replace("MsiExec.exe", "").Trim();
+                                // uninstallString += " /quiet /qn";
                                 return uninstallString;
                             }
                         }
@@ -244,4 +268,6 @@ namespace Konvolucio.PostBuildTool
             return string.Empty;
         }
     }
+
+
 }

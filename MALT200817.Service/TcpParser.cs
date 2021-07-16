@@ -118,7 +118,7 @@
                     }
                     else if (parts[COMMAND] == "GET#SEVERAL#DO")
                     {
-                        var block = Tools.HexaByteStrToByte(parts[PARAM2]);
+                        var block = Tools.HexaByteStrToByte(parts[PARAM1]);
                         var state = _exp.GetOutputs(familyCode, address, block);
                         var retval = "@" + familyCode.ToString("X2") + ":" + address.ToString("X2") + ":STA:" +
                             Tools.ConvertByteArrayToString(state);
